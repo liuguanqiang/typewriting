@@ -1,0 +1,11 @@
+{
+    "levels":[
+        {
+            "name":"level1",
+            "boss": {
+                "normal":["aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff"],
+                "punishment":["f","ff","ff","fff","fff","fff"]
+            }
+        }
+    ]
+}

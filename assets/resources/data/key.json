@@ -1,0 +1,272 @@
+{
+    "keys": [
+        {
+            "key": "~\n`",
+            "fontSize": 14,
+            "code": 192
+        },
+        {
+            "key": "!\n1",
+            "fontSize": 14,
+            "code": 49
+        },
+        {
+            "key": "@\n2",
+            "fontSize": 14,
+            "code": 50
+        },
+        {
+            "key": "#\n3",
+            "fontSize": 14,
+            "code": 51
+        },
+        {
+            "key": "$\n4",
+            "fontSize": 14,
+            "code": 52
+        },
+        {
+            "key": "%\n5",
+            "fontSize": 14,
+            "code": 53
+        },
+        {
+            "key": "^\n6",
+            "fontSize": 14,
+            "code": 54
+        },
+        {
+            "key": "&\n7",
+            "fontSize": 14,
+            "code": 55
+        },
+        {
+            "key": "*\n8",
+            "fontSize": 14,
+            "code": 56
+        },
+        {
+            "key": "(\n9",
+            "fontSize": 14,
+            "code": 57
+        },
+        {
+            "key": ")\n0",
+            "fontSize": 14,
+            "code": 48
+        },
+        {
+            "key": "_\n-",
+            "fontSize": 14,
+            "code": 189
+        },
+        {
+            "key": "+\n=",
+            "fontSize": 14,
+            "code": 187
+        },
+        {
+            "key": "delete",
+            "width": 1.6,
+            "fontSize": 14,
+            "horizontal": 3,
+            "code": 8
+        },
+        {
+            "key": "tab",
+            "width": 1.6,
+            "horizontal": 1,
+            "fontSize": 14,
+            "code": 9
+        },
+        {
+            "key": "Q"
+        },
+        {
+            "key": "W"
+        },
+        {
+            "key": "E"
+        },
+        {
+            "key": "R"
+        },
+        {
+            "key": "T"
+        },
+        {
+            "key": "Y"
+        },
+        {
+            "key": "U"
+        },
+        {
+            "key": "I"
+        },
+        {
+            "key": "O"
+        },
+        {
+            "key": "P"
+        },
+        {
+            "key": "{\n[",
+            "fontSize": 14,
+            "code": 219
+        },
+        {
+            "key": "}\n]",
+            "fontSize": 14,
+            "code": 221
+        },
+        {
+            "key": "|\n\\",
+            "fontSize": 14,
+            "code": 220
+        },
+        {
+            "key": "cape lock",
+            "width": 1.85,
+            "horizontal": 1,
+            "fontSize": 14,
+            "code": 20
+        },
+        {
+            "key": "A"
+        },
+        {
+            "key": "S"
+        },
+        {
+            "key": "D"
+        },
+        {
+            "key": "F"
+        },
+        {
+            "key": "G"
+        },
+        {
+            "key": "H"
+        },
+        {
+            "key": "J"
+        },
+        {
+            "key": "K"
+        },
+        {
+            "key": "L"
+        },
+        {
+            "key": ":\n;",
+            "fontSize": 14,
+            "code": 186
+        },
+        {
+            "key": "\"\n'",
+            "fontSize": 14,
+            "code": 222
+        },
+        {
+            "key": "enter",
+            "width": 1.85,
+            "horizontal": 3,
+            "fontSize": 14,
+            "code": 13
+        },
+        {
+            "key": "shift",
+            "width": 2.4,
+            "horizontal": 1,
+            "fontSize": 14,
+            "code": 16
+        },
+        {
+            "key": "Z"
+        },
+        {
+            "key": "X"
+        },
+        {
+            "key": "C"
+        },
+        {
+            "key": "V"
+        },
+        {
+            "key": "B"
+        },
+        {
+            "key": "N"
+        },
+        {
+            "key": "M"
+        },
+        {
+            "key": "<\n,",
+            "fontSize": 14,
+            "code": 188
+        },
+        {
+            "key": ">\n.",
+            "fontSize": 14,
+            "code": 190
+        },
+        {
+            "key": "?\n/",
+            "fontSize": 14,
+            "code": 191
+        },
+        {
+            "key": "shift",
+            "width": 2.4,
+            "horizontal": 3,
+            "fontSize": 14,
+            "code": 16
+        },
+        {
+            "key": "ctrl",
+            "horizontal": 1,
+            "fontSize": 14,
+            "code": 17
+        },
+        {
+            "key": "alt",
+            "horizontal": 1,
+            "fontSize": 14,
+            "code": 18
+        },
+        {
+            "key": "cmd",
+            "width": 1.85,
+            "horizontal": 1,
+            "fontSize": 14,
+            "code": 91
+        },
+        {
+            "key": "",
+            "width": 7.6,
+            "code": 32
+        },
+        {
+            "key": "cmd",
+            "width": 1.85,
+            "horizontal": 3,
+            "fontSize": 14,
+            "code": 91
+        },
+        {
+            "key": "alt",
+            "horizontal": 3,
+            "fontSize": 14,
+            "code": 18
+        },
+        {
+            "key": "ctrl",
+            "horizontal": 3,
+            "fontSize": 14,
+            "code": 17
+        }
+    ]
+}
