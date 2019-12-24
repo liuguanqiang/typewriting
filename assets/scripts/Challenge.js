@@ -9,7 +9,8 @@ cc.Class({
         LetterBoxs: cc.Node,
         BulletsBoxs: cc.Node,
         LetterRectItem: cc.Prefab,
-        BulletItem: cc.Prefab
+        BulletItem: cc.Prefab,
+        Audio: cc.Node
     },
     onLoad() {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -88,6 +89,7 @@ cc.Class({
     createBulletItem() {
         const item = cc.instantiate(this.BulletItem);
         this.BulletsBoxs.addChild(item);
+        this.Audio.getComponent("gameAudio").onPlayBullet();
         return item;
     },
 

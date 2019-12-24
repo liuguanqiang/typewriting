@@ -26,13 +26,14 @@ cc.Class({
             this.node.x = this.random(-400, 400);
         }
         this.rotateSprite.runAction(cc.repeatForever(cc.sequence(cc.rotateTo(1, -180, -180), cc.rotateTo(1, -360, -360))));
-        this.rotateSprite.zIndex = 100;
-
     },
+
     //设置当前为定位字母块
     setAnchor() {
         this.letterLabel.color = new cc.color(255, 120, 0, 255);
+        this.node.zIndex = 100;
     },
+
     //外部传入按键字母，进行删除当前字母块的首字母，如果不符合返回-1,
     removeCode(key) {
         if (this.getFristLetter() == key) {
@@ -45,12 +46,16 @@ cc.Class({
         }
         return -1;
     },
+
+    //获取首字母
     getFristLetter() {
         if (this.comLetterLabel.string.length >= 1) {
-            return this.comLetterLabel.string.substring(0, 1);
+            return this.comLetterLabel.string[0];
         }
         return null;
     },
+
+    //获取随机数
     random(lower, upper) {
         return Math.floor(Math.random() * (upper - lower)) + lower;
     },
@@ -67,12 +72,11 @@ cc.Class({
             return;
         }
         if (this.LetterCount === 1) {
-            this.node.active = false;
             setTimeout(() => {
                 if (cc.isValid(this.node)) {
                     this.node.destroy();
                 }
-            }, 1000);
+            }, 200);
         } else {
             this.LetterCount--;
         }
