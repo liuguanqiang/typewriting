@@ -58,7 +58,7 @@ cc.Class({
             if (aLength == 0) {
                 this.curAnchorLetter.isFinish = true;
             }
-        }else{
+        } else {
             console.log("打错无定位");
         }
     },
@@ -67,7 +67,7 @@ cc.Class({
         this.LetterBoxs.destroyAllChildren();
         this.letterIndex = 0;
         this.levelIndex = 0;
-        this.letterDatas = this.ConfigJson.json.levels[this.levelIndex].boss.normal;
+        this.letterDatas = this.ConfigJson.json.levels[this.levelIndex].boss.attackState.normal;
         this.unscheduleAllCallbacks(this);
         this.schedule(this.createLetterItem, 5, cc.macro.REPEAT_FOREVER, 0.1);
     },
@@ -78,7 +78,7 @@ cc.Class({
             if (this.letterIndex < this.letterDatas.length) {
                 const item = cc.instantiate(this.LetterRectItem);
                 this.LetterBoxs.addChild(item);
-                item.getComponent("letterRect").onPlay(this.letterDatas[this.letterIndex], i * 1);
+                item.getComponent("letterRect").onInit(this.letterDatas[this.letterIndex], i * 1);
                 this.letterIndex++;
             } else {
                 this.unscheduleAllCallbacks(this);
@@ -101,5 +101,4 @@ cc.Class({
         }
         return "";
     }
-    // update (dt) {},
 });

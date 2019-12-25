@@ -41,9 +41,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.4794921875,
-      "y": 0.4794921875,
-      "z": 0.4794921875
+      "x": 0.4389241536458333,
+      "y": 0.4389241536458333,
+      "z": 0.4389241536458333
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -486,7 +486,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -224,
+      "y": -234,
       "z": 0
     },
     "_scale": {
@@ -646,7 +646,7 @@
     "_left": 98,
     "_right": 98,
     "_top": 0,
-    "_bottom": 10,
+    "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
@@ -1126,7 +1126,7 @@
     },
     "_enabled": true,
     "ConfigJson": {
-      "__uuid__": "6f8ae68c-a69a-44d9-8e58-632cfbf7f31c"
+      "__uuid__": "ad65cdc0-cbe8-436c-9d6c-1b5afd9580b9"
     },
     "KeyJson": {
       "__uuid__": "7e5bf9de-e8d4-435b-b44e-fd4b7440ec63"

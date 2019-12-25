@@ -7,13 +7,11 @@ cc.Class({
         speed: 6
     },
 
-    // onLoad () {},
-
     start() {
 
     },
 
-    onPlay(text, timeOut) {
+    onInit(text, timeOut) {
         this.comLetterLabel = this.letterLabel.getComponent(cc.Label);
         if (text) {
             this.LetterCount = text.length;

@@ -1,0 +1,18 @@
+{
+    "levels":[
+        {
+            "name":"level1",
+            "boss": {
+                "attackState":{
+                    "normal":["aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff"],
+                    "punishment":["f","ff","ff","fff","fff","fff"]
+                },
+                "beatingState":{
+                    "normal":["aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff"]
+                }
+               
+            }
+        }
+    ]
+}
+
