@@ -23,15 +23,15 @@ cc.Class({
         for (let i = 0; i < this.KeyJson.json.keys.length; i++) {
             const keyData = this.KeyJson.json.keys[i];
             const item = cc.instantiate(this.KeyItem);
-            item.getComponent("KeyCube").setKey(keyData);
+            item.getComponent("keyCube").setKey(keyData);
             this.KeyBox.addChild(item);
         }
     },
     onKeyDown(event) {
         for (let i = 0; i < this.KeyBox.children.length; i++) {
             const item = this.KeyBox.children[i];
-            if (item.getComponent("KeyCube").keyCode == event.keyCode) {
-                item.getComponent("KeyCube").onClick();
+            if (item.getComponent("keyCube").keyCode == event.keyCode) {
+                item.getComponent("keyCube").onClick();
                 break;
             }
         }
@@ -58,6 +58,8 @@ cc.Class({
             if (aLength == 0) {
                 this.curAnchorLetter.isFinish = true;
             }
+        }else{
+            console.log("打错无定位");
         }
     },
     onPlay() {
