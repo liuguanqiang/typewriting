@@ -2,13 +2,23 @@
     "levels":[
         {
             "name":"level1",
-            "speed":30,
+            "speed":40,
+            "blood":100,
             "boss": {
-                "practiceState":{
-                    "normal":["f","j"," "],
-                    "punishment":["a","b"],
-                    "updateCount":50
-                },
+                "practiceState":[
+                    {
+                      "normal":["f","j"," "],
+                      "updateCount":10
+                    },
+                    {
+                        "normal":["d","k"," "],
+                        "updateCount":10
+                    },
+                    {
+                        "normal":["f","j"," "],
+                        "updateCount":10
+                    }
+                ],
                 "attackState":{
                     "normal":["f","j"," "],
                     "punishment":["a","b"],
@@ -17,7 +27,7 @@
                 "beatingState":{
                     "normal":["f","j"," "],
                     "punishment":["a","b"],
-                    "updateCount":50
+                    "beatTime":10
                 }
                
             }

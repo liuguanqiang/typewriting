@@ -16,13 +16,16 @@ cc.Class({
         }
     },
 
-    onKeyDown(event) {
+    onKeyDown(event, isCorrect) {
         for (let i = 0; i < this.KeyBox.children.length; i++) {
             const item = this.KeyBox.children[i];
             if (item.getComponent("keyCube").keyCode == event.keyCode) {
-                item.getComponent("keyCube").onClick();
-                //返回当前按键对应的世界坐标系
-                return item.convertToWorldSpaceAR(cc.v2(0, 0));
+                item.getComponent("keyCube").onClick(isCorrect);
+                //按键正确返回当前按键对应的世界坐标系
+                if (isCorrect) {
+                    return item.convertToWorldSpaceAR(cc.v2(0, 0));
+                }
+                return 0;
             }
         }
         return 0;

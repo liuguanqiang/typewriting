@@ -6,6 +6,8 @@ cc.Class({
         KeyLabel: cc.Node,
     },
     start() {
+        this.blueColor = new cc.color(50, 149, 219, 255);
+        this.redColor = new cc.color(242, 58, 58, 255);
     },
 
     setKey(keyData) {
@@ -33,8 +35,8 @@ cc.Class({
             label.verticalAlign = cc.Label.VerticalAlign.BOTTOM;
         }
     },
-    onClick() {
-        this.node.color = new cc.color(50, 149, 219, 255);
+    onClick(isCorrect) {
+        this.node.color = isCorrect ? this.blueColor : this.redColor;
         this.KeyLabel.color = new cc.color(246, 246, 246, 255);
         setTimeout(() => {
             this.node.color = new cc.color(246, 246, 246, 255);

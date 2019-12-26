@@ -14,6 +14,7 @@ cc.Class({
      * @param  xPoint    初始X坐标 
      */
     onInit(text, xPoint, speed = 20) {
+        this.accelerate = 1;
         this.speed = speed;
         this.comLetterLabel = this.letterLabel.getComponent(cc.Label);
         this.curText = text;
@@ -27,7 +28,8 @@ cc.Class({
     },
 
     //设置当前为定位字母块
-    setAnchor() {
+    setAnchor(cb) {
+        this.cb = cb;
         this.node.color = new cc.color(255, 120, 0, 255);
         this.letterLabel.color = new cc.color(255, 120, 0, 255);
         this.node.zIndex = 100;
@@ -74,6 +76,9 @@ cc.Class({
         this.comLetterLabel.string = this.comLetterLabel.string.substring(1, this.comLetterLabel.string);
         if (this.LetterCount === 1) {
             if (cc.isValid(this.node)) {
+                if (this.cb) {
+                    this.cb();
+                }
                 this.node.destroy();
             }
         } else {
@@ -81,8 +86,18 @@ cc.Class({
         }
     },
 
+    //加速一次
+    onAccelerate() {
+        this.accelerate = 10;
+    },
+
     update(dt) {
         if (!this.isPlay) return;
-        this.node.y -= this.speed * dt;
+        if (this.accelerate > 1) {
+            this.accelerate--;
+            this.node.y -= this.speed * 5 * dt;
+        } else {
+            this.node.y -= this.speed * dt;
+        }
     },
 });
