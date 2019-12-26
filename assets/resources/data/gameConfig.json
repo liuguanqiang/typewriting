@@ -2,13 +2,44 @@
     "levels":[
         {
             "name":"level1",
+            "speed":30,
             "boss": {
+                "practiceState":{
+                    "normal":["f","j"," "],
+                    "punishment":["a","b"],
+                    "updateCount":50
+                },
                 "attackState":{
-                    "normal":["aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff"],
-                    "punishment":["f","ff","ff","fff","fff","fff"]
+                    "normal":["f","j"," "],
+                    "punishment":["a","b"],
+                    "updateCount":50
                 },
                 "beatingState":{
-                    "normal":["aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff","aaa","sss","ddd","fff"]
+                    "normal":["f","j"," "],
+                    "punishment":["a","b"],
+                    "updateCount":50
+                }
+               
+            }
+        },
+        {
+            "name":"level2",
+            "speed":30,
+            "boss": {
+                "practiceState":{
+                    "normal":["d","k"," "],
+                    "punishment":["a","b"],
+                    "updateCount":50
+                },
+                "attackState":{
+                    "normal":["d","k"," "],
+                    "punishment":["a","b"],
+                    "updateCount":50
+                },
+                "beatingState":{
+                    "normal":["d","k"," "],
+                    "punishment":["a","b"],
+                    "updateCount":50
                 }
                
             }

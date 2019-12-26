@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "letterRect",
+    "_name": "keyboard",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -37,15 +37,15 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 217,
+      "g": 217,
+      "b": 217,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 55,
-      "height": 55
+      "width": 828,
+      "height": 300
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -55,7 +55,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 368,
+      "y": -234,
       "z": 0
     },
     "_scale": {
@@ -82,7 +82,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "letterLabel",
+    "_name": "keys",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -108,8 +108,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 32.09,
-      "height": 40
+      "width": 828,
+      "height": 50
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -140,33 +140,39 @@
     "_zIndex": 0,
     "_is3DNode": false,
     "groupIndex": 0,
-    "_rotationX": 0,
-    "_rotationY": 0,
     "_id": ""
   },
   {
-    "__type__": "cc.Label",
+    "__type__": "cc.Layout",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 2
     },
     "_enabled": true,
-    "_srcBlendFactor": 1,
-    "_dstBlendFactor": 771,
-    "_useOriginalSize": false,
-    "_string": "W",
-    "_N$string": "W",
-    "_fontSize": 34,
-    "_lineHeight": 40,
-    "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
-    "_spacingX": 0,
-    "_N$horizontalAlign": 1,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0,
+    "_layoutSize": {
+      "__type__": "cc.Size",
+      "width": 828,
+      "height": 50
+    },
+    "_resize": 1,
+    "_N$layoutType": 3,
+    "_N$padding": 0,
+    "_N$cellSize": {
+      "__type__": "cc.Size",
+      "width": 40,
+      "height": 40
+    },
+    "_N$startAxis": 0,
+    "_N$paddingLeft": 16,
+    "_N$paddingRight": 16,
+    "_N$paddingTop": 0,
+    "_N$paddingBottom": 0,
+    "_N$spacingX": 5,
+    "_N$spacingY": 5,
+    "_N$verticalDirection": 1,
+    "_N$horizontalDirection": 0,
+    "_N$affectedByScale": false,
     "_id": ""
   },
   {
@@ -175,14 +181,14 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "df283c9c-19c0-4acc-a532-085d6d46a396"
+      "__uuid__": "1a556364-f782-4e73-baba-d9651f40f713"
     },
-    "fileId": "f5+8ZMQZ1I+Y+bVzFVD/oQ",
+    "fileId": "312XGa8r1I7YkOnuDAQDbA",
     "sync": false
   },
   {
     "__type__": "cc.Sprite",
-    "_name": "",
+    "_name": "keyboard<Sprite>",
     "_objFlags": 0,
     "node": {
       "__id__": 1
@@ -191,9 +197,9 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "5d46007b-8cb3-41d5-bdf3-8fc708da2fdc"
+      "__uuid__": "f2103670-bbac-4b3a-a93d-44ee41648a05"
     },
-    "_type": 0,
+    "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
@@ -209,18 +215,22 @@
     "_id": ""
   },
   {
-    "__type__": "47e8dkMJphCVredHU5KrGn8",
+    "__type__": "f3b80POiuJOd7p7dceaSAk1",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "rotateSprite": null,
-    "letterLabel": {
+    "KeyBox": {
       "__id__": 2
     },
-    "speed": 12,
+    "KeyJson": {
+      "__uuid__": "7e5bf9de-e8d4-435b-b44e-fd4b7440ec63"
+    },
+    "KeyItem": {
+      "__uuid__": "a98ff6fe-4116-4a52-a822-7ec838ddc115"
+    },
     "_id": ""
   },
   {
@@ -229,9 +239,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "df283c9c-19c0-4acc-a532-085d6d46a396"
+      "__uuid__": "1a556364-f782-4e73-baba-d9651f40f713"
     },
-    "fileId": "97tmjI4IFDs6Npf83AP9co",
+    "fileId": "9aWkaCwopCxpBG0MONeGMy",
     "sync": false
   }
 ]

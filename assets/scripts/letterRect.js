@@ -2,32 +2,33 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        rotateSprite: cc.Node,
-        letterLabel: cc.Node,
-        speed: 6
+        letterLabel: cc.Node
     },
 
     start() {
 
     },
 
-    onInit(text, timeOut) {
+    /**
+     * @param  text 文本
+     * @param  xPoint    初始X坐标 
+     */
+    onInit(text, xPoint, speed = 20) {
+        this.speed = speed;
         this.comLetterLabel = this.letterLabel.getComponent(cc.Label);
-        if (text) {
-            this.LetterCount = text.length;
-            this.comLetterLabel.string = text;
-            this.comLetterLabel._updateRenderData(true);
-            this.node.width = this.letterLabel.width + 20;
-            setTimeout(() => {
-                this.isPlay = true;
-            }, timeOut * 1000);
-            this.node.x = this.random(-400, 400);
-        }
-        this.rotateSprite.runAction(cc.repeatForever(cc.sequence(cc.rotateTo(1, -180, -180), cc.rotateTo(1, -360, -360))));
+        this.curText = text;
+        this.LetterCount = text.length;
+        this.comLetterLabel.string = text;
+        this.isPlay = true;
+        this.node.x = xPoint;
+        // this.comLetterLabel._updateRenderData(true);
+        // this.node.width = this.letterLabel.width + 20;
+        // this.rotateSprite.runAction(cc.repeatForever(cc.sequence(cc.rotateTo(1, -180, -180), cc.rotateTo(1, -360, -360))));
     },
 
     //设置当前为定位字母块
     setAnchor() {
+        this.node.color = new cc.color(255, 120, 0, 255);
         this.letterLabel.color = new cc.color(255, 120, 0, 255);
         this.node.zIndex = 100;
     },
@@ -35,20 +36,20 @@ cc.Class({
     //外部传入按键字母，进行删除当前字母块的首字母，如果不符合返回-1,
     removeCode(key) {
         if (this.getFristLetter() == key) {
-            if (this.comLetterLabel.string.length > 1) {
-                this.comLetterLabel.string = this.comLetterLabel.string.substring(1, this.comLetterLabel.string.length);
+            if (this.curText.length > 1) {
+                this.curText = this.curText.substring(1, this.curText);
             } else {
-                this.comLetterLabel.string = ""
+                this.curText = ""
             }
-            return this.comLetterLabel.string.length || 0;
+            return this.curText.length;
         }
         return -1;
     },
 
     //获取首字母
     getFristLetter() {
-        if (this.comLetterLabel.string.length >= 1) {
-            return this.comLetterLabel.string[0];
+        if (this.curText.length >= 1) {
+            return this.curText[0];
         }
         return null;
     },
@@ -60,8 +61,9 @@ cc.Class({
 
     //获取靶心坐标点
     getBullseyePosition() {
-        const nodePoint = this.node.getPosition();
-        return cc.v2(nodePoint.x + this.rotateSprite.x, nodePoint.y + this.rotateSprite.y);
+        return this.node.getPosition();
+        // const nodePoint = this.node.getPosition();
+        // return cc.v2(nodePoint.x + this.rotateSprite.x, nodePoint.y + this.rotateSprite.y);
     },
 
     //被击中
@@ -69,12 +71,11 @@ cc.Class({
         if (!this.LetterCount) {
             return;
         }
+        this.comLetterLabel.string = this.comLetterLabel.string.substring(1, this.comLetterLabel.string);
         if (this.LetterCount === 1) {
-            setTimeout(() => {
-                if (cc.isValid(this.node)) {
-                    this.node.destroy();
-                }
-            }, 200);
+            if (cc.isValid(this.node)) {
+                this.node.destroy();
+            }
         } else {
             this.LetterCount--;
         }

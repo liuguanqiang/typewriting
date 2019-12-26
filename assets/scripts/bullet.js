@@ -6,9 +6,11 @@ cc.Class({
 
     start() {
         this.speed = 40;
-
     },
-    setTarget(traget) {
+    setTarget(traget, initPoint) {
+        if (initPoint != 0) {
+            this.node.setPosition(this.node.convertToNodeSpaceAR(initPoint));
+        }
         this.traget = traget;
     },
     update(dt) {
