@@ -20,13 +20,11 @@
                     }
                 ],
                 "attackState":{
-                    "normal":["f","j"," "],
-                    "punishment":["a","b"],
+                    "normal":["f","name"," "],
                     "updateCount":50
                 },
                 "beatingState":{
                     "normal":["f","j"," "],
-                    "punishment":["a","b"],
                     "beatTime":10
                 }
                

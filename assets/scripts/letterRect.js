@@ -15,9 +15,8 @@ cc.Class({
     },
 
     //初始化
-    onInit(text, xPoint, speed = 20) {
+    onInit(text, point, speed = 20) {
         this.bg.active = true;
-        this.node.setPosition(0, 368);
         this.accelerate = 1;
         this.speed = speed;
         this.comLetterLabel = this.letterLabel.getComponent(cc.Label);
@@ -25,9 +24,12 @@ cc.Class({
         this.LetterCount = text.length;
         this.comLetterLabel.string = text;
         this.isPlay = true;
-        this.node.x = xPoint;
-        // this.comLetterLabel._updateRenderData(true);
-        // this.node.width = this.letterLabel.width + 20;
+        this.node.setPosition(point);
+        if (text.length > 1) {
+            this.comLetterLabel._updateRenderData(true);
+            this.bg.width = this.letterLabel.width + 20;
+        }
+
         // this.rotateSprite.runAction(cc.repeatForever(cc.sequence(cc.rotateTo(1, -180, -180), cc.rotateTo(1, -360, -360))));
     },
 
@@ -43,7 +45,7 @@ cc.Class({
     removeCode(key) {
         if (this.getFristLetter() == key) {
             if (this.curText.length > 1) {
-                this.curText = this.curText.substring(1, this.curText);
+                this.curText = this.curText.substring(1, this.curText.length);
             } else {
                 this.curText = ""
             }
@@ -77,7 +79,7 @@ cc.Class({
         if (!this.LetterCount) {
             return;
         }
-        this.comLetterLabel.string = this.comLetterLabel.string.substring(1, this.comLetterLabel.string);
+        this.comLetterLabel.string = this.comLetterLabel.string.substring(1, this.comLetterLabel.string.length);
         if (this.LetterCount === 1) {
             this.onPlayParticle();
             if (this.finish_cb) {

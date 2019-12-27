@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "43a5e9d0-a6c4-4055-8626-db4b1baed82e",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "Armature_露弱点呼吸_15": {
+      "ver": "1.0.3",
+      "uuid": "23a3f55a-b9e8-4c9a-b390-45faddc10bd4",
+      "rawTextureUuid": "43a5e9d0-a6c4-4055-8626-db4b1baed82e",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -1.5,
+      "offsetY": 1,
+      "trimX": 2,
+      "trimY": 8,
+      "width": 240,
+      "height": 215,
+      "rawWidth": 247,
+      "rawHeight": 233,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

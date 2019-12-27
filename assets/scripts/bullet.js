@@ -23,10 +23,8 @@ cc.Class({
         let distance = point.sub(targetPoint).mag();
         if (distance <= 30) {
             this.isUpdate = false;
-            if (this.cb) {
-                this.cb(this.node);
-            }
             this.traget.getComponent("letterRect").setHit();
+            this.node.destroy();
             return true;
         }
         let delta = targetPoint.sub(point);

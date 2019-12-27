@@ -6,7 +6,6 @@ cc.Class({
     },
 
     start() {
-        this.letterIndex = 0;
     },
 
     //开始游戏
@@ -42,8 +41,9 @@ cc.Class({
             this.curUpdateCount = this.data[this.curPoolIndex].updateCount;
             this.schedule(this.createLetterItem, 1.5, cc.macro.REPEAT_FOREVER, 0.1);
         } else {
-            //当前练习完成
-            console.log("当前练习完成");
+            //当前练习完成 
+            this.levelFinish = true;
+
         }
     },
 
@@ -83,7 +83,7 @@ cc.Class({
             const item = this.gameJS.createLetterItem();
             const letterText = this.curNormalLetterPool[this.randomToFloor(0, this.curNormalLetterPool.length)];
             const x = this.keyboardJS.getPointX(letterText);
-            item.getComponent("letterRect").onInit(letterText, x, this.speed);
+            item.getComponent("letterRect").onInit(letterText, cc.v2(x, 368), this.speed);
             this.letterRectIndex++;
             this.onAutoLocation();
         } else {
@@ -108,6 +108,9 @@ cc.Class({
                 });
                 return;
             }
+        }
+        if (this.levelFinish) {
+            this.gameJS.onBack();
         }
     },
 
