@@ -21,12 +21,12 @@ cc.Class({
 
     onLoad() {
         this.bulletNodePool = new cc.NodePool();
-        this.letterNodePool = new cc.NodePool();
+        //this.letterNodePool = new cc.NodePool();
         for (let i = 0; i < 5; ++i) {
             let enemy = cc.instantiate(this.BulletItem);
             this.bulletNodePool.put(enemy);
-            let letter = cc.instantiate(this.LetterRectItem);
-            this.letterNodePool.put(letter);
+            // let letter = cc.instantiate(this.LetterRectItem);
+            // this.letterNodePool.put(letter);
         }
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     },
@@ -82,12 +82,12 @@ cc.Class({
 
     //创建字母块
     createLetterItem() {
-        let newNode;
-        if (this.letterNodePool.size() > 0) {
-            newNode = this.letterNodePool.get();
-        } else {
-            newNode = cc.instantiate(this.LetterRectItem);
-        }
+        let newNode = cc.instantiate(this.LetterRectItem);
+        // if (this.letterNodePool.size() > 0) {
+        //     newNode = this.letterNodePool.get();
+        // } else {
+        //     newNode = cc.instantiate(this.LetterRectItem);
+        // }
         this.LetterBoxs.addChild(newNode);
         return newNode;
     },

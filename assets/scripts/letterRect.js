@@ -4,12 +4,11 @@ cc.Class({
     properties: {
         letterLabel: cc.Node,
         particle: cc.Node,
+        bg: cc.Node
     },
 
     start() {
-
     },
-
     onLoad() {
         this.normalColor = new cc.color(255, 255, 255, 255);
         this.anchorColor = new cc.color(255, 120, 0, 255);
@@ -17,11 +16,8 @@ cc.Class({
 
     //初始化
     onInit(text, xPoint, speed = 20) {
-        this.node.isFinish = false;
+        this.bg.active = true;
         this.node.setPosition(0, 368);
-        this.node.zIndex = 0;
-        this.node.color = this.normalColor;
-        this.letterLabel.color = this.normalColor;
         this.accelerate = 1;
         this.speed = speed;
         this.comLetterLabel = this.letterLabel.getComponent(cc.Label);
@@ -36,9 +32,9 @@ cc.Class({
     },
 
     //设置当前为定位字母块
-    setAnchor(cb) {
-        this.cb = cb;
-        this.node.color = this.anchorColor;
+    setAnchor(finish_cb) {
+        this.finish_cb = finish_cb;
+        this.bg.color = this.anchorColor;
         this.letterLabel.color = this.anchorColor;
         this.node.zIndex = 100;
     },
@@ -83,12 +79,24 @@ cc.Class({
         }
         this.comLetterLabel.string = this.comLetterLabel.string.substring(1, this.comLetterLabel.string);
         if (this.LetterCount === 1) {
-            if (this.cb) {
-                this.cb(this.node);
+            this.onPlayParticle();
+            if (this.finish_cb) {
+                this.finish_cb();
             }
         } else {
             this.LetterCount--;
         }
+    },
+
+    //播放爆炸效果，发送回收回调
+    onPlayParticle() {
+        this.bg.active = false;
+        const comParticle = this.particle.getComponent(cc.ParticleSystem);
+        comParticle.resetSystem();
+        setTimeout(() => {
+            comParticle.stopSystem();
+            this.node.destroy();
+        }, 800);
     },
 
     //加速一次
@@ -96,21 +104,11 @@ cc.Class({
         this.accelerate = 10;
     },
 
-    //播放粒子
-    playParticle() {
-        const myParticle = this.particle.getComponent(cc.ParticleSystem);
-        if (myParticle.particleCount > 0) {
-            myParticle.stopSystem();
-        } else {
-            myParticle.resetSystem();
-        }
-    },
-
     update(dt) {
         if (!this.isPlay) return;
         if (this.accelerate > 1) {
+            this.node.y -= this.speed * this.accelerate * dt;
             this.accelerate--;
-            this.node.y -= this.speed * 5 * dt;
         } else {
             this.node.y -= this.speed * dt;
         }

@@ -6,6 +6,7 @@ cc.Class({
     },
 
     start() {
+        this.letterIndex = 0;
     },
 
     //开始游戏
@@ -39,7 +40,7 @@ cc.Class({
             this.curNormalLetterPool = this.data[this.curPoolIndex].normal;
             //当前正常池刷新次数，也就是用户不增加惩罚的默认刷新次数
             this.curUpdateCount = this.data[this.curPoolIndex].updateCount;
-            this.schedule(this.createLetterItem, 3, cc.macro.REPEAT_FOREVER, 0.1);
+            this.schedule(this.createLetterItem, 1.5, cc.macro.REPEAT_FOREVER, 0.1);
         } else {
             //当前练习完成
             console.log("当前练习完成");
@@ -57,9 +58,6 @@ cc.Class({
             }
             const keyboardPoint = this.keyboardJS.onKeyDown(event, true);
             this.gameJS.createBulletItem(this.curAnchorLetter, keyboardPoint);
-            if (aLength == 0) {
-                this.curAnchorLetter.isFinish = true;
-            }
         } else {
             this.onKeyError();
             console.log("打错无定位");
@@ -86,13 +84,10 @@ cc.Class({
             const letterText = this.curNormalLetterPool[this.randomToFloor(0, this.curNormalLetterPool.length)];
             const x = this.keyboardJS.getPointX(letterText);
             item.getComponent("letterRect").onInit(letterText, x, this.speed);
-            console.log("isFinish1", item.isFinish)
-            console.log("isFinish2", this.letterBoxs.children[0].isFinish)
             this.letterRectIndex++;
             this.onAutoLocation();
         } else {
             //当前池子已完成，刷新池子索引
-            this.curPoolIndex++;
             this.onUpdatePoolData();
             return;
         }
@@ -103,18 +98,15 @@ cc.Class({
         if ((this.curAnchorLetter && !this.curAnchorLetter.isFinish) || !this.letterBoxs)
             return;
         for (let i = 0; i < this.letterBoxs.children.length; i++) {
-            const element = this.letterBoxs.children[i];
-            if (!element.isFinish) {
-                this.curAnchorLetter = element;
-                this.curAnchorLetter.getComponent("letterRect").setAnchor((node) => {
+            const item = this.letterBoxs.children[i];
+            if (!item.isFinish) {
+                this.curAnchorLetter = item;
+                this.curAnchorLetter.getComponent("letterRect").setAnchor(() => {
+                    this.curAnchorLetter.isFinish = true;
                     this.scoreLabel.string = ++this.score;
                     this.onAutoLocation();
-                    this.gameJS.onletterNodePoolPut(node);
                 });
                 return;
-            } else {
-                console.log("element", element.isFinish)
-                console.log("aa", this.letterBoxs.children.length)
             }
         }
     },
