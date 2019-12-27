@@ -7,19 +7,25 @@ cc.Class({
     start() {
         this.speed = 40;
     },
-    setTarget(traget, initPoint) {
+    setTarget(traget, initPoint, cb) {
         if (initPoint != 0) {
+            this.node.setPosition(0, 0);
             this.node.setPosition(this.node.convertToNodeSpaceAR(initPoint));
         }
         this.traget = traget;
+        this.isUpdate = true;
+        this.cb = cb;
     },
     update(dt) {
-        if (!this.traget || !cc.isValid(this.node)) return;
+        if (!this.traget || !this.isUpdate) return;
         let targetPoint = this.traget.getComponent("letterRect").getBullseyePosition();
         let point = cc.v2(this.node.x, this.node.y);
         let distance = point.sub(targetPoint).mag();
         if (distance <= 30) {
-            this.node.destroy();
+            this.isUpdate = false;
+            if (this.cb) {
+                this.cb(this.node);
+            }
             this.traget.getComponent("letterRect").setHit();
             return true;
         }

@@ -6,23 +6,24 @@ cc.Class({
     },
 
     start() {
-
     },
 
-    onSetData(levelData) {
-        this.data = levelData.boss.practiceState;
-        this.speed = levelData.speed;
-    },
-
+    //开始游戏
     onPlayGame(gameJS) {
+        this.gameJS = gameJS;
+        this.data = gameJS.getCurLevelData().boss.practiceState;
+        this.speed = gameJS.getCurLevelData().speed;
         this.letterBoxs = gameJS.LetterBoxs;
         this.letterRectItem = gameJS.LetterRectItem;
         this.bulletsBoxs = gameJS.BulletsBoxs;
         this.bulletItem = gameJS.BulletItem;
         this.audio = gameJS.Audio;
-        this.KeyboardJS = gameJS.KeyboardJS;
+        this.keyboardJS = gameJS.KeyboardJS;
+        this.scoreLabel = gameJS.Score.getComponent(cc.Label);
         this.curAnchorLetter = null;
         this.letterBoxs.destroyAllChildren();
+        //当前分数
+        this.score = 0;
         //当前刷新池索引
         this.curPoolIndex = 0;
         this.onUpdatePoolData();
@@ -38,7 +39,7 @@ cc.Class({
             this.curNormalLetterPool = this.data[this.curPoolIndex].normal;
             //当前正常池刷新次数，也就是用户不增加惩罚的默认刷新次数
             this.curUpdateCount = this.data[this.curPoolIndex].updateCount;
-            this.schedule(this.createLetterItem, 2, cc.macro.REPEAT_FOREVER, 0.1);
+            this.schedule(this.createLetterItem, 3, cc.macro.REPEAT_FOREVER, 0.1);
         } else {
             //当前练习完成
             console.log("当前练习完成");
@@ -54,9 +55,8 @@ cc.Class({
                 console.log("打错了");
                 return;
             }
-            const keyboardPoint = this.KeyboardJS.onKeyDown(event, true);
-            const bullet = this.createBulletItem();
-            bullet.getComponent("bullet").setTarget(this.curAnchorLetter, keyboardPoint);
+            const keyboardPoint = this.keyboardJS.onKeyDown(event, true);
+            this.gameJS.createBulletItem(this.curAnchorLetter, keyboardPoint);
             if (aLength == 0) {
                 this.curAnchorLetter.isFinish = true;
             }
@@ -74,7 +74,7 @@ cc.Class({
             const element = this.letterBoxs.children[i];
             element.getComponent("letterRect").onAccelerate();
         }
-        this.KeyboardJS.onKeyDown(event, false);
+        this.keyboardJS.onKeyDown(event, false);
         //惩罚一次，当前刷新项+1
         this.curUpdateCount++;
     },
@@ -82,11 +82,12 @@ cc.Class({
     //创建字母块
     createLetterItem() {
         if (this.letterRectIndex < this.curUpdateCount) {
-            const item = cc.instantiate(this.letterRectItem);
-            this.letterBoxs.addChild(item);
+            const item = this.gameJS.createLetterItem();
             const letterText = this.curNormalLetterPool[this.randomToFloor(0, this.curNormalLetterPool.length)];
-            const x = this.KeyboardJS.getPointX(letterText);
+            const x = this.keyboardJS.getPointX(letterText);
             item.getComponent("letterRect").onInit(letterText, x, this.speed);
+            console.log("isFinish1", item.isFinish)
+            console.log("isFinish2", this.letterBoxs.children[0].isFinish)
             this.letterRectIndex++;
             this.onAutoLocation();
         } else {
@@ -105,10 +106,15 @@ cc.Class({
             const element = this.letterBoxs.children[i];
             if (!element.isFinish) {
                 this.curAnchorLetter = element;
-                this.curAnchorLetter.getComponent("letterRect").setAnchor(() => {
+                this.curAnchorLetter.getComponent("letterRect").setAnchor((node) => {
+                    this.scoreLabel.string = ++this.score;
                     this.onAutoLocation();
+                    this.gameJS.onletterNodePoolPut(node);
                 });
                 return;
+            } else {
+                console.log("element", element.isFinish)
+                console.log("aa", this.letterBoxs.children.length)
             }
         }
     },
@@ -118,13 +124,4 @@ cc.Class({
         const random = Math.floor(Math.random() * (upper - lower)) + lower;
         return random;
     },
-
-    //创建子弹
-    createBulletItem() {
-        const item = cc.instantiate(this.bulletItem);
-        this.bulletsBoxs.addChild(item);
-        this.audio.getComponent("gameAudio").onPlayBullet();
-        return item;
-    },
-
 });

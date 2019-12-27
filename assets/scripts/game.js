@@ -9,13 +9,8 @@ cc.Class({
         BulletItem: cc.Prefab,
         Audio: cc.Node,
         Keyboard: cc.Node,
-        stateJSNode: cc.Node
-    },
-    onLoad() {
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-    },
-    onDestroy() {
-        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        stateJSNode: cc.Node,
+        Score: cc.Node
     },
     //954
     start() {
@@ -24,11 +19,25 @@ cc.Class({
         this.KeyboardJS = this.Keyboard.getComponent("keyboard");
     },
 
+    onLoad() {
+        this.bulletNodePool = new cc.NodePool();
+        this.letterNodePool = new cc.NodePool();
+        for (let i = 0; i < 5; ++i) {
+            let enemy = cc.instantiate(this.BulletItem);
+            this.bulletNodePool.put(enemy);
+            let letter = cc.instantiate(this.LetterRectItem);
+            this.letterNodePool.put(letter);
+        }
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+    },
+    onDestroy() {
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+    },
+
     onPlayGame() {
         //当前关卡索引
         this.levelIndex = 0;
         this.curStateJS = this.getStateJS();
-        this.curStateJS.onSetData(this.getCurLevelData())
         this.curStateJS.onPlayGame(this);
     },
     getStateJS() {
@@ -55,6 +64,37 @@ cc.Class({
         // }
     },
 
+    //创建子弹
+    createBulletItem(target, keyboardPoint) {
+        let newNode;
+        if (this.bulletNodePool.size() > 0) {
+            newNode = this.bulletNodePool.get();
+        } else {
+            newNode = cc.instantiate(this.BulletItem);
+        }
+        this.BulletsBoxs.addChild(newNode);
+        newNode.getComponent("bullet").setTarget(target, keyboardPoint, (enemy) => {
+            this.bulletNodePool.put(enemy);
+        });
+        this.Audio.getComponent("gameAudio").onPlayBullet();
+        return newNode;
+    },
+
+    //创建字母块
+    createLetterItem() {
+        let newNode;
+        if (this.letterNodePool.size() > 0) {
+            newNode = this.letterNodePool.get();
+        } else {
+            newNode = cc.instantiate(this.LetterRectItem);
+        }
+        this.LetterBoxs.addChild(newNode);
+        return newNode;
+    },
+    //字母块回收
+    onletterNodePoolPut(node) {
+        this.letterNodePool.put(node);
+    },
     ///获取当前关卡的数据对象
     getCurLevelData() {
         return this.ConfigJson.json.levels[this.levelIndex];

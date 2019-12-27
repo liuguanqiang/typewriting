@@ -2,18 +2,26 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        letterLabel: cc.Node
+        letterLabel: cc.Node,
+        particle: cc.Node,
     },
 
     start() {
 
     },
 
-    /**
-     * @param  text 文本
-     * @param  xPoint    初始X坐标 
-     */
+    onLoad() {
+        this.normalColor = new cc.color(255, 255, 255, 255);
+        this.anchorColor = new cc.color(255, 120, 0, 255);
+    },
+
+    //初始化
     onInit(text, xPoint, speed = 20) {
+        this.node.isFinish = false;
+        this.node.setPosition(0, 368);
+        this.node.zIndex = 0;
+        this.node.color = this.normalColor;
+        this.letterLabel.color = this.normalColor;
         this.accelerate = 1;
         this.speed = speed;
         this.comLetterLabel = this.letterLabel.getComponent(cc.Label);
@@ -30,8 +38,8 @@ cc.Class({
     //设置当前为定位字母块
     setAnchor(cb) {
         this.cb = cb;
-        this.node.color = new cc.color(255, 120, 0, 255);
-        this.letterLabel.color = new cc.color(255, 120, 0, 255);
+        this.node.color = this.anchorColor;
+        this.letterLabel.color = this.anchorColor;
         this.node.zIndex = 100;
     },
 
@@ -75,11 +83,8 @@ cc.Class({
         }
         this.comLetterLabel.string = this.comLetterLabel.string.substring(1, this.comLetterLabel.string);
         if (this.LetterCount === 1) {
-            if (cc.isValid(this.node)) {
-                if (this.cb) {
-                    this.cb();
-                }
-                this.node.destroy();
+            if (this.cb) {
+                this.cb(this.node);
             }
         } else {
             this.LetterCount--;
@@ -89,6 +94,16 @@ cc.Class({
     //加速一次
     onAccelerate() {
         this.accelerate = 10;
+    },
+
+    //播放粒子
+    playParticle() {
+        const myParticle = this.particle.getComponent(cc.ParticleSystem);
+        if (myParticle.particleCount > 0) {
+            myParticle.stopSystem();
+        } else {
+            myParticle.resetSystem();
+        }
     },
 
     update(dt) {
