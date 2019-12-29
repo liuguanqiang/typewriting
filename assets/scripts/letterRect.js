@@ -92,6 +92,7 @@ cc.Class({
 
     //播放爆炸效果，发送回收回调
     onPlayParticle() {
+        this.isPlay = false;
         this.bg.active = false;
         const comParticle = this.particle.getComponent(cc.ParticleSystem);
         comParticle.resetSystem();

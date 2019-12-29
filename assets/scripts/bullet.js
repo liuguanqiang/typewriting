@@ -9,8 +9,10 @@ cc.Class({
     },
     setTarget(traget, initPoint, cb) {
         if (initPoint != 0) {
+            this.node.rotation = 0;
             this.node.setPosition(0, 0);
-            this.node.setPosition(this.node.convertToNodeSpaceAR(initPoint));
+            const point = this.node.convertToNodeSpaceAR(initPoint);
+            this.node.setPosition(point);
         }
         this.traget = traget;
         this.isUpdate = true;
@@ -24,7 +26,9 @@ cc.Class({
         if (distance <= 30) {
             this.isUpdate = false;
             this.traget.getComponent("letterRect").setHit();
-            this.node.destroy();
+            if (this.cb) {
+                this.cb(this.node);
+            }
             return true;
         }
         let delta = targetPoint.sub(point);

@@ -24,11 +24,11 @@ cc.Class({
     },
 
     onLoad() {
-        // this.bulletNodePool = new cc.NodePool();
-        // for (let i = 0; i < 5; ++i) {
-        //     let enemy = cc.instantiate(this.BulletItem);
-        //     this.bulletNodePool.put(enemy);
-        // }
+        this.bulletNodePool = new cc.NodePool();
+        for (let i = 0; i < 5; ++i) {
+            let enemy = cc.instantiate(this.BulletItem);
+            this.bulletNodePool.put(enemy);
+        }
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     },
     onDestroy() {
@@ -73,14 +73,16 @@ cc.Class({
 
     //创建子弹
     createBulletItem(target, keyboardPoint) {
-        let newNode = cc.instantiate(this.BulletItem);
-        // if (this.bulletNodePool.size() > 0) {
-        //     newNode = this.bulletNodePool.get();
-        // } else {
-        //     newNode = cc.instantiate(this.BulletItem);
-        // }
+        let newNode ;
+        if (this.bulletNodePool.size() > 0) {
+            newNode = this.bulletNodePool.get();
+        } else {
+            newNode = cc.instantiate(this.BulletItem);
+        }
         this.BulletsBoxs.addChild(newNode);
-        newNode.getComponent("bullet").setTarget(target, keyboardPoint);
+        newNode.getComponent("bullet").setTarget(target, keyboardPoint, (node) => {
+            this.bulletNodePool.put(node);
+        });
         this.Audio.getComponent("gameAudio").onPlayBullet();
         return newNode;
     },

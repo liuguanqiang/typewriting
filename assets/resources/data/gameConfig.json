@@ -20,7 +20,7 @@
                     }
                 ],
                 "attackState":{
-                    "normal":["f","name"," "],
+                    "normal":["f","f","f"],
                     "updateCount":50
                 },
                 "beatingState":{
