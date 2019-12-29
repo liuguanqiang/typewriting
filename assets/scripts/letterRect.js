@@ -23,13 +23,14 @@ cc.Class({
         this.curText = text;
         this.LetterCount = text.length;
         this.comLetterLabel.string = text;
-        this.isPlay = true;
         this.node.setPosition(point);
         if (text.length > 1) {
             this.comLetterLabel._updateRenderData(true);
             this.bg.width = this.letterLabel.width + 20;
         }
-
+        if (this.speed != -1) {
+            this.isPlay = true;
+        }
         // this.rotateSprite.runAction(cc.repeatForever(cc.sequence(cc.rotateTo(1, -180, -180), cc.rotateTo(1, -360, -360))));
     },
 
@@ -97,8 +98,10 @@ cc.Class({
         const comParticle = this.particle.getComponent(cc.ParticleSystem);
         comParticle.resetSystem();
         setTimeout(() => {
-            comParticle.stopSystem();
-            this.node.destroy();
+            if (cc.isValid(this.node)) {
+                comParticle.stopSystem();
+                this.node.destroy();
+            }
         }, 800);
     },
 

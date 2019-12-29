@@ -11,15 +11,15 @@ cc.Class({
         Audio: cc.Node,
         Keyboard: cc.Node,
         stateJSNode: cc.Node,
-        Score: cc.Node
+        Score: cc.Node,
+        Blood: cc.Node,
     },
     //954
     start() {
         //当前关卡索引
         this.levelIndex = 0;
-
         //当前游戏状态  boss关卡 0 练习状态  1 boss攻击状态  2 boss挨打状态
-        this.bossStateIndex = 1;
+        this.bossStateIndex = 0;
         this.KeyboardJS = this.Keyboard.getComponent("keyboard");
     },
 
@@ -36,29 +36,47 @@ cc.Class({
     },
 
     onPlayGame() {
+        this.curAnchorLetter = null;
+        this.BulletsBoxs.destroyAllChildren();
+        this.LetterBoxs.destroyAllChildren();
         this.curStateJS = this.getStateJS();
         this.curStateJS.onPlayGame(this);
     },
 
-    onBack() {
-        if (this.bossStateIndex < 2) {
-            this.bossStateIndex++;
-            this.onPlayGame();
-        }
+    onBack(increment = 1) {
+        this.bossStateIndex += increment;
+        this.onPlayGame();
     },
 
     getStateJS() {
+        this.Blood.active = false;
+        this.Score.active = true;
         if (this.bossStateIndex == 0) {
             return this.stateJSNode.getComponent("practiceStateJS");
         } else if (this.bossStateIndex == 1) {
             return this.stateJSNode.getComponent("attackStateJS");
         } else {
-            return this.stateJSNode.getComponent("practiceStateJS");
+            this.Score.active = false;
+            this.Blood.active = true;
+            return this.stateJSNode.getComponent("beatingStateJS");
         }
     },
 
     onKeyDown(event) {
-        this.curStateJS.onKeyDown(event);
+        if (this.curAnchorLetter && !this.curAnchorLetter.isFinish) {
+            const code = String.fromCharCode(event.keyCode).toLowerCase();
+            const aLength = this.curAnchorLetter.getComponent("letterRect").removeCode(code);
+            if (aLength == -1) {
+                this.onKeyError();
+                console.log("打错了");
+                return;
+            }
+            const keyboardPoint = this.KeyboardJS.onKeyDown(event, true);
+            this.createBulletItem(this.curAnchorLetter, keyboardPoint);
+        } else {
+            this.onKeyError();
+            console.log("打错无定位");
+        }
         // if (!this.curAnchorLetter || this.curAnchorLetter.isFinish) {
         //     for (let i = 0; i < this.letterBoxs.children.length; i++) {
         //         const item = this.letterBoxs.children[i];
@@ -71,9 +89,40 @@ cc.Class({
         // }
     },
 
+    //按错
+    onKeyError() {
+        if (!this.LetterBoxs)
+            return;
+        for (let i = 0; i < this.LetterBoxs.children.length; i++) {
+            const element = this.LetterBoxs.children[i];
+            element.getComponent("letterRect").onAccelerate();
+        }
+        this.KeyboardJS.onKeyDown(event, false);
+        this.curStateJS.punishmentOnce();
+    },
+
+
+    //自动定位最近一个
+    onAutoLocation() {
+        if ((this.curAnchorLetter && !this.curAnchorLetter.isFinish) || !this.LetterBoxs)
+            return;
+        for (let i = 0; i < this.LetterBoxs.children.length; i++) {
+            const item = this.LetterBoxs.children[i];
+            if (!item.isFinish) {
+                this.curAnchorLetter = item;
+                this.curAnchorLetter.getComponent("letterRect").setAnchor(() => {
+                    this.curAnchorLetter.isFinish = true;
+                    this.curStateJS.finishOnce();
+                    this.onAutoLocation();
+                });
+                return;
+            }
+        }
+    },
+
     //创建子弹
     createBulletItem(target, keyboardPoint) {
-        let newNode ;
+        let newNode;
         if (this.bulletNodePool.size() > 0) {
             newNode = this.bulletNodePool.get();
         } else {
@@ -93,10 +142,26 @@ cc.Class({
         this.LetterBoxs.addChild(newNode);
         return newNode;
     },
-    //字母块回收
-    onletterNodePoolPut(node) {
-        this.letterNodePool.put(node);
+
+    //获取随机数 取整
+    randomToFloor(lower, upper) {
+        const random = Math.floor(Math.random() * (upper - lower)) + lower;
+        return random;
     },
+
+    //获取当前字母框中的字母是否全部击打完成
+    getLettersAllFinish() {
+        if (this.LetterBoxs) {
+            for (let index = 0; index < this.LetterBoxs.children.length; index++) {
+                const element = this.LetterBoxs.children[index];
+                if (!element.isFinish) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    },
+
     ///获取当前关卡的数据对象
     getCurLevelData() {
         return this.ConfigJson.json.levels[this.levelIndex];

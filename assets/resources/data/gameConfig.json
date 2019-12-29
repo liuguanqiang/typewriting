@@ -3,29 +3,29 @@
         {
             "name":"level1",
             "speed":40,
-            "blood":100,
             "boss": {
+                "blood":100,
                 "practiceState":[
                     {
                       "normal":["f","j"," "],
-                      "updateCount":10
+                      "updateCount":2
                     },
                     {
                         "normal":["d","k"," ","a","l"],
-                        "updateCount":10
+                        "updateCount":2
                     },
                     {
                         "normal":["f","j"," "],
-                        "updateCount":10
+                        "updateCount":2
                     }
                 ],
                 "attackState":{
-                    "normal":["f","f","f"],
-                    "updateCount":50
+                    "normal":["a","s"," "],
+                    "updateCount":6
                 },
                 "beatingState":{
-                    "normal":["f","j"," "],
-                    "beatTime":10
+                    "normal":["z","x","c"],
+                    "beatTime":6
                 }
                
             }

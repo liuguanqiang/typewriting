@@ -7,33 +7,21 @@ cc.Class({
     },
 
     start() {
-        this.isInit = false;
-
     },
 
     //开始游戏
     onPlayGame(gameJS) {
         this.gameJS = gameJS;
-        if (!this.isInit) {
-            this.isInit = true;
+        if (!gameJS.Bosslayer || gameJS.Bosslayer.children.length == 0) {
             this.bossNode = cc.instantiate(this.CrabBoss);
             this.bossAnim = this.bossNode.getComponent(cc.Animation);
             this.gameJS.Bosslayer.addChild(this.bossNode);
             this.initAnimation();
             this.data = gameJS.getCurLevelData().boss.attackState;
             this.speed = gameJS.getCurLevelData().speed;
-            this.letterBoxs = gameJS.LetterBoxs;
-            this.letterRectItem = gameJS.LetterRectItem;
-            this.bulletsBoxs = gameJS.BulletsBoxs;
-            this.bulletItem = gameJS.BulletItem;
-            this.audio = gameJS.Audio;
-            this.keyboardJS = gameJS.KeyboardJS;
             this.scoreLabel = gameJS.Score.getComponent(cc.Label);
-            this.curAnchorLetter = null;
-            this.letterBoxs.destroyAllChildren();
             this.score = 0;
         }
-
         //当前分数
         this.onUpdatePoolData();
         this.animIndex = 0;
@@ -55,6 +43,7 @@ cc.Class({
 
     //获取对应刷新池数据
     onUpdatePoolData() {
+        this.isCreateOver = false;
         this.unscheduleAllCallbacks(this);
         //当前已创建字母块索引
         this.letterRectIndex = 0;
@@ -85,74 +74,36 @@ cc.Class({
         }
     },
 
-    onKeyDown(event) {
-        if (this.curAnchorLetter && !this.curAnchorLetter.isFinish) {
-            const code = String.fromCharCode(event.keyCode).toLowerCase();
-            const aLength = this.curAnchorLetter.getComponent("letterRect").removeCode(code);
-            if (aLength == -1) {
-                this.onKeyError();
-                console.log("打错了");
-                return;
-            }
-            const keyboardPoint = this.keyboardJS.onKeyDown(event, true);
-            this.gameJS.createBulletItem(this.curAnchorLetter, keyboardPoint);
-        } else {
-            this.onKeyError();
-            console.log("打错无定位");
-        }
-    },
 
-    //按错
-    onKeyError() {
-        if (!this.letterBoxs)
-            return;
-        for (let i = 0; i < this.letterBoxs.children.length; i++) {
-            const element = this.letterBoxs.children[i];
-            element.getComponent("letterRect").onAccelerate();
-        }
-        this.keyboardJS.onKeyDown(event, false);
-        //惩罚一次，当前刷新项+1
-        this.curUpdateCount++;
-    },
 
     //创建字母块
     createLetterItem(point) {
         if (this.letterRectIndex < this.curUpdateCount) {
             const item = this.gameJS.createLetterItem();
-            const letterText = this.curNormalLetterPool[this.randomToFloor(0, this.curNormalLetterPool.length)];
+            const letterText = this.curNormalLetterPool[this.gameJS.randomToFloor(0, this.curNormalLetterPool.length)];
             item.getComponent("letterRect").onInit(letterText, point, this.speed);
             this.letterRectIndex++;
-            this.onAutoLocation();
-        } else {
-            //当前池子已完成，刷新池子索引
-            return;
-        }
-    },
-
-    //自动定位最近一个
-    onAutoLocation() {
-        if ((this.curAnchorLetter && !this.curAnchorLetter.isFinish) || !this.letterBoxs)
-            return;
-        for (let i = 0; i < this.letterBoxs.children.length; i++) {
-            const item = this.letterBoxs.children[i];
-            if (!item.isFinish) {
-                this.curAnchorLetter = item;
-                this.curAnchorLetter.getComponent("letterRect").setAnchor(() => {
-                    this.curAnchorLetter.isFinish = true;
-                    this.scoreLabel.string = ++this.score;
-                    this.onAutoLocation();
-                });
-                return;
+            this.gameJS.onAutoLocation();
+            if (this.letterRectIndex == this.curUpdateCount) {
+                this.isCreateOver = true;
             }
         }
-        if (this.levelFinish) {
-            this.gameJS.onBack();
-        }
     },
 
-    //获取随机数 取整
-    randomToFloor(lower, upper) {
-        const random = Math.floor(Math.random() * (upper - lower)) + lower;
-        return random;
+    //惩罚一次，当前刷新项+1
+    punishmentOnce() {
+        ++this.curUpdateCount;
+        this.isCreateOver = false;
+    },
+
+    //打完一个字母
+    finishOnce() {
+        this.scoreLabel.string = ++this.score;
+        //字母创建完成，检测字母是否都打击完毕
+        if (!this.isCreateOver || !this.gameJS.getLettersAllFinish()) return;
+        this.bossAnim.stop();
+        setTimeout(() => {
+            this.gameJS.onBack();
+        }, 500);
     },
 });
