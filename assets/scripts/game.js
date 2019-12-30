@@ -38,6 +38,7 @@ cc.Class({
     },
 
     onPlayGame() {
+        this.isLose = false;
         this.curAnchorLetter = null;
         this.BulletsBoxs.destroyAllChildren();
         this.LetterBoxs.destroyAllChildren();
@@ -65,6 +66,7 @@ cc.Class({
     },
 
     onKeyDown(event) {
+        if (this.isLose) return;
         if (this.curAnchorLetter && !this.curAnchorLetter.isFinish) {
             const code = String.fromCharCode(event.keyCode).toLowerCase();
             const aLength = this.curAnchorLetter.getComponent("letterRect").removeCode(code);
@@ -128,6 +130,7 @@ cc.Class({
 
     //触碰到键盘 失败了
     onLose() {
+        this.isLose = true;
         this.curStateJS.onLose();
         console.log("失败了");
         this.AudioJS.onPlayLose();
