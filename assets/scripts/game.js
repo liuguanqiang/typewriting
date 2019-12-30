@@ -21,6 +21,8 @@ cc.Class({
         //当前游戏状态  boss关卡 0 练习状态  1 boss攻击状态  2 boss挨打状态
         this.bossStateIndex = 0;
         this.KeyboardJS = this.Keyboard.getComponent("keyboard");
+        this.AudioJS = this.Audio.getComponent("gameAudio");
+        this.AudioJS.onPlayBossStage1();
     },
 
     onLoad() {
@@ -93,6 +95,7 @@ cc.Class({
     onKeyError() {
         if (!this.LetterBoxs)
             return;
+        this.AudioJS.onPlayKeyError();
         for (let i = 0; i < this.LetterBoxs.children.length; i++) {
             const element = this.LetterBoxs.children[i];
             element.getComponent("letterRect").onAccelerate();
@@ -110,13 +113,27 @@ cc.Class({
             const item = this.LetterBoxs.children[i];
             if (!item.isFinish) {
                 this.curAnchorLetter = item;
-                this.curAnchorLetter.getComponent("letterRect").setAnchor(() => {
-                    this.curAnchorLetter.isFinish = true;
-                    this.curStateJS.finishOnce();
-                    this.onAutoLocation();
-                });
+                this.curAnchorLetter.getComponent("letterRect").setAnchor(() => this.onFinishOnce(), () => this.onLose());
                 return;
             }
+        }
+    },
+
+    //字母块打击完成
+    onFinishOnce() {
+        this.curAnchorLetter.isFinish = true;
+        this.curStateJS.finishOnce();
+        this.onAutoLocation();
+    },
+
+    //触碰到键盘 失败了
+    onLose() {
+        this.curStateJS.onLose();
+        console.log("失败了");
+        this.AudioJS.onPlayLose();
+        for (let index = 0; index < this.LetterBoxs.children.length; index++) {
+            const element = this.LetterBoxs.children[index];
+            element.getComponent("letterRect").onStop();
         }
     },
 
@@ -132,7 +149,7 @@ cc.Class({
         newNode.getComponent("bullet").setTarget(target, keyboardPoint, (node) => {
             this.bulletNodePool.put(node);
         });
-        this.Audio.getComponent("gameAudio").onPlayBullet();
+        this.AudioJS.onPlayBullet();
         return newNode;
     },
 

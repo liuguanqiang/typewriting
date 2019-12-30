@@ -8,24 +8,24 @@
                 "practiceState":[
                     {
                       "normal":["f","j"," "],
-                      "updateCount":2
+                      "updateCount":6
                     },
                     {
-                        "normal":["d","k"," ","a","l"],
-                        "updateCount":2
+                        "normal":["d","k"," "],
+                        "updateCount":6
                     },
                     {
-                        "normal":["f","j"," "],
-                        "updateCount":2
+                        "normal":["q","w"," "],
+                        "updateCount":6
                     }
                 ],
                 "attackState":{
                     "normal":["a","s"," "],
-                    "updateCount":6
+                    "updateCount":10
                 },
                 "beatingState":{
                     "normal":["z","x","c"],
-                    "beatTime":6
+                    "beatTime":10
                 }
                
             }

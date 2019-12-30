@@ -44,9 +44,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.6687686915801256,
-      "y": 0.6687686915801256,
-      "z": 0.6687686915801256
+      "x": 0.447265625,
+      "y": 0.447265625,
+      "z": 0.447265625
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -1037,7 +1037,25 @@
     },
     "_enabled": true,
     "bullet": {
-      "__uuid__": "c3589286-bfa4-4bea-b940-8a418f7bd09a"
+      "__uuid__": "8db1c26d-f076-4996-a6f2-148c38b92fec"
+    },
+    "keyError": {
+      "__uuid__": "935db3fb-5c64-465d-9260-fc0344d37aed"
+    },
+    "win": {
+      "__uuid__": "fb70ba2f-d2a7-4ff8-95ae-b079b0d75ce5"
+    },
+    "lose": {
+      "__uuid__": "b06cc6aa-da58-4bd1-966c-80c02fbe03ce"
+    },
+    "bossAppear": {
+      "__uuid__": "cd09b809-f531-4e64-a2a6-4d74db4508a1"
+    },
+    "bossStage1": {
+      "__uuid__": "47ec3833-7332-4ce9-876f-fb21fedac747"
+    },
+    "bossExplode": {
+      "__uuid__": "91bed4b2-42d1-4041-9027-bbc3c0fe7dfd"
     },
     "_id": "eeu4TE2ShASKHzq4KLZ5yk"
   },

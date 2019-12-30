@@ -40,6 +40,11 @@ cc.Class({
         }
     },
 
+    //失败了 停止游戏
+    onLose() {
+        this.unscheduleAllCallbacks(this);
+    },
+
     //创建字母块
     createLetterItem() {
         if (this.letterRectIndex < this.curUpdateCount) {
@@ -71,7 +76,8 @@ cc.Class({
         if (!this.isCreateOver || !this.gameJS.getLettersAllFinish()) return;
         this.unscheduleAllCallbacks(this);
         setTimeout(() => {
+            this.gameJS.AudioJS.onPlayBossAppear();
             this.gameJS.onBack();
-        }, 500);
+        }, 1000);
     },
 });

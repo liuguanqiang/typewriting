@@ -36,8 +36,16 @@ cc.Class({
         this.curBeatTime = this.data.beatTime;
         this.isPlay = true;
         this.timeOut = setTimeout(() => {
+            this.isPlay = false;
             this.gameOver();
         }, this.curBeatTime * 1000);
+    },
+
+    //失败了 停止游戏
+    onLose() {
+        this.isPlay = false;
+        this.bossAnim.stop();
+        clearTimeout(this.timeOut);
     },
 
     //开始播放boss动画 并发送字符
@@ -57,18 +65,16 @@ cc.Class({
 
     //打错 惩罚直接返回攻击模式
     punishmentOnce() {
-        this.bossAnim.stop();
+        this.isPlay = false;
         clearTimeout(this.timeOut);
-        setTimeout(() => {
-            this.gameOver();
-        }, 500);
+        this.bossAnim.stop();
+        this.gameOver();
     },
 
     gameOver() {
-        if (this.isPlay) {
-            this.isPlay = false;
+        setTimeout(() => {
             this.gameJS.onBack(-1);
-        }
+        }, 1000);
     },
 
     //打完一个字母

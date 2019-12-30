@@ -31,15 +31,21 @@ cc.Class({
         if (this.speed != -1) {
             this.isPlay = true;
         }
+        this.maxY = 300 - this.node.parent.height / 2 + this.node.height / 2;
         // this.rotateSprite.runAction(cc.repeatForever(cc.sequence(cc.rotateTo(1, -180, -180), cc.rotateTo(1, -360, -360))));
     },
 
     //设置当前为定位字母块
-    setAnchor(finish_cb) {
+    setAnchor(finish_cb, lose_cb) {
         this.finish_cb = finish_cb;
+        this.lose_cb = lose_cb;
         this.bg.color = this.anchorColor;
         this.letterLabel.color = this.anchorColor;
         this.node.zIndex = 100;
+    },
+
+    onStop() {
+        this.isPlay = false;
     },
 
     //外部传入按键字母，进行删除当前字母块的首字母，如果不符合返回-1,
@@ -117,6 +123,10 @@ cc.Class({
             this.accelerate--;
         } else {
             this.node.y -= this.speed * dt;
+        }
+        //碰触到键盘了  失败
+        if (this.node.y <= this.maxY && this.lose_cb) {
+            this.lose_cb();
         }
     },
 });

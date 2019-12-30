@@ -53,6 +53,11 @@ cc.Class({
         this.curUpdateCount = this.data.updateCount;
     },
 
+    //失败了 停止游戏
+    onLose() {
+        this.bossAnim.stop();
+    },
+
     //开始播放boss动画 并发送字符
     onPlayAnimation() {
         if (this.animIndex > 2) {
@@ -104,6 +109,6 @@ cc.Class({
         this.bossAnim.stop();
         setTimeout(() => {
             this.gameJS.onBack();
-        }, 500);
+        }, 1000);
     },
 });
