@@ -1,16 +1,16 @@
 {
   "ver": "2.3.0",
-  "uuid": "6abec3a4-0243-45ea-a635-4cb053e2a332",
+  "uuid": "20d583f2-f8e8-498e-87c4-492790bdcab9",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
   "platformSettings": {},
   "subMetas": {
-    "砖块": {
+    "砖块g": {
       "ver": "1.0.3",
-      "uuid": "06d4d2ba-c875-4469-8fe5-10dc2716f31b",
-      "rawTextureUuid": "6abec3a4-0243-45ea-a635-4cb053e2a332",
+      "uuid": "6d0cd556-c6ba-4edc-a2a0-319423744d86",
+      "rawTextureUuid": "20d583f2-f8e8-498e-87c4-492790bdcab9",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -18,14 +18,14 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 55,
-      "height": 55,
-      "rawWidth": 55,
-      "rawHeight": 55,
-      "borderTop": 18,
-      "borderBottom": 22,
-      "borderLeft": 21,
-      "borderRight": 18,
+      "width": 60,
+      "height": 60,
+      "rawWidth": 60,
+      "rawHeight": 60,
+      "borderTop": 20,
+      "borderBottom": 24,
+      "borderLeft": 27,
+      "borderRight": 23,
       "subMetas": {}
     }
   }

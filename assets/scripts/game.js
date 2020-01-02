@@ -20,7 +20,7 @@ cc.Class({
         //当前关卡索引
         this.levelIndex = 0;
         //当前游戏状态  boss关卡 0 练习状态  1 boss攻击状态  2 boss挨打状态
-        this.bossStateIndex = 0;
+        this.bossStateIndex = 1;
         this.KeyboardJS = this.Keyboard.getComponent("keyboard");
         this.AudioJS = this.Audio.getComponent("gameAudio");
         this.AudioJS.onPlayBossStage1();
@@ -33,7 +33,7 @@ cc.Class({
             this.bulletNodePool.put(enemy);
         }
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-        //this.onBgAnim();
+        this.onBgAnim();
     },
     onDestroy() {
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -45,13 +45,13 @@ cc.Class({
             const node = leftAnimBox.children[i];
             setTimeout(() => {
                 node.runAction(cc.repeatForever(cc.sequence(cc.moveTo(this.random(3, 6), node.x, -node.y), cc.moveTo(0, node.x, node.y))));
-            }, i * 400);
+            }, i * 800);
         }
         for (let i = 0; i < rightAnimBox.children.length; i++) {
             const node = rightAnimBox.children[i];
             setTimeout(() => {
                 node.runAction(cc.repeatForever(cc.sequence(cc.moveTo(this.random(3, 6), node.x, -node.y), cc.moveTo(0, node.x, node.y))));
-            }, i * 400);
+            }, i * 800);
         }
     },
     onPlayGame() {

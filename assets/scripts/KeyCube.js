@@ -37,10 +37,10 @@ cc.Class({
     },
     onClick(isCorrect) {
         this.node.color = isCorrect ? this.blueColor : this.redColor;
-        this.KeyLabel.color = new cc.color(246, 246, 246, 255);
+        this.KeyLabel.color = new cc.color(255, 255, 255, 255);
         setTimeout(() => {
-            this.node.color = new cc.color(246, 246, 246, 255);
-            this.KeyLabel.color = new cc.color(25, 25, 25, 25);
+            this.node.color = new cc.color(255, 255, 255, 255);
+            this.KeyLabel.color = new cc.color(255, 255, 255, 25);
         }, 100);
     }
 });

@@ -7,6 +7,7 @@ cc.Class({
     },
 
     start() {
+        this.animIndex = -1;
     },
 
     //开始游戏
@@ -24,8 +25,18 @@ cc.Class({
         }
         //当前分数
         this.onUpdatePoolData();
-        this.animIndex = 0;
-        this.onPlayAnimation();
+        if (this.animIndex == -1) {
+            this.gameJS.AudioJS.onPlayBossAppear();
+            this.bossAnim.play('walk');
+            this.bossNode.runAction(cc.moveTo(2, 0, 250));
+            setTimeout(() => {
+                this.animIndex = 0;
+                this.onPlayAnimation();
+            }, 2000);
+        } else {
+            this.animIndex = 0;
+            this.onPlayAnimation();
+        }
     },
 
     initAnimation() {
