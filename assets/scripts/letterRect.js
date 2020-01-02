@@ -11,7 +11,7 @@ cc.Class({
     },
     onLoad() {
         this.normalColor = new cc.color(255, 255, 255, 255);
-        this.anchorColor = new cc.color(255, 120, 0, 255);
+        this.anchorColor = new cc.color(26, 125, 255, 255);
     },
 
     //初始化

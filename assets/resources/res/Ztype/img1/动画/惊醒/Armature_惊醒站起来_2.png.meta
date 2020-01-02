@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "67c9e348-3f59-4df8-9322-402c02649cca",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "Armature_惊醒站起来_2": {
+      "ver": "1.0.3",
+      "uuid": "0dfd6aea-9144-413b-948c-ceb649ee833c",
+      "rawTextureUuid": "67c9e348-3f59-4df8-9322-402c02649cca",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -1,
+      "offsetY": 4.5,
+      "trimX": 127,
+      "trimY": 84,
+      "width": 244,
+      "height": 223,
+      "rawWidth": 500,
+      "rawHeight": 400,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

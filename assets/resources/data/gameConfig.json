@@ -24,7 +24,7 @@
                     "updateCount":10
                 },
                 "beatingState":{
-                    "normal":["z","x","c"],
+                    "normal":["z"],
                     "beatTime":10
                 }
                

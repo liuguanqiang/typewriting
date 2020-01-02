@@ -12,7 +12,8 @@ cc.Class({
         Keyboard: cc.Node,
         stateJSNode: cc.Node,
         Score: cc.Node,
-        BgAnimBox: cc.Node
+        BgAnimBox: cc.Node,
+        Pop: cc.Node,
     },
     //954
     start() {
@@ -32,19 +33,29 @@ cc.Class({
             this.bulletNodePool.put(enemy);
         }
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-
-        for (let i = 0; i < this.BgAnimBox.children.length; i++) {
-            const node = this.BgAnimBox.children[i];
+        //this.onBgAnim();
+    },
+    onDestroy() {
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+    },
+    onBgAnim() {
+        const leftAnimBox = this.BgAnimBox.getChildByName("leftSprite");
+        const rightAnimBox = this.BgAnimBox.getChildByName("rightSprite");
+        for (let i = 0; i < leftAnimBox.children.length; i++) {
+            const node = leftAnimBox.children[i];
+            setTimeout(() => {
+                node.runAction(cc.repeatForever(cc.sequence(cc.moveTo(this.random(3, 6), node.x, -node.y), cc.moveTo(0, node.x, node.y))));
+            }, i * 400);
+        }
+        for (let i = 0; i < rightAnimBox.children.length; i++) {
+            const node = rightAnimBox.children[i];
             setTimeout(() => {
                 node.runAction(cc.repeatForever(cc.sequence(cc.moveTo(this.random(3, 6), node.x, -node.y), cc.moveTo(0, node.x, node.y))));
             }, i * 400);
         }
     },
-    onDestroy() {
-        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-    },
-
     onPlayGame() {
+        this.Pop.active = false;
         this.isLose = false;
         this.curAnchorLetter = null;
         this.BulletsBoxs.destroyAllChildren();
@@ -131,11 +142,21 @@ cc.Class({
         this.onAutoLocation();
     },
 
+    //游戏胜利
+    onWin() {
+        this.Pop.active = true;
+        this.Pop.getChildByName('label').getComponent(cc.Label).string = "恭喜你 胜利了";
+        this.AudioJS.onPlayWin();
+        console.log("游戏胜利");
+    },
+
     //触碰到键盘 失败了
     onLose() {
         this.isLose = true;
+        this.Pop.active = true;
+        this.Pop.getChildByName('label').getComponent(cc.Label).string = "哎呀 玩失败了";
         this.curStateJS.onLose();
-        console.log("失败了");
+        console.log("游戏失败了");
         this.AudioJS.onPlayLose();
         for (let index = 0; index < this.LetterBoxs.children.length; index++) {
             const element = this.LetterBoxs.children[index];

@@ -87,7 +87,7 @@ cc.Class({
         --this.residueBlood;
         this.Blood.getComponent(cc.ProgressBar).progress -= 0.1;
         if (this.residueBlood == 0) {
-            console.log("胜利");
+            this.gameJS.onWin();
             return;
         }
         if (this.Blood.getComponent(cc.ProgressBar).progress < 0.05) {
