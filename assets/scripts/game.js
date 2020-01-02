@@ -12,7 +12,7 @@ cc.Class({
         Keyboard: cc.Node,
         stateJSNode: cc.Node,
         Score: cc.Node,
-        Blood: cc.Node,
+        BgAnimBox: cc.Node
     },
     //954
     start() {
@@ -32,6 +32,13 @@ cc.Class({
             this.bulletNodePool.put(enemy);
         }
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+
+        for (let i = 0; i < this.BgAnimBox.children.length; i++) {
+            const node = this.BgAnimBox.children[i];
+            setTimeout(() => {
+                node.runAction(cc.repeatForever(cc.sequence(cc.moveTo(this.random(3, 6), node.x, -node.y), cc.moveTo(0, node.x, node.y))));
+            }, i * 400);
+        }
     },
     onDestroy() {
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -46,13 +53,20 @@ cc.Class({
         this.curStateJS.onPlayGame(this);
     },
 
+    onBossGame() {
+        if (this.curStateJS) {
+            this.curStateJS.onLose();
+        }
+        this.bossStateIndex = 1;
+        this.onPlayGame();
+    },
+
     onBack(increment = 1) {
         this.bossStateIndex += increment;
         this.onPlayGame();
     },
 
     getStateJS() {
-        this.Blood.active = false;
         this.Score.active = true;
         if (this.bossStateIndex == 0) {
             return this.stateJSNode.getComponent("practiceStateJS");
@@ -60,7 +74,6 @@ cc.Class({
             return this.stateJSNode.getComponent("attackStateJS");
         } else {
             this.Score.active = false;
-            this.Blood.active = true;
             return this.stateJSNode.getComponent("beatingStateJS");
         }
     },
@@ -78,19 +91,9 @@ cc.Class({
             const keyboardPoint = this.KeyboardJS.onKeyDown(event, true);
             this.createBulletItem(this.curAnchorLetter, keyboardPoint);
         } else {
-            this.onKeyError();
-            console.log("打错无定位");
+            // this.onKeyError();
+            console.log("无定位");
         }
-        // if (!this.curAnchorLetter || this.curAnchorLetter.isFinish) {
-        //     for (let i = 0; i < this.letterBoxs.children.length; i++) {
-        //         const item = this.letterBoxs.children[i];
-        //         if (item.isFinish) continue;
-        //         if (item.getComponent("letterRect").getFristLetter() == code) {
-        //             this.curAnchorLetter = item;
-        //             break;
-        //         }
-        //     }
-        // }
     },
 
     //按错
@@ -168,6 +171,13 @@ cc.Class({
         const random = Math.floor(Math.random() * (upper - lower)) + lower;
         return random;
     },
+
+    //获取随机数
+    random(lower, upper) {
+        const random = Math.random() * (upper - lower) + lower;
+        return random;
+    },
+
 
     //获取当前字母框中的字母是否全部击打完成
     getLettersAllFinish() {

@@ -2,21 +2,21 @@
     "levels":[
         {
             "name":"level1",
-            "speed":40,
+            "speed":80,
             "boss": {
                 "blood":100,
                 "practiceState":[
                     {
                       "normal":["f","j"," "],
-                      "updateCount":6
+                      "updateCount":4
                     },
                     {
                         "normal":["d","k"," "],
-                        "updateCount":6
+                        "updateCount":4
                     },
                     {
                         "normal":["q","w"," "],
-                        "updateCount":6
+                        "updateCount":4
                     }
                 ],
                 "attackState":{

@@ -4,23 +4,27 @@ cc.Class({
 
     properties: {
         CrabBoss: cc.Prefab,
+        Blood: cc.Node,
+        HaemalCountLabel: cc.Node,
     },
 
     start() {
+        this.isInit = false;
     },
 
     //开始游戏
     onPlayGame(gameJS) {
         this.gameJS = gameJS;
-        if (gameJS.Bosslayer && gameJS.Bosslayer.children.length > 0) {
+        this.Blood.active = true;
+        if (!this.isInit) {
+            this.isInit = true;
             this.bossNode = this.gameJS.Bosslayer.children[0];
             this.bossAnim = this.bossNode.getComponent(cc.Animation);
             this.data = gameJS.getCurLevelData().boss.beatingState;
-            this.blood = gameJS.getCurLevelData().boss.blood;
-            this.scoreLabel = gameJS.Score.getComponent(cc.Label);
-            this.score = 0;
+            this.sumBlood = gameJS.getCurLevelData().boss.blood;
+            this.residueBlood = this.sumBlood;
+            this.HaemalCountLabel.getComponent(cc.Label).string = "X" + this.sumBlood / 10;
         }
-        //当前分数
         this.y = this.bossNode.y + 37;
         this.onUpdatePoolData();
         this.onPlayAnimation();
@@ -73,13 +77,23 @@ cc.Class({
 
     gameOver() {
         setTimeout(() => {
+            this.Blood.active = false;
             this.gameJS.onBack(-1);
         }, 1000);
     },
 
     //打完一个字母
     finishOnce() {
-        this.gameJS.Blood.getComponent(cc.ProgressBar).progress -= 1 / this.blood;
+        --this.residueBlood;
+        this.Blood.getComponent(cc.ProgressBar).progress -= 0.1;
+        if (this.residueBlood == 0) {
+            console.log("胜利");
+            return;
+        }
+        if (this.Blood.getComponent(cc.ProgressBar).progress < 0.05) {
+            this.Blood.getComponent(cc.ProgressBar).progress = 1;
+            this.HaemalCountLabel.getComponent(cc.Label).string = "X" + Math.floor(this.residueBlood / 10);
+        }
         this.createLetterItem();
     },
 });
