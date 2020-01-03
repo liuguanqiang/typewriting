@@ -58,7 +58,7 @@ cc.Class({
         setTimeout(() => {
             this.bossNode.getChildByName("weakness").active = false;
             this.createLetterItem();
-        }, 1500);
+        }, 1200);
     },
 
     //创建字母块
@@ -74,7 +74,9 @@ cc.Class({
     punishmentOnce() {
         this.isPlay = false;
         clearTimeout(this.timeOut);
+        this.gameJS.LetterBoxs.destroyAllChildren();
         this.bossAnim.stop();
+        this.bossAnim.play('sleepLightly');
         this.gameOver();
     },
 
@@ -82,7 +84,7 @@ cc.Class({
         setTimeout(() => {
             this.Blood.active = false;
             this.gameJS.onBack(-1);
-        }, 1000);
+        }, 1200);
     },
 
     //打完一个字母

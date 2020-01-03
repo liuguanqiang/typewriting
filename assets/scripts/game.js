@@ -20,7 +20,7 @@ cc.Class({
         //当前关卡索引
         this.levelIndex = 0;
         //当前游戏状态  boss关卡 0 练习状态  1 boss攻击状态  2 boss挨打状态
-        this.bossStateIndex = 1;
+        this.bossStateIndex = 0;
         this.KeyboardJS = this.Keyboard.getComponent("keyboard");
         this.AudioJS = this.Audio.getComponent("gameAudio");
         this.AudioJS.onPlayBossStage1();
@@ -92,14 +92,18 @@ cc.Class({
     onKeyDown(event) {
         if (this.isLose) return;
         if (this.curAnchorLetter && !this.curAnchorLetter.isFinish) {
+            const index = this.KeyboardJS.onCanKeyDown(event);
+            if (index == -1) {
+                return;
+            }
             const code = String.fromCharCode(event.keyCode).toLowerCase();
             const aLength = this.curAnchorLetter.getComponent("letterRect").removeCode(code);
             if (aLength == -1) {
-                this.onKeyError();
+                this.onKeyError(index);
                 console.log("打错了");
                 return;
             }
-            const keyboardPoint = this.KeyboardJS.onKeyDown(event, true);
+            const keyboardPoint = this.KeyboardJS.onKeyDown(index, true);
             this.createBulletItem(this.curAnchorLetter, keyboardPoint);
         } else {
             // this.onKeyError();
@@ -108,7 +112,7 @@ cc.Class({
     },
 
     //按错
-    onKeyError() {
+    onKeyError(index) {
         if (!this.LetterBoxs)
             return;
         this.AudioJS.onPlayKeyError();
@@ -116,7 +120,7 @@ cc.Class({
             const element = this.LetterBoxs.children[i];
             element.getComponent("letterRect").onAccelerate();
         }
-        this.KeyboardJS.onKeyDown(event, false);
+        this.KeyboardJS.onKeyDown(index, false);
         this.curStateJS.punishmentOnce();
     },
 

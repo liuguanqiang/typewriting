@@ -70,14 +70,16 @@
             "width": 1.6,
             "fontSize": 14,
             "horizontal": 3,
-            "code": 8
+            "code": 8,
+            "active": false
         },
         {
             "key": "tab",
             "width": 1.6,
             "horizontal": 1,
             "fontSize": 14,
-            "code": 9
+            "code": 9,
+            "active": false
         },
         {
             "key": "Q"
@@ -129,7 +131,8 @@
             "width": 1.85,
             "horizontal": 1,
             "fontSize": 14,
-            "code": 20
+            "code": 20,
+            "active": false
         },
         {
             "key": "A"
@@ -173,14 +176,16 @@
             "width": 1.85,
             "horizontal": 3,
             "fontSize": 14,
-            "code": 13
+            "code": 13,
+            "active": false
         },
         {
             "key": "shift",
             "width": 2.4,
             "horizontal": 1,
             "fontSize": 14,
-            "code": 16
+            "code": 16,
+            "active": false
         },
         {
             "key": "Z"
@@ -223,26 +228,30 @@
             "width": 2.4,
             "horizontal": 3,
             "fontSize": 14,
-            "code": 16
+            "code": 16,
+            "active": false
         },
         {
             "key": "ctrl",
             "horizontal": 1,
             "fontSize": 14,
-            "code": 17
+            "code": 17,
+            "active": false
         },
         {
             "key": "alt",
             "horizontal": 1,
             "fontSize": 14,
-            "code": 18
+            "code": 18,
+            "active": false
         },
         {
             "key": "cmd",
             "width": 1.85,
             "horizontal": 1,
             "fontSize": 14,
-            "code": 91
+            "code": 91,
+            "active": false
         },
         {
             "key": "",
@@ -254,19 +263,22 @@
             "width": 1.85,
             "horizontal": 3,
             "fontSize": 14,
-            "code": 91
+            "code": 91,
+            "active": false
         },
         {
             "key": "alt",
             "horizontal": 3,
             "fontSize": 14,
-            "code": 18
+            "code": 18,
+            "active": false
         },
         {
             "key": "ctrl",
             "horizontal": 3,
             "fontSize": 14,
-            "code": 17
+            "code": 17,
+            "active": false
         }
     ]
 }

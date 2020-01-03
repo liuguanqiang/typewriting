@@ -113,19 +113,21 @@ cc.Class({
 
     //boss挨打状态
     bossBloodHit() {
+        this.onPlayParticle();
         this.bg.getChildByName("letterLabel").runAction(cc.sequence(cc.fadeOut(0.15), cc.fadeIn(0.15)));
         setTimeout(() => {
-            this.onPlayParticle();
             if (this.finish_cb) {
                 this.finish_cb();
             }
-        }, 400);
+        }, 300);
     },
 
     //播放爆炸效果，发送回收回调
     onPlayParticle() {
         this.isPlay = false;
-        this.bg.active = false;
+        if (this.bgIndex == 0) {
+            this.bg.active = false;
+        }
         const comParticle = this.particle.getComponent(cc.ParticleSystem);
         comParticle.resetSystem();
         setTimeout(() => {
@@ -133,7 +135,7 @@ cc.Class({
                 comParticle.stopSystem();
                 this.node.destroy();
             }
-        }, 800);
+        }, 1000);
     },
 
     //加速一次

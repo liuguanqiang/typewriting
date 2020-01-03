@@ -35,6 +35,7 @@ cc.Class({
             label.horizontalAlign = cc.Label.HorizontalAlign.RIGHT;
             label.verticalAlign = cc.Label.VerticalAlign.BOTTOM;
         }
+        this.canClick = keyData.active !== false;
     },
     onClick(isCorrect) {
         const index = isCorrect ? 0 : 1;

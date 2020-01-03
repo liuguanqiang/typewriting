@@ -16,19 +16,28 @@ cc.Class({
         }
     },
 
-    onKeyDown(event, isCorrect) {
-        for (let i = 0; i < this.KeyBox.children.length; i++) {
-            const item = this.KeyBox.children[i];
-            if (item.getComponent("keyCube").keyCode == event.keyCode) {
-                item.getComponent("keyCube").onClick(isCorrect);
-                //按键正确返回当前按键对应的世界坐标系
-                if (isCorrect) {
-                    return item.convertToWorldSpaceAR(cc.v2(0, 0));
-                }
-                return 0;
-            }
+    onKeyDown(index, isCorrect) {
+        const item = this.KeyBox.children[index];
+        const itemComponent = item.getComponent("keyCube");
+        itemComponent.onClick(isCorrect);
+        //按键正确返回当前按键对应的世界坐标系
+        if (isCorrect) {
+            return item.convertToWorldSpaceAR(cc.v2(0, 0));
         }
         return 0;
+    },
+
+    onCanKeyDown(event) {
+        for (let i = 0; i < this.KeyBox.children.length; i++) {
+            const item = this.KeyBox.children[i];
+            const itemComponent = item.getComponent("keyCube");
+            if (itemComponent.keyCode == event.keyCode) {
+                if (itemComponent.canClick) {
+                    return i;
+                }
+            }
+        }
+        return -1;
     },
 
     //获取字母对应键盘的X坐标点
