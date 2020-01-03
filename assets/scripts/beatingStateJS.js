@@ -74,16 +74,19 @@ cc.Class({
     punishmentOnce() {
         this.isPlay = false;
         clearTimeout(this.timeOut);
-        this.gameJS.LetterBoxs.destroyAllChildren();
-        this.bossAnim.stop();
-        this.bossAnim.play('sleepLightly');
         this.gameOver();
     },
 
+    //挨打模式时间到了  或者打错了  直接返回攻击模式
     gameOver() {
+        this.gameJS.LetterBoxs.destroyAllChildren();
+        this.bossAnim.stop();
+        this.bossAnim.play('sleepLightly');
         setTimeout(() => {
-            this.Blood.active = false;
-            this.gameJS.onBack(-1);
+            if (this.Blood.active) {
+                this.Blood.active = false;
+                this.gameJS.onBack(-1);
+            }
         }, 1200);
     },
 

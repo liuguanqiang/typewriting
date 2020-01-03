@@ -20,7 +20,7 @@ cc.Class({
         //当前关卡索引
         this.levelIndex = 0;
         //当前游戏状态  boss关卡 0 练习状态  1 boss攻击状态  2 boss挨打状态
-        this.bossStateIndex = 0;
+        this.bossStateIndex = 1;
         this.KeyboardJS = this.Keyboard.getComponent("keyboard");
         this.AudioJS = this.Audio.getComponent("gameAudio");
         this.AudioJS.onPlayBossStage1();
