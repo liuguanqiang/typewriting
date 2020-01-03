@@ -4,10 +4,10 @@ cc.Class({
 
     properties: {
         KeyLabel: cc.Node,
+        bg: cc.Node,
+        keySpriteFrame: [cc.SpriteFrame]
     },
     start() {
-        this.blueColor = new cc.color(50, 149, 219, 255);
-        this.redColor = new cc.color(242, 58, 58, 255);
     },
 
     setKey(keyData) {
@@ -26,6 +26,7 @@ cc.Class({
         if (keyData.width) {
             this.KeyLabel.width = this.KeyLabel.width + (keyData.width - 1) * this.node.width;
             this.node.width = this.node.width * keyData.width;
+            this.bg.width = this.node.width;
         }
         if (keyData.horizontal == 1) {
             label.horizontalAlign = cc.Label.HorizontalAlign.LEFT;
@@ -36,11 +37,12 @@ cc.Class({
         }
     },
     onClick(isCorrect) {
-        this.node.color = isCorrect ? this.blueColor : this.redColor;
-        this.KeyLabel.color = new cc.color(255, 255, 255, 255);
+        const index = isCorrect ? 0 : 1;
+        this.bg.getComponent(cc.Sprite).spriteFrame = this.keySpriteFrame[index];
+        this.bg.width = this.node.width;
         setTimeout(() => {
-            this.node.color = new cc.color(255, 255, 255, 255);
-            this.KeyLabel.color = new cc.color(255, 255, 255, 25);
-        }, 100);
+            this.bg.getComponent(cc.Sprite).spriteFrame = this.keySpriteFrame[2];
+            this.bg.width = this.node.width;
+        }, 130);
     }
 });

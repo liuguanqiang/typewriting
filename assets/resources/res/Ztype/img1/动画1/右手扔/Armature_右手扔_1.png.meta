@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "8afe6e48-7dbb-4f8e-b842-77381f1f4f94",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "Armature_右手扔_1": {
+      "ver": "1.0.3",
+      "uuid": "18685767-38b7-48cb-a94e-460ce036c643",
+      "rawTextureUuid": "8afe6e48-7dbb-4f8e-b842-77381f1f4f94",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -24.5,
+      "offsetY": -7,
+      "trimX": 4,
+      "trimY": 27,
+      "width": 179,
+      "height": 153,
+      "rawWidth": 236,
+      "rawHeight": 193,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
