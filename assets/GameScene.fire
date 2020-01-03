@@ -41,9 +41,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.45939905324492764,
-      "y": 0.45939905324492764,
-      "z": 0.45939905324492764
+      "x": 0.7778548313981545,
+      "y": 0.7778548313981545,
+      "z": 0.7778548313981545
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -2305,9 +2305,6 @@
       "__id__": 49
     },
     "_enabled": true,
-    "CrabBoss": {
-      "__uuid__": "f3817abd-58f6-4d01-8bcc-b06b1f8fc4b0"
-    },
     "Blood": {
       "__id__": 53
     },
@@ -2352,7 +2349,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 200,
+      "width": 170,
       "height": 8
     },
     "_anchorPoint": {
@@ -2414,7 +2411,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 200,
+      "width": 170,
       "height": 8
     },
     "_anchorPoint": {
@@ -2424,7 +2421,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 100,
+      "x": 85,
       "y": 0,
       "z": 0
     },
@@ -2603,7 +2600,7 @@
       "__id__": 53
     },
     "_enabled": true,
-    "_N$totalLength": 200,
+    "_N$totalLength": 170,
     "_N$barSprite": {
       "__id__": 55
     },

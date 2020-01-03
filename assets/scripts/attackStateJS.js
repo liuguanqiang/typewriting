@@ -3,7 +3,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        CrabBoss: cc.Prefab,
+        CrabBoss: cc.Prefab
     },
 
     start() {
@@ -13,6 +13,7 @@ cc.Class({
     //开始游戏
     onPlayGame(gameJS) {
         this.gameJS = gameJS;
+        this.isStop = false;
         if (!gameJS.Bosslayer || gameJS.Bosslayer.children.length == 0) {
             this.bossNode = cc.instantiate(this.CrabBoss);
             this.bossAnim = this.bossNode.getComponent(cc.Animation);
@@ -23,6 +24,7 @@ cc.Class({
             this.scoreLabel = gameJS.Score.getComponent(cc.Label);
             this.score = 0;
         }
+        this.bossNode.getChildByName("weakness").active = false;
         //当前分数
         this.onUpdatePoolData();
         if (this.animIndex == -1) {
@@ -41,12 +43,18 @@ cc.Class({
 
     initAnimation() {
         this.bossAnim.on('finished', (e) => {
+            if (this.isStop) return;
             if (this.animIndex == 1) {
                 this.createLetterItem(cc.v2(-212, 290));
             } else if (this.animIndex == 2) {
                 this.createLetterItem(cc.v2(212, 290));
             }
-            ++this.animIndex;
+            //如果创建完成 只做呼吸动画
+            if (this.isCreateOver) {
+                this.animIndex = 0;
+            } else {
+                ++this.animIndex;
+            }
             this.onPlayAnimation();
         }, this);
     },
@@ -66,7 +74,7 @@ cc.Class({
 
     //失败了 停止游戏
     onLose() {
-        this.bossAnim.stop();
+        this.isStop = true;
     },
 
     //开始播放boss动画 并发送字符
@@ -117,7 +125,7 @@ cc.Class({
         this.scoreLabel.string = ++this.score;
         //字母创建完成，检测字母是否都打击完毕
         if (!this.isCreateOver || !this.gameJS.getLettersAllFinish()) return;
-        this.bossAnim.stop();
+        this.isStop = true;
         setTimeout(() => {
             this.gameJS.onBack();
         }, 1000);

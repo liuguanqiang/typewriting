@@ -3,7 +3,6 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        CrabBoss: cc.Prefab,
         Blood: cc.Node,
         HaemalCountLabel: cc.Node,
     },
@@ -25,7 +24,8 @@ cc.Class({
             this.residueBlood = this.sumBlood;
             this.HaemalCountLabel.getComponent(cc.Label).string = "X" + this.sumBlood / 10;
         }
-        this.y = this.bossNode.y + 37;
+        this.bossNode.getChildByName("weakness").active = true;
+        this.y = this.bossNode.y + 36;
         this.onUpdatePoolData();
         this.onPlayAnimation();
     },
@@ -54,8 +54,11 @@ cc.Class({
 
     //开始播放boss动画 并发送字符
     onPlayAnimation() {
-        this.bossAnim.play('bloodBreathe');
-        this.createLetterItem();
+        this.bossAnim.play('weakness');
+        setTimeout(() => {
+            this.bossNode.getChildByName("weakness").active = false;
+            this.createLetterItem();
+        }, 1500);
     },
 
     //创建字母块
@@ -63,7 +66,7 @@ cc.Class({
         if (!this.isPlay) return;
         const item = this.gameJS.createLetterItem();
         const letterText = this.curNormalLetterPool[this.gameJS.randomToFloor(0, this.curNormalLetterPool.length)];
-        item.getComponent("letterRect").onInit(letterText, cc.v2(0, this.y), -1);
+        item.getComponent("letterRect").onInit(letterText, cc.v2(3, this.y), -1, 1);
         this.gameJS.onAutoLocation();
     },
 

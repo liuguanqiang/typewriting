@@ -4,7 +4,8 @@ cc.Class({
     properties: {
         letterLabel: cc.Node,
         particle: cc.Node,
-        bg: cc.Node
+        bg: cc.Node,
+        bgSpriteFrame: [cc.SpriteFrame]
     },
 
     start() {
@@ -15,8 +16,9 @@ cc.Class({
     },
 
     //初始化
-    onInit(text, point, speed = 20) {
+    onInit(text, point, speed = 20, bgIndex = 0) {
         this.bg.active = true;
+        this.bgIndex = bgIndex
         this.accelerate = 1;
         this.speed = speed;
         this.comLetterLabel = this.letterLabel.getComponent(cc.Label);
@@ -24,6 +26,12 @@ cc.Class({
         this.LetterCount = text.length;
         this.comLetterLabel.string = text;
         this.node.setPosition(point);
+        if (bgIndex == 1) {
+            this.bg.width = 59;
+            this.bg.height = 50;
+            this.bg.getComponent(cc.Sprite).spriteFrame = this.bgSpriteFrame[bgIndex];
+            this.bg.getChildByName("letterLabel").getComponent(cc.Label).fontSize = 34;
+        }
         if (text.length > 1) {
             this.comLetterLabel._updateRenderData(true);
             this.bg.width = this.letterLabel.width + 20;
@@ -39,8 +47,10 @@ cc.Class({
     setAnchor(finish_cb, lose_cb) {
         this.finish_cb = finish_cb;
         this.lose_cb = lose_cb;
-        this.bg.color = this.anchorColor;
-        this.letterLabel.color = this.anchorColor;
+        if (this.bgIndex == 0) {
+            this.bg.color = this.anchorColor;
+            this.letterLabel.color = this.anchorColor;
+        }
         this.node.zIndex = 100;
     },
 
@@ -88,6 +98,10 @@ cc.Class({
         }
         this.comLetterLabel.string = this.comLetterLabel.string.substring(1, this.comLetterLabel.string.length);
         if (this.LetterCount === 1) {
+            if (this.bgIndex == 1) {
+                this.bossBloodHit()
+                return;
+            }
             this.onPlayParticle();
             if (this.finish_cb) {
                 this.finish_cb();
@@ -95,6 +109,17 @@ cc.Class({
         } else {
             this.LetterCount--;
         }
+    },
+
+    //boss挨打状态
+    bossBloodHit() {
+        this.bg.getChildByName("letterLabel").runAction(cc.sequence(cc.fadeOut(0.15), cc.fadeIn(0.15)));
+        setTimeout(() => {
+            this.onPlayParticle();
+            if (this.finish_cb) {
+                this.finish_cb();
+            }
+        }, 400);
     },
 
     //播放爆炸效果，发送回收回调
