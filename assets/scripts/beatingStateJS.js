@@ -80,15 +80,17 @@ cc.Class({
 
     //挨打模式时间到了  或者打错了  直接返回攻击模式
     gameOver() {
-        this.gameJS.LetterBoxs.destroyAllChildren();
+        this.gameJS.canKeyDown = false;
         this.bossAnim.stop();
         this.bossAnim.play('sleepLightly');
+        this.gameJS.BulletsBoxs.destroyAllChildren();
+        this.gameJS.LetterBoxs.destroyAllChildren();
         setTimeout(() => {
             if (this.Blood.active) {
                 this.Blood.active = false;
                 this.gameJS.onBack(-1);
             }
-        }, 1200);
+        }, 3000);
     },
 
     //打完一个字母

@@ -4,6 +4,7 @@ cc.Class({
     properties: {
         letterLabel: cc.Node,
         particle: cc.Node,
+        weaknessParticle: cc.Node,
         bg: cc.Node,
         bgSpriteFrame: [cc.SpriteFrame]
     },
@@ -79,11 +80,6 @@ cc.Class({
         return null;
     },
 
-    //获取随机数
-    random(lower, upper) {
-        return Math.floor(Math.random() * (upper - lower)) + lower;
-    },
-
     //获取靶心坐标点
     getBullseyePosition() {
         return this.node.getPosition();
@@ -128,7 +124,7 @@ cc.Class({
         if (this.bgIndex == 0) {
             this.bg.active = false;
         }
-        const comParticle = this.particle.getComponent(cc.ParticleSystem);
+        const comParticle = this.bgIndex == 0 ? this.particle.getComponent(cc.ParticleSystem) : this.weaknessParticle.getComponent(cc.ParticleSystem);
         comParticle.resetSystem();
         setTimeout(() => {
             if (cc.isValid(this.node)) {

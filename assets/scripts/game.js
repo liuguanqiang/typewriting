@@ -58,6 +58,7 @@ cc.Class({
     onPlayGame() {
         this.Pop.active = false;
         this.isLose = false;
+        this.canKeyDown = true;
         this.curAnchorLetter = null;
         this.BulletsBoxs.destroyAllChildren();
         this.LetterBoxs.destroyAllChildren();
@@ -91,7 +92,7 @@ cc.Class({
     },
 
     onKeyDown(event) {
-        if (this.isLose) return;
+        if (this.isLose || !this.canKeyDown) return;
         if (this.curAnchorLetter && !this.curAnchorLetter.isFinish) {
             const index = this.KeyboardJS.onCanKeyDown(event);
             if (index == -1) {
@@ -231,6 +232,6 @@ cc.Class({
         let action2 = cc.fadeTo(0.3, 0);
         action2.easing(cc.easeOut(1));
 
-        this.Lighting.runAction(cc.repeat(cc.sequence(action1, action2), 3));
+        this.Lighting.runAction(cc.repeat(cc.sequence(action1, action2), 6));
     }
 });
