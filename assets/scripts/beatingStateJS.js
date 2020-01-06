@@ -83,8 +83,11 @@ cc.Class({
         this.gameJS.canKeyDown = false;
         this.bossAnim.stop();
         this.bossAnim.play('sleepLightly');
-        this.gameJS.BulletsBoxs.destroyAllChildren();
-        this.gameJS.LetterBoxs.destroyAllChildren();
+        setTimeout(() => {
+            this.gameJS.BulletsBoxs.destroyAllChildren();
+            this.gameJS.LetterBoxs.destroyAllChildren();
+        }, 300);
+
         setTimeout(() => {
             if (this.Blood.active) {
                 this.Blood.active = false;

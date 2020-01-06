@@ -39,6 +39,8 @@ cc.Class({
     onDestroy() {
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     },
+
+    //背景上动画
     onBgAnim() {
         const leftAnimBox = this.BgAnimBox.getChildByName("leftSprite");
         const rightAnimBox = this.BgAnimBox.getChildByName("rightSprite");
@@ -55,6 +57,7 @@ cc.Class({
             }, i * 800);
         }
     },
+
     onPlayGame() {
         this.Pop.active = false;
         this.isLose = false;
@@ -141,7 +144,7 @@ cc.Class({
         }
     },
 
-    //字母块打击完成
+    //一个字母块打击完成
     onFinishOnce() {
         this.curAnchorLetter.isFinish = true;
         this.curStateJS.finishOnce();
@@ -228,10 +231,8 @@ cc.Class({
     onPlayLighting() {
         let action1 = cc.fadeTo(0.3, 255);
         action1.easing(cc.easeIn(1));
-
         let action2 = cc.fadeTo(0.3, 0);
         action2.easing(cc.easeOut(1));
-
         this.Lighting.runAction(cc.repeat(cc.sequence(action1, action2), 6));
     }
 });
