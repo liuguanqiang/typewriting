@@ -14,13 +14,14 @@ cc.Class({
         Score: cc.Node,
         BgAnimBox: cc.Node,
         Pop: cc.Node,
+        Lighting: cc.Node,
     },
     //954
     start() {
         //当前关卡索引
         this.levelIndex = 0;
         //当前游戏状态  boss关卡 0 练习状态  1 boss攻击状态  2 boss挨打状态
-        this.bossStateIndex = 0;
+        this.bossStateIndex = 1;
         this.KeyboardJS = this.Keyboard.getComponent("keyboard");
         this.AudioJS = this.Audio.getComponent("gameAudio");
         this.AudioJS.onPlayBossStage1();
@@ -221,4 +222,15 @@ cc.Class({
     getCurLevelData() {
         return this.ConfigJson.json.levels[this.levelIndex];
     },
+
+    //闪烁光效
+    onPlayLighting() {
+        let action1 = cc.fadeTo(0.3, 255);
+        action1.easing(cc.easeIn(1));
+
+        let action2 = cc.fadeTo(0.3, 0);
+        action2.easing(cc.easeOut(1));
+
+        this.Lighting.runAction(cc.repeat(cc.sequence(action1, action2), 3));
+    }
 });

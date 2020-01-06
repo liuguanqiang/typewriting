@@ -15,6 +15,7 @@ cc.Class({
         this.gameJS = gameJS;
         this.isStop = false;
         if (!gameJS.Bosslayer || gameJS.Bosslayer.children.length == 0) {
+            this.gameJS.onPlayLighting();
             this.bossNode = cc.instantiate(this.CrabBoss);
             this.bossAnim = this.bossNode.getComponent(cc.Animation);
             this.gameJS.Bosslayer.addChild(this.bossNode);

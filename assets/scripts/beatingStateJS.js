@@ -5,6 +5,7 @@ cc.Class({
     properties: {
         Blood: cc.Node,
         HaemalCountLabel: cc.Node,
+        whiltBar: cc.Node,
     },
 
     start() {
@@ -93,6 +94,8 @@ cc.Class({
     //打完一个字母
     finishOnce() {
         --this.residueBlood;
+        // this.whiltBar.x = (1 - this.Blood.getComponent(cc.ProgressBar).progress) * this.Blood.width - this.Blood.width / 2;
+        // this.whiltBar.runAction(cc.sequence(cc.fadeIn(0.4), cc.fadeOut(0.1)));
         this.Blood.getComponent(cc.ProgressBar).progress -= 0.1;
         if (this.residueBlood == 0) {
             this.gameJS.onWin();

@@ -114,12 +114,12 @@ cc.Class({
     //boss挨打状态
     bossBloodHit() {
         this.onPlayParticle();
-        this.bg.getChildByName("letterLabel").runAction(cc.sequence(cc.fadeOut(0.15), cc.fadeIn(0.15)));
-        setTimeout(() => {
+        let finished = cc.callFunc(() => {
             if (this.finish_cb) {
                 this.finish_cb();
             }
-        }, 300);
+        }, this);
+        this.bg.getChildByName("letterLabel").runAction(cc.sequence(cc.fadeOut(0.1), cc.fadeIn(0.1), finished));
     },
 
     //播放爆炸效果，发送回收回调
