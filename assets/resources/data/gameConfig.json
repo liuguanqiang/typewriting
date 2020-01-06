@@ -21,7 +21,7 @@
                 ],
                 "attackState":{
                     "normal":["a","s"," "],
-                    "updateCount":2
+                    "updateCount":10
                 },
                 "beatingState":{
                     "normal":["z","x"],

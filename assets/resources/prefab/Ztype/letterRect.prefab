@@ -156,39 +156,39 @@
     "_dstBlendFactor": 1,
     "_custom": true,
     "_file": {
-      "__uuid__": "5c0774ec-eb5e-46f5-97e1-f08fe93ef1b1"
+      "__uuid__": "fbf8e56d-376e-42ef-9429-8d018d8cc183"
     },
     "_spriteFrame": {
-      "__uuid__": "472df5d3-35e7-4184-9e6c-7f41bee65ee3"
+      "__uuid__": "7a153d9d-e055-4baf-868d-34acbfb8ccd5"
     },
     "_stopped": true,
     "playOnLoad": false,
     "autoRemoveOnFinish": false,
-    "totalParticles": 10,
-    "duration": 0.5,
-    "emissionRate": 9.09090909090909,
-    "life": 1.1,
-    "lifeVar": 0.4,
+    "totalParticles": 100,
+    "duration": 0,
+    "emissionRate": 1.7976931348623157e+308,
+    "life": 0,
+    "lifeVar": 0.58,
     "_startColor": {
       "__type__": "cc.Color",
-      "r": 51,
-      "g": 102,
-      "b": 175,
+      "r": 255,
+      "g": 255,
+      "b": 126,
       "a": 255
     },
     "_startColorVar": {
       "__type__": "cc.Color",
-      "r": 0,
+      "r": 51,
       "g": 0,
-      "b": 51,
-      "a": 25
+      "b": 0,
+      "a": 51
     },
     "_endColor": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
+      "r": 255,
+      "g": 142,
+      "b": 3,
+      "a": 0
     },
     "_endColorVar": {
       "__type__": "cc.Color",
@@ -197,16 +197,16 @@
       "b": 0,
       "a": 0
     },
-    "angle": -88,
-    "angleVar": 50,
-    "startSize": 111,
+    "angle": 360,
+    "angleVar": 360,
+    "startSize": 50,
     "startSizeVar": 10,
-    "endSize": 40,
-    "endSizeVar": 0,
-    "startSpin": 720,
+    "endSize": 10,
+    "endSizeVar": 20,
+    "startSpin": 0,
     "startSpinVar": 0,
     "endSpin": 0,
-    "endSpinVar": 0,
+    "endSpinVar": 360,
     "sourcePos": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -214,18 +214,18 @@
     },
     "posVar": {
       "__type__": "cc.Vec2",
-      "x": 25,
-      "y": 25
+      "x": 0,
+      "y": 4.4
     },
     "positionType": 0,
     "emitterMode": 0,
     "gravity": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": -1384
+      "x": 1000,
+      "y": -818.799988
     },
-    "speed": 526,
-    "speedVar": 5,
+    "speed": 100,
+    "speedVar": 800,
     "tangentialAccel": 0,
     "tangentialAccelVar": 0,
     "radialAccel": 0,
@@ -248,7 +248,7 @@
     "asset": {
       "__uuid__": "df283c9c-19c0-4acc-a532-085d6d46a396"
     },
-    "fileId": "95jwgc2O5EQYYu6PxduXR+",
+    "fileId": "1e10LNHlRCg4woHFCdN4bx",
     "sync": false
   },
   {
