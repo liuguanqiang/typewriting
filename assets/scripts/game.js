@@ -14,7 +14,7 @@ cc.Class({
         Score: cc.Node,
         BgAnimBox: cc.Node,
         Pop: cc.Node,
-        Lighting: cc.Node,
+        Lighting: cc.Node
     },
     //954
     start() {
@@ -29,9 +29,8 @@ cc.Class({
 
     onLoad() {
         this.bulletNodePool = new cc.NodePool();
-        for (let i = 0; i < 5; ++i) {
-            let enemy = cc.instantiate(this.BulletItem);
-            this.bulletNodePool.put(enemy);
+        for (let i = 0; i < 10; ++i) {
+            this.bulletNodePool.put(cc.instantiate(this.BulletItem));
         }
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         this.onBgAnim();
@@ -102,14 +101,15 @@ cc.Class({
                 return;
             }
             const code = String.fromCharCode(event.keyCode).toLowerCase();
-            const aLength = this.curAnchorLetter.getComponent("letterRect").removeCode(code);
+            const curAnchorLetterJS = this.bossStateIndex > 1 ? this.curAnchorLetter.getComponent("weaknessLetterRect") : this.curAnchorLetter.getComponent("letterRect");
+            const aLength = curAnchorLetterJS.removeCode(code);
             if (aLength == -1) {
                 this.onKeyError(index);
                 console.log("打错了");
                 return;
             }
             const keyboardPoint = this.KeyboardJS.onKeyDown(index, true);
-            this.createBulletItem(this.curAnchorLetter, keyboardPoint);
+            this.createBulletItem(curAnchorLetterJS, keyboardPoint);
         } else {
             // this.onKeyError();
             console.log("无定位");
@@ -121,9 +121,11 @@ cc.Class({
         if (!this.LetterBoxs)
             return;
         this.AudioJS.onPlayKeyError();
-        for (let i = 0; i < this.LetterBoxs.children.length; i++) {
-            const element = this.LetterBoxs.children[i];
-            element.getComponent("letterRect").onAccelerate();
+        if (this.bossStateIndex <= 1) {
+            for (let i = 0; i < this.LetterBoxs.children.length; i++) {
+                const element = this.LetterBoxs.children[i];
+                element.getComponent("letterRect").onAccelerate();
+            }
         }
         this.KeyboardJS.onKeyDown(index, false);
         this.curStateJS.punishmentOnce();
@@ -142,6 +144,11 @@ cc.Class({
                 return;
             }
         }
+    },
+
+    //设置定位字符快
+    onSetAnchorLetter(item) {
+        this.curAnchorLetter = item;
     },
 
     //一个字母块打击完成
@@ -182,7 +189,7 @@ cc.Class({
             newNode = cc.instantiate(this.BulletItem);
         }
         this.BulletsBoxs.addChild(newNode);
-        newNode.getComponent("bullet").setTarget(target, keyboardPoint, (node) => {
+        newNode.getComponent("bullet").onInit(target, keyboardPoint, (node) => {
             this.bulletNodePool.put(node);
         });
         this.AudioJS.onPlayBullet();

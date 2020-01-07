@@ -6,6 +6,7 @@ cc.Class({
         Blood: cc.Node,
         HaemalCountLabel: cc.Node,
         whiltBar: cc.Node,
+        WeaknessLetterRect: cc.Prefab
     },
 
     start() {
@@ -65,10 +66,18 @@ cc.Class({
     //创建字母块
     createLetterItem() {
         if (!this.isPlay) return;
-        const item = this.gameJS.createLetterItem();
-        const letterText = this.curNormalLetterPool[this.gameJS.randomToFloor(0, this.curNormalLetterPool.length)];
-        item.getComponent("letterRect").onInit(letterText, cc.v2(3, this.y), -1, 1);
-        this.gameJS.onAutoLocation();
+        this.letterRect = cc.instantiate(this.WeaknessLetterRect);
+        this.gameJS.LetterBoxs.addChild(this.letterRect);
+        this.letterRect.getComponent("weaknessLetterRect").onInit(cc.v2(3, this.y), () => {
+            this.finishOnce();
+        });
+        this.letterRect.getComponent("weaknessLetterRect").onSetText(this.getLetterText());
+        this.gameJS.onSetAnchorLetter(this.letterRect);
+    },
+
+    //获取一个随机字符
+    getLetterText() {
+        return this.curNormalLetterPool[this.gameJS.randomToFloor(0, this.curNormalLetterPool.length)];
     },
 
     //打错 惩罚直接返回攻击模式
@@ -110,6 +119,6 @@ cc.Class({
             this.Blood.getComponent(cc.ProgressBar).progress = 1;
             this.HaemalCountLabel.getComponent(cc.Label).string = "X" + Math.floor(this.residueBlood / 10);
         }
-        this.createLetterItem();
+        this.letterRect.getComponent("weaknessLetterRect").onSetText(this.getLetterText());
     },
 });

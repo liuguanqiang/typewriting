@@ -110,6 +110,9 @@
       "__id__": 1
     },
     "_enabled": true,
+    "particle": {
+      "__uuid__": "212ca572-dd6a-4e36-bde8-033d14e37a32"
+    },
     "_id": ""
   },
   {
