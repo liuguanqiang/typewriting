@@ -14,14 +14,16 @@ cc.Class({
         Score: cc.Node,
         BgAnimBox: cc.Node,
         Pop: cc.Node,
-        Lighting: cc.Node
+        Lighting: cc.Node,
+        bg_left: [cc.Node],
+        bg_right: [cc.Node],
     },
     //954
     start() {
         //当前关卡索引
         this.levelIndex = 0;
         //当前游戏状态  boss关卡 0 练习状态  1 boss攻击状态  2 boss挨打状态
-        this.bossStateIndex = 1;
+        this.bossStateIndex = 0;
         this.KeyboardJS = this.Keyboard.getComponent("keyboard");
         this.AudioJS = this.Audio.getComponent("gameAudio");
         this.AudioJS.onPlayBossStage1();
@@ -101,9 +103,8 @@ cc.Class({
                 return;
             }
             const code = String.fromCharCode(event.keyCode).toLowerCase();
-            const curAnchorLetterJS = this.bossStateIndex > 1 ? this.curAnchorLetter.getComponent("weaknessLetterRect") : this.curAnchorLetter.getComponent("letterRect");
-            const aLength = curAnchorLetterJS.removeCode(code);
-            if (aLength == -1) {
+            const curAnchorLetterJS = this.curStateJS.onKeyDown(code, this.curAnchorLetter);
+            if (!curAnchorLetterJS) {
                 this.onKeyError(index);
                 console.log("打错了");
                 return;
@@ -241,5 +242,27 @@ cc.Class({
         let action2 = cc.fadeTo(0.3, 0);
         action2.easing(cc.easeOut(1));
         this.Lighting.runAction(cc.repeat(cc.sequence(action1, action2), 6));
+    },
+    bgMove(bgList) {
+        for (var index = 0; index < bgList.length; index++) {
+            var element = bgList[index];
+            element.y -= 1;
+        }
+    },
+    //检查是否要重置位置
+    checkBgReset(bgList) {
+        var first_y = bgList[0].y;
+        if (first_y <= -bgList[0].height) {
+            var preFirstBg = bgList.shift();
+            bgList.push(preFirstBg);
+            var curFirstBg = bgList[0];
+            preFirstBg.y = curFirstBg.height;
+        }
+    },
+    update(dt) {
+        this.bgMove(this.bg_left);
+        this.checkBgReset(this.bg_left);
+        this.bgMove(this.bg_right);
+        this.checkBgReset(this.bg_right);
     }
 });

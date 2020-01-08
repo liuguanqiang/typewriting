@@ -154,41 +154,41 @@
     "_enabled": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 1,
-    "_custom": true,
+    "_custom": false,
     "_file": {
-      "__uuid__": "fbf8e56d-376e-42ef-9429-8d018d8cc183"
+      "__uuid__": "2851f4e4-bf67-4d41-9689-105c7ce7f59a"
     },
     "_spriteFrame": {
-      "__uuid__": "7a153d9d-e055-4baf-868d-34acbfb8ccd5"
+      "__uuid__": "4255e5c6-994e-4792-9549-4df873d146be"
     },
     "_stopped": true,
     "playOnLoad": false,
     "autoRemoveOnFinish": false,
-    "totalParticles": 100,
+    "totalParticles": 381,
     "duration": 0,
     "emissionRate": 1.7976931348623157e+308,
     "life": 0,
-    "lifeVar": 0.58,
+    "lifeVar": 0.86,
     "_startColor": {
       "__type__": "cc.Color",
       "r": 255,
       "g": 255,
-      "b": 126,
+      "b": 0,
       "a": 255
     },
     "_startColorVar": {
       "__type__": "cc.Color",
-      "r": 51,
+      "r": 0,
       "g": 0,
       "b": 0,
-      "a": 51
+      "a": 0
     },
     "_endColor": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 142,
-      "b": 3,
-      "a": 0
+      "g": 0,
+      "b": 0,
+      "a": 255
     },
     "_endColorVar": {
       "__type__": "cc.Color",
@@ -197,16 +197,16 @@
       "b": 0,
       "a": 0
     },
-    "angle": 360,
+    "angle": 0,
     "angleVar": 360,
-    "startSize": 50,
-    "startSizeVar": 10,
-    "endSize": 10,
-    "endSizeVar": 20,
+    "startSize": 20,
+    "startSizeVar": 2.11,
+    "endSize": 0,
+    "endSizeVar": 0,
     "startSpin": 0,
     "startSpinVar": 0,
     "endSpin": 0,
-    "endSpinVar": 360,
+    "endSpinVar": 0,
     "sourcePos": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -215,14 +215,14 @@
     "posVar": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 4.4
+      "y": 0
     },
     "positionType": 0,
     "emitterMode": 0,
     "gravity": {
       "__type__": "cc.Vec2",
-      "x": 1000,
-      "y": -818.799988
+      "x": 0,
+      "y": -500
     },
     "speed": 100,
     "speedVar": 800,
@@ -248,7 +248,7 @@
     "asset": {
       "__uuid__": "df283c9c-19c0-4acc-a532-085d6d46a396"
     },
-    "fileId": "1e10LNHlRCg4woHFCdN4bx",
+    "fileId": "84yxwg7eNHI6UoTarfbcP3",
     "sync": false
   },
   {

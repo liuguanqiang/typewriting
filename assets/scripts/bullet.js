@@ -6,7 +6,7 @@ cc.Class({
     },
 
     start() {
-        this.speed = 40;
+
     },
     onInit(tragetJS, initPoint, cb) {
         if (initPoint != 0) {
@@ -35,8 +35,8 @@ cc.Class({
             return true;
         }
         let delta = targetPoint.sub(point);
-        let x2 = point.x + this.speed * delta.x / distance;
-        let y2 = point.y + this.speed * delta.y / distance;
+        let x2 = point.x + this.tragetJS.bulletSpeed * delta.x / distance;
+        let y2 = point.y + this.tragetJS.bulletSpeed * delta.y / distance;
         let newPosition = cc.v2(x2, y2);
         let x1 = point.x;
         let y1 = point.y;

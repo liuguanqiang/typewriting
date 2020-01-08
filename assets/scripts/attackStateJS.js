@@ -73,6 +73,16 @@ cc.Class({
         this.curUpdateCount = this.data.updateCount;
     },
 
+    onKeyDown(code, curAnchorLetter) {
+        const curAnchorLetterJS = curAnchorLetter.getComponent("letterRect");
+        const length = curAnchorLetterJS.removeCode(code);
+        if (length == -1) {
+            return null;
+        }
+        curAnchorLetterJS.bulletSpeed = 40;
+        return curAnchorLetterJS;
+    },
+
     //失败了 停止游戏
     onLose() {
         this.isStop = true;

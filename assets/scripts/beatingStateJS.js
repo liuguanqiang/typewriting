@@ -27,7 +27,7 @@ cc.Class({
             this.HaemalCountLabel.getComponent(cc.Label).string = "X" + this.sumBlood / 10;
         }
         this.bossNode.getChildByName("weakness").active = true;
-        this.y = this.bossNode.y + 36;
+        this.y = this.bossNode.y + 33;
         this.onUpdatePoolData();
         this.onPlayAnimation();
     },
@@ -45,6 +45,16 @@ cc.Class({
             this.isPlay = false;
             this.gameOver();
         }, this.curBeatTime * 1000);
+    },
+
+    onKeyDown(code, curAnchorLetter) {
+        const curAnchorLetterJS = curAnchorLetter.getComponent("weaknessLetterRect");
+        const length = curAnchorLetterJS.removeCode(code);
+        if (length == -1) {
+            return null;
+        }
+        curAnchorLetterJS.bulletSpeed = 60;
+        return curAnchorLetterJS;
     },
 
     //失败了 停止游戏
@@ -68,9 +78,9 @@ cc.Class({
         if (!this.isPlay) return;
         this.letterRect = cc.instantiate(this.WeaknessLetterRect);
         this.gameJS.LetterBoxs.addChild(this.letterRect);
-        this.letterRect.getComponent("weaknessLetterRect").onInit(cc.v2(3, this.y), () => {
+        this.letterRect.getComponent("weaknessLetterRect").onInit(cc.v2(0, this.y), () => {
             this.finishOnce();
-        });
+        }, 0, true);
         this.letterRect.getComponent("weaknessLetterRect").onSetText(this.getLetterText());
         this.gameJS.onSetAnchorLetter(this.letterRect);
     },
@@ -95,7 +105,7 @@ cc.Class({
         setTimeout(() => {
             this.gameJS.BulletsBoxs.destroyAllChildren();
             this.gameJS.LetterBoxs.destroyAllChildren();
-        }, 300);
+        }, 100);
 
         setTimeout(() => {
             if (this.Blood.active) {

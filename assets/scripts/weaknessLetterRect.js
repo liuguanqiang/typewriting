@@ -13,11 +13,12 @@ cc.Class({
     },
 
     //初始化
-    onInit(point, finish_cb, bgIndex = 0) {
+    //isBrught 爽爆模式  不等子弹直接删除首字符
+    onInit(point, finish_cb, bgIndex = 0, isBrught = false) {
+        this.isBrught = isBrught;
         this.finish_cb = finish_cb;
         this.node.setPosition(point);
         this.bg.getComponent(cc.Sprite).spriteFrame = this.bgSpriteFrame[bgIndex];
-
     },
 
     onSetText(text) {
@@ -27,7 +28,7 @@ cc.Class({
         this.comLetterLabel.string = text;
         if (text.length > 1) {
             this.comLetterLabel._updateRenderData(true);
-            this.bg.width = this.letterLabel.width + 20;
+            this.bg.width = this.letterLabel.width + 30;
         }
     },
 
@@ -36,8 +37,18 @@ cc.Class({
         if (this.getFristLetter() == key) {
             if (this.curText.length > 1) {
                 this.curText = this.curText.substring(1, this.curText.length);
+                if (this.isBrught) {
+                    this.comLetterLabel.string = this.curText;
+                }
             } else {
                 this.curText = ""
+                if (this.isBrught) {
+                    this.comLetterLabel.string = this.curText;
+                    this.particle.getComponent(cc.ParticleSystem).resetSystem();
+                    if (this.finish_cb) {
+                        this.finish_cb();
+                    }
+                }
             }
             return this.curText.length;
         }
@@ -59,12 +70,12 @@ cc.Class({
 
     //被击中
     setHit() {
-        if (!this.LetterCount) {
+        if (!this.LetterCount || this.isBrught) {
             return;
         }
         this.comLetterLabel.string = this.comLetterLabel.string.substring(1, this.comLetterLabel.string.length);
         if (this.LetterCount === 1) {
-            this.onPlayParticle();
+            this.particle.getComponent(cc.ParticleSystem).resetSystem();
             let finished = cc.callFunc(() => {
                 if (this.finish_cb) {
                     this.finish_cb();
@@ -75,18 +86,4 @@ cc.Class({
             this.LetterCount--;
         }
     },
-
-
-    //播放爆炸效果，发送回收回调
-    onPlayParticle() {
-        const comParticle = this.particle.getComponent(cc.ParticleSystem);
-        comParticle.resetSystem();
-        // setTimeout(() => {
-        //     if (cc.isValid(this.node)) {
-        //         comParticle.stopSystem();
-        //         this.node.destroy();
-        //     }
-        // }, 1000);
-    },
-
 });

@@ -40,6 +40,20 @@ cc.Class({
         }
     },
 
+    onKeyDown(code, curAnchorLetter) {
+        const curAnchorLetterJS = curAnchorLetter.getComponent("letterRect");
+        const length = curAnchorLetterJS.removeCode(code);
+        if (length == -1) {
+            return null;
+        }
+        curAnchorLetterJS.bulletSpeed = 40;
+        return curAnchorLetterJS;
+    },
+
+    getBulletSpeed() {
+        return 40;
+    },
+
     //失败了 停止游戏
     onLose() {
         this.unscheduleAllCallbacks(this);
