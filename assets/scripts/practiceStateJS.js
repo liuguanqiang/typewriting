@@ -22,7 +22,7 @@ cc.Class({
         this.onUpdatePoolData();
         this.isCreateOver = false;
         this.unscheduleAllCallbacks(this);
-        this.schedule(this.createLetterItem, 1.5, cc.macro.REPEAT_FOREVER, 0.1);
+        this.schedule(this.createLetterItem, 1.2, cc.macro.REPEAT_FOREVER, 0.1);
     },
 
     //获取对应刷新池数据
