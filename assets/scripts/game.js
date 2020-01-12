@@ -22,8 +22,8 @@ cc.Class({
     start() {
         //当前关卡索引
         this.levelIndex = 0;
-        //当前游戏状态  boss关卡 0 练习状态  1 boss攻击状态  2 boss挨打状态
-        this.bossStateIndex = 0;
+        //当前游戏状态  0 练习状态  1 boss练习状态 2 boss攻击状态  3 boss挨打状态
+        this.curStateIndex = 2;
         this.KeyboardJS = this.Keyboard.getComponent("keyboard");
         this.AudioJS = this.Audio.getComponent("gameAudio");
         this.AudioJS.onPlayBossStage1();
@@ -71,23 +71,27 @@ cc.Class({
     },
 
     onBossGame() {
+        // this.createShockEff(this.BgAnimBox, 3);
+        // return
         if (this.curStateJS) {
             this.curStateJS.onLose();
         }
-        this.bossStateIndex = 1;
+        this.curStateIndex = 1;
         this.onPlayGame();
     },
 
     onBack(increment = 1) {
-        this.bossStateIndex += increment;
+        this.curStateIndex += increment;
         this.onPlayGame();
     },
 
     getStateJS() {
         this.Score.active = true;
-        if (this.bossStateIndex == 0) {
+        if (this.curStateIndex == 0) {
+            return this.stateJSNode.getComponent("exerciseStateJS");
+        } else if (this.curStateIndex == 1) {
             return this.stateJSNode.getComponent("practiceStateJS");
-        } else if (this.bossStateIndex == 1) {
+        } else if (this.curStateIndex == 2) {
             return this.stateJSNode.getComponent("attackStateJS");
         } else {
             this.Score.active = false;
@@ -122,12 +126,6 @@ cc.Class({
         if (!this.LetterBoxs)
             return;
         this.AudioJS.onPlayKeyError();
-        if (this.bossStateIndex <= 1) {
-            for (let i = 0; i < this.LetterBoxs.children.length; i++) {
-                const element = this.LetterBoxs.children[i];
-                element.getComponent("letterRect").onAccelerate();
-            }
-        }
         this.KeyboardJS.onKeyDown(index, false);
         this.curStateJS.punishmentOnce();
     },
@@ -258,6 +256,34 @@ cc.Class({
             var curFirstBg = bgList[0];
             preFirstBg.y = curFirstBg.height;
         }
+    },
+    //抖动
+    createShockEff(pLayer, nStopTime) {
+        if (!pLayer) {
+            return;
+        }
+        var pTag = 666;
+        if (pLayer.getActionByTag(pTag)) {
+            return;
+        }
+        pLayer.save_layer_pos = cc.v2(pLayer.x, pLayer.y);
+
+        var action = cc.repeatForever(cc.sequence(
+            cc.moveBy(0.05, cc.v2(2, 2)),
+            cc.moveBy(0.1, cc.v2(-4, -4)),
+            cc.moveBy(0.05, cc.v2(2, 2))
+        ));
+        action.setTag(pTag);
+        pLayer.runAction(action);
+        if (!nStopTime) {
+            nStopTime = 1.0;
+        }
+
+        this.scheduleOnce(function () {
+            pLayer.stopActionByTag(pTag);
+            pLayer.x = pLayer.save_layer_pos.x;
+            pLayer.y = pLayer.save_layer_pos.y;
+        }.bind(pLayer), nStopTime);
     },
     update(dt) {
         this.bgMove(this.bg_left);

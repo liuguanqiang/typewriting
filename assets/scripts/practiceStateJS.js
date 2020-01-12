@@ -26,7 +26,7 @@ cc.Class({
     },
 
     //获取对应刷新池数据
-    onUpdatePoolData() {
+    onUpdatePoolData(isFristUpdate = true) {
         if (this.curPoolIndex < this.data.length) {
             //当前已创建字母块索引
             this.letterRectIndex = 0;
@@ -34,6 +34,9 @@ cc.Class({
             this.curNormalLetterPool = this.data[this.curPoolIndex].normal;
             //当前正常池刷新次数，也就是用户不增加惩罚的默认刷新次数
             this.curUpdateCount = this.data[this.curPoolIndex].updateCount;
+            if (!isFristUpdate) {
+                this.createLetterItem();
+            }
         } else {
             //当前练习完成 
             this.levelFinish = true;
@@ -50,9 +53,6 @@ cc.Class({
         return curAnchorLetterJS;
     },
 
-    getBulletSpeed() {
-        return 40;
-    },
 
     //失败了 停止游戏
     onLose() {
@@ -73,14 +73,18 @@ cc.Class({
             }
         } else {
             ++this.curPoolIndex;
-            this.onUpdatePoolData();
+            this.onUpdatePoolData(false);
         }
     },
 
     //惩罚一次，当前刷新项+1
     punishmentOnce() {
-        this.curUpdateCount++;
-        this.isCreateOver = false;
+        for (let i = 0; i < this.gameJS.LetterBoxs.children.length; i++) {
+            const element = this.gameJS.LetterBoxs.children[i];
+            element.getComponent("letterRect").onAccelerate();
+        }
+        // this.curUpdateCount++;
+        // this.isCreateOver = false;
     },
 
     //打完一个字母

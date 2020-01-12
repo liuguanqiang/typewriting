@@ -1,0 +1,119 @@
+//boss练习关卡 操作类
+cc.Class({
+    extends: cc.Component,
+    properties: {
+
+    },
+
+    start() {
+    },
+
+    //开始游戏
+    onPlayGame(gameJS) {
+        this.gameJS = gameJS;
+        this.data = gameJS.getCurLevelData().exercise;
+        this.keyboardJS = gameJS.KeyboardJS;
+        this.scoreLabel = gameJS.Score.getComponent(cc.Label);
+        //当前分数
+        this.score = 0;
+        //当前刷新池索引
+        this.curPoolIndex = 0;
+
+        //练习关卡索引，练习关卡会配置多个
+        this.levelIndex = 0;
+        this.levelCount = this.data.length;
+        this.topY = 290;
+        this.onUpdatePoolData();
+    },
+
+    //获取对应刷新池数据
+    onUpdatePoolData(isFristUpdate = true) {
+        this.curLevelData = this.data[this.levelIndex];
+        if (this.curPoolIndex < this.curLevelData.length) {
+            //当前已创建字母块索引
+            this.letterRectIndex = 0;
+            //当前字母块正常池
+            this.curNormalLetterPool = this.curLevelData[this.curPoolIndex].normal;
+            //当前正常池刷新次数，也就是用户不增加惩罚的默认刷新次数
+            this.curUpdateCount = this.curLevelData[this.curPoolIndex].updateCount;
+            if (isFristUpdate) {
+                //当前关卡是否创建完成
+                this.isCurCreateOver = false;
+                for (let i = 3; i >= 0; i--) {
+                    let isAutoLocation = i == 3 ? true : false;
+                    this.createLetterItem(this.topY - 80 * i, isAutoLocation);
+                }
+            } else {
+                this.createLetterItem(this.topY);
+            }
+        }
+    },
+
+    onKeyDown(code, curAnchorLetter) {
+        const curAnchorLetterJS = curAnchorLetter.getComponent("letterRect");
+        const length = curAnchorLetterJS.removeCode(code);
+        if (length == -1) {
+            return null;
+        }
+        curAnchorLetterJS.bulletSpeed = 40;
+        return curAnchorLetterJS;
+    },
+
+    //失败了 停止游戏
+    onLose() {
+
+    },
+
+    //创建字母块
+    createLetterItem(y, isAutoLocation = true) {
+        if (this.letterRectIndex < this.curUpdateCount) {
+            const item = this.gameJS.createLetterItem();
+            const letterText = this.curNormalLetterPool[this.gameJS.randomToFloor(0, this.curNormalLetterPool.length)];
+            const x = this.keyboardJS.getPointX(letterText);
+            item.getComponent("letterRect").onInit(letterText, cc.v2(x, y), -1);
+            this.letterRectIndex++;
+            if (isAutoLocation) {
+                this.gameJS.onAutoLocation();
+            }
+            if (this.letterRectIndex == this.curUpdateCount && this.curPoolIndex == this.curLevelData.length - 1) {
+                this.isCurCreateOver = true;
+            }
+        } else {
+            ++this.curPoolIndex;
+            this.onUpdatePoolData(false);
+        }
+    },
+
+    //惩罚一次，当前刷新项+1
+    punishmentOnce() {
+
+    },
+
+    //打完一个字母
+    finishOnce() {
+        this.scoreLabel.string = ++this.score;
+        for (let i = 0; i < this.gameJS.LetterBoxs.children.length; i++) {
+            const node = this.gameJS.LetterBoxs.children[i];
+            node.runAction(cc.moveTo(0.1, node.x, node.y - 80).easing(cc.easeIn(1)));
+        }
+        if (!this.isCurCreateOver) {
+            setTimeout(() => {
+                this.createLetterItem(this.topY);
+            }, 100);
+            return;
+        }
+
+        //当前关卡 打击完毕
+        if (this.gameJS.getLettersAllFinish()) {
+            this.levelIndex++;
+            if (this.levelIndex < this.levelCount) {
+                this.curPoolIndex = 0;
+                this.onUpdatePoolData();
+            } else {
+                setTimeout(() => {
+                    this.gameJS.onBack();
+                }, 1000);
+            }
+        }
+    },
+});

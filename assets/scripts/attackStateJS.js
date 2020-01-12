@@ -3,7 +3,8 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        CrabBoss: cc.Prefab
+        CrabBoss: cc.Prefab,
+        EnergyProgressBar: cc.Node,
     },
 
     start() {
@@ -22,10 +23,10 @@ cc.Class({
             this.initAnimation();
             this.data = gameJS.getCurLevelData().boss.attackState;
             this.speed = gameJS.getCurLevelData().speed;
-            this.scoreLabel = gameJS.Score.getComponent(cc.Label);
-            this.score = 0;
         }
         this.bossNode.getChildByName("weakness").active = false;
+        this.EnergyProgressBar.active = true;
+        this.EnergyProgressBar.getComponent(cc.ProgressBar).progress = 0;
         //当前分数
         this.onUpdatePoolData();
         if (this.animIndex == -1) {
@@ -127,18 +128,19 @@ cc.Class({
 
     //惩罚一次，当前刷新项+1
     punishmentOnce() {
-        ++this.curUpdateCount;
-        this.isCreateOver = false;
+        // ++this.curUpdateCount;
+        // this.isCreateOver = false;
     },
 
     //打完一个字母
     finishOnce() {
-        this.scoreLabel.string = ++this.score;
+        this.EnergyProgressBar.getComponent(cc.ProgressBar).progress += 1 / this.curUpdateCount;
         //字母创建完成，检测字母是否都打击完毕
         if (!this.isCreateOver || !this.gameJS.getLettersAllFinish()) return;
         this.isStop = true;
         setTimeout(() => {
             this.gameJS.onBack();
+            this.EnergyProgressBar.active = false;
         }, 1000);
     },
 });
