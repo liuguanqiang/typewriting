@@ -83,13 +83,13 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "weakness",
+    "_name": "particle",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_level": 2,
     "_components": [
       {
@@ -109,8 +109,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 59,
-      "height": 50
+      "width": 0,
+      "height": 0
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -120,7 +120,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 33,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -146,7 +146,7 @@
     "_id": ""
   },
   {
-    "__type__": "cc.Sprite",
+    "__type__": "cc.ParticleSystem",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -154,23 +154,91 @@
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_spriteFrame": {
-      "__uuid__": "85cc9989-4c52-4492-8322-5f0219abd4ea"
+    "_dstBlendFactor": 1,
+    "_custom": true,
+    "_file": {
+      "__uuid__": "794b8ae6-7d10-4e1a-b168-ec3b490e800d"
     },
-    "_type": 0,
-    "_sizeMode": 0,
-    "_fillType": 0,
-    "_fillCenter": {
+    "_spriteFrame": {
+      "__uuid__": "10242419-77c9-4510-9c27-5b0be1737304"
+    },
+    "_stopped": true,
+    "playOnLoad": false,
+    "autoRemoveOnFinish": false,
+    "totalParticles": 100,
+    "duration": 0,
+    "emissionRate": 1.7976931348623157e+308,
+    "life": 0,
+    "lifeVar": 0.5,
+    "_startColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 126,
+      "a": 255
+    },
+    "_startColorVar": {
+      "__type__": "cc.Color",
+      "r": 51,
+      "g": 0,
+      "b": 0,
+      "a": 51
+    },
+    "_endColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 142,
+      "b": 3,
+      "a": 0
+    },
+    "_endColorVar": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 0
+    },
+    "angle": 360,
+    "angleVar": 360,
+    "startSize": 25,
+    "startSizeVar": 35,
+    "endSize": 5,
+    "endSizeVar": 5,
+    "startSpin": 0,
+    "startSpinVar": 0,
+    "endSpin": 0,
+    "endSpinVar": 360,
+    "sourcePos": {
       "__type__": "cc.Vec2",
       "x": 0,
       "y": 0
     },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_state": 0,
-    "_atlas": null,
+    "posVar": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 4.4
+    },
+    "positionType": 0,
+    "emitterMode": 0,
+    "gravity": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": -500
+    },
+    "speed": 500,
+    "speedVar": 600,
+    "tangentialAccel": 0,
+    "tangentialAccelVar": 0,
+    "radialAccel": 0,
+    "radialAccelVar": 0,
+    "rotationIsDir": false,
+    "startRadius": 0,
+    "startRadiusVar": 0,
+    "endRadius": 0,
+    "endRadiusVar": 0,
+    "rotatePerS": 0,
+    "rotatePerSVar": 0,
+    "_N$preview": true,
     "_id": ""
   },
   {
@@ -181,12 +249,12 @@
     "asset": {
       "__uuid__": "f3817abd-58f6-4d01-8bcc-b06b1f8fc4b0"
     },
-    "fileId": "6bNdiRZWJL14SHA+brEBj5",
+    "fileId": "c76H2mlqVJ0r+xD7MpAucK",
     "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "New Sprite",
+    "_name": "particle1",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -202,7 +270,7 @@
     "_prefab": {
       "__id__": 7
     },
-    "_opacity": 0,
+    "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -212,8 +280,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 55,
-      "height": 60
+      "width": 0,
+      "height": 0
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -222,8 +290,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 100,
-      "y": 20,
+      "x": 0,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -249,7 +317,7 @@
     "_id": ""
   },
   {
-    "__type__": "cc.Sprite",
+    "__type__": "cc.ParticleSystem",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -257,23 +325,91 @@
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_spriteFrame": {
-      "__uuid__": "c10cf783-84aa-4ada-8735-3286a3b76297"
+    "_dstBlendFactor": 1,
+    "_custom": true,
+    "_file": {
+      "__uuid__": "794b8ae6-7d10-4e1a-b168-ec3b490e800d"
     },
-    "_type": 0,
-    "_sizeMode": 0,
-    "_fillType": 0,
-    "_fillCenter": {
+    "_spriteFrame": {
+      "__uuid__": "10242419-77c9-4510-9c27-5b0be1737304"
+    },
+    "_stopped": false,
+    "playOnLoad": false,
+    "autoRemoveOnFinish": false,
+    "totalParticles": 100,
+    "duration": 0,
+    "emissionRate": 1.7976931348623157e+308,
+    "life": 0,
+    "lifeVar": 0.5,
+    "_startColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 126,
+      "a": 255
+    },
+    "_startColorVar": {
+      "__type__": "cc.Color",
+      "r": 51,
+      "g": 0,
+      "b": 0,
+      "a": 51
+    },
+    "_endColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 142,
+      "b": 3,
+      "a": 0
+    },
+    "_endColorVar": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 0
+    },
+    "angle": 360,
+    "angleVar": 360,
+    "startSize": 25,
+    "startSizeVar": 35,
+    "endSize": 5,
+    "endSizeVar": 5,
+    "startSpin": 0,
+    "startSpinVar": 0,
+    "endSpin": 0,
+    "endSpinVar": 360,
+    "sourcePos": {
       "__type__": "cc.Vec2",
       "x": 0,
       "y": 0
     },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_state": 0,
-    "_atlas": null,
+    "posVar": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 4.4
+    },
+    "positionType": 0,
+    "emitterMode": 0,
+    "gravity": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": -500
+    },
+    "speed": 500,
+    "speedVar": 600,
+    "tangentialAccel": 0,
+    "tangentialAccelVar": 0,
+    "radialAccel": 0,
+    "radialAccelVar": 0,
+    "rotationIsDir": false,
+    "startRadius": 0,
+    "startRadiusVar": 0,
+    "endRadius": 0,
+    "endRadiusVar": 0,
+    "rotatePerS": 0,
+    "rotatePerSVar": 0,
+    "_N$preview": true,
     "_id": ""
   },
   {
@@ -284,7 +420,7 @@
     "asset": {
       "__uuid__": "f3817abd-58f6-4d01-8bcc-b06b1f8fc4b0"
     },
-    "fileId": "4d0b1pvexIoYeQe0jv57sq",
+    "fileId": "56f23WQLlOlJYReoJD1dLG",
     "sync": false
   },
   {
@@ -336,12 +472,6 @@
       },
       {
         "__uuid__": "f9cfbd2f-1e5e-499f-882e-e38100b61708"
-      },
-      {
-        "__uuid__": "af03da0f-e8ee-4195-a0af-3b2cf0ce7bc1"
-      },
-      {
-        "__uuid__": "d7c3d037-39c5-416c-b0e8-1589961082e9"
       }
     ],
     "playOnLoad": false,

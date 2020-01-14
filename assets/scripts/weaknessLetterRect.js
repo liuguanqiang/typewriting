@@ -10,15 +10,15 @@ cc.Class({
     start() {
     },
     onLoad() {
+        this.anchorColor = new cc.color(26, 125, 255, 255);
     },
 
     //初始化
-    //isBrught 爽爆模式  不等子弹直接删除首字符
-    onInit(point, finish_cb, bgIndex = 0, isBrught = false) {
-        this.isBrught = isBrught;
+    onInit(point, finish_cb, bgIndex = 0) {
         this.finish_cb = finish_cb;
         this.node.setPosition(point);
-        this.bg.getComponent(cc.Sprite).spriteFrame = this.bgSpriteFrame[bgIndex];
+        //this.bg.getComponent(cc.Sprite).spriteFrame = this.bgSpriteFrame[bgIndex];
+        this.node.opacity = this.node.opacity * 0.6;
     },
 
     onSetText(text) {
@@ -32,22 +32,29 @@ cc.Class({
         }
     },
 
+    //设置高亮
+    onSetHigh() {
+        this.node.isHigh = true;
+        this.node.stopAllActions();
+        this.node.opacity = 255;
+    },
+
+    //设置闪烁
+    onFlicker() {
+        this.node.runAction(cc.repeatForever(cc.sequence(cc.fadeTo(0.2, 255 * 0.9), cc.fadeTo(0.2, 255 * 0.6))));
+    },
+
     //外部传入按键字母，进行删除当前字母块的首字母，如果不符合返回-1,
     removeCode(key) {
         if (this.getFristLetter() == key) {
             if (this.curText.length > 1) {
                 this.curText = this.curText.substring(1, this.curText.length);
-                if (this.isBrught) {
-                    this.comLetterLabel.string = this.curText;
-                }
+
             } else {
                 this.curText = ""
-                if (this.isBrught) {
-                    this.comLetterLabel.string = this.curText;
-                    this.particle.getComponent(cc.ParticleSystem).resetSystem();
-                    if (this.finish_cb) {
-                        this.finish_cb();
-                    }
+                // this.particle.getComponent(cc.ParticleSystem).resetSystem();
+                if (this.finish_cb) {
+                    this.finish_cb();
                 }
             }
             return this.curText.length;
@@ -70,7 +77,7 @@ cc.Class({
 
     //被击中
     setHit() {
-        if (!this.LetterCount || this.isBrught) {
+        if (!this.LetterCount) {
             return;
         }
         this.comLetterLabel.string = this.comLetterLabel.string.substring(1, this.comLetterLabel.string.length);

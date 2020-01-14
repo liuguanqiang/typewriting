@@ -283,8 +283,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 59,
-      "height": 50
+      "width": 60,
+      "height": 60
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -347,8 +347,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 9.45,
-      "height": 36
+      "width": 11.11,
+      "height": 42
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -396,8 +396,8 @@
     "_useOriginalSize": false,
     "_string": "f",
     "_N$string": "f",
-    "_fontSize": 34,
-    "_lineHeight": 36,
+    "_fontSize": 40,
+    "_lineHeight": 42,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -430,7 +430,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "85cc9989-4c52-4492-8322-5f0219abd4ea"
+      "__uuid__": "6d0cd556-c6ba-4edc-a2a0-319423744d86"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -475,11 +475,7 @@
     "bg": {
       "__id__": 5
     },
-    "bgSpriteFrame": [
-      {
-        "__uuid__": "85cc9989-4c52-4492-8322-5f0219abd4ea"
-      }
-    ],
+    "bgSpriteFrame": [],
     "_id": ""
   },
   {

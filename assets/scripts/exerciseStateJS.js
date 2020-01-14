@@ -39,10 +39,22 @@ cc.Class({
             if (isFristUpdate) {
                 //当前关卡是否创建完成
                 this.isCurCreateOver = false;
-                for (let i = 3; i >= 0; i--) {
-                    let isAutoLocation = i == 3 ? true : false;
-                    this.createLetterItem(this.topY - 80 * i, isAutoLocation);
-                }
+                let index = 3;
+                const h = 80;
+                let canvasHeight = this.gameJS.BgAnimBox.height;
+                this.schedule(function () {
+                    let isAutoLocation = index == 3 ? true : false;
+                    let item = this.createLetterItem((canvasHeight + h) / 2, isAutoLocation);
+                    if (item) {
+                        const y = this.topY - h * index;
+                        item.runAction(cc.moveTo(0.2, item.x, y).easing(cc.easeIn(2)));
+                    }
+                    --index;
+                }, 0.1, 3, 0);
+                // for (let i = 3; i >= 0; i--) {
+                //     let isAutoLocation = i == 3 ? true : false;
+                //     this.createLetterItem(this.topY - 80 * i, isAutoLocation);
+                // }
             } else {
                 this.createLetterItem(this.topY);
             }
@@ -78,14 +90,16 @@ cc.Class({
             if (this.letterRectIndex == this.curUpdateCount && this.curPoolIndex == this.curLevelData.length - 1) {
                 this.isCurCreateOver = true;
             }
+            return item;
         } else {
             ++this.curPoolIndex;
             this.onUpdatePoolData(false);
         }
+        return null;
     },
 
     //惩罚一次，当前刷新项+1
-    punishmentOnce() {
+    onKeyError() {
 
     },
 

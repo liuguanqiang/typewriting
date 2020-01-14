@@ -15,6 +15,7 @@ cc.Class({
         BgAnimBox: cc.Node,
         Pop: cc.Node,
         Lighting: cc.Node,
+        EnergyProgressBar: cc.Node,
         bg_left: [cc.Node],
         bg_right: [cc.Node],
     },
@@ -23,7 +24,7 @@ cc.Class({
         //当前关卡索引
         this.levelIndex = 0;
         //当前游戏状态  0 练习状态  1 boss练习状态 2 boss攻击状态  3 boss挨打状态
-        this.curStateIndex = 2;
+        this.curStateIndex = 0;
         this.KeyboardJS = this.Keyboard.getComponent("keyboard");
         this.AudioJS = this.Audio.getComponent("gameAudio");
         this.AudioJS.onPlayBossStage1();
@@ -67,7 +68,7 @@ cc.Class({
         this.BulletsBoxs.destroyAllChildren();
         this.LetterBoxs.destroyAllChildren();
         this.curStateJS = this.getStateJS();
-        this.curStateJS.onPlayGame(this);
+        this.curStateJS.onPlayGame(this, this.levelIndex);
     },
 
     onBossGame() {
@@ -114,7 +115,9 @@ cc.Class({
                 return;
             }
             const keyboardPoint = this.KeyboardJS.onKeyDown(index, true);
-            this.createBulletItem(curAnchorLetterJS, keyboardPoint);
+            if (curAnchorLetterJS.launchBullet !== false) {
+                this.createBulletItem(curAnchorLetterJS, keyboardPoint);
+            }
         } else {
             // this.onKeyError();
             console.log("无定位");
@@ -127,7 +130,7 @@ cc.Class({
             return;
         this.AudioJS.onPlayKeyError();
         this.KeyboardJS.onKeyDown(index, false);
-        this.curStateJS.punishmentOnce();
+        this.curStateJS.onKeyError();
     },
 
 
@@ -257,34 +260,7 @@ cc.Class({
             preFirstBg.y = curFirstBg.height;
         }
     },
-    //抖动
-    createShockEff(pLayer, nStopTime) {
-        if (!pLayer) {
-            return;
-        }
-        var pTag = 666;
-        if (pLayer.getActionByTag(pTag)) {
-            return;
-        }
-        pLayer.save_layer_pos = cc.v2(pLayer.x, pLayer.y);
 
-        var action = cc.repeatForever(cc.sequence(
-            cc.moveBy(0.05, cc.v2(2, 2)),
-            cc.moveBy(0.1, cc.v2(-4, -4)),
-            cc.moveBy(0.05, cc.v2(2, 2))
-        ));
-        action.setTag(pTag);
-        pLayer.runAction(action);
-        if (!nStopTime) {
-            nStopTime = 1.0;
-        }
-
-        this.scheduleOnce(function () {
-            pLayer.stopActionByTag(pTag);
-            pLayer.x = pLayer.save_layer_pos.x;
-            pLayer.y = pLayer.save_layer_pos.y;
-        }.bind(pLayer), nStopTime);
-    },
     update(dt) {
         this.bgMove(this.bg_left);
         this.checkBgReset(this.bg_left);

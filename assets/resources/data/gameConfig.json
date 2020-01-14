@@ -48,12 +48,13 @@
                     }
                 ],
                 "attackState":{
-                    "normal":["a","b","c"],
-                    "updateCount":10
+                    "normal":["a"],
+                    "updateCount":2
                 },
                 "beatingState":{
                     "normal":["a"],
-                    "beatTime":100
+                    "updateCount":10,
+                    "beatTime":5
                 }
                
             }

@@ -5,48 +5,30 @@ cc.Class({
         ScrollView: cc.Node,
         ScrollContent: cc.Node,
         PreItem: cc.Prefab,
-        dataJson: cc.JsonAsset
+        dataJson: cc.JsonAsset,
+        label: cc.Node,
     },
 
     start() {
-        this.ScrollView.targetOff(this);
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-
-        for (let i = 0; i < this.dataJson.json.level1.length; i++) {
-            const level = this.dataJson.json.level1[i];
-            const preItem = cc.instantiate(this.PreItem);
-            preItem.getComponent("writingItem").SetText(level);
-            this.ScrollContent.addChild(preItem);
-        }
-        this.scrollView = this.ScrollView.getComponent(cc.ScrollView);
-        this.scrollView.scrollToBottom();
-        this.curIndex = this.dataJson.json.level1.length - 1;
+        this.sum = 0;
+        this.count = 0;
     },
     onKeyDown(event) {
-        const code = String.fromCharCode(event.keyCode);
-        if (code == this.getCurWriting()) {
-            const curItem = this.ScrollContent.children[this.curIndex];
-            if (curItem) {
-                curItem.getComponent("writingItem").playParticle();
-            }
-            const curOffset = this.scrollView.getScrollOffset();
-            this.scrollView.scrollToOffset(cc.v2(curOffset.x, curOffset.y - 50 - 20), 0.2);
 
-            if (this.curIndex > 0) {
-                --this.curIndex;
-            }
-            else {
-                console.log("恭喜过关");
-            }
-        } else {
-            console.log("失败");
-        }
 
     },
+
+    onClick() {
+        this.count++;
+        this.schedule(function () {
+            this.label.getComponent(cc.Label).string = ++this.sum;
+        }, 0.2 / this.count, this.count, 0); //(function(){},间隔时间，次数，多久后开始)
+        const action = cc.sequence(cc.spawn(cc.moveBy(0.2, cc.v2(0, 10)), cc.scaleTo(0.4, 1.2, 1.2)),
+            cc.spawn(cc.moveBy(0.2, cc.v2(0, -10)), cc.scaleTo(0.4, 1, 1))
+        );
+        this.label.runAction(action);
+    },
     getCurWriting() {
-        if (this.curIndex < this.dataJson.json.level1.length) {
-            return this.dataJson.json.level1[this.curIndex];
-        }
-        return "";
+
     }
 });

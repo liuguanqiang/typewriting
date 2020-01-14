@@ -3,19 +3,20 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        CrabBoss: cc.Prefab,
-        EnergyProgressBar: cc.Node,
+        CrabBoss: cc.Prefab
     },
 
     start() {
         this.animIndex = -1;
+        this.levelIndex = -1;
     },
 
     //开始游戏
-    onPlayGame(gameJS) {
-        this.gameJS = gameJS;
+    onPlayGame(gameJS, levelIndex) {
         this.isStop = false;
-        if (!gameJS.Bosslayer || gameJS.Bosslayer.children.length == 0) {
+        if (this.levelIndex != levelIndex) {
+            this.levelIndex = levelIndex;
+            this.gameJS = gameJS;
             this.gameJS.onPlayLighting();
             this.bossNode = cc.instantiate(this.CrabBoss);
             this.bossAnim = this.bossNode.getComponent(cc.Animation);
@@ -24,9 +25,9 @@ cc.Class({
             this.data = gameJS.getCurLevelData().boss.attackState;
             this.speed = gameJS.getCurLevelData().speed;
         }
-        this.bossNode.getChildByName("weakness").active = false;
-        this.EnergyProgressBar.active = true;
-        this.EnergyProgressBar.getComponent(cc.ProgressBar).progress = 0;
+        this.gameJS.EnergyProgressBar.active = true;
+        this.energyProgressBar = this.gameJS.EnergyProgressBar.getComponent(cc.ProgressBar);
+        this.energyProgressBar.progress = 0;
         //当前分数
         this.onUpdatePoolData();
         if (this.animIndex == -1) {
@@ -127,20 +128,19 @@ cc.Class({
     },
 
     //惩罚一次，当前刷新项+1
-    punishmentOnce() {
+    onKeyError() {
         // ++this.curUpdateCount;
         // this.isCreateOver = false;
     },
 
     //打完一个字母
     finishOnce() {
-        this.EnergyProgressBar.getComponent(cc.ProgressBar).progress += 1 / this.curUpdateCount;
+        this.energyProgressBar.progress += 1 / this.curUpdateCount;
         //字母创建完成，检测字母是否都打击完毕
         if (!this.isCreateOver || !this.gameJS.getLettersAllFinish()) return;
         this.isStop = true;
         setTimeout(() => {
             this.gameJS.onBack();
-            this.EnergyProgressBar.active = false;
         }, 1000);
     },
 });

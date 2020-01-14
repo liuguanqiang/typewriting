@@ -78,7 +78,7 @@ cc.Class({
     },
 
     //惩罚一次，当前刷新项+1
-    punishmentOnce() {
+    onKeyError() {
         for (let i = 0; i < this.gameJS.LetterBoxs.children.length; i++) {
             const element = this.gameJS.LetterBoxs.children[i];
             element.getComponent("letterRect").onAccelerate();

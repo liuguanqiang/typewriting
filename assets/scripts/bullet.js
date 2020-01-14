@@ -6,7 +6,7 @@ cc.Class({
     },
 
     start() {
-
+        
     },
     onInit(tragetJS, initPoint, cb) {
         if (initPoint != 0) {
