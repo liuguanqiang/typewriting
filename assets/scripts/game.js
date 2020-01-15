@@ -2,7 +2,6 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        ConfigJson: cc.JsonAsset,
         LetterBoxs: cc.Node,
         Bosslayer: cc.Node,
         BulletsBoxs: cc.Node,
@@ -18,6 +17,7 @@ cc.Class({
         EnergyProgressBar: cc.Node,
         bg_left: [cc.Node],
         bg_right: [cc.Node],
+        LevelJsons: [cc.JsonAsset],
     },
     //954
     start() {
@@ -72,12 +72,10 @@ cc.Class({
     },
 
     onBossGame() {
-        // this.createShockEff(this.BgAnimBox, 3);
-        // return
         if (this.curStateJS) {
             this.curStateJS.onLose();
         }
-        this.curStateIndex = 1;
+        this.curStateIndex = 2;
         this.onPlayGame();
     },
 
@@ -233,7 +231,7 @@ cc.Class({
 
     ///获取当前关卡的数据对象
     getCurLevelData() {
-        return this.ConfigJson.json.levels[this.levelIndex];
+        return this.LevelJsons[this.levelIndex].json.level;
     },
 
     //闪烁光效

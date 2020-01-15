@@ -21,14 +21,14 @@ cc.Class({
 
         //练习关卡索引，练习关卡会配置多个
         this.levelIndex = 0;
-        this.levelCount = this.data.length;
+        this.levelCount = this.data.exerciseState.length;
         this.topY = 290;
         this.onUpdatePoolData();
     },
 
     //获取对应刷新池数据
     onUpdatePoolData(isFristUpdate = true) {
-        this.curLevelData = this.data[this.levelIndex];
+        this.curLevelData = this.data.exerciseState[this.levelIndex];
         if (this.curPoolIndex < this.curLevelData.length) {
             //当前已创建字母块索引
             this.letterRectIndex = 0;
@@ -51,10 +51,6 @@ cc.Class({
                     }
                     --index;
                 }, 0.1, 3, 0);
-                // for (let i = 3; i >= 0; i--) {
-                //     let isAutoLocation = i == 3 ? true : false;
-                //     this.createLetterItem(this.topY - 80 * i, isAutoLocation);
-                // }
             } else {
                 this.createLetterItem(this.topY);
             }
