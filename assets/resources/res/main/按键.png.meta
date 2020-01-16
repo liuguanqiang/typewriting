@@ -1,6 +1,6 @@
 {
   "ver": "2.3.0",
-  "uuid": "89035ca4-3cd7-49a0-8b1e-8b5405f37b07",
+  "uuid": "665fbcf5-a259-46b0-86d5-b21fb1142d3f",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -9,8 +9,8 @@
   "subMetas": {
     "按键": {
       "ver": "1.0.3",
-      "uuid": "46d20e3d-d96a-4699-8e51-88a8c89c2d1f",
-      "rawTextureUuid": "89035ca4-3cd7-49a0-8b1e-8b5405f37b07",
+      "uuid": "c0a36e88-5d82-4419-b57e-5348b499f559",
+      "rawTextureUuid": "665fbcf5-a259-46b0-86d5-b21fb1142d3f",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -22,10 +22,10 @@
       "height": 50,
       "rawWidth": 50,
       "rawHeight": 50,
-      "borderTop": 24,
-      "borderBottom": 20,
-      "borderLeft": 19,
-      "borderRight": 20,
+      "borderTop": 14,
+      "borderBottom": 17,
+      "borderLeft": 21,
+      "borderRight": 17,
       "subMetas": {}
     }
   }

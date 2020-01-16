@@ -87,7 +87,7 @@ cc.Class({
             }, 0);
             letterRect.getComponent("weaknessLetterRect").onSetText(this.getLetterText());
             const x = left_x + index * rectWidth + rectWidth / 2;
-            letterRect.runAction(cc.moveTo(0.2, x, letterRect.y - 30).easing(cc.easeIn(2)));
+            letterRect.runAction(cc.moveTo(0.2, x, letterRect.y - 10).easing(cc.easeIn(2)));
             if (index == 0) {
                 letterRect.getComponent("weaknessLetterRect").onFlicker();
                 this.gameJS.onSetAnchorLetter(letterRect);

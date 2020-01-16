@@ -39,7 +39,8 @@ cc.Class({
 
     //设置闪烁
     onFlicker() {
-        this.bg.runAction(cc.repeatForever(cc.sequence(cc.tintTo(0.2, 57, 178, 255), cc.tintTo(0.2, 61, 96, 211))));
+        this.letterLabel.color = new cc.color(219, 25, 123, 255);
+        this.bg.runAction(cc.repeatForever(cc.sequence(cc.tintTo(0.2, 219, 25, 123), cc.tintTo(0.2, 61, 96, 211))));
     },
 
     //外部传入按键字母，进行删除当前字母块的首字母，如果不符合返回-1,

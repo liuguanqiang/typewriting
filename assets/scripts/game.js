@@ -28,9 +28,13 @@ cc.Class({
         this.KeyboardJS = this.Keyboard.getComponent("keyboard");
         this.AudioJS = this.Audio.getComponent("gameAudio");
         this.AudioJS.onPlayBossStage1();
+
     },
 
     onLoad() {
+        //用户连续正确的次数  一旦错误归零重新累计
+        this.correctCount = 0;
+
         this.bulletNodePool = new cc.NodePool();
         for (let i = 0; i < 10; ++i) {
             this.bulletNodePool.put(cc.instantiate(this.BulletItem));
@@ -38,6 +42,7 @@ cc.Class({
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         this.onBgAnim();
     },
+
     onDestroy() {
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     },
@@ -69,6 +74,7 @@ cc.Class({
         this.LetterBoxs.destroyAllChildren();
         this.curStateJS = this.getStateJS();
         this.curStateJS.onPlayGame(this, this.levelIndex);
+
     },
 
     onBossGame() {
@@ -112,6 +118,7 @@ cc.Class({
                 console.log("打错了");
                 return;
             }
+            ++this.correctCount;
             const keyboardPoint = this.KeyboardJS.onKeyDown(index, true);
             if (curAnchorLetterJS.launchBullet !== false) {
                 this.createBulletItem(curAnchorLetterJS, keyboardPoint);
@@ -124,6 +131,7 @@ cc.Class({
 
     //按错
     onKeyError(index) {
+        this.correctCount = 0;
         if (!this.LetterBoxs)
             return;
         this.AudioJS.onPlayKeyError();
@@ -189,11 +197,23 @@ cc.Class({
             newNode = cc.instantiate(this.BulletItem);
         }
         this.BulletsBoxs.addChild(newNode);
-        newNode.getComponent("bullet").onInit(target, keyboardPoint, (node) => {
+        newNode.getComponent("bullet").onInit(target, keyboardPoint, this.onGetStall(), (node) => {
             this.bulletNodePool.put(node);
         });
         this.AudioJS.onPlayBullet();
         return newNode;
+    },
+
+    //获取粒子特效档位
+    onGetStall() {
+        let stallIndex = Math.ceil(this.correctCount / 2);
+        if (stallIndex > 4) {
+            stallIndex = 4;
+        }
+        if (stallIndex < 0) {
+            stallIndex = 0;
+        }
+        return stallIndex;
     },
 
     //创建字母块

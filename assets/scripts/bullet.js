@@ -6,9 +6,9 @@ cc.Class({
     },
 
     start() {
-        
+
     },
-    onInit(tragetJS, initPoint, cb) {
+    onInit(tragetJS, initPoint, stallIndex, cb) {
         if (initPoint != 0) {
             this.node.rotation = 0;
             this.node.setPosition(0, 0);
@@ -16,6 +16,7 @@ cc.Class({
             this.node.setPosition(point);
         }
         this.node.addChild(cc.instantiate(this.particle));
+        this.stallIndex = stallIndex;
         this.tragetJS = tragetJS;
         this.isUpdate = true;
         this.cb = cb;
@@ -27,7 +28,7 @@ cc.Class({
         let distance = point.sub(targetPoint).mag();
         if (distance <= 30) {
             this.isUpdate = false;
-            this.tragetJS.setHit();
+            this.tragetJS.setHit(this.stallIndex);
             this.node.destroyAllChildren();
             if (this.cb) {
                 this.cb(this.node);

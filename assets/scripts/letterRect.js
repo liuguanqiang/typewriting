@@ -11,7 +11,7 @@ cc.Class({
     start() {
     },
     onLoad() {
-        this.anchorColor = new cc.color(255, 255, 255, 255);
+        this.anchorColor = new cc.color(219, 25, 123, 255);
     },
 
     //初始化
@@ -38,7 +38,8 @@ cc.Class({
     setAnchor(finish_cb, lose_cb) {
         this.finish_cb = finish_cb;
         this.lose_cb = lose_cb;
-        this.activeBg.active = true;
+        //this.activeBg.active = true;
+        this.bg.color = this.anchorColor;
         this.letterLabel.color = this.anchorColor;
         this.node.zIndex = 100;
     },
@@ -74,13 +75,13 @@ cc.Class({
     },
 
     //被击中
-    setHit() {
+    setHit(stallIndex) {
         if (!this.LetterCount) {
             return;
         }
         this.comLetterLabel.string = this.comLetterLabel.string.substring(1, this.comLetterLabel.string.length);
         if (this.LetterCount === 1) {
-            this.onPlayParticle();
+            this.onPlayParticle(stallIndex);
             if (this.finish_cb) {
                 this.finish_cb();
             }
@@ -90,10 +91,11 @@ cc.Class({
     },
 
     //播放爆炸效果，发送回收回调
-    onPlayParticle() {
+    onPlayParticle(stallIndex) {
         this.isPlay = false;
         this.bg.active = false;
         const comParticle = this.particle.getComponent(cc.ParticleSystem);
+        this.onSetParticleStyle(stallIndex, comParticle)
         comParticle.resetSystem();
         setTimeout(() => {
             if (cc.isValid(this.node)) {
@@ -101,6 +103,30 @@ cc.Class({
                 this.node.destroy();
             }
         }, 1000);
+    },
+
+    onSetParticleStyle(stallIndex, comParticle) {
+        if (stallIndex === 1) {
+            comParticle.lifeVar = 0.44;
+            comParticle.totalParticles = 200;
+            comParticle.speed = 40;
+            comParticle.speedVar = 300;
+        } else if (stallIndex === 2) {
+            comParticle.lifeVar = 0.55;
+            comParticle.totalParticles = 250;
+            comParticle.speed = 45;
+            comParticle.speedVar = 360;
+        } else if (stallIndex === 3) {
+            comParticle.lifeVar = 0.66;
+            comParticle.totalParticles = 381;
+            comParticle.speed = 70;
+            comParticle.speedVar = 560;
+        } else {
+            comParticle.lifeVar = 0.77;
+            comParticle.totalParticles = 381;
+            comParticle.speed = 100;
+            comParticle.speedVar = 666;
+        }
     },
 
     //加速一次
