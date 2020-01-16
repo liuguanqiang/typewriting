@@ -41,9 +41,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.447265625,
-      "y": 0.447265625,
-      "z": 0.447265625
+      "x": 0.36099521775526966,
+      "y": 0.36099521775526966,
+      "z": 0.36099521775526966
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -371,7 +371,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 233,
+      "width": 158,
       "height": 768
     },
     "_anchorPoint": {
@@ -418,7 +418,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "753a9865-6fdc-442d-8af3-147e35f93c91"
+      "__uuid__": "498447a2-6bf8-465e-a8e5-b1ba249c562b"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -491,7 +491,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 233,
+      "width": 158,
       "height": 768
     },
     "_anchorPoint": {
@@ -538,7 +538,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "753a9865-6fdc-442d-8af3-147e35f93c91"
+      "__uuid__": "498447a2-6bf8-465e-a8e5-b1ba249c562b"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -611,7 +611,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 233,
+      "width": 171,
       "height": 768
     },
     "_anchorPoint": {
@@ -621,7 +621,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 279,
+      "x": 341,
       "y": 0,
       "z": 0
     },
@@ -658,7 +658,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "b5a9fbf4-9b20-4a6e-992e-e73a7a039b37"
+      "__uuid__": "a63d4ee5-4b87-4f67-9e39-005d1de1a89b"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -731,7 +731,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 233,
+      "width": 171,
       "height": 768
     },
     "_anchorPoint": {
@@ -741,7 +741,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 279,
+      "x": 341,
       "y": 768,
       "z": 0
     },
@@ -778,7 +778,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "b5a9fbf4-9b20-4a6e-992e-e73a7a039b37"
+      "__uuid__": "a63d4ee5-4b87-4f67-9e39-005d1de1a89b"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -2869,7 +2869,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "3792e251-e33f-4117-9e4e-2637aff15dc2"
+      "__uuid__": "3109898a-e635-403b-8ab3-babf35d1862b"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -3488,7 +3488,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 55.6,
+      "width": 54.8,
       "height": 20
     },
     "_anchorPoint": {
@@ -3535,13 +3535,13 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "X10",
-    "_N$string": "X10",
+    "_string": "x10",
+    "_N$string": "x10",
     "_fontSize": 16,
     "_lineHeight": 50,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "e07bfb5b-973f-441a-9a23-e28f6dd951e9"
+      "__uuid__": "92d72943-61c7-428c-8809-ed699a4b67a9"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 1,
@@ -3583,15 +3583,15 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 253,
-      "g": 0,
-      "b": 0,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 49,
-      "height": 50
+      "width": 39,
+      "height": 37.5
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3600,7 +3600,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 201,
+      "x": 198.1,
       "y": 0,
       "z": 0
     },
@@ -3628,7 +3628,7 @@
   },
   {
     "__type__": "cc.Label",
-    "_name": "",
+    "_name": "num<Label>",
     "_objFlags": 0,
     "node": {
       "__id__": 83
@@ -3639,11 +3639,11 @@
     "_useOriginalSize": false,
     "_string": "0",
     "_N$string": "0",
-    "_fontSize": 40,
+    "_fontSize": 30,
     "_lineHeight": 50,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "e07bfb5b-973f-441a-9a23-e28f6dd951e9"
+      "__uuid__": "92d72943-61c7-428c-8809-ed699a4b67a9"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 1,

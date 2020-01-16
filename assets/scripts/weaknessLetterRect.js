@@ -2,23 +2,20 @@ cc.Class({
     extends: cc.Component,
     properties: {
         letterLabel: cc.Node,
-        particle: cc.Node,
         bg: cc.Node,
-        bgSpriteFrame: [cc.SpriteFrame]
+        activeBg: cc.Node,
     },
 
     start() {
     },
     onLoad() {
-        this.anchorColor = new cc.color(26, 125, 255, 255);
+        this.anchorColor = new cc.color(255, 255, 255, 255);
     },
 
     //初始化
     onInit(point, finish_cb, bgIndex = 0) {
         this.finish_cb = finish_cb;
         this.node.setPosition(point);
-        //this.bg.getComponent(cc.Sprite).spriteFrame = this.bgSpriteFrame[bgIndex];
-        this.node.opacity = this.node.opacity * 0.6;
     },
 
     onSetText(text) {
@@ -36,12 +33,13 @@ cc.Class({
     onSetHigh() {
         this.node.isHigh = true;
         this.node.stopAllActions();
-        this.node.opacity = 255;
+        this.activeBg.active = true;
+        this.letterLabel.color = this.anchorColor;
     },
 
     //设置闪烁
     onFlicker() {
-        this.node.runAction(cc.repeatForever(cc.sequence(cc.fadeTo(0.2, 255 * 0.9), cc.fadeTo(0.2, 255 * 0.6))));
+        this.bg.runAction(cc.repeatForever(cc.sequence(cc.tintTo(0.2, 57, 178, 255), cc.tintTo(0.2, 61, 96, 211))));
     },
 
     //外部传入按键字母，进行删除当前字母块的首字母，如果不符合返回-1,
@@ -73,24 +71,5 @@ cc.Class({
     //获取靶心坐标点
     getBullseyePosition() {
         return this.node.getPosition();
-    },
-
-    //被击中
-    setHit() {
-        if (!this.LetterCount) {
-            return;
-        }
-        this.comLetterLabel.string = this.comLetterLabel.string.substring(1, this.comLetterLabel.string.length);
-        if (this.LetterCount === 1) {
-            this.particle.getComponent(cc.ParticleSystem).resetSystem();
-            let finished = cc.callFunc(() => {
-                if (this.finish_cb) {
-                    this.finish_cb();
-                }
-            }, this);
-            this.bg.getChildByName("letterLabel").runAction(cc.sequence(cc.fadeOut(0.1), cc.fadeIn(0.1), finished));
-        } else {
-            this.LetterCount--;
-        }
     },
 });

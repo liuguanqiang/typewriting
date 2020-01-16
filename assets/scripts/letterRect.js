@@ -4,13 +4,14 @@ cc.Class({
     properties: {
         letterLabel: cc.Node,
         particle: cc.Node,
-        bg: cc.Node
+        bg: cc.Node,
+        activeBg: cc.Node,
     },
 
     start() {
     },
     onLoad() {
-        this.anchorColor = new cc.color(26, 125, 255, 255);
+        this.anchorColor = new cc.color(255, 255, 255, 255);
     },
 
     //初始化
@@ -37,7 +38,7 @@ cc.Class({
     setAnchor(finish_cb, lose_cb) {
         this.finish_cb = finish_cb;
         this.lose_cb = lose_cb;
-        this.bg.color = this.anchorColor;
+        this.activeBg.active = true;
         this.letterLabel.color = this.anchorColor;
         this.node.zIndex = 100;
     },

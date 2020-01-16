@@ -14,7 +14,7 @@ cc.Class({
     onInit(sumBlood) {
         this.sumBlood = sumBlood;
         this.curBlood = sumBlood;
-        this.HaemalCountLabel.getComponent(cc.Label).string = "X" + this.sumBlood / 10;
+        this.HaemalCountLabel.getComponent(cc.Label).string = "x" + this.sumBlood / 10;
         this.onReset();
     },
     onReset() {
@@ -27,11 +27,11 @@ cc.Class({
         const xBlood = Math.ceil(this.curBlood / 10);
         const yBlood = this.curBlood % 10 == 0 ? 10 : this.curBlood % 10;
         this.node.getComponent(cc.ProgressBar).progress = yBlood / 10;
-        this.HaemalCountLabel.getComponent(cc.Label).string = "X" + xBlood;
+        this.HaemalCountLabel.getComponent(cc.Label).string = "x" + xBlood;
 
         const offset = oldBlood - this.curBlood;
         this.schedule(function () {
-            this.NumLabel.getComponent(cc.Label).string = ++this.num;
+            this.NumLabel.getComponent(cc.Label).string = "-" + ++this.num;
         }, 0.25 / offset, offset - 1, 0);
         const action = cc.sequence(cc.spawn(cc.moveBy(0.15, cc.v2(0, 10)).easing(cc.easeBackIn(2)), cc.scaleTo(0.15, 1.2, 1.2)),
             cc.spawn(cc.moveBy(0.15, cc.v2(0, -10)).easing(cc.easeBackOut(2)), cc.scaleTo(0.15, 1, 1))
