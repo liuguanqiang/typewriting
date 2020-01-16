@@ -13,12 +13,8 @@ cc.Class({
         this.gameJS = gameJS;
         this.data = gameJS.getCurLevelData().exercise;
         this.keyboardJS = gameJS.KeyboardJS;
-        this.scoreLabel = gameJS.Score.getComponent(cc.Label);
-        //当前分数
-        this.score = 0;
         //当前刷新池索引
         this.curPoolIndex = 0;
-
         //练习关卡索引，练习关卡会配置多个
         this.levelIndex = 0;
         this.levelCount = this.data.exerciseState.length;
@@ -37,6 +33,10 @@ cc.Class({
             //当前正常池刷新次数，也就是用户不增加惩罚的默认刷新次数
             this.curUpdateCount = this.curLevelData[this.curPoolIndex].updateCount;
             if (isFristUpdate) {
+                //当前打正确的个数
+                this.correctCount = 0;
+                //当前打错误的个数
+                this.errorCount = 0;
                 //当前关卡是否创建完成
                 this.isCurCreateOver = false;
                 let index = 3;
@@ -96,12 +96,12 @@ cc.Class({
 
     //惩罚一次，当前刷新项+1
     onKeyError() {
-
+        ++this.errorCount;
     },
 
     //打完一个字母
     finishOnce() {
-        this.scoreLabel.string = ++this.score;
+        ++this.correctCount;
         for (let i = 0; i < this.gameJS.LetterBoxs.children.length; i++) {
             const node = this.gameJS.LetterBoxs.children[i];
             node.runAction(cc.moveTo(0.1, node.x, node.y - 80).easing(cc.easeIn(1)));
@@ -115,6 +115,8 @@ cc.Class({
 
         //当前关卡 打击完毕
         if (this.gameJS.getLettersAllFinish()) {
+            const accuracy = this.correctCount / (this.correctCount + this.errorCount);
+            console.log("accuracy", accuracy);
             this.levelIndex++;
             if (this.levelIndex < this.levelCount) {
                 this.curPoolIndex = 0;

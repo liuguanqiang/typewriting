@@ -4,14 +4,12 @@ cc.Class({
 
     properties: {
         Blood: cc.Node,
-        HaemalCountLabel: cc.Node,
-        whiltBar: cc.Node,
         WeaknessLetterRect: cc.Prefab
     },
 
     start() {
         this.levelIndex = -1;
-        this.interval = 250;//子弹发射间隔
+        this.interval = 300;//子弹发射间隔
     },
 
     //开始游戏
@@ -24,8 +22,8 @@ cc.Class({
             this.bossAnim = this.bossNode.getComponent(cc.Animation);
             this.data = gameJS.getCurLevelData().boss.beatingState;
             this.sumBlood = gameJS.getCurLevelData().boss.blood;
-            this.residueBlood = this.sumBlood;
-            this.HaemalCountLabel.getComponent(cc.Label).string = "X" + this.sumBlood / 10;
+            this.bloodJS = this.Blood.getComponent("blood");
+            this.bloodJS.onInit(this.sumBlood);
             this.energyProgressBar = this.gameJS.EnergyProgressBar.getComponent(cc.ProgressBar);
             this.y = this.bossNode.y + 33;
             this.particle = this.bossNode.getChildByName("particle");
@@ -114,6 +112,7 @@ cc.Class({
         setTimeout(() => {
             if (this.Blood.active) {
                 this.Blood.active = false;
+                this.bloodJS.onReset();
                 this.gameJS.onBack(-1);
             }
         }, this.interval * lastHighIndex + 1000);
@@ -132,7 +131,7 @@ cc.Class({
                 setTimeout(() => {
                     const keyboardPoint = item.convertToWorldSpaceAR(cc.v2(0, 0));
                     this.gameJS.createBulletItem(tragetJS, keyboardPoint);
-                    this.onSetBlood(i);
+                    this.onSetBlood(i + 1);
                     item.destroy();
                 }, this.interval * i);
             } else {
@@ -185,16 +184,10 @@ cc.Class({
     },
 
     onSetBlood(increment) {
-        this.residueBlood = (this.residueBlood - increment) > 0 ? (this.residueBlood - increment) : 0;
-        if (this.residueBlood == 0) {
-            this.Blood.getComponent(cc.ProgressBar).progress = 0;
+        const remain = this.bloodJS.onSetBlood(increment);
+        if (remain == 0) {
             this.gameJS.onWin();
-            return;
         }
-        const xBlood = Math.ceil(this.residueBlood / 10);
-        const yBlood = this.residueBlood % 10 == 0 ? 10 : this.residueBlood % 10;
-        this.Blood.getComponent(cc.ProgressBar).progress = yBlood / 10;
-        this.HaemalCountLabel.getComponent(cc.Label).string = "X" + xBlood;
     },
 
     //打完一个字母
@@ -211,18 +204,5 @@ cc.Class({
                 this.onSendBullet();
             }
         }
-        //--this.residueBlood;
-        // this.whiltBar.x = (1 - this.Blood.getComponent(cc.ProgressBar).progress) * this.Blood.width - this.Blood.width / 2;
-        // this.whiltBar.runAction(cc.sequence(cc.fadeIn(0.4), cc.fadeOut(0.1)));
-        // this.Blood.getComponent(cc.ProgressBar).progress -= 0.1;
-        // if (this.residueBlood == 0) {
-        //     this.gameJS.onWin();
-        //     return;
-        // }
-        // if (this.Blood.getComponent(cc.ProgressBar).progress < 0.05) {
-        //     this.Blood.getComponent(cc.ProgressBar).progress = 1;
-        //     this.HaemalCountLabel.getComponent(cc.Label).string = "X" + Math.floor(this.residueBlood / 10);
-        // }
-        // this.letterRect.getComponent("weaknessLetterRect").onSetText(this.getLetterText());
     },
 });
