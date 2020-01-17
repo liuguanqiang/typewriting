@@ -4,7 +4,8 @@ cc.Class({
 
     properties: {
         Blood: cc.Node,
-        WeaknessLetterRect: cc.Prefab
+        WeaknessLetterRect: cc.Prefab,
+        QTEStart: cc.Node,
     },
 
     start() {
@@ -19,7 +20,7 @@ cc.Class({
             this.gameJS = gameJS;
             this.levelIndex = levelIndex;
             this.bossNode = this.gameJS.Bosslayer.children[0];
-            this.bossAnim = this.bossNode.getComponent(cc.Animation);
+            this.QTEStartAnim = this.QTEStart.getComponent(cc.Animation);
             this.data = gameJS.getCurLevelData().boss.beatingState;
             this.sumBlood = gameJS.getCurLevelData().boss.blood;
             this.bloodJS = this.Blood.getComponent("blood");
@@ -52,7 +53,7 @@ cc.Class({
             if (t == tCount) {
                 this.onSendBullet();
             }
-        }, this.curBeatTime / tCount, tCount - 1, 0.1 * this.updateCount);
+        }, this.curBeatTime / tCount, tCount - 1, 0.1 * this.updateCount + 0.7);
     },
 
     onKeyDown(code, curAnchorLetter) {
@@ -68,12 +69,12 @@ cc.Class({
     //失败了 停止游戏
     onLose() {
         this.isPlay = false;
-        this.bossAnim.stop();
         clearTimeout(this.timeOut);
     },
 
     //开始播放boss动画 并发送字符
     onPlayAnimation() {
+        this.QTEStartAnim.play();
         let canvasWidth = this.gameJS.BgAnimBox.width;
         const rectWidth = 75;
         const left_x = -this.updateCount * rectWidth / 2;
@@ -93,7 +94,7 @@ cc.Class({
                 this.gameJS.onSetAnchorLetter(letterRect);
             }
             ++index;
-        }, 0.1, this.updateCount - 1, 0);
+        }, 0.1, this.updateCount - 1, 0.7);
     },
 
 
