@@ -41,9 +41,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.44437971548222804,
-      "y": 0.44437971548222804,
-      "z": 0.44437971548222804
+      "x": 0.7319742838541657,
+      "y": 0.7319742838541657,
+      "z": 0.7319742838541657
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -2752,7 +2752,7 @@
     "_spriteFrame": {
       "__uuid__": "933b4cf3-fbe0-4539-b8b5-cac57e2d170a"
     },
-    "_type": 1,
+    "_type": 2,
     "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
@@ -3822,12 +3822,12 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 1,
+      "x": 0,
       "y": 0.5
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 351.5,
+      "x": -351.5,
       "y": 0,
       "z": 0
     },
@@ -3874,7 +3874,7 @@
       "x": 0,
       "y": 0
     },
-    "_fillStart": 1,
+    "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_state": 0,
@@ -4032,8 +4032,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 191,
-      "y": -139,
+      "x": 187,
+      "y": -99,
       "z": 0
     },
     "_scale": {
@@ -4138,7 +4138,7 @@
     },
     "_N$mode": 0,
     "_N$progress": 1,
-    "_N$reverse": true,
+    "_N$reverse": false,
     "_id": "e5q71jBwFHz6g6JwK1L1G3"
   },
   {
