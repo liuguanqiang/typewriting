@@ -1,6 +1,6 @@
 {
     "level": {
-        "name": "level1",
+        "name": "第一关",
         "speed": 100,
         "exercise": {
             "twoStars": 0.8,
@@ -8,8 +8,13 @@
                 "accuracy": 0.9,
                 "time": 20
             },
-            "exerciseState": [
-                [
+            "videoState":{
+                "name": "正确的打字姿势",
+                "url":""
+            },
+            "exerciseState": [{
+                "name": "a,b",
+                "state": [
                     {
                         "normal": ["a"],
                         "updateCount": 6
@@ -22,8 +27,11 @@
                         "normal": ["a","b"],
                         "updateCount": 6
                     }
-                ],
-                [
+                ]
+              },
+              {
+                "name": "c,d",
+                "state":[
                     {
                         "normal": ["c"],
                         "updateCount": 6
@@ -37,6 +45,7 @@
                         "updateCount": 6
                     }
                 ]
+              }
             ]
         },
         "boss": {

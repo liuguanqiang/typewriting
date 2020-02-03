@@ -1,0 +1,96 @@
+{
+    "level": {
+        "name": "第二关",
+        "speed": 100,
+        "exercise": {
+            "twoStars": 0.8,
+            "threeStars": {
+                "accuracy": 0.9,
+                "time": 20
+            },
+            "exerciseState": [{
+                "name": "a,b",
+                "state": [
+                    {
+                        "normal": ["a"],
+                        "updateCount": 6
+                    },
+                    {
+                        "normal": ["b"],
+                        "updateCount": 6
+                    },
+                    {
+                        "normal": ["a","b"],
+                        "updateCount": 6
+                    }
+                ]
+              },
+              {
+                "name": "c,d",
+                "state":[
+                    {
+                        "normal": ["c"],
+                        "updateCount": 6
+                    },
+                    {
+                        "normal": ["d"],
+                        "updateCount": 6
+                    },
+                    {
+                        "normal": ["c","d"],
+                        "updateCount": 6
+                    }
+                ]
+              },
+              {
+                "name": "e,f",
+                "state":[
+                    {
+                        "normal": ["e"],
+                        "updateCount": 6
+                    },
+                    {
+                        "normal": ["f"],
+                        "updateCount": 6
+                    },
+                    {
+                        "normal": ["e","f"],
+                        "updateCount": 6
+                    }
+                ]
+              }
+            ]
+        },
+        "boss": {
+            "twoStars": 0.8,
+            "threeStars": {
+                "accuracy": 0.9,
+                "time": 30
+            },
+            "blood": 100,
+            "practiceState": [
+                {
+                    "normal": ["abc","j"," "],
+                    "updateCount": 4
+                },
+                {
+                    "normal": ["d","f"],
+                    "updateCount": 4
+                },
+                {
+                    "normal": ["abc","w"," "],
+                    "updateCount": 10
+                }
+            ],
+            "attackState": {
+                "normal": ["a"],
+                "updateCount": 4
+            },
+            "beatingState": {
+                "normal": ["a"],
+                "updateCount": 10,
+                "beatTime": 5
+            }
+        }
+    }
+}

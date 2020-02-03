@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "e90d3aa1-88d2-4a5a-b086-37dcd42b088c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "练习icon": {
+      "ver": "1.0.3",
+      "uuid": "4388905f-f6f1-425a-b70c-16680cf98e2a",
+      "rawTextureUuid": "e90d3aa1-88d2-4a5a-b086-37dcd42b088c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 48,
+      "height": 48,
+      "rawWidth": 48,
+      "rawHeight": 48,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

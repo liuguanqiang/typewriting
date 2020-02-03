@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "7c2869bd-0b1e-4f67-8e16-300e01b08267",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "挑战完成": {
+      "ver": "1.0.3",
+      "uuid": "0cf76baa-6e58-460e-8aac-087ae2f43847",
+      "rawTextureUuid": "7c2869bd-0b1e-4f67-8e16-300e01b08267",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 42,
+      "height": 42,
+      "rawWidth": 42,
+      "rawHeight": 42,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
