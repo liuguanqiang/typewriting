@@ -49,6 +49,8 @@
             ]
         },
         "boss": {
+            "name": "螃蟹怪",
+            "describe": "病毒界的弱鸡",
             "twoStars": 0.8,
             "threeStars": {
                 "accuracy": 0.9,

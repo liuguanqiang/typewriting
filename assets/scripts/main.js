@@ -8,14 +8,14 @@ cc.Class({
     },
 
     start() {
-
+        cc.director.preloadScene('gameScene');
     },
     onLoad() {
         for (let i = 0; i < this.LevelJsons.length; i++) {
             const data =  this.LevelJsons[i].json.level;
             const gameItem=cc.instantiate(this.GameItem);
             this.ScrollContent.addChild(gameItem);
-            gameItem.getComponent("gameItem").onInit(data);
+            gameItem.getComponent("gameItem").onInit(i,data);
         }
     }
 });
