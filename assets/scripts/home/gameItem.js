@@ -1,3 +1,4 @@
+var localData = require('localData');
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -18,19 +19,19 @@ cc.Class({
 
     },
     onInit(index, data) {
-        this.data = data;
+        this.gameData = data;
         this.title.getComponent(cc.Label).string = data.name;
         if (data.exercise.videoState) {
             const levelItem = cc.instantiate(this.levelItem);
             this.levelContent.addChild(levelItem);
-            levelItem.getComponent("levelItem").onInit(true, data.exercise.videoState);
+            levelItem.getComponent("levelItem").onInit(true, this.gameData, 0, data.exercise.videoState);
         }
         if (data.exercise.exerciseState) {
             for (let i = 0; i < data.exercise.exerciseState.length; i++) {
                 const levelData = data.exercise.exerciseState[i];
                 const levelItem = cc.instantiate(this.levelItem);
                 this.levelContent.addChild(levelItem);
-                levelItem.getComponent("levelItem").onInit(false, levelData);
+                levelItem.getComponent("levelItem").onInit(false, this.gameData, i, levelData);
             }
         }
         this.bossIcon.getComponent(cc.Sprite).spriteFrame = this.bossFrame[index];
@@ -52,4 +53,9 @@ cc.Class({
             this.bossDiademaContent.children[i].getComponent(cc.Sprite).spriteFrame = this.bossDiademaFrame;
         }
     },
+    onPlay() {
+        localData.GameData = this.gameData;
+        localData.GameProgressIndex = this.gameData.exercise.exerciseState.length;
+        cc.director.loadScene("gameScene");
+    }
 })

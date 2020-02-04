@@ -9,14 +9,14 @@ cc.Class({
     },
 
     //开始游戏
-    onPlayGame(gameJS) {
+    onPlayGame(gameJS, progressIndex) {
         this.gameJS = gameJS;
         this.data = gameJS.getCurLevelData().exercise;
         this.keyboardJS = gameJS.KeyboardJS;
         //当前刷新池索引
         this.curPoolIndex = 0;
         //练习关卡索引，练习关卡会配置多个
-        this.levelIndex = 0;
+        this.levelIndex = progressIndex;
         this.levelCount = this.data.exerciseState.length;
         this.topY = 290;
         this.onUpdatePoolData();
@@ -24,7 +24,7 @@ cc.Class({
 
     //获取对应刷新池数据
     onUpdatePoolData(isFristUpdate = true) {
-        this.curLevelData = this.data.exerciseState[this.levelIndex];
+        this.curLevelData = this.data.exerciseState[this.levelIndex].state;
         if (this.curPoolIndex < this.curLevelData.length) {
             //当前已创建字母块索引
             this.letterRectIndex = 0;
@@ -63,7 +63,7 @@ cc.Class({
         if (length == -1) {
             return null;
         }
-        curAnchorLetterJS.bulletSpeed = 40;
+        curAnchorLetterJS.bulletSpeed = 50;
         return curAnchorLetterJS;
     },
 
@@ -94,7 +94,7 @@ cc.Class({
         return null;
     },
 
-    //惩罚一次，当前刷新项+1
+    //按错一次
     onKeyError() {
         ++this.errorCount;
     },

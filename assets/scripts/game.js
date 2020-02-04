@@ -1,6 +1,6 @@
+var localData = require('localData');
 cc.Class({
     extends: cc.Component,
-
     properties: {
         LetterBoxs: cc.Node,
         Bosslayer: cc.Node,
@@ -10,7 +10,6 @@ cc.Class({
         Audio: cc.Node,
         Keyboard: cc.Node,
         stateJSNode: cc.Node,
-        Score: cc.Node,
         BgAnimBox: cc.Node,
         Pop: cc.Node,
         Lighting: cc.Node,
@@ -21,32 +20,39 @@ cc.Class({
     },
     //954
     start() {
-        //当前关卡索引
-        this.levelIndex = 0;
-        //当前游戏状态  0 练习状态  1 boss练习状态 2 boss攻击状态  3 boss挨打状态
-        this.curStateIndex = 0;
-        this.KeyboardJS = this.Keyboard.getComponent("keyboard");
-        this.AudioJS = this.Audio.getComponent("gameAudio");
-        this.AudioJS.onPlayBossStage1();
-
     },
 
     onLoad() {
+        this.KeyboardJS = this.Keyboard.getComponent("keyboard");
+        this.AudioJS = this.Audio.getComponent("gameAudio");
+        //播放背景音乐
+        this.AudioJS.onPlayBossStage1();
+        //当前游戏总配置数据
+        this.gameData = localData.GameData;
+        //进入时游戏进度
+        this.progressIndex = localData.GameProgressIndex;
+        this.setAnchorCurStateIndex(this.progressIndex);
         //用户连续正确的次数  一旦错误归零重新累计
         this.correctCount = 0;
-
         this.bulletNodePool = new cc.NodePool();
         for (let i = 0; i < 10; ++i) {
             this.bulletNodePool.put(cc.instantiate(this.BulletItem));
         }
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         this.onBgAnim();
+        this.onPlayGame();
     },
 
     onDestroy() {
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     },
-
+    setAnchorCurStateIndex(index) {
+        if (index < this.gameData.exercise.exerciseState.length) {
+            this.curStateIndex = 0;
+        } else {
+            this.curStateIndex = 1;
+        }
+    },
     //背景上动画
     onBgAnim() {
         const leftAnimBox = this.BgAnimBox.getChildByName("leftSprite");
@@ -73,16 +79,7 @@ cc.Class({
         this.BulletsBoxs.destroyAllChildren();
         this.LetterBoxs.destroyAllChildren();
         this.curStateJS = this.getStateJS();
-        this.curStateJS.onPlayGame(this, this.levelIndex);
-
-    },
-
-    onBossGame() {
-        if (this.curStateJS) {
-            this.curStateJS.onLose();
-        }
-        this.curStateIndex = 2;
-        this.onPlayGame();
+        this.curStateJS.onPlayGame(this, this.progressIndex);
     },
 
     onBack(increment = 1) {
@@ -91,7 +88,6 @@ cc.Class({
     },
 
     getStateJS() {
-        this.Score.active = true;
         if (this.curStateIndex == 0) {
             return this.stateJSNode.getComponent("exerciseStateJS");
         } else if (this.curStateIndex == 1) {
@@ -99,7 +95,6 @@ cc.Class({
         } else if (this.curStateIndex == 2) {
             return this.stateJSNode.getComponent("attackStateJS");
         } else {
-            this.Score.active = false;
             return this.stateJSNode.getComponent("beatingStateJS");
         }
     },
@@ -251,7 +246,7 @@ cc.Class({
 
     ///获取当前关卡的数据对象
     getCurLevelData() {
-        return this.LevelJsons[this.levelIndex].json.level;
+        return this.gameData;
     },
 
     //闪烁光效

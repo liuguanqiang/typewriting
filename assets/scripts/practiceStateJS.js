@@ -14,9 +14,6 @@ cc.Class({
         this.data = gameJS.getCurLevelData().boss.practiceState;
         this.speed = gameJS.getCurLevelData().speed;
         this.keyboardJS = gameJS.KeyboardJS;
-        this.scoreLabel = gameJS.Score.getComponent(cc.Label);
-        //当前分数
-        this.score = 0;
         //当前刷新池索引
         this.curPoolIndex = 0;
         this.onUpdatePoolData();
@@ -89,7 +86,6 @@ cc.Class({
 
     //打完一个字母
     finishOnce() {
-        this.scoreLabel.string = ++this.score;
         //字母创建完成，检测字母是否都打击完毕
         if (!this.isCreateOver || !this.gameJS.getLettersAllFinish()) return;
         this.unscheduleAllCallbacks(this);
