@@ -17,15 +17,15 @@
                 "state": [
                     {
                         "normal": ["a"],
-                        "updateCount": 6
+                        "updateCount": 4
                     },
                     {
                         "normal": ["b"],
-                        "updateCount": 6
+                        "updateCount": 4
                     },
                     {
                         "normal": ["a","b"],
-                        "updateCount": 6
+                        "updateCount": 4
                     }
                 ]
               },
@@ -34,15 +34,15 @@
                 "state":[
                     {
                         "normal": ["c"],
-                        "updateCount": 6
+                        "updateCount": 4
                     },
                     {
                         "normal": ["d"],
-                        "updateCount": 6
+                        "updateCount": 4
                     },
                     {
                         "normal": ["c","d"],
-                        "updateCount": 6
+                        "updateCount": 4
                     }
                 ]
               }

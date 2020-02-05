@@ -11,7 +11,7 @@ cc.Class({
         Keyboard: cc.Node,
         stateJSNode: cc.Node,
         BgAnimBox: cc.Node,
-        Pop: cc.Node,
+        winPop: cc.Node,
         Lighting: cc.Node,
         EnergyProgressBar: cc.Node,
         bg_left: [cc.Node],
@@ -72,7 +72,7 @@ cc.Class({
     },
 
     onPlayGame() {
-        this.Pop.active = false;
+        this.winPop.active = false;
         this.isLose = false;
         this.canKeyDown = true;
         this.curAnchorLetter = null;
@@ -161,26 +161,34 @@ cc.Class({
         this.onAutoLocation();
     },
 
-    //游戏胜利
-    onWin() {
-        this.Pop.active = true;
-        this.Pop.getChildByName('label').getComponent(cc.Label).string = "恭喜你 胜利了";
-        this.AudioJS.onPlayWin();
-        console.log("游戏胜利");
-    },
-
     //触碰到键盘 失败了
     onLose() {
         this.isLose = true;
-        this.Pop.active = true;
-        this.Pop.getChildByName('label').getComponent(cc.Label).string = "哎呀 玩失败了";
+        this.onWinPop(3, this.gameData)
         this.curStateJS.onLose();
-        console.log("游戏失败了");
         this.AudioJS.onPlayLose();
         for (let index = 0; index < this.LetterBoxs.children.length; index++) {
             const element = this.LetterBoxs.children[index];
             element.getComponent("letterRect").onStop();
         }
+    },
+
+    //显示胜利弹窗
+    onWinPop(num, data, cb) {
+        setTimeout(() => {
+            this.winPop.active = true;
+            this.AudioJS.onPlayWin();
+            this.winPop.getComponent("winPop").onInit(num, data, (id) => {
+                this.winPop.active = false;
+                if (id == 1) {
+                    cc.director.loadScene("mainScene");
+                } else if (id == 2) {
+                    cb(id);
+                } else {
+                    cb(id);
+                }
+            });
+        }, 1000);
     },
 
     //创建子弹

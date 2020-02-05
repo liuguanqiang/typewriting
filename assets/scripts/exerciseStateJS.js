@@ -19,6 +19,10 @@ cc.Class({
         this.levelIndex = progressIndex;
         this.levelCount = this.data.exerciseState.length;
         this.topY = 290;
+        this.timeOffset = 0;
+        this.timeCB = () => {
+            this.timeOffset += 0.5;
+        };
         this.onUpdatePoolData();
     },
 
@@ -33,6 +37,8 @@ cc.Class({
             //当前正常池刷新次数，也就是用户不增加惩罚的默认刷新次数
             this.curUpdateCount = this.curLevelData[this.curPoolIndex].updateCount;
             if (isFristUpdate) {
+                this.timeOffset = 0;
+                this.schedule(this.timeCB, 0.5);//启动定时器
                 //当前打正确的个数
                 this.correctCount = 0;
                 //当前打错误的个数
@@ -116,16 +122,30 @@ cc.Class({
         //当前关卡 打击完毕
         if (this.gameJS.getLettersAllFinish()) {
             const accuracy = this.correctCount / (this.correctCount + this.errorCount);
-            console.log("accuracy", accuracy);
-            this.levelIndex++;
-            if (this.levelIndex < this.levelCount) {
-                this.curPoolIndex = 0;
-                this.onUpdatePoolData();
-            } else {
-                setTimeout(() => {
-                    this.gameJS.onBack();
-                }, 1000);
+            this.unschedule(this.timeCB);
+            console.log("this.timeOffset ", this.timeOffset);
+            console.log("this.accuracy ", accuracy);
+            let starNum = 1;
+            //三星 两星判断
+            if (accuracy >= this.data.threeStars.accuracy && this.timeOffset <= this.data.threeStars.time) {
+                starNum = 3;
+            } else if (accuracy >= this.data.twoStars) {
+                starNum = 2;
             }
+            this.gameJS.onWinPop(starNum, this.data, (id) => {
+                if (id == 2) {
+                    this.curPoolIndex = 0;
+                    this.onUpdatePoolData();
+                } else if (id == 3) {
+                    this.levelIndex++;
+                    if (this.levelIndex < this.levelCount) {
+                        this.curPoolIndex = 0;
+                        this.onUpdatePoolData();
+                    } else {
+                        this.gameJS.onBack();
+                    }
+                }
+            });
         }
     },
 });
