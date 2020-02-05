@@ -1,5 +1,6 @@
 {
     "level": {
+        "id": "L1",
         "name": "第一关",
         "speed": 100,
         "exercise": {

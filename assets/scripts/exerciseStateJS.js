@@ -19,10 +19,6 @@ cc.Class({
         this.levelIndex = progressIndex;
         this.levelCount = this.data.exerciseState.length;
         this.topY = 290;
-        this.timeOffset = 0;
-        this.timeCB = () => {
-            this.timeOffset += 0.5;
-        };
         this.onUpdatePoolData();
     },
 
@@ -37,12 +33,11 @@ cc.Class({
             //当前正常池刷新次数，也就是用户不增加惩罚的默认刷新次数
             this.curUpdateCount = this.curLevelData[this.curPoolIndex].updateCount;
             if (isFristUpdate) {
-                this.timeOffset = 0;
-                this.schedule(this.timeCB, 0.5);//启动定时器
+                this.gameJS.onRunTimer(true);
                 //当前打正确的个数
-                this.correctCount = 0;
+                this.gameJS.hitOKCount = 0;
                 //当前打错误的个数
-                this.errorCount = 0;
+                this.gameJS.hitErrorCount = 0;
                 //当前关卡是否创建完成
                 this.isCurCreateOver = false;
                 let index = 3;
@@ -102,12 +97,11 @@ cc.Class({
 
     //按错一次
     onKeyError() {
-        ++this.errorCount;
+       
     },
 
     //打完一个字母
     finishOnce() {
-        ++this.correctCount;
         for (let i = 0; i < this.gameJS.LetterBoxs.children.length; i++) {
             const node = this.gameJS.LetterBoxs.children[i];
             node.runAction(cc.moveTo(0.1, node.x, node.y - 80).easing(cc.easeIn(1)));
@@ -121,13 +115,13 @@ cc.Class({
 
         //当前关卡 打击完毕
         if (this.gameJS.getLettersAllFinish()) {
-            const accuracy = this.correctCount / (this.correctCount + this.errorCount);
-            this.unschedule(this.timeCB);
-            console.log("this.timeOffset ", this.timeOffset);
+            const accuracy = this.gameJS.hitOKCount / (this.gameJS.hitOKCount + this.gameJS.hitErrorCount);
+            this.gameJS.onRunTimer(false);
+            console.log("this.gameJS.hitTimeOffset ", this.gameJS.hitTimeOffset);
             console.log("this.accuracy ", accuracy);
             let starNum = 1;
             //三星 两星判断
-            if (accuracy >= this.data.threeStars.accuracy && this.timeOffset <= this.data.threeStars.time) {
+            if (accuracy >= this.data.threeStars.accuracy && this.gameJS.hitTimeOffset <= this.data.threeStars.time) {
                 starNum = 3;
             } else if (accuracy >= this.data.twoStars) {
                 starNum = 2;

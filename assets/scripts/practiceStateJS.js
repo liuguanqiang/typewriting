@@ -20,6 +20,12 @@ cc.Class({
         this.isCreateOver = false;
         this.unscheduleAllCallbacks(this);
         this.schedule(this.createLetterItem, 1.2, cc.macro.REPEAT_FOREVER, 0.1);
+        
+        this.gameJS.onRunTimer(true);
+        //当前打正确的个数
+        this.gameJS.hitOKCount = 0;
+        //当前打错误的个数
+        this.gameJS.hitErrorCount = 0;
     },
 
     //获取对应刷新池数据

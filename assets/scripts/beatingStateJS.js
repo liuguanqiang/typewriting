@@ -9,20 +9,22 @@ cc.Class({
     },
 
     start() {
-        this.levelIndex = -1;
+        this.id = undefined;
         this.interval = 300;//子弹发射间隔
     },
 
     //开始游戏
-    onPlayGame(gameJS, levelIndex) {
+    onPlayGame(gameJS) {
         this.Blood.active = true;
-        if (this.levelIndex != levelIndex) {
+        const id = gameJS.getCurLevelData().id;
+        if (this.id != id) {
             this.gameJS = gameJS;
-            this.levelIndex = levelIndex;
+            this.id = id;
             this.bossNode = this.gameJS.Bosslayer.children[0];
             this.QTEStartAnim = this.QTEStart.getComponent(cc.Animation);
-            this.data = gameJS.getCurLevelData().boss.beatingState;
-            this.sumBlood = gameJS.getCurLevelData().boss.blood;
+            this.bossData = gameJS.getCurLevelData().boss;
+            this.data = this.bossData.beatingState;
+            this.sumBlood = this.bossData.blood;
             this.bloodJS = this.Blood.getComponent("blood");
             this.bloodJS.onInit(this.sumBlood);
             this.energyProgressBar = this.gameJS.EnergyProgressBar.getComponent(cc.ProgressBar);
@@ -187,7 +189,24 @@ cc.Class({
     onSetBlood(increment) {
         const remain = this.bloodJS.onSetBlood(increment);
         if (remain == 0) {
-            this.gameJS.onWin();
+            const accuracy = this.gameJS.hitOKCount / (this.gameJS.hitOKCount + this.gameJS.hitErrorCount);
+            this.gameJS.onRunTimer(false);
+            console.log("this.gameJS.hitTimeOffset ", this.gameJS.hitTimeOffset);
+            console.log("this.accuracy ", accuracy);
+            let starNum = 1;
+            //三星 两星判断
+            if (accuracy >= this.bossData.threeStars.accuracy && this.gameJS.hitTimeOffset <= this.bossData.threeStars.time) {
+                starNum = 3;
+            } else if (accuracy >= this.bossData.twoStars) {
+                starNum = 2;
+            }
+            this.gameJS.onWinPop(starNum, this.bossData, (id) => {
+                if (id == 2) {
+
+                } else if (id == 3) {
+
+                }
+            });
         }
     },
 

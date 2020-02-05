@@ -8,14 +8,16 @@ cc.Class({
 
     start() {
         this.animIndex = -1;
-        this.levelIndex = -1;
+        this.id = undefined;
     },
 
     //开始游戏
-    onPlayGame(gameJS, levelIndex) {
+    onPlayGame(gameJS) {
         this.isStop = false;
-        if (this.levelIndex != levelIndex) {
-            this.levelIndex = levelIndex;
+        const id = gameJS.getCurLevelData().id;
+        if (this.id != id) {
+            this.gameJS = gameJS;
+            this.id = id;
             this.gameJS = gameJS;
             this.gameJS.onPlayLighting();
             this.bossNode = cc.instantiate(this.CrabBoss);

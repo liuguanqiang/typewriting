@@ -1,5 +1,6 @@
 {
     "level": {
+        "id": "L2",
         "name": "第二关",
         "speed": 100,
         "exercise": {

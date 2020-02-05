@@ -12,6 +12,7 @@ cc.Class({
         stateJSNode: cc.Node,
         BgAnimBox: cc.Node,
         winPop: cc.Node,
+        pausePop: cc.Node,
         Lighting: cc.Node,
         EnergyProgressBar: cc.Node,
         bg_left: [cc.Node],
@@ -20,9 +21,16 @@ cc.Class({
     },
     //954
     start() {
+
     },
 
     onLoad() {
+        this.hitOKCount = 0;
+        this.hitErrorCount = 0;
+        this.hitTimeOffset = 0;
+        this.hitTimeCB = () => {
+            this.hitTimeOffset += 0.5;
+        };
         this.KeyboardJS = this.Keyboard.getComponent("keyboard");
         this.AudioJS = this.Audio.getComponent("gameAudio");
         //播放背景音乐
@@ -100,6 +108,10 @@ cc.Class({
     },
 
     onKeyDown(event) {
+        if (event.keyCode == cc.macro.KEY.escape) {
+            this.onPausePop();
+            return;
+        }
         if (this.isLose || !this.canKeyDown) return;
         if (this.curAnchorLetter && !this.curAnchorLetter.isFinish) {
             const index = this.KeyboardJS.onCanKeyDown(event);
@@ -132,8 +144,8 @@ cc.Class({
         this.AudioJS.onPlayKeyError();
         this.KeyboardJS.onKeyDown(index, false);
         this.curStateJS.onKeyError();
+        ++this.hitErrorCount;
     },
-
 
     //自动定位最近一个
     onAutoLocation() {
@@ -158,6 +170,7 @@ cc.Class({
     onFinishOnce() {
         this.curAnchorLetter.isFinish = true;
         this.curStateJS.finishOnce();
+        ++this.hitOKCount;
         this.onAutoLocation();
     },
 
@@ -179,7 +192,6 @@ cc.Class({
             this.winPop.active = true;
             this.AudioJS.onPlayWin();
             this.winPop.getComponent("winPop").onInit(num, data, (id) => {
-                this.winPop.active = false;
                 if (id == 1) {
                     cc.director.loadScene("mainScene");
                 } else if (id == 2) {
@@ -187,8 +199,21 @@ cc.Class({
                 } else {
                     cb(id);
                 }
+                this.winPop.active = false;
             });
-        }, 1000);
+        }, 500);
+    },
+    //显示暂停窗口
+    onPausePop() {
+        cc.director.pause();//暂停
+        this.pausePop.active = true;
+        this.pausePop.getComponent("pausePop").onInit((id) => {
+            this.pausePop.active = false;
+            cc.director.resume();
+            if (id == 1) {
+                cc.director.loadScene("mainScene");
+            }
+        })
     },
 
     //创建子弹
@@ -279,6 +304,16 @@ cc.Class({
             bgList.push(preFirstBg);
             var curFirstBg = bgList[0];
             preFirstBg.y = curFirstBg.height;
+        }
+    },
+
+    //开启或者关闭计时器
+    onRunTimer(isRun) {
+        if (isRun) {
+            this.hitTimeOffset = 0;
+            this.schedule(this.hitTimeCB, 0.5);//启动定时器
+        } else {
+            this.unschedule(this.hitTimeCB);
         }
     },
 
