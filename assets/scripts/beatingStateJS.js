@@ -187,8 +187,9 @@ cc.Class({
     },
 
     onSetBlood(increment) {
-        const remain = this.bloodJS.onSetBlood(increment);
-        if (remain == 0) {
+        const residueBlood = this.bloodJS.onSetBlood(increment);
+        this.bossNode.residueBlood = residueBlood;
+        if (residueBlood == 0) {
             const accuracy = this.gameJS.hitOKCount / (this.gameJS.hitOKCount + this.gameJS.hitErrorCount);
             this.gameJS.onRunTimer(false);
             console.log("this.gameJS.hitTimeOffset ", this.gameJS.hitTimeOffset);

@@ -11,13 +11,13 @@ cc.Class({
         Keyboard: cc.Node,
         stateJSNode: cc.Node,
         BgAnimBox: cc.Node,
-        winPop: cc.Node,
-        pausePop: cc.Node,
         Lighting: cc.Node,
         EnergyProgressBar: cc.Node,
         bg_left: [cc.Node],
         bg_right: [cc.Node],
-        LevelJsons: [cc.JsonAsset],
+        winPop: cc.Node,
+        pausePop: cc.Node,
+        failurePop: cc.Node,
     },
     //954
     start() {
@@ -25,9 +25,7 @@ cc.Class({
     },
 
     onLoad() {
-        this.hitOKCount = 0;
-        this.hitErrorCount = 0;
-        this.hitTimeOffset = 0;
+        this.initSetting();
         this.hitTimeCB = () => {
             this.hitTimeOffset += 0.5;
         };
@@ -54,6 +52,15 @@ cc.Class({
     onDestroy() {
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     },
+
+    //关卡切换重置数据
+    initSetting() {
+        this.hitOKCount = 0;
+        this.hitErrorCount = 0;
+        this.hitTimeOffset = 0;
+    },
+
+    //判断进入练习关卡还是boss关卡
     setAnchorCurStateIndex(index) {
         if (index < this.gameData.exercise.exerciseState.length) {
             this.curStateIndex = 0;
@@ -62,20 +69,25 @@ cc.Class({
         }
     },
     //背景上动画
-    onBgAnim() {
+    onBgAnim(isPlay = true) {
         const leftAnimBox = this.BgAnimBox.getChildByName("leftSprite");
         const rightAnimBox = this.BgAnimBox.getChildByName("rightSprite");
+        const nodeAction = (i, node) => {
+            if (isPlay) {
+                setTimeout(() => {
+                    node.runAction(cc.repeatForever(cc.sequence(cc.moveTo(this.random(3, 6), node.x, -node.y), cc.moveTo(0, node.x, node.y))));
+                }, i * 800);
+            } else {
+                node.stopAllActions();
+            }
+        }
         for (let i = 0; i < leftAnimBox.children.length; i++) {
             const node = leftAnimBox.children[i];
-            setTimeout(() => {
-                node.runAction(cc.repeatForever(cc.sequence(cc.moveTo(this.random(3, 6), node.x, -node.y), cc.moveTo(0, node.x, node.y))));
-            }, i * 800);
+            nodeAction(i, node);
         }
         for (let i = 0; i < rightAnimBox.children.length; i++) {
             const node = rightAnimBox.children[i];
-            setTimeout(() => {
-                node.runAction(cc.repeatForever(cc.sequence(cc.moveTo(this.random(3, 6), node.x, -node.y), cc.moveTo(0, node.x, node.y))));
-            }, i * 800);
+            nodeAction(i, node);
         }
     },
 
@@ -131,7 +143,6 @@ cc.Class({
                 this.createBulletItem(curAnchorLetterJS, keyboardPoint);
             }
         } else {
-            // this.onKeyError();
             console.log("无定位");
         }
     },
@@ -177,7 +188,7 @@ cc.Class({
     //触碰到键盘 失败了
     onLose() {
         this.isLose = true;
-        this.onWinPop(3, this.gameData)
+        this.onFailurePop();
         this.curStateJS.onLose();
         this.AudioJS.onPlayLose();
         for (let index = 0; index < this.LetterBoxs.children.length; index++) {
@@ -191,7 +202,8 @@ cc.Class({
         setTimeout(() => {
             this.winPop.active = true;
             this.AudioJS.onPlayWin();
-            this.winPop.getComponent("winPop").onInit(num, data, (id) => {
+            const isBoss = this.curStateIndex != 0;
+            this.winPop.getComponent("winPop").onInit(num, data, isBoss, (id) => {
                 if (id == 1) {
                     cc.director.loadScene("mainScene");
                 } else if (id == 2) {
@@ -211,8 +223,28 @@ cc.Class({
             this.pausePop.active = false;
             cc.director.resume();
             if (id == 1) {
+                this.onBgAnim(false);
                 cc.director.loadScene("mainScene");
             }
+        })
+    },
+
+    //显示失败窗口
+    onFailurePop() {
+        this.failurePop.getComponent("failurePop").onDefault();
+        this.failurePop.active = true;
+        let progress = 0;
+        if (this.curStateIndex == 1) {
+            const sumCount = this.getStateJS().onGetSumUpdateCount();
+            progress = (this.hitOKCount / sumCount / 2).toFixed(2);
+            console.log("sumCount", sumCount);
+            console.log("this.hitOKCount", sumCount);
+            console.log("progress", progress);
+        } else {
+            progress = 0.5 + (this.getStateJS().onGetBloodRatio() / 2).toFixed(2);
+        }
+        this.failurePop.getComponent("failurePop").onInit(progress, (id) => {
+            this.failurePop.active = false;
         })
     },
 
@@ -310,7 +342,7 @@ cc.Class({
     //开启或者关闭计时器
     onRunTimer(isRun) {
         if (isRun) {
-            this.hitTimeOffset = 0;
+            this.initSetting();
             this.schedule(this.hitTimeCB, 0.5);//启动定时器
         } else {
             this.unschedule(this.hitTimeCB);

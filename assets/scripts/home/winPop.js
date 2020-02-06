@@ -1,18 +1,59 @@
 cc.Class({
     extends: cc.Component,
     properties: {
-        starFrame: cc.SpriteFrame,
+        starFrames: [cc.SpriteFrame],
         tickrFrames: [cc.SpriteFrame],
         starContent: cc.Node,
         tickContent: cc.Node,
         twoStarAccuracy: cc.Node,
         threeStarAccuracy: cc.Node,
         threeStarTime: cc.Node,
+        diademaFrames: [cc.SpriteFrame],
+        smallStarFrames: [cc.SpriteFrame],
+        starEmpty: cc.Node,
+        smallStarContent: cc.Node,
+        btns: cc.Node,
     },
     start() {
 
     },
-    onInit(starNum, data, cb) {
+    onInit(starNum, data, isBoss, cb) {
+        for (let i = 0; i < 3; i++) {
+            const star0 = this.starEmpty.children[i];
+            const star1 = this.starContent.children[i];
+            const star2 = this.smallStarContent.children[i];
+            const btn = this.btns.children[i];
+            if (isBoss) {
+                star0.getComponent(cc.Sprite).spriteFrame = this.diademaFrames[0];
+                star0.setContentSize(137, 108);
+                star1.getComponent(cc.Sprite).spriteFrame = this.diademaFrames[1];
+                star1.setContentSize(137, 108);
+                star2.getComponent(cc.Sprite).spriteFrame = this.smallStarFrames[1];
+                star2.setContentSize(50, 39);
+                if (i == 0) {
+                    btn.x = -80;
+                } else if (i == 1) {
+                    btn.x = 80;
+                } else {
+                    btn.active = false;
+                }
+            } else {
+                star0.getComponent(cc.Sprite).spriteFrame = this.starFrames[0];
+                star0.setContentSize(138, 139);
+                star1.getComponent(cc.Sprite).spriteFrame = this.starFrames[1];
+                star1.setContentSize(138, 139);
+                star2.getComponent(cc.Sprite).spriteFrame = this.smallStarFrames[0];
+                star2.setContentSize(50, 50);
+                if (i == 0) {
+                    btn.x = -170;
+                } else if (i == 1) {
+                    btn.x = 0;
+                } else {
+                    btn.active = true;
+                }
+            }
+        }
+
         this.twoStarAccuracy.getComponent(cc.Label).string = data.twoStars * 100 + "%";
         this.threeStarAccuracy.getComponent(cc.Label).string = data.threeStars.accuracy * 100 + "%";
         this.threeStarTime.getComponent(cc.Label).string = data.threeStars.time + "s";
@@ -22,7 +63,6 @@ cc.Class({
         if (starNum > this.starContent.children.length) { return; }
         for (let i = 0; i < starNum; i++) {
             const star = this.starContent.children[i];
-            star.getComponent(cc.Sprite).spriteFrame = this.starFrame;
             setTimeout(() => {
                 star.runAction(cc.fadeTo(0.25, 255));
             }, i * 250 + 500);

@@ -24,7 +24,8 @@ cc.Class({
             this.bossAnim = this.bossNode.getComponent(cc.Animation);
             this.gameJS.Bosslayer.addChild(this.bossNode);
             this.initAnimation();
-            this.data = gameJS.getCurLevelData().boss.attackState;
+            this.bossData = gameJS.getCurLevelData().boss;
+            this.data = this.bossData.attackState;
             this.speed = gameJS.getCurLevelData().speed;
         }
         this.gameJS.EnergyProgressBar.active = true;
@@ -85,6 +86,14 @@ cc.Class({
         }
         curAnchorLetterJS.bulletSpeed = 40;
         return curAnchorLetterJS;
+    },
+
+    //根据剩余血量返回boss攻击状态进度比例
+    onGetBloodRatio() {
+        if (this.bossNode.residueBlood) {
+            return (this.bossData.blood - this.bossNode.residueBlood) / this.bossData.blood;
+        }
+        return 0;
     },
 
     //失败了 停止游戏

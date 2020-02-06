@@ -20,7 +20,7 @@ cc.Class({
         this.isCreateOver = false;
         this.unscheduleAllCallbacks(this);
         this.schedule(this.createLetterItem, 1.2, cc.macro.REPEAT_FOREVER, 0.1);
-        
+
         this.gameJS.onRunTimer(true);
         //当前打正确的个数
         this.gameJS.hitOKCount = 0;
@@ -44,6 +44,16 @@ cc.Class({
             //当前练习完成 
             this.levelFinish = true;
         }
+    },
+
+    //boss练习关卡总刷新次数
+    onGetSumUpdateCount() {
+        let count = 0;
+        for (let i = 0; i < this.data.length; i++) {
+            const item = this.data[i];
+            count += item.updateCount;
+        }
+        return count;
     },
 
     onKeyDown(code, curAnchorLetter) {

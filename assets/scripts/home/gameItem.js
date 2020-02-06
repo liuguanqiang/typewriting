@@ -35,8 +35,8 @@ cc.Class({
             }
         }
         this.bossIcon.getComponent(cc.Sprite).spriteFrame = this.bossFrame[index];
-        this.bossTitle = data.boss.name;
-        this.bossInfo = data.boss.describe;
+        this.bossTitle.getComponent(cc.Label).string = data.boss.name;
+        this.bossInfo.getComponent(cc.Label).string = data.boss.describe;
         this.onBossUnLock();
         //this.onLightenDiadema(2);
     },
