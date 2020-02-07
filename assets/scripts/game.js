@@ -47,6 +47,7 @@ cc.Class({
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         this.onBgAnim();
         this.onPlayGame();
+        this.isGotoMainScene=false;
     },
 
     onDestroy() {
@@ -75,7 +76,9 @@ cc.Class({
         const nodeAction = (i, node) => {
             if (isPlay) {
                 setTimeout(() => {
-                    node.runAction(cc.repeatForever(cc.sequence(cc.moveTo(this.random(3, 6), node.x, -node.y), cc.moveTo(0, node.x, node.y))));
+                    if (this.isGotoMainScene == false) {
+                        node.runAction(cc.repeatForever(cc.sequence(cc.moveTo(this.random(3, 6), node.x, -node.y), cc.moveTo(0, node.x, node.y))));
+                    }
                 }, i * 800);
             } else {
                 node.stopAllActions();
@@ -274,6 +277,7 @@ cc.Class({
 
     //返回主页
     onGotoMainScene() {
+        this.isGotoMainScene=true;
         this.AudioJS.onStopAllEffects();
         cc.director.loadScene("mainScene");
     },
