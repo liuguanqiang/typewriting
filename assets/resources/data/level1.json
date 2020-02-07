@@ -60,16 +60,12 @@
             "blood": 100,
             "practiceState": [
                 {
-                    "normal": ["abc","j"," "],
-                    "updateCount": 4
+                    "normal": ["a"],
+                    "updateCount": 2
                 },
                 {
                     "normal": ["d","f"],
-                    "updateCount": 4
-                },
-                {
-                    "normal": ["abc","w"," "],
-                    "updateCount": 10
+                    "updateCount": 2
                 }
             ],
             "attackState": {

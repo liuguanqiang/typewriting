@@ -21,12 +21,18 @@ cc.Class({
         setTimeout(() => {
             this.progressNode.opacity = 255;
             this.schedule(function () {
-                this.progressNode.getComponent(cc.ProgressBar).progress += progress / 20;
-            }, 0.025, 19, 0);
-        }, 500);
-        setTimeout(() => {
-            this.btns.opacity = 255;
-        }, 1500);
+                const curProgress = this.progressNode.getComponent(cc.ProgressBar).progress + 0.05;
+                if (curProgress < progress) {
+                    this.progressNode.getComponent(cc.ProgressBar).progress = curProgress;
+                } else {
+                    this.unscheduleAllCallbacks(this);
+                    this.progressNode.getComponent(cc.ProgressBar).progress = progress;
+                    setTimeout(() => {
+                        this.btns.opacity = 255;
+                    }, 100);
+                }
+            }, 0.025);
+        }, 600);
         this.cb = cb;
     },
     onHome() {

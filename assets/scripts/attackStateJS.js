@@ -28,6 +28,7 @@ cc.Class({
             this.data = this.bossData.attackState;
             this.speed = gameJS.getCurLevelData().speed;
         }
+        this.bossNode.active = true;
         this.gameJS.EnergyProgressBar.active = true;
         this.energyProgressBar = this.gameJS.EnergyProgressBar.getComponent(cc.ProgressBar);
         this.energyProgressBar.progress = 0;
@@ -76,6 +77,16 @@ cc.Class({
         this.curNormalLetterPool = this.data.normal;
         //当前正常池刷新次数，也就是用户不增加惩罚的默认刷新次数
         this.curUpdateCount = this.data.updateCount;
+    },
+
+    //用户重玩一次，复原boss位置等数据
+    onRecover() {
+        if (this.bossNode) {
+            this.animIndex = -1;
+            this.bossNode.active = false;
+            this.gameJS.EnergyProgressBar.active = false;
+            this.bossNode.y = 466;
+        }
     },
 
     onKeyDown(code, curAnchorLetter) {

@@ -32,6 +32,7 @@ cc.Class({
             this.particle = this.bossNode.getChildByName("particle");
             this.particle1 = this.bossNode.getChildByName("particle1");
         }
+        this.isWin = false;
         this.onUpdatePoolData();
         this.onPlayAnimation();
     },
@@ -66,6 +67,15 @@ cc.Class({
         }
         curAnchorLetterJS.launchBullet = false;
         return curAnchorLetterJS;
+    },
+
+    //用户重玩一次，复原血量等数据
+    onRecover() {
+        if (this.bloodJS) {
+            this.Blood.active = false;
+            this.bloodJS.onInit(this.sumBlood);
+            this.bossNode.residueBlood = this.sumBlood;
+        }
     },
 
     //失败了 停止游戏
@@ -113,6 +123,9 @@ cc.Class({
     //挨打模式时间到了  或者打错了  直接返回攻击模式
     gameOver(lastHighIndex) {
         setTimeout(() => {
+            if (this.isWin == true) {
+                return;
+            }
             if (this.Blood.active) {
                 this.Blood.active = false;
                 this.bloodJS.onReset();
@@ -187,9 +200,12 @@ cc.Class({
     },
 
     onSetBlood(increment) {
+        if (this.bossNode.residueBlood == 0)
+            return;
         const residueBlood = this.bloodJS.onSetBlood(increment);
         this.bossNode.residueBlood = residueBlood;
         if (residueBlood == 0) {
+            this.isWin = true;
             const accuracy = this.gameJS.hitOKCount / (this.gameJS.hitOKCount + this.gameJS.hitErrorCount);
             this.gameJS.onRunTimer(false);
             console.log("this.gameJS.hitTimeOffset ", this.gameJS.hitTimeOffset);
@@ -202,11 +218,7 @@ cc.Class({
                 starNum = 2;
             }
             this.gameJS.onWinPop(starNum, this.bossData, (id) => {
-                if (id == 2) {
 
-                } else if (id == 3) {
-
-                }
             });
         }
     },

@@ -197,26 +197,69 @@ cc.Class({
         }
     },
 
+    //boss关卡胜利或者失败  在玩一次
+    onBossOnceAgain() {
+        this.stateJSNode.getComponent("attackStateJS").onRecover();
+        this.stateJSNode.getComponent("beatingStateJS").onRecover();
+        this.curStateIndex = 1;
+        this.onPlayGame();
+    },
+
     //显示胜利弹窗
     onWinPop(num, data, cb) {
         setTimeout(() => {
             this.winPop.active = true;
+            this.Keyboard.active = false;
             this.AudioJS.onPlayWin();
             const isBoss = this.curStateIndex != 0;
             this.winPop.getComponent("winPop").onInit(num, data, isBoss, (id) => {
                 if (id == 1) {
-                    cc.director.loadScene("mainScene");
+                    this.onGotoMainScene();
                 } else if (id == 2) {
-                    cb(id);
+                    if (isBoss) {
+                        this.onBossOnceAgain();
+                    } else {
+                        cb(id);
+                    }
                 } else {
                     cb(id);
                 }
                 this.winPop.active = false;
+                this.Keyboard.active = true;
             });
         }, 500);
     },
+
+    //显示失败窗口
+    onFailurePop() {
+        this.failurePop.getComponent("failurePop").onDefault();
+        this.failurePop.active = true;
+        this.Keyboard.active = false;
+        let progress = 0;
+        if (this.curStateIndex == 1) {
+            const sumCount = this.getStateJS().onGetSumUpdateCount();
+            progress = (this.hitOKCount / sumCount / 2);
+            console.log("sumCount", sumCount);
+            console.log("this.hitOKCount", sumCount);
+            console.log("progress", progress);
+        } else {
+            progress = 0.5 + (this.getStateJS().onGetBloodRatio() / 2);
+        }
+        this.failurePop.getComponent("failurePop").onInit(progress, (id) => {
+            if (id == 1) {
+                this.onGotoMainScene();
+            } else if (id == 2) {
+                this.onBossOnceAgain();
+            }
+            this.failurePop.active = false;
+            this.Keyboard.active = true;
+        })
+    },
+
     //显示暂停窗口
     onPausePop() {
+        if (!this.Keyboard.active)
+            return;
         cc.director.pause();//暂停
         this.pausePop.active = true;
         this.pausePop.getComponent("pausePop").onInit((id) => {
@@ -224,28 +267,15 @@ cc.Class({
             cc.director.resume();
             if (id == 1) {
                 this.onBgAnim(false);
-                cc.director.loadScene("mainScene");
+                this.onGotoMainScene();
             }
         })
     },
 
-    //显示失败窗口
-    onFailurePop() {
-        this.failurePop.getComponent("failurePop").onDefault();
-        this.failurePop.active = true;
-        let progress = 0;
-        if (this.curStateIndex == 1) {
-            const sumCount = this.getStateJS().onGetSumUpdateCount();
-            progress = (this.hitOKCount / sumCount / 2).toFixed(2);
-            console.log("sumCount", sumCount);
-            console.log("this.hitOKCount", sumCount);
-            console.log("progress", progress);
-        } else {
-            progress = 0.5 + (this.getStateJS().onGetBloodRatio() / 2).toFixed(2);
-        }
-        this.failurePop.getComponent("failurePop").onInit(progress, (id) => {
-            this.failurePop.active = false;
-        })
+    //返回主页
+    onGotoMainScene() {
+        this.AudioJS.onStopAllEffects();
+        cc.director.loadScene("mainScene");
     },
 
     //创建子弹
