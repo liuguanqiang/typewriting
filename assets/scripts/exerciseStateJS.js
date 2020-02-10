@@ -126,6 +126,12 @@ cc.Class({
             } else if (accuracy >= this.data.twoStars) {
                 starNum = 2;
             }
+            const progressIndex = this.data.videoState ? this.levelIndex + 1 : this.levelIndex;
+            this.gameJS.onUpdateProgressData(starNum, progressIndex);
+            //当前练习关卡完成 需解锁下一模块第一个关卡
+            if (this.levelIndex == this.levelCount - 1) {
+                this.gameJS.onUnlockNextModule();
+            }
             this.gameJS.onWinPop(starNum, this.data, (id) => {
                 if (id == 2) {
                     this.curPoolIndex = 0;

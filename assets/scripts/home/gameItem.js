@@ -59,6 +59,18 @@ cc.Class({
                 this.onLightenDiadema(levelData.star);
             }
         }
+        //如果进度数据已解锁的最后一个关卡获得星星数大于0，则自动解锁下一个关卡
+        if (progressData.levels.length < 4) {
+            const levelData = progressData.levels[progressData.levels.length - 1];
+            if (levelData.star != 0) {
+                const nextIndex = progressData.levels.length;
+                if (nextIndex < 3) {
+                    this.levelContent.children[nextIndex].getComponent("levelItem").onUnLock();
+                } else {
+                    this.onBossUnLock();
+                }
+            }
+        }
     },
 
     //解锁

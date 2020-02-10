@@ -275,6 +275,40 @@ cc.Class({
         })
     },
 
+    //用户胜利更新关卡进度信息
+    onUpdateProgressData(starNum, levelIndex) {
+        if (localData.GameProgressData.length <= this.gotoGameData.moduleIndex) {
+            localData.GameProgressData.push({
+                "name": "M" + (this.gotoGameData.moduleIndex + 1),
+                "levels": []
+            })
+        }
+        const moduleData = localData.GameProgressData[this.gotoGameData.moduleIndex];
+        if (moduleData.levels.length > levelIndex) {
+            const levelData = moduleData.levels[levelIndex];
+            if (levelData.star < starNum) {
+                levelData.star = starNum;
+            }
+        } else {
+            moduleData.levels.push({
+                "name": "L" + (levelIndex + 1),
+                "star": starNum
+            })
+        }
+    },
+
+    //解锁下一个模块第一个关卡
+    onUnlockNextModule() {
+        //填充默认数据
+        localData.GameProgressData.push({
+            "name": "M" + (this.gotoGameData.moduleIndex + 1),
+            "levels": [{
+                "name": "L1",
+                "star": 0
+            }]
+        })
+    },
+
     //返回主页
     onGotoMainScene() {
         this.isGotoMainScene = true;

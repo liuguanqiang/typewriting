@@ -217,6 +217,7 @@ cc.Class({
             } else if (accuracy >= this.bossData.twoStars) {
                 starNum = 2;
             }
+            this.gameJS.onUpdateProgressData(starNum, 3);
             this.gameJS.onWinPop(starNum, this.bossData, (id) => {
 
             });

@@ -5,32 +5,7 @@
             "levels": [
                 {
                     "name": "L1",
-                    "star": 0
-                },
-                {
-                    "name": "L2",
-                    "star": 3
-                },
-                {
-                    "name": "L3",
-                    "star": 2
-                },
-                {
-                    "name": "L4",
-                    "star": 3
-                }
-            ]
-        },
-        {
-            "name": "M2",
-            "levels": [
-                {
-                    "name": "L1",
-                    "star": 2
-                },
-                {
-                    "name": "L2",
-                    "star": 1
+                    "star":2
                 }
             ]
         }
