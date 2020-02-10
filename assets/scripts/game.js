@@ -36,8 +36,8 @@ cc.Class({
         //当前游戏总配置数据
         this.gameData = localData.GameData;
         //进入时游戏进度
-        this.progressIndex = localData.GameProgressIndex;
-        this.setAnchorCurStateIndex(this.progressIndex);
+        this.gotoGameData = localData.GotoGameData;
+        this.setAnchorCurStateIndex(this.gotoGameData.levelIndex);
         //用户连续正确的次数  一旦错误归零重新累计
         this.correctCount = 0;
         this.bulletNodePool = new cc.NodePool();
@@ -47,7 +47,7 @@ cc.Class({
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         this.onBgAnim();
         this.onPlayGame();
-        this.isGotoMainScene=false;
+        this.isGotoMainScene = false;
     },
 
     onDestroy() {
@@ -63,7 +63,7 @@ cc.Class({
 
     //判断进入练习关卡还是boss关卡
     setAnchorCurStateIndex(index) {
-        if (index < this.gameData.exercise.exerciseState.length) {
+        if (index < 3) {
             this.curStateIndex = 0;
         } else {
             this.curStateIndex = 1;
@@ -102,7 +102,7 @@ cc.Class({
         this.BulletsBoxs.destroyAllChildren();
         this.LetterBoxs.destroyAllChildren();
         this.curStateJS = this.getStateJS();
-        this.curStateJS.onPlayGame(this, this.progressIndex);
+        this.curStateJS.onPlayGame(this, this.gotoGameData.levelIndex);
     },
 
     onBack(increment = 1) {
@@ -277,7 +277,7 @@ cc.Class({
 
     //返回主页
     onGotoMainScene() {
-        this.isGotoMainScene=true;
+        this.isGotoMainScene = true;
         this.AudioJS.onStopAllEffects();
         cc.director.loadScene("mainScene");
     },

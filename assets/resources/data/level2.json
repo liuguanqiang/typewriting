@@ -10,35 +10,35 @@
                 "time": 20
             },
             "exerciseState": [{
-                "name": "a,b",
+                "name": "q,w",
                 "state": [
                     {
-                        "normal": ["a"],
+                        "normal": ["q"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["b"],
+                        "normal": ["w"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["a","b"],
+                        "normal": ["q","w"],
                         "updateCount": 6
                     }
                 ]
               },
               {
-                "name": "c,d",
+                "name": "z,x",
                 "state":[
                     {
-                        "normal": ["c"],
+                        "normal": ["z"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["d"],
+                        "normal": ["x"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["c","d"],
+                        "normal": ["z","x"],
                         "updateCount": 6
                     }
                 ]
@@ -73,11 +73,11 @@
             "blood": 100,
             "practiceState": [
                 {
-                    "normal": ["abc","j"," "],
+                    "normal": ["z","x"," "],
                     "updateCount": 4
                 },
                 {
-                    "normal": ["d","f"],
+                    "normal": ["q","w"],
                     "updateCount": 4
                 },
                 {
@@ -86,11 +86,11 @@
                 }
             ],
             "attackState": {
-                "normal": ["a"],
+                "normal": ["z"],
                 "updateCount": 4
             },
             "beatingState": {
-                "normal": ["a"],
+                "normal": ["z"],
                 "updateCount": 10,
                 "beatTime": 5
             }

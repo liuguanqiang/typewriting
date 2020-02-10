@@ -15,8 +15,8 @@ cc.Class({
         this.keyboardJS = gameJS.KeyboardJS;
         //当前刷新池索引
         this.curPoolIndex = 0;
-        //练习关卡索引，练习关卡会配置多个
-        this.levelIndex = progressIndex;
+        //练习关卡索引，练习关卡会配置多个 如果配置了视频  默认关卡索引-1
+        this.levelIndex = this.data.videoState ? progressIndex - 1 : progressIndex;
         this.levelCount = this.data.exerciseState.length;
         this.topY = 290;
         this.onUpdatePoolData();
@@ -97,7 +97,7 @@ cc.Class({
 
     //按错一次
     onKeyError() {
-       
+
     },
 
     //打完一个字母

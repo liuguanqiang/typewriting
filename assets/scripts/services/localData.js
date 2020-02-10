@@ -64,11 +64,19 @@ module.exports = {
     get GameData() {
         return getCacheData("gameData");
     },
-    set GameProgressIndex(value) {
-        return setCacheData(value, "gameProgressIndex");
+    //用户选择进入游戏时缓存关卡数据
+    set GotoGameData(value) {
+        return setCacheData(value, "gotoGameData");
     },
-    get GameProgressIndex() {
-        return getCacheData("gameProgressIndex");
+    get GotoGameData() {
+        return getCacheData("gotoGameData");
+    },
+    //用户整体游戏进度数据
+    set GameProgressData(value) {
+        return setCacheData(value, "gameProgressData");
+    },
+    get GameProgressData() {
+        return getCacheData("gameProgressData");
     },
 
     // ---------------------------------- 本地数据 ----------------------------------

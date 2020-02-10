@@ -14,11 +14,10 @@ cc.Class({
     start() {
 
     },
-    onInit(isVideo, gameData, index, data) {
-        this.gameData = gameData;
+    onInit(isVideo, data, cb) {
         this.data = data;
-        this.index = index;
         this.isVideo = isVideo;
+        this.cb = cb;
         if (isVideo) {
             this.icon.getComponent(cc.Sprite).spriteFrame = this.iconFrame[1];
             this.starContent.active = false;
@@ -26,15 +25,23 @@ cc.Class({
             this.icon.getComponent(cc.Sprite).spriteFrame = this.iconFrame[0];
         }
         this.title.getComponent(cc.Label).string = data.name;
-        this.onUnLock();
-        //this.onLightenStar(2);
     },
+
+    //设置进度数据
+    onSetProgressData(levelData) {
+        this.onUnLock();
+        if (!this.isVideo) {
+            this.onLightenStar(levelData.star);
+        }
+    },
+
     //解锁
     onUnLock() {
         this.shade.active = false;
         this.lock.active = false;
         this.play.active = true;
     },
+
     //设置亮起星星数量
     onLightenStar(num) {
         if (num > this.starContent.children.length) { return; }
@@ -44,9 +51,7 @@ cc.Class({
     },
     onPlay() {
         if (!this.isVideo) {
-            localData.GameData = this.gameData;
-            localData.GameProgressIndex = this.index;
-            cc.director.loadScene("gameScene");
+            this.cb();
         }
     }
 })

@@ -20,26 +20,47 @@ cc.Class({
     },
     onInit(index, data) {
         this.gameData = data;
+        this.moduleIndex = index;
         this.title.getComponent(cc.Label).string = data.name;
+        let offset = 0;
         if (data.exercise.videoState) {
+            offset = 1;
             const levelItem = cc.instantiate(this.levelItem);
             this.levelContent.addChild(levelItem);
-            levelItem.getComponent("levelItem").onInit(true, this.gameData, 0, data.exercise.videoState);
+            levelItem.getComponent("levelItem").onInit(true, data.exercise.videoState, () => {
+                console.log("i ", 0)
+            });
         }
         if (data.exercise.exerciseState) {
             for (let i = 0; i < data.exercise.exerciseState.length; i++) {
                 const levelData = data.exercise.exerciseState[i];
                 const levelItem = cc.instantiate(this.levelItem);
                 this.levelContent.addChild(levelItem);
-                levelItem.getComponent("levelItem").onInit(false, this.gameData, i, levelData);
+                levelItem.getComponent("levelItem").onInit(false, levelData, () => {
+                    this.onPlayGame(i + offset);
+                });
             }
         }
         this.bossIcon.getComponent(cc.Sprite).spriteFrame = this.bossFrame[index];
         this.bossTitle.getComponent(cc.Label).string = data.boss.name;
         this.bossInfo.getComponent(cc.Label).string = data.boss.describe;
-        this.onBossUnLock();
-        //this.onLightenDiadema(2);
     },
+
+    //设置进度数据
+    onSetProgressData(progressData) {
+        this.progressData = progressData;
+        for (let i = 0; i < progressData.levels.length; i++) {
+            const levelData = progressData.levels[i];
+            if (i < 3) {
+                const item = this.levelContent.children[i];
+                item.getComponent("levelItem").onSetProgressData(levelData);
+            } else {
+                this.onBossUnLock();
+                this.onLightenDiadema(levelData.star);
+            }
+        }
+    },
+
     //解锁
     onBossUnLock() {
         this.bossShade.active = false;
@@ -54,8 +75,14 @@ cc.Class({
         }
     },
     onPlay() {
+        this.onPlayGame(3);
+    },
+    onPlayGame(levelIndex) {
         localData.GameData = this.gameData;
-        localData.GameProgressIndex = this.gameData.exercise.exerciseState.length;
+        localData.GotoGameData = {
+            moduleIndex: this.moduleIndex,
+            levelIndex: levelIndex
+        }
         cc.director.loadScene("gameScene");
     }
 })
