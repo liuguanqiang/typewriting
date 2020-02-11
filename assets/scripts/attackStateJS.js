@@ -95,7 +95,7 @@ cc.Class({
         if (length == -1) {
             return null;
         }
-        curAnchorLetterJS.bulletSpeed = 40;
+        curAnchorLetterJS.bulletSpeed = 50;
         return curAnchorLetterJS;
     },
 

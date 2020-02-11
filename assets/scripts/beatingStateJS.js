@@ -163,7 +163,7 @@ cc.Class({
     onTragetJS() {
         let isOne = true;
         let tragetJS = {};
-        tragetJS.bulletSpeed = 30;
+        tragetJS.bulletSpeed = 50;
         tragetJS.getBullseyePosition = () => {
             return this.bossNode.getPosition();
         };
