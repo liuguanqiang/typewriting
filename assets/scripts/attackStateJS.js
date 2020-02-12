@@ -3,7 +3,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        CrabBoss: cc.Prefab
+        Bosses: [cc.Prefab]
     },
 
     start() {
@@ -16,7 +16,6 @@ cc.Class({
         this.isStop = false;
         const id = gameJS.getCurLevelData().id;
         if (this.id != id) {
-            this.gameJS = gameJS;
             this.id = id;
             this.gameJS = gameJS;
             this.gameJS.onPlayLighting();
