@@ -50,8 +50,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 512,
-      "y": 384,
+      "x": 0,
+      "y": 490,
       "z": 0
     },
     "_scale": {
@@ -85,8 +85,8 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_armatureName": "dzboss2",
-    "_animationName": "状态2右攻击",
-    "playTimes": 1,
+    "_animationName": "喷火焰进入",
+    "playTimes": 0,
     "_N$dragonAsset": {
       "__uuid__": "293d281a-1771-4573-9f1e-d68597f0a5a6"
     },
@@ -94,7 +94,7 @@
       "__uuid__": "ab1a5bed-b152-4c6d-b868-ff2d7b62d424"
     },
     "_N$_defaultArmatureIndex": 0,
-    "_N$_animationIndex": 6,
+    "_N$_animationIndex": 1,
     "_N$timeScale": 1,
     "_N$debugBones": false,
     "_id": ""

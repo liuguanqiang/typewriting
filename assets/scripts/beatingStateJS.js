@@ -6,6 +6,7 @@ cc.Class({
         Blood: cc.Node,
         WeaknessLetterRect: cc.Prefab,
         QTEStart: cc.Node,
+        bossParticleLayer: cc.Node,
     },
 
     start() {
@@ -29,8 +30,8 @@ cc.Class({
             this.bloodJS.onInit(this.sumBlood);
             this.energyProgressBar = this.gameJS.EnergyProgressBar.getComponent(cc.ProgressBar);
             this.y = this.bossNode.y + 33;
-            this.particle = this.bossNode.getChildByName("particle");
-            this.particle1 = this.bossNode.getChildByName("particle1");
+            this.particle = this.bossParticleLayer.getChildByName("particle");
+            this.particle1 = this.bossParticleLayer.getChildByName("particle1");
         }
         this.isWin = false;
         this.onUpdatePoolData();

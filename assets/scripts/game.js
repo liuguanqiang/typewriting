@@ -63,6 +63,8 @@ cc.Class({
 
     //判断进入练习关卡还是boss关卡
     setAnchorCurStateIndex(index) {
+        this.curStateIndex = 2;
+        return;
         if (index < 3) {
             this.curStateIndex = 0;
         } else {

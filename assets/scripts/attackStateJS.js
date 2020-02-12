@@ -7,8 +7,6 @@ cc.Class({
     },
 
     start() {
-        this.animIndex = -1;
-        this.id = undefined;
     },
 
     //开始游戏
@@ -16,55 +14,43 @@ cc.Class({
         this.isStop = false;
         const id = gameJS.getCurLevelData().id;
         if (this.id != id) {
+            this.isFristInit = true;
             this.id = id;
             this.gameJS = gameJS;
             this.gameJS.onPlayLighting();
-            this.bossNode = cc.instantiate(this.CrabBoss);
-            this.bossAnim = this.bossNode.getComponent(cc.Animation);
+            this.bossIndex = 1;
+            this.createBoss();
             this.gameJS.Bosslayer.addChild(this.bossNode);
-            this.initAnimation();
+            this.bossJS.onInit(this);
             this.bossData = gameJS.getCurLevelData().boss;
             this.data = this.bossData.attackState;
             this.speed = gameJS.getCurLevelData().speed;
         }
+        this.playAnimation();
         this.bossNode.active = true;
         this.gameJS.EnergyProgressBar.active = true;
         this.energyProgressBar = this.gameJS.EnergyProgressBar.getComponent(cc.ProgressBar);
         this.energyProgressBar.progress = 0;
         //当前分数
         this.onUpdatePoolData();
-        if (this.animIndex == -1) {
-            this.gameJS.AudioJS.onPlayBossAppear();
-            this.bossAnim.play('walk');
-            this.bossNode.runAction(cc.moveTo(2, 0, 250));
-            setTimeout(() => {
-                this.animIndex = 0;
-                this.onPlayAnimation();
-            }, 2000);
-        } else {
-            this.animIndex = 0;
-            this.onPlayAnimation();
+    },
+
+    //创建boss
+    createBoss() {
+        if (this.bossIndex == 1) {
+            this.bossNode = cc.instantiate(this.Bosses[1]);
+            this.bossJS = this.bossNode.getComponent("airplaneBoss");
         }
     },
 
-    initAnimation() {
-        this.bossAnim.on('finished', (e) => {
-            if (this.isStop) return;
-            if (this.animIndex == 1) {
-                this.createLetterItem(cc.v2(-212, 290));
-            } else if (this.animIndex == 2) {
-                this.createLetterItem(cc.v2(212, 290));
-            }
-            //如果创建完成 只做呼吸动画
-            if (this.isCreateOver) {
-                this.animIndex = 0;
-            } else {
-                ++this.animIndex;
-            }
-            this.onPlayAnimation();
-        }, this);
+    playAnimation() {
+        this.bossJS.playAnimation(this.isFristInit);
+        console.log("this.isFristInit  ", this.isFristInit)
+        if (this.isFristInit) {
+            this.isFristInit = false;
+            this.bossNode.runAction(cc.moveTo(2, 0, 200));
+        }
     },
-
 
     //获取对应刷新池数据
     onUpdatePoolData() {
@@ -81,10 +67,10 @@ cc.Class({
     //用户重玩一次，复原boss位置等数据
     onRecover() {
         if (this.bossNode) {
-            this.animIndex = -1;
+            this.isFristInit = true;
             this.bossNode.active = false;
             this.gameJS.EnergyProgressBar.active = false;
-            this.bossNode.y = 466;
+            this.bossNode.y = 490;
         }
     },
 
@@ -108,34 +94,16 @@ cc.Class({
 
     //失败了 停止游戏
     onLose() {
-        this.isStop = true;
+        this.onStop();
     },
 
-    //开始播放boss动画 并发送字符
-    onPlayAnimation() {
-        if (this.animIndex > 2) {
-            this.animIndex = 0;
-        }
-        if (this.animIndex == 0) {
-            const animState = this.bossAnim.play('breathe');
-            animState.wrapMode = cc.WrapMode.Loop;
-            animState.repeatCount = 2;
-            return;
-        }
-        if (this.animIndex == 1) {
-            this.bossAnim.play('leftHand');
-            return;
-        }
-        if (this.animIndex == 2) {
-            this.bossAnim.play('rightHand');
-            return;
-        }
+    //获取随机数 取整
+    randomToFloor(lower, upper) {
+        return this.gameJS.randomToFloor(lower, upper);
     },
-
-
-
     //创建字母块
     createLetterItem(point) {
+        if (this.isStop) return;
         if (this.letterRectIndex < this.curUpdateCount) {
             const item = this.gameJS.createLetterItem();
             const letterText = this.curNormalLetterPool[this.gameJS.randomToFloor(0, this.curNormalLetterPool.length)];
@@ -154,12 +122,17 @@ cc.Class({
         // this.isCreateOver = false;
     },
 
+    onStop() {
+        this.isStop = true;
+        this.bossJS.onStop();
+    },
+
     //打完一个字母
     finishOnce() {
         this.energyProgressBar.progress += 1 / this.curUpdateCount;
         //字母创建完成，检测字母是否都打击完毕
         if (!this.isCreateOver || !this.gameJS.getLettersAllFinish()) return;
-        this.isStop = true;
+        this.onStop();
         setTimeout(() => {
             this.gameJS.onBack();
         }, 1000);
