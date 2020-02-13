@@ -10,7 +10,6 @@ cc.Class({
     },
 
     start() {
-        this.id = undefined;
         this.interval = 300;//子弹发射间隔
     },
 
@@ -96,7 +95,7 @@ cc.Class({
             const letterRect = cc.instantiate(this.WeaknessLetterRect);
             letterRect.index = index;
             this.gameJS.LetterBoxs.addChild(letterRect);
-            letterRect.getComponent("weaknessLetterRect").onInit(cc.v2((canvasWidth + letterRect.width) / 2, 0), () => {
+            letterRect.getComponent("weaknessLetterRect").onInit(cc.v2((canvasWidth + letterRect.width) / 2, -90), () => {
                 this.finishOnce(letterRect.index);
             }, 0);
             letterRect.getComponent("weaknessLetterRect").onSetText(this.getLetterText());
@@ -164,7 +163,7 @@ cc.Class({
     onTragetJS() {
         let isOne = true;
         let tragetJS = {};
-        tragetJS.bulletSpeed = 50;
+        tragetJS.bulletSpeed = 40;
         tragetJS.getBullseyePosition = () => {
             return this.bossNode.getPosition();
         };

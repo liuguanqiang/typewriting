@@ -18,7 +18,7 @@ cc.Class({
             this.id = id;
             this.gameJS = gameJS;
             this.gameJS.onPlayLighting();
-            this.bossIndex = 1;
+            this.bossIndex = this.gameJS.gotoGameData.moduleIndex;
             this.createBoss();
             this.gameJS.Bosslayer.addChild(this.bossNode);
             this.bossJS.onInit(this);
@@ -37,19 +37,27 @@ cc.Class({
 
     //创建boss
     createBoss() {
-        if (this.bossIndex == 1) {
+        if (this.bossIndex == 0) {
+            this.bossNode = cc.instantiate(this.Bosses[0]);
+            this.bossJS = this.bossNode.getComponent("crabBoss");
+        } else if (this.bossIndex == 1) {
             this.bossNode = cc.instantiate(this.Bosses[1]);
             this.bossJS = this.bossNode.getComponent("airplaneBoss");
         }
     },
 
     playAnimation() {
-        this.bossJS.playAnimation(this.isFristInit);
-        console.log("this.isFristInit  ", this.isFristInit)
+        this.bossJS.playAnimation(this.isFristInit, 1 - this.onGetBloodRatio());
         if (this.isFristInit) {
             this.isFristInit = false;
-            this.bossNode.runAction(cc.moveTo(2, 0, 200));
+            const y = this.onGetBossDefaultY();
+            this.bossNode.runAction(cc.moveTo(2, 0, y));
         }
+    },
+
+    //胜利
+    onWin() {
+        this.bossJS.onWin();
     },
 
     //获取对应刷新池数据
@@ -72,6 +80,13 @@ cc.Class({
             this.gameJS.EnergyProgressBar.active = false;
             this.bossNode.y = 490;
         }
+    },
+
+    onGetBossDefaultY() {
+        if (this.bossIndex == 0) {
+            return 170;
+        }
+        return 200;
     },
 
     onKeyDown(code, curAnchorLetter) {

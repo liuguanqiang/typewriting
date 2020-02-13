@@ -35,6 +35,7 @@ cc.Class({
         this.AudioJS.onPlayBossStage1();
         //当前游戏总配置数据
         this.gameData = localData.GameData;
+
         //进入时游戏进度
         this.gotoGameData = localData.GotoGameData;
         this.setAnchorCurStateIndex(this.gotoGameData.levelIndex);
@@ -212,11 +213,16 @@ cc.Class({
 
     //显示胜利弹窗
     onWinPop(num, data, cb) {
+        const isBoss = this.curStateIndex != 0;
+        let delayDate = 500;
+        if (isBoss) {
+            delayDate = 1000;
+            delayDate += this.stateJSNode.getComponent("attackStateJS").onWin();
+        }
         setTimeout(() => {
             this.winPop.active = true;
             this.Keyboard.active = false;
             this.AudioJS.onPlayWin();
-            const isBoss = this.curStateIndex != 0;
             this.winPop.getComponent("winPop").onInit(num, data, isBoss, (id) => {
                 if (id == 1) {
                     this.onGotoMainScene();
@@ -232,7 +238,7 @@ cc.Class({
                 this.winPop.active = false;
                 this.Keyboard.active = true;
             });
-        }, 500);
+        }, delayDate);
     },
 
     //显示失败窗口
