@@ -1,4 +1,5 @@
 var localData = require('localData');
+require('windowFun');
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -13,14 +14,31 @@ cc.Class({
         cc.director.preloadScene('gameScene');
     },
     onLoad() {
-        this.AudioJS = this.Audio.getComponent("gameAudio");
-        this.AudioJS.onPlayHomeBG();
+        window.PersistRootJS().initPersistRootNode();
+        window.AudioJS().onPlayHomeBG();
         for (let i = 0; i < this.LevelJsons.length; i++) {
             const data = this.LevelJsons[i].json.level;
             const gameItem = cc.instantiate(this.GameItem);
             this.ScrollContent.addChild(gameItem);
-            gameItem.getComponent("gameItem").onInit(i, data, this.AudioJS);
+            gameItem.getComponent("gameItem").onInit(i, data);
         }
+
+   
+        let param = {
+            "userId": 123456,
+            "chapterId": 1,
+            "sectionId": 1,
+            "score": 30
+        }
+        window.UserJS().requestSetUserPorgress(() => {
+
+        }, param);
+
+        window.UserJS().requestGetUserList(() => {
+
+        });
+
+
         if (!localData.GameProgressData) {
             localData.GameProgressData = this.GameProgressData.json.modules;
         }

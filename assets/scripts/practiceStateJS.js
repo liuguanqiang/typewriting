@@ -1,4 +1,5 @@
 //boss练习关卡 操作类
+require('windowFun');
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -12,7 +13,7 @@ cc.Class({
     onPlayGame(gameJS) {
         this.gameJS = gameJS;
         //播放背景音乐
-        this.gameJS.AudioJS.onPlayExerciseBG();
+        window.AudioJS().onPlayExerciseBG();
         this.data = gameJS.getCurLevelData().boss.practiceState;
         this.speed = gameJS.getCurLevelData().speed;
         this.keyboardJS = gameJS.KeyboardJS;
@@ -108,7 +109,7 @@ cc.Class({
         if (!this.isCreateOver || !this.gameJS.getLettersAllFinish()) return;
         this.unscheduleAllCallbacks(this);
         setTimeout(() => {
-            this.gameJS.AudioJS.onPlayBossAppear();
+            window.AudioJS().onPlayBossAppear();
             this.gameJS.onBack();
         }, 1000);
     },

@@ -16,7 +16,7 @@ cc.Class({
         if (window.isIOS) {
             this.urlStr = base.url;
         } else {
-            this.urlStr = "https://api.hetao101.com";
+            this.urlStr = "https://api.testing8.hetao101.com";
         }
     },
 
@@ -40,6 +40,12 @@ cc.Class({
         return this;
     },
     sendPost(urlStr, callback, sendData, errorCallback, header, isNoErrorTip, param, cancelBtnCallback) {
+        urlStr = this.urlStr + urlStr;
+        if (urlStr.indexOf("?") >= 0) {
+            urlStr = urlStr + "&t=" + (new Date()).valueOf();
+        } else {
+            urlStr = urlStr + "?t=" + (new Date()).valueOf();
+        }
         this._messageArray.push({
             type: 'POST',
             url: urlStr,
@@ -119,7 +125,7 @@ cc.Class({
                 xhr.setRequestHeader(info.header.header, info.header.value);
             }
         }
-        xhr.setRequestHeader("X-Client-Version", window.ShellJS().getAppVision());
+        xhr.setRequestHeader("X-Client-Version", "1.0.0");
         xhr.setRequestHeader("x-platform", "CLIENT");
         if (type === 'POST' || type === 'PUT') {
             if (sendData === undefined || sendData === null) {
@@ -161,20 +167,7 @@ cc.Class({
             //
             cc.log("<------------------------\ntype=" + info.type + " url=" + info.url + " \n消息完成状态" + xhr.status + " \n收到消息:" + JSON.stringify(response) + "\n--------------------->");
             if (response && response.errcode && (response.errcode != 0)) {
-                if (info && info.param && info.param.isBannerData) {
-                    this.errorTip(true, info, null, "活动课内容获取失败（" + response.errcode + "）");
-                } else if (info && info.param && info.param.isThumbWork && (response.errcode == "1002")) {
-                    this.errorTip(true, info, null, "你已经给这份作品点过赞啦！特别喜欢的话分享一下呗~");
-                    if (info.errorCallback) info.errorCallback();
-                } else if (info && info.param && info.param.isClockRewardLimit) {
-                    if (info.callback) info.callback(response, xhr);
-                } else if (response.errcode == "10056") {
-                    if (info.callback) info.callback(response, xhr);
-                } else {
-                    let confirmStr = response.errcode == "1018" ? "去扫码登录" : null;
-                    this.errorTip(true, info, null, this.CodeJSON[response.errcode] || (response.errmsg + "（" + response.errcode + "）"), confirmStr);
-                    if (info.errorCallback) info.errorCallback();
-                }
+                cc.log(response.errcode);
             } else {
                 if (info.callback) info.callback(response, xhr);
             }
@@ -194,9 +187,7 @@ cc.Class({
                 if (response.message) {
                     str = response.message;
                 }
-                this.errorTip(true, info, null, str || ("Code:" + xhr.status));
             } else {
-                this.errorTip(false, info, "无法连接到服务器，请检查您的网络。Code:" + xhr.status + "\n点击确定尝试重新连接。", "无法连接到服务器，请检查您的网络。Code:" + xhr.status);
             }
             if (info.errorCallback) {
                 info.errorCallback();
@@ -213,7 +204,6 @@ cc.Class({
             return;
         }
         cc.log('消息超时 ' + info.url);
-        this.errorTip(false, info, "网络连接超时。\n点击确定尝试重新连接。", "网络连接超时。");
     },
     // 消息错误
     _onerror(xhr, info, evnet) {
@@ -224,53 +214,8 @@ cc.Class({
             cc.log('_onerror，节点已无效，放弃回调');
             return;
         }
-
-        // 显示提示界面
-        this.errorTip(false, info, "无法连接到服务器，请检查您的网络。\n点击确定尝试重新连接。", "无法连接到服务器，请检查您的网络。");
     },
 
-    errorTip(singleBtn, info, str0, str1, confirmStr, cancelStr) {
-        if (info && info.isNoErrorTip) return;
-        if (info && info.param) {
-            if (info.param.isBanner)//如果请求为banner的话不弹错误提示
-                return;
-            if (info.param.isNewCorrectWork) //如果请求为最新批改的作业不弹错误提示
-                return;
-            if (info.param.isGetUserAddress) //如果请求为用户常用地址不弹错误提示
-                return;
-            if (info.param.isBuyGoods) {
-                singleBtn = true;
-            }
-            if (info.param.isCheckUpgrade) {
-                singleBtn = false;
-                str0 = str1;
-                confirmStr = "重 试";
-                cancelStr = "退 出";
-            }
-        }
-        if (!singleBtn) {
-            this.repeateRequestArray.push(info);
-            window.TipJS().showCommonTip(false, str0, () => {
-                this._messageArray = this.repeateRequestArray.concat(this._messageArray);
-                this.repeateRequestArray = [];
-                cc.log("#this._messageArray==" + JSON.stringify(this._messageArray))
-                // this._messageArray.splice(0, 0, info);
-            }, () => {
-                this.clearMessageArray();
-                if (info && info.param && info.param.isCheckUpgrade) {
-                    window.ShellJS().appQuit();
-                }
-                if (info.cancelBtnCallback)
-                    info.cancelBtnCallback();
-            }, confirmStr, cancelStr);
-        } else {
-            window.TipJS().showCommonTip(true, str1, () => {
-                this.clearMessageArray();
-                if (info.cancelBtnCallback)
-                    info.cancelBtnCallback();
-            }, null, confirmStr, cancelStr);
-        }
-    },
 
     clearMessageArray() {
         this._messageArray = [];

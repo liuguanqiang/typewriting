@@ -1,4 +1,5 @@
 //boss练习关卡 操作类
+require('windowFun');
 cc.Class({
     extends: cc.Component,
 
@@ -32,11 +33,11 @@ cc.Class({
             this.particle = this.bossParticleLayer.getChildByName("particle");
             this.particle1 = this.bossParticleLayer.getChildByName("particle1");
         }
-        this.gameJS.AudioJS.onStopMusic();
-        this.gameJS.AudioJS.onPlayQTEAppear();
+        window.AudioJS().onStopMusic();
+        window.AudioJS().onPlayQTEAppear();
         setTimeout(() => {
             //播放背景音乐
-            this.gameJS.AudioJS.onPlayQTEBG();
+            window.AudioJS().onPlayQTEBG();
         }, 2000);
         this.isWin = false;
         this.onUpdatePoolData();

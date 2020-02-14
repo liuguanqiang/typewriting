@@ -1,4 +1,5 @@
 var localData = require('localData');
+require('windowFun');
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -7,7 +8,6 @@ cc.Class({
         BulletsBoxs: cc.Node,
         LetterRectItem: cc.Prefab,
         BulletItem: cc.Prefab,
-        Audio: cc.Node,
         Keyboard: cc.Node,
         stateJSNode: cc.Node,
         BgAnimBox: cc.Node,
@@ -30,7 +30,6 @@ cc.Class({
             this.hitTimeOffset += 0.5;
         };
         this.KeyboardJS = this.Keyboard.getComponent("keyboard");
-        this.AudioJS = this.Audio.getComponent("gameAudio");
 
         //当前游戏总配置数据
         this.gameData = localData.GameData;
@@ -157,7 +156,7 @@ cc.Class({
         this.correctCount = 0;
         if (!this.LetterBoxs)
             return;
-        this.AudioJS.onPlayKeyError();
+        window.AudioJS().onPlayKeyError();
         this.KeyboardJS.onKeyDown(index, false);
         this.curStateJS.onKeyError();
         ++this.hitErrorCount;
@@ -195,7 +194,7 @@ cc.Class({
         this.isLose = true;
         this.onFailurePop();
         this.curStateJS.onLose();
-        this.AudioJS.onPlayLose();
+        window.AudioJS().onPlayLose();
         for (let index = 0; index < this.LetterBoxs.children.length; index++) {
             const element = this.LetterBoxs.children[index];
             element.getComponent("letterRect").onStop();
@@ -221,9 +220,9 @@ cc.Class({
         setTimeout(() => {
             this.winPop.active = true;
             this.Keyboard.active = false;
-            this.AudioJS.onPlayWin();
+            window.AudioJS().onPlayWin();
             this.winPop.getComponent("winPop").onInit(num, data, isBoss, (id) => {
-                this.AudioJS.onPlayBtn();
+                window.AudioJS().onPlayBtn();
                 if (id == 1) {
                     this.onGotoMainScene();
                 } else if (id == 2) {
@@ -257,7 +256,7 @@ cc.Class({
             progress = 0.5 + (this.getStateJS().onGetBloodRatio() / 2);
         }
         this.failurePop.getComponent("failurePop").onInit(progress, (id) => {
-            this.AudioJS.onPlayBtn();
+            window.AudioJS().onPlayBtn();
             if (id == 1) {
                 this.onGotoMainScene();
             } else if (id == 2) {
@@ -277,7 +276,7 @@ cc.Class({
         this.pausePop.getComponent("pausePop").onInit((id) => {
             this.pausePop.active = false;
             cc.director.resume();
-            this.AudioJS.onPlayBtn();
+            window.AudioJS().onPlayBtn();
             if (id == 1) {
                 this.onBgAnim(false);
                 this.onGotoMainScene();
@@ -322,7 +321,6 @@ cc.Class({
     //返回主页
     onGotoMainScene() {
         this.isGotoMainScene = true;
-        this.AudioJS.onStopAllEffects();
         cc.director.loadScene("mainScene");
     },
 
@@ -338,7 +336,7 @@ cc.Class({
         newNode.getComponent("bullet").onInit(target, keyboardPoint, this.onGetStall(), (node) => {
             this.bulletNodePool.put(node);
         });
-        this.AudioJS.onPlayBullet();
+        window.AudioJS().onPlayBullet();
         return newNode;
     },
 
