@@ -23,31 +23,27 @@ cc.Class({
             gameItem.getComponent("gameItem").onInit(i, data);
         }
 
-   
-        let param = {
-            "userId": 123456,
-            "chapterId": 1,
-            "sectionId": 1,
-            "score": 30
-        }
-        window.UserJS().requestSetUserPorgress(() => {
-
-        }, param);
-
-        window.UserJS().requestGetUserList(() => {
-
-        });
-
-
-        if (!localData.GameProgressData) {
-            localData.GameProgressData = this.GameProgressData.json.modules;
-        }
-        for (let i = 0; i < localData.GameProgressData.length; i++) {
-            const data = localData.GameProgressData[i];
-            if (this.ScrollContent.children.length > i) {
-                const item = this.ScrollContent.children[i];
-                item.getComponent("gameItem").onSetProgressData(data);
+        window.UserJS().requestGetUserList((res) => {
+            if (res.length == 0) {
+                res = [{
+                    "userId": 123123,
+                    "chapterId": 0,
+                    "sectionId": 0,
+                    "score": 0
+                }, {
+                    "userId": 123123,
+                    "chapterId": 0,
+                    "sectionId": 1,
+                    "score": 0
+                }]
+                res.forEach(param => {
+                    window.UserJS().requestSetUserPorgress(() => { }, param);
+                });
             }
-        }
+            for (let i = 0; i < this.ScrollContent.children.length; i++) {
+                const item = this.ScrollContent.children[i];
+                item.getComponent("gameItem").onSetProgressData(res);
+            }
+        });
     }
 });

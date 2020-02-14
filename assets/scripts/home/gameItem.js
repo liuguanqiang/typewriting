@@ -21,14 +21,14 @@ cc.Class({
     },
     onInit(index, data) {
         this.gameData = data;
-        this.moduleIndex = index;
+        this.chapterId = index;
         this.title.getComponent(cc.Label).string = data.name;
         let offset = 0;
         if (data.exercise.videoState) {
             offset = 1;
             const levelItem = cc.instantiate(this.levelItem);
             this.levelContent.addChild(levelItem);
-            levelItem.getComponent("levelItem").onInit(true, data.exercise.videoState, () => {
+            levelItem.getComponent("levelItem").onInit(true, 0, data.exercise.videoState, () => {
                 console.log("i ", 0)
             });
         }
@@ -37,7 +37,7 @@ cc.Class({
                 const levelData = data.exercise.exerciseState[i];
                 const levelItem = cc.instantiate(this.levelItem);
                 this.levelContent.addChild(levelItem);
-                levelItem.getComponent("levelItem").onInit(false, levelData, () => {
+                levelItem.getComponent("levelItem").onInit(false, i + offset, levelData, () => {
                     this.onPlayGame(i + offset);
                 });
             }
@@ -50,27 +50,14 @@ cc.Class({
     //设置进度数据
     onSetProgressData(progressData) {
         this.progressData = progressData;
-        for (let i = 0; i < progressData.levels.length; i++) {
-            const levelData = progressData.levels[i];
-            if (i < 3) {
-                const item = this.levelContent.children[i];
-                item.getComponent("levelItem").onSetProgressData(levelData);
-            } else {
-                this.onBossUnLock();
-                this.onLightenDiadema(levelData.star);
-            }
+        for (let i = 0; i < this.levelContent.children.length; i++) {
+            const item = this.levelContent.children[i];
+            item.getComponent("levelItem").onSetProgressData(this.chapterId, this.progressData);
         }
-        //如果进度数据已解锁的最后一个关卡获得星星数大于0，则自动解锁下一个关卡
-        if (progressData.levels.length < 4) {
-            const levelData = progressData.levels[progressData.levels.length - 1];
-            if (levelData.star != 0) {
-                const nextIndex = progressData.levels.length;
-                if (nextIndex < 3) {
-                    this.levelContent.children[nextIndex].getComponent("levelItem").onUnLock();
-                } else {
-                    this.onBossUnLock();
-                }
-            }
+        const bossData = this.progressData.find(a => a.chapterId == this.chapterId && a.sectionId == 3);
+        if (bossData) {
+            this.onBossUnLock();
+            this.onLightenDiadema(bossData.score);
         }
     },
 
@@ -82,7 +69,9 @@ cc.Class({
     },
     //设置亮起王冠数量
     onLightenDiadema(num) {
-        if (num > this.bossDiademaContent.children.length) { return; }
+        if (num > this.bossDiademaContent.children.length) {
+            num = this.bossDiademaContent.children.length;
+        }
         for (let i = 0; i < num; i++) {
             this.bossDiademaContent.children[i].getComponent(cc.Sprite).spriteFrame = this.bossDiademaFrame;
         }
@@ -90,12 +79,12 @@ cc.Class({
     onPlay() {
         this.onPlayGame(3);
     },
-    onPlayGame(levelIndex) {
+    onPlayGame(sectionId) {
         window.AudioJS().onPlayBtn();
         localData.GameData = this.gameData;
         localData.GotoGameData = {
-            moduleIndex: this.moduleIndex,
-            levelIndex: levelIndex
+            chapterId: this.chapterId,
+            sectionId: sectionId
         }
         cc.director.loadScene("gameScene");
     }

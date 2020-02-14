@@ -14,8 +14,9 @@ cc.Class({
     start() {
 
     },
-    onInit(isVideo, data, cb) {
+    onInit(isVideo, index, data, cb) {
         this.data = data;
+        this.sectionId = index;
         this.isVideo = isVideo;
         this.cb = cb;
         if (isVideo) {
@@ -28,10 +29,11 @@ cc.Class({
     },
 
     //设置进度数据
-    onSetProgressData(levelData) {
-        this.onUnLock();
-        if (!this.isVideo) {
-            this.onLightenStar(levelData.star);
+    onSetProgressData(chapterId, progressData) {
+        const data = progressData.find(a => a.chapterId == chapterId && a.sectionId == this.sectionId);
+        if (data) {
+            this.onUnLock();
+            this.onLightenStar(data.score);
         }
     },
 
@@ -44,7 +46,9 @@ cc.Class({
 
     //设置亮起星星数量
     onLightenStar(num) {
-        if (num > this.starContent.children.length) { return; }
+        if (num > this.starContent.children.length) {
+            num = this.starContent.children.length;
+        }
         for (let i = 0; i < num; i++) {
             this.starContent.children[i].getComponent(cc.Sprite).spriteFrame = this.starFrame;
         }

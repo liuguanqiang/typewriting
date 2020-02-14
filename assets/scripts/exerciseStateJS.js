@@ -131,7 +131,9 @@ cc.Class({
             }
             const progressIndex = this.data.videoState ? this.levelIndex + 1 : this.levelIndex;
             this.gameJS.onUpdateProgressData(starNum, progressIndex);
-            //当前练习关卡完成 需解锁下一模块第一个关卡
+            //当前关卡完成 需解锁下一个关卡
+            this.gameJS.onUnlockNextLevel(progressIndex);
+            //当前练习全部关卡完成 需解锁下一模块第一个关卡
             if (this.levelIndex == this.levelCount - 1) {
                 this.gameJS.onUnlockNextModule();
             }
