@@ -26,6 +26,8 @@ cc.Class({
             this.data = this.bossData.attackState;
             this.speed = gameJS.getCurLevelData().speed;
         }
+        //播放背景音乐
+        this.gameJS.AudioJS.onPlayBossBG();
         this.playAnimation();
         this.bossNode.active = true;
         this.gameJS.EnergyProgressBar.active = true;

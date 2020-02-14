@@ -7,17 +7,40 @@ cc.Class({
         win: cc.AudioClip,//胜利
         lose: cc.AudioClip,//失败
         bossAppear: cc.AudioClip,//boss出现
-        bossStage1: cc.AudioClip,//boss阶段1
         bossExplode: cc.AudioClip,//boss爆炸
+        QTEAppear: cc.AudioClip,//QTE进入
+        bossBG: cc.AudioClip,//boss背景音
+        QTEBG: cc.AudioClip,//QTE背景音
+        exerciseBG: cc.AudioClip,//练习关卡背景音
+        homeBG: cc.AudioClip,//主页背景音
+        btn: cc.AudioClip,//按钮音
     },
 
     start() {
 
     },
 
-    //播放boss阶段1背景音乐
-    onPlayBossStage1() {
-        cc.audioEngine.playMusic(this.bossStage1, true);
+    //播放boss阶段背景音乐
+    onPlayBossBG() {
+        cc.audioEngine.playMusic(this.bossBG, true);
+        cc.audioEngine.setMusicVolume(0.5);
+    },
+
+    //播放QTE背景音乐
+    onPlayQTEBG() {
+        cc.audioEngine.playMusic(this.QTEBG, true);
+        cc.audioEngine.setMusicVolume(1);
+    },
+
+    //播放练习关卡背景音乐
+    onPlayExerciseBG() {
+        cc.audioEngine.playMusic(this.exerciseBG, true);
+        cc.audioEngine.setMusicVolume(0.5);
+    },
+
+    //播放主页背景音
+    onPlayHomeBG() {
+        cc.audioEngine.playMusic(this.homeBG, true);
         cc.audioEngine.setMusicVolume(0.5);
     },
 
@@ -51,9 +74,22 @@ cc.Class({
         cc.audioEngine.playEffect(this.bossExplode, false);
     },
 
-    //停止播放所有音乐
-    onStopAllEffects(){
-        cc.audioEngine.stopAllEffects();
-    }
+    //播放按钮点击音效
+    onPlayBtn() {
+        cc.audioEngine.playEffect(this.btn, false);
+    },
 
+    //播放QTE进入音效
+    onPlayQTEAppear() {
+        cc.audioEngine.playEffect(this.QTEAppear, false);
+    },
+
+    //停止播放所有音频
+    onStopAllEffects() {
+        cc.audioEngine.stopAllEffects();
+    },
+    //停止播放背景音乐
+    onStopMusic() {
+        cc.audioEngine.stopMusic();
+    }
 });

@@ -11,6 +11,8 @@ cc.Class({
     //开始游戏
     onPlayGame(gameJS, progressIndex) {
         this.gameJS = gameJS;
+        //播放背景音乐
+        this.gameJS.AudioJS.onPlayExerciseBG();
         this.data = gameJS.getCurLevelData().exercise;
         this.keyboardJS = gameJS.KeyboardJS;
         //当前刷新池索引

@@ -11,6 +11,8 @@ cc.Class({
     //开始游戏
     onPlayGame(gameJS) {
         this.gameJS = gameJS;
+        //播放背景音乐
+        this.gameJS.AudioJS.onPlayExerciseBG();
         this.data = gameJS.getCurLevelData().boss.practiceState;
         this.speed = gameJS.getCurLevelData().speed;
         this.keyboardJS = gameJS.KeyboardJS;

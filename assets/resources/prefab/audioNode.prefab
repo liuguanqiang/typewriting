@@ -1,0 +1,131 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "",
+    "_objFlags": 0,
+    "_native": "",
+    "data": {
+      "__id__": 1
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false,
+    "readonly": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "audioNode",
+    "_objFlags": 0,
+    "_parent": null,
+    "_children": [],
+    "_active": true,
+    "_level": 2,
+    "_components": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_prefab": {
+      "__id__": 3
+    },
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_scale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_quat": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_zIndex": 0,
+    "_is3DNode": false,
+    "groupIndex": 0,
+    "_id": ""
+  },
+  {
+    "__type__": "6e77cBFDHxA947ccihxYpaK",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "bullet": {
+      "__uuid__": "a06f6554-8f13-4080-8312-10a1f316da4e"
+    },
+    "keyError": {
+      "__uuid__": "f662be0d-94cf-4de9-98d3-9141fd96fae7"
+    },
+    "win": {
+      "__uuid__": "16a58c74-bab5-4dd2-8b89-ce9c4fac6fe1"
+    },
+    "lose": {
+      "__uuid__": "621396db-90c0-4c97-8a73-17ba141ec9fd"
+    },
+    "bossAppear": {
+      "__uuid__": "bd0d6f1a-0f10-4371-8135-15155adceb1e"
+    },
+    "bossExplode": {
+      "__uuid__": "418375ea-2c86-49f3-b300-faa6f258f69d"
+    },
+    "QTEAppear": {
+      "__uuid__": "9ea4da96-d721-4852-a580-455cb7e87a06"
+    },
+    "bossBG": {
+      "__uuid__": "d486bd1e-0b4b-4687-bd9b-31ce4425b8c3"
+    },
+    "QTEBG": {
+      "__uuid__": "93bf9cb9-d814-4d96-98eb-e1fe157fe494"
+    },
+    "exerciseBG": {
+      "__uuid__": "99f21110-d31e-4d78-9d7e-bf96480a8d73"
+    },
+    "homeBG": {
+      "__uuid__": "00bec3e1-31cb-4fb7-b4df-a044b86bfa1a"
+    },
+    "btn": {
+      "__uuid__": "b7b5fd9d-9471-4950-9c4b-4d3ba81ad145"
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "4e79121b-793d-4d60-8b7f-f3d8149546a3"
+    },
+    "fileId": "38nYaA0wlH+Z0jGmiPb/9G",
+    "sync": false
+  }
+]

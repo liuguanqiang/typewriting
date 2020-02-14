@@ -18,9 +18,10 @@ cc.Class({
     start() {
 
     },
-    onInit(index, data) {
+    onInit(index, data, audioJS) {
         this.gameData = data;
         this.moduleIndex = index;
+        this.audioJS = audioJS;
         this.title.getComponent(cc.Label).string = data.name;
         let offset = 0;
         if (data.exercise.videoState) {
@@ -90,6 +91,7 @@ cc.Class({
         this.onPlayGame(3);
     },
     onPlayGame(levelIndex) {
+        this.audioJS.onPlayBtn();
         localData.GameData = this.gameData;
         localData.GotoGameData = {
             moduleIndex: this.moduleIndex,

@@ -32,6 +32,12 @@ cc.Class({
             this.particle = this.bossParticleLayer.getChildByName("particle");
             this.particle1 = this.bossParticleLayer.getChildByName("particle1");
         }
+        this.gameJS.AudioJS.onStopMusic();
+        this.gameJS.AudioJS.onPlayQTEAppear();
+        setTimeout(() => {
+            //播放背景音乐
+            this.gameJS.AudioJS.onPlayQTEBG();
+        }, 2000);
         this.isWin = false;
         this.onUpdatePoolData();
         this.onPlayAnimation();

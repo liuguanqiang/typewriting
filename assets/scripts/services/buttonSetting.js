@@ -2,7 +2,7 @@ cc.Class({
     extends: cc.Component,
     properties: {
         isScale: true,
-        scaleRatio: 1.05
+        scaleRatio: 1.05,
     },
     start() {
         this.node.on('mouseenter', () => {

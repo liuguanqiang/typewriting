@@ -31,8 +31,7 @@ cc.Class({
         };
         this.KeyboardJS = this.Keyboard.getComponent("keyboard");
         this.AudioJS = this.Audio.getComponent("gameAudio");
-        //播放背景音乐
-        this.AudioJS.onPlayBossStage1();
+
         //当前游戏总配置数据
         this.gameData = localData.GameData;
 
@@ -224,6 +223,7 @@ cc.Class({
             this.Keyboard.active = false;
             this.AudioJS.onPlayWin();
             this.winPop.getComponent("winPop").onInit(num, data, isBoss, (id) => {
+                this.AudioJS.onPlayBtn();
                 if (id == 1) {
                     this.onGotoMainScene();
                 } else if (id == 2) {
@@ -257,6 +257,7 @@ cc.Class({
             progress = 0.5 + (this.getStateJS().onGetBloodRatio() / 2);
         }
         this.failurePop.getComponent("failurePop").onInit(progress, (id) => {
+            this.AudioJS.onPlayBtn();
             if (id == 1) {
                 this.onGotoMainScene();
             } else if (id == 2) {
@@ -276,6 +277,7 @@ cc.Class({
         this.pausePop.getComponent("pausePop").onInit((id) => {
             this.pausePop.active = false;
             cc.director.resume();
+            this.AudioJS.onPlayBtn();
             if (id == 1) {
                 this.onBgAnim(false);
                 this.onGotoMainScene();
