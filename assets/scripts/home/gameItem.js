@@ -1,5 +1,5 @@
-var localData = require('localData');
-require('windowFun');
+var gameLocalData = require('gameLocalData');
+require('gameWindowFun');
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -80,9 +80,9 @@ cc.Class({
         this.onPlayGame(3);
     },
     onPlayGame(sectionId) {
-        window.AudioJS().onPlayBtn();
-        localData.GameData = this.gameData;
-        localData.GotoGameData = {
+        window.GameAudioJS().onPlayBtn();
+        gameLocalData.GameData = this.gameData;
+        gameLocalData.GotoGameData = {
             chapterId: this.chapterId,
             sectionId: sectionId
         }

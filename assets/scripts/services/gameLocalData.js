@@ -1,24 +1,24 @@
-var localData = {};
+var gameLocalData = {};
 var getLocalData = function (key, callback, cancelBtnCallback) {
-    localData = localData || {};
+    gameLocalData = gameLocalData || {};
     // 返回缓存数据
-    if (localData[key] !== undefined) {
-        if (callback) callback(localData[key]);
-        return localData[key];
+    if (gameLocalData[key] !== undefined) {
+        if (callback) callback(gameLocalData[key]);
+        return gameLocalData[key];
     }
     // 进一步，查找本地数据
     let str = window.ShellJS().getLocalStorageItem(key);
     if (str == null || str === '') {
-        localData[key] = null;
+        gameLocalData[key] = null;
     } else {
-        localData[key] = JSON.parse(str);
+        gameLocalData[key] = JSON.parse(str);
     }
-    if (callback) callback(localData[key]);
-    return localData[key];
+    if (callback) callback(gameLocalData[key]);
+    return gameLocalData[key];
 };
 var setLocalData = function (value, key) {
-    localData = localData || {};
-    localData[key] = value;
+    gameLocalData = gameLocalData || {};
+    gameLocalData[key] = value;
     var valueStr = JSON.stringify(value);
 
     // 写入本地数据
@@ -34,7 +34,7 @@ var setCacheData = function (value, key, additional) {
             key += '__' + k + '_' + additional[k];
         }
     }
-    localData[key] = value;
+    gameLocalData[key] = value;
 };
 var getCacheData = function (key, additional) {
     for (var k in additional) {
@@ -43,8 +43,8 @@ var getCacheData = function (key, additional) {
         }
     }
     // 返回缓存数据
-    if (localData[key] !== undefined) {
-        return localData[key];
+    if (gameLocalData[key] !== undefined) {
+        return gameLocalData[key];
     }
 };
 var removeCacheData = function (key, additional) {
@@ -53,7 +53,7 @@ var removeCacheData = function (key, additional) {
             key += '__' + k + '_' + additional[k];
         }
     }
-    delete (localData[key]);
+    delete (gameLocalData[key]);
 };
 
 module.exports = {
@@ -63,6 +63,13 @@ module.exports = {
     },
     get GameData() {
         return getCacheData("gameData");
+    },
+    // ---------------------------------- 缓存数据 ----------------------------------
+    set UserID(value) {
+        return setCacheData(value, "userID");
+    },
+    get UserID() {
+        return getCacheData("userID");
     },
     //用户选择进入游戏时缓存关卡数据
     set GotoGameData(value) {

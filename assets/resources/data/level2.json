@@ -1,7 +1,7 @@
 {
     "level": {
         "id": "L2",
-        "name": "第二关",
+        "name": "迈出你的第二步",
         "speed": 100,
         "exercise": {
             "twoStars": 0.8,
@@ -63,8 +63,8 @@
             ]
         },
         "boss": {
-            "name": "螃蟹怪2",
-            "describe": "病毒界的弱鸡2",
+            "name": "飞机怪",
+            "describe": "飞机中的战斗机",
             "twoStars": 0.8,
             "threeStars": {
                 "accuracy": 0.9,

@@ -1,4 +1,4 @@
-var localData = require('localData');
+var gameLocalData = require('gameLocalData');
 cc.Class({
     extends: cc.Component,
     properties: {

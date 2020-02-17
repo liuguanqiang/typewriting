@@ -1,7 +1,7 @@
 {
     "level": {
         "id": "L1",
-        "name": "第一关",
+        "name": "迈出你的第一步",
         "speed": 100,
         "exercise": {
             "twoStars": 0.8,

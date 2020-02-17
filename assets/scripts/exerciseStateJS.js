@@ -1,5 +1,5 @@
 //boss练习关卡 操作类
-require('windowFun');
+require('gameWindowFun');
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -13,7 +13,7 @@ cc.Class({
     onPlayGame(gameJS, progressIndex) {
         this.gameJS = gameJS;
         //播放背景音乐
-        window.AudioJS().onPlayExerciseBG();
+        window.GameAudioJS().onPlayExerciseBG();
         this.data = gameJS.getCurLevelData().exercise;
         this.keyboardJS = gameJS.KeyboardJS;
         //当前刷新池索引

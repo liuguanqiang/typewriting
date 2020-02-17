@@ -1,5 +1,5 @@
-var localData = require('localData');
-require('windowFun');
+var gameLocalData = require('gameLocalData');
+require('gameWindowFun');
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -7,15 +7,20 @@ cc.Class({
         GameItem: cc.Prefab,
         LevelJsons: [cc.JsonAsset],
         Audio: cc.Node,
-        GameProgressData: cc.JsonAsset
+        GameProgressData: cc.JsonAsset,
     },
 
     start() {
         cc.director.preloadScene('gameScene');
     },
     onLoad() {
-        window.PersistRootJS().initPersistRootNode();
-        window.AudioJS().onPlayHomeBG();
+        let userId = gameLocalData.UserID;
+        if (!userId) {
+            userId = this.randomToFloor(100000, 999999);
+            gameLocalData.UserID = userId;
+        }
+        window.GamePersistRootJS().initPersistRootNode();
+        window.GameAudioJS().onPlayHomeBG();
         for (let i = 0; i < this.LevelJsons.length; i++) {
             const data = this.LevelJsons[i].json.level;
             const gameItem = cc.instantiate(this.GameItem);
@@ -23,27 +28,38 @@ cc.Class({
             gameItem.getComponent("gameItem").onInit(i, data);
         }
 
-        window.UserJS().requestGetUserList((res) => {
+        window.GameUserJS().requestGetUserList((res) => {
             if (res.length == 0) {
                 res = [{
-                    "userId": 123123,
+                    "userId": gameLocalData.UserID,
                     "chapterId": 0,
                     "sectionId": 0,
                     "score": 0
                 }, {
-                    "userId": 123123,
+                    "userId": gameLocalData.UserID,
                     "chapterId": 0,
                     "sectionId": 1,
                     "score": 0
                 }]
                 res.forEach(param => {
-                    window.UserJS().requestSetUserPorgress(() => { }, param);
+                    window.GameUserJS().requestSetUserPorgress(() => { }, param);
                 });
             }
             for (let i = 0; i < this.ScrollContent.children.length; i++) {
                 const item = this.ScrollContent.children[i];
                 item.getComponent("gameItem").onSetProgressData(res);
             }
-        });
+        },gameLocalData.UserID);
+    },
+    //获取随机数 取整
+    randomToFloor(lower, upper) {
+        const random = Math.floor(Math.random() * (upper - lower)) + lower;
+        return random;
+    },
+    onGoHome() {
+        // if (window.isShell) {
+        //     this.AALab.getComponent(cc.Label).string = "AAAAAAAA";
+        //     //return window.parent.HttpJS;
+        // }
     }
 });

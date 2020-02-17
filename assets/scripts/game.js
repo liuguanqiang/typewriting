@@ -1,5 +1,5 @@
-var localData = require('localData');
-require('windowFun');
+var gameLocalData = require('gameLocalData');
+require('gameWindowFun');
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -32,10 +32,10 @@ cc.Class({
         this.KeyboardJS = this.Keyboard.getComponent("keyboard");
 
         //当前游戏总配置数据
-        this.gameData = localData.GameData;
+        this.gameData = gameLocalData.GameData;
 
         //进入时游戏进度
-        this.gotoGameData = localData.GotoGameData;
+        this.gotoGameData = gameLocalData.GotoGameData;
         this.setAnchorCurStateIndex(this.gotoGameData.sectionId);
         //用户连续正确的次数  一旦错误归零重新累计
         this.correctCount = 0;
@@ -154,7 +154,7 @@ cc.Class({
         this.correctCount = 0;
         if (!this.LetterBoxs)
             return;
-        window.AudioJS().onPlayKeyError();
+        window.GameAudioJS().onPlayKeyError();
         this.KeyboardJS.onKeyDown(index, false);
         this.curStateJS.onKeyError();
         ++this.hitErrorCount;
@@ -192,7 +192,7 @@ cc.Class({
         this.isLose = true;
         this.onFailurePop();
         this.curStateJS.onLose();
-        window.AudioJS().onPlayLose();
+        window.GameAudioJS().onPlayLose();
         for (let index = 0; index < this.LetterBoxs.children.length; index++) {
             const element = this.LetterBoxs.children[index];
             element.getComponent("letterRect").onStop();
@@ -218,9 +218,9 @@ cc.Class({
         setTimeout(() => {
             this.winPop.active = true;
             this.Keyboard.active = false;
-            window.AudioJS().onPlayWin();
+            window.GameAudioJS().onPlayWin();
             this.winPop.getComponent("winPop").onInit(num, data, isBoss, (id) => {
-                window.AudioJS().onPlayBtn();
+                window.GameAudioJS().onPlayBtn();
                 if (id == 1) {
                     this.onGotoMainScene();
                 } else if (id == 2) {
@@ -254,7 +254,7 @@ cc.Class({
             progress = 0.5 + (this.getStateJS().onGetBloodRatio() / 2);
         }
         this.failurePop.getComponent("failurePop").onInit(progress, (id) => {
-            window.AudioJS().onPlayBtn();
+            window.GameAudioJS().onPlayBtn();
             if (id == 1) {
                 this.onGotoMainScene();
             } else if (id == 2) {
@@ -274,7 +274,7 @@ cc.Class({
         this.pausePop.getComponent("pausePop").onInit((id) => {
             this.pausePop.active = false;
             cc.director.resume();
-            window.AudioJS().onPlayBtn();
+            window.GameAudioJS().onPlayBtn();
             if (id == 1) {
                 this.onBgAnim(false);
                 this.onGotoMainScene();
@@ -300,12 +300,12 @@ cc.Class({
 
     onRequestSetUserPorgress(chapterId, sectionId, score) {
         const param = {
-            "userId": 123123,
+            "userId": gameLocalData.UserID,
             "chapterId": chapterId,
             "sectionId": sectionId,
             "score": score
         }
-        window.UserJS().requestSetUserPorgress(() => { }, param);
+        window.GameUserJS().requestSetUserPorgress(() => { }, param);
     },
 
     //返回主页
@@ -326,7 +326,7 @@ cc.Class({
         newNode.getComponent("bullet").onInit(target, keyboardPoint, this.onGetStall(), (node) => {
             this.bulletNodePool.put(node);
         });
-        window.AudioJS().onPlayBullet();
+        window.GameAudioJS().onPlayBullet();
         return newNode;
     },
 

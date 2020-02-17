@@ -1,5 +1,5 @@
 //boss练习关卡 操作类
-require('windowFun');
+require('gameWindowFun');
 cc.Class({
     extends: cc.Component,
 
@@ -28,7 +28,7 @@ cc.Class({
             this.speed = gameJS.getCurLevelData().speed;
         }
         //播放背景音乐
-        window.AudioJS().onPlayBossBG();
+        window.GameAudioJS().onPlayBossBG();
         this.playAnimation();
         this.bossNode.active = true;
         this.gameJS.EnergyProgressBar.active = true;
