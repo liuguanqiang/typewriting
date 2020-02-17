@@ -43,6 +43,8 @@ cc.Class({
             }
         }
         this.bossIcon.getComponent(cc.Sprite).spriteFrame = this.bossFrame[index];
+        const bossSize = [{ x: 132, y: 118 }, { x: 145, y: 115 }, { x: 145, y: 81 }];
+        this.bossIcon.setContentSize(bossSize[index].x, bossSize[index].y);
         this.bossTitle.getComponent(cc.Label).string = data.boss.name;
         this.bossInfo.getComponent(cc.Label).string = data.boss.describe;
     },

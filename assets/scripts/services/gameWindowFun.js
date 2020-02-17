@@ -13,7 +13,7 @@ window.GamePersistRootJS = function () {
 window.GameHttpJS = function () {
     if (window.isShell) {
         console.log("AAA");
-        return window.parent.HttpJS;
+        //return window.parent.HttpJS;
     }
     return window.GamePersistRootJS().getHttpJS();
 };

@@ -8,6 +8,7 @@ cc.Class({
         LevelJsons: [cc.JsonAsset],
         Audio: cc.Node,
         GameProgressData: cc.JsonAsset,
+        AALab: cc.Node,
     },
 
     start() {
@@ -27,7 +28,6 @@ cc.Class({
             this.ScrollContent.addChild(gameItem);
             gameItem.getComponent("gameItem").onInit(i, data);
         }
-
         window.GameUserJS().requestGetUserList((res) => {
             if (res.length == 0) {
                 res = [{
@@ -49,7 +49,7 @@ cc.Class({
                 const item = this.ScrollContent.children[i];
                 item.getComponent("gameItem").onSetProgressData(res);
             }
-        },gameLocalData.UserID);
+        }, gameLocalData.UserID);
     },
     //获取随机数 取整
     randomToFloor(lower, upper) {
@@ -57,9 +57,9 @@ cc.Class({
         return random;
     },
     onGoHome() {
-        // if (window.isShell) {
-        //     this.AALab.getComponent(cc.Label).string = "AAAAAAAA";
-        //     //return window.parent.HttpJS;
-        // }
+        if (window.isShell) {
+            this.AALab.getComponent(cc.Label).string = window.parent.HttpJS;
+            //return window.parent.HttpJS;
+        }
     }
 });
