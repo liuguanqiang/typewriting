@@ -46,6 +46,9 @@ cc.Class({
         } else if (this.bossIndex == 1) {
             this.bossNode = cc.instantiate(this.Bosses[1]);
             this.bossJS = this.bossNode.getComponent("airplaneBoss");
+        } else if (this.bossIndex == 2) {
+            this.bossNode = cc.instantiate(this.Bosses[2]);
+            this.bossJS = this.bossNode.getComponent("catBoss");
         }
     },
 
@@ -88,6 +91,12 @@ cc.Class({
     onGetBossDefaultY() {
         if (this.bossIndex == 0) {
             return 170;
+        }
+        else if (this.bossIndex == 1) {
+            return 200;
+        }
+        else if (this.bossIndex == 2) {
+            return 230;
         }
         return 200;
     },

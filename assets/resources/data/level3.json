@@ -1,7 +1,7 @@
 {
     "level": {
-        "id": "L2",
-        "name": "迈出你的第二步",
+        "id": "L3",
+        "name": "迈出你的第三步",
         "speed": 100,
         "exercise": {
             "twoStars": 0.8,
@@ -10,35 +10,35 @@
                 "time": 20
             },
             "exerciseState": [{
-                "name": "q,w",
+                "name": "d,f",
                 "state": [
                     {
-                        "normal": ["q"],
+                        "normal": ["d"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["w"],
+                        "normal": ["f"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["q","w"],
+                        "normal": ["d","f"],
                         "updateCount": 6
                     }
                 ]
               },
               {
-                "name": "z,x",
+                "name": "g,h",
                 "state":[
                     {
-                        "normal": ["z"],
+                        "normal": ["g"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["x"],
+                        "normal": ["h"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["z","x"],
+                        "normal": ["g","h"],
                         "updateCount": 6
                     }
                 ]
@@ -63,8 +63,8 @@
             ]
         },
         "boss": {
-            "name": "飞机怪",
-            "describe": "飞机中的战斗机",
+            "name": "猫猫",
+            "describe": "猫猫猫猫猫猫",
             "twoStars": 0.8,
             "threeStars": {
                 "accuracy": 0.9,
@@ -73,24 +73,24 @@
             "blood": 100,
             "practiceState": [
                 {
-                    "normal": ["z","x"," "],
+                    "normal": ["d","g"," "],
                     "updateCount": 4
                 },
                 {
-                    "normal": ["q","w"],
+                    "normal": ["f","h"],
                     "updateCount": 4
                 },
                 {
-                    "normal": ["q","w"," "],
+                    "normal": ["f","j"," "],
                     "updateCount": 10
                 }
             ],
             "attackState": {
-                "normal": ["z"],
+                "normal": ["f"],
                 "updateCount": 12
             },
             "beatingState": {
-                "normal": ["z"],
+                "normal": ["g"],
                 "updateCount": 10,
                 "beatTime": 5
             }

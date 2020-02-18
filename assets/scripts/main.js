@@ -7,7 +7,6 @@ cc.Class({
         GameItem: cc.Prefab,
         LevelJsons: [cc.JsonAsset],
         Audio: cc.Node,
-        GameProgressData: cc.JsonAsset,
         AALab: cc.Node,
     },
 
@@ -18,7 +17,7 @@ cc.Class({
         let userId = gameLocalData.UserID;
         if (!userId) {
             userId = this.randomToFloor(100000, 999999);
-            gameLocalData.UserID = userId;
+            gameLocalData.UserID = 123123;
         }
         window.GamePersistRootJS().initPersistRootNode();
         window.GameAudioJS().onPlayHomeBG();
@@ -28,6 +27,12 @@ cc.Class({
             this.ScrollContent.addChild(gameItem);
             gameItem.getComponent("gameItem").onInit(i, data);
         }
+        // window.GameUserJS().requestSetUserPorgress(() => { }, {
+        //     "userId": gameLocalData.UserID,
+        //     "chapterId": 2,
+        //     "sectionId": 0,
+        //     "score": 0
+        // });
         window.GameUserJS().requestGetUserList((res) => {
             if (res.length == 0) {
                 res = [{
@@ -58,8 +63,12 @@ cc.Class({
     },
     onGoHome() {
         if (window.isShell) {
-            this.AALab.getComponent(cc.Label).string = window.parent.HttpJS;
-            //return window.parent.HttpJS;
+
+        }
+        if (window.HttpJS()) {
+            this.AALab.getComponent(cc.Label).string = "111";
+        } else {
+            this.AALab.getComponent(cc.Label).string = "222";
         }
     }
 });
