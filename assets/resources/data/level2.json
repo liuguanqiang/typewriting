@@ -11,6 +11,7 @@
             },
             "exerciseState": [{
                 "name": "q,w",
+                "isVideo":false,
                 "state": [
                     {
                         "normal": ["q"],
@@ -27,7 +28,13 @@
                 ]
               },
               {
+                "isVideo":true,
+                "name": "正确的打字姿势",
+                "url":"https://client-hot-update.oss-cn-beijing.aliyuncs.com/mathapp/video/c1s1/c1_3.mp4"
+              },
+              {
                 "name": "z,x",
+                "isVideo":false,
                 "state":[
                     {
                         "normal": ["z"],
@@ -44,21 +51,9 @@
                 ]
               },
               {
-                "name": "e,f",
-                "state":[
-                    {
-                        "normal": ["e"],
-                        "updateCount": 6
-                    },
-                    {
-                        "normal": ["f"],
-                        "updateCount": 6
-                    },
-                    {
-                        "normal": ["e","f"],
-                        "updateCount": 6
-                    }
-                ]
+                "isVideo":true,
+                "name": "学习shift键",
+                "url":"https://client-hot-update.oss-cn-beijing.aliyuncs.com/mathapp/video/c1s1/c1_3.mp4"
               }
             ]
         },

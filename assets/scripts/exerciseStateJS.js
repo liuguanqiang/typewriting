@@ -19,7 +19,7 @@ cc.Class({
         //当前刷新池索引
         this.curPoolIndex = 0;
         //练习关卡索引，练习关卡会配置多个 如果配置了视频  默认关卡索引-1
-        this.levelIndex = this.data.videoState ? progressIndex - 1 : progressIndex;
+        this.levelIndex = progressIndex;
         this.levelCount = this.data.exerciseState.length;
         this.topY = 290;
         this.onUpdatePoolData();
@@ -129,10 +129,9 @@ cc.Class({
             } else if (accuracy >= this.data.twoStars) {
                 starNum = 2;
             }
-            const progressIndex = this.data.videoState ? this.levelIndex + 1 : this.levelIndex;
-            this.gameJS.onUpdateProgressData(starNum, progressIndex);
+            this.gameJS.onUpdateProgressData(starNum, this.levelIndex);
             //当前关卡完成 需解锁下一个关卡
-            this.gameJS.onUnlockNextLevel(progressIndex);
+            this.gameJS.onUnlockNextLevel(this.levelIndex);
             //当前练习全部关卡完成 需解锁下一模块第一个关卡
             if (this.levelIndex == this.levelCount - 1) {
                 this.gameJS.onUnlockNextModule();

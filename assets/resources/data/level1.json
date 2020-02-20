@@ -9,11 +9,14 @@
                 "accuracy": 0.9,
                 "time": 20
             },
-            "videoState":{
-                "name": "正确的打字姿势",
-                "url":""
-            },
-            "exerciseState": [{
+            "exerciseState": [
+                {
+                    "isVideo":true,
+                    "name": "正确的打字姿势",
+                    "url":"https://client-hot-update.oss-cn-beijing.aliyuncs.com/mathapp/video/c1s1/c1_3.mp4"
+                },
+                {
+                "isVideo":false,
                 "name": "a,b",
                 "state": [
                     {
@@ -31,6 +34,7 @@
                 ]
               },
               {
+                "isVideo":false,
                 "name": "c,d",
                 "state":[
                     {

@@ -36,7 +36,7 @@ cc.Class({
 
         //进入时游戏进度
         this.gotoGameData = gameLocalData.GotoGameData;
-        this.setAnchorCurStateIndex(this.gotoGameData.sectionId);
+        this.setAnchorCurStateIndex(this.gotoGameData.isBossLevel);
         //用户连续正确的次数  一旦错误归零重新累计
         this.correctCount = 0;
         this.bulletNodePool = new cc.NodePool();
@@ -61,8 +61,8 @@ cc.Class({
     },
 
     //判断进入练习关卡还是boss关卡
-    setAnchorCurStateIndex(index) {
-        if (index < 3) {
+    setAnchorCurStateIndex(isBossLevel) {
+        if (!isBossLevel) {
             this.curStateIndex = 0;
         } else {
             this.curStateIndex = 1;

@@ -14,12 +14,12 @@ cc.Class({
     start() {
 
     },
-    onInit(isVideo, index, data, cb) {
+    onInit(index, data, cb) {
         this.data = data;
         this.sectionId = index;
-        this.isVideo = isVideo;
+        this.isVideo = data.isVideo;
         this.cb = cb;
-        if (isVideo) {
+        if (this.isVideo) {
             this.icon.getComponent(cc.Sprite).spriteFrame = this.iconFrame[1];
             this.starContent.active = false;
         } else {
@@ -54,8 +54,6 @@ cc.Class({
         }
     },
     onPlay() {
-        if (!this.isVideo) {
-            this.cb();
-        }
+        this.cb(this.isVideo);
     }
 })

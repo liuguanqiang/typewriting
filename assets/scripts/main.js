@@ -17,7 +17,7 @@ cc.Class({
         let userId = gameLocalData.UserID;
         if (!userId) {
             userId = this.randomToFloor(100000, 999999);
-            gameLocalData.UserID = 123123;
+            gameLocalData.UserID = 123124;
         }
         window.GamePersistRootJS().initPersistRootNode();
         window.GameAudioJS().onPlayHomeBG();
@@ -63,12 +63,9 @@ cc.Class({
     },
     onGoHome() {
         if (window.isShell) {
+            window.parent.PublicJS().runScene("MainScene");
+            // window.parent.ShellJS().requestTrack("learning_punch_view_reward", courseData.id);
+        }
 
-        }
-        if (window.HttpJS()) {
-            this.AALab.getComponent(cc.Label).string = "111";
-        } else {
-            this.AALab.getComponent(cc.Label).string = "222";
-        }
     }
 });

@@ -23,22 +23,13 @@ cc.Class({
         this.gameData = data;
         this.chapterId = index;
         this.title.getComponent(cc.Label).string = data.name;
-        let offset = 0;
-        if (data.exercise.videoState) {
-            offset = 1;
-            const levelItem = cc.instantiate(this.levelItem);
-            this.levelContent.addChild(levelItem);
-            levelItem.getComponent("levelItem").onInit(true, 0, data.exercise.videoState, () => {
-                console.log("i ", 0)
-            });
-        }
         if (data.exercise.exerciseState) {
             for (let i = 0; i < data.exercise.exerciseState.length; i++) {
                 const levelData = data.exercise.exerciseState[i];
                 const levelItem = cc.instantiate(this.levelItem);
                 this.levelContent.addChild(levelItem);
-                levelItem.getComponent("levelItem").onInit(false, i + offset, levelData, () => {
-                    this.onPlayGame(i + offset);
+                levelItem.getComponent("levelItem").onInit(i, levelData, (isVideo) => {
+                    this.onPlayGame(i, isVideo);
                 });
             }
         }
@@ -47,6 +38,8 @@ cc.Class({
         this.bossIcon.setContentSize(bossSize[index].x, bossSize[index].y);
         this.bossTitle.getComponent(cc.Label).string = data.boss.name;
         this.bossInfo.getComponent(cc.Label).string = data.boss.describe;
+        this.node.height += (data.exercise.exerciseState.length - 3) * 62;
+        this.bossIndex = data.exercise.exerciseState.length;
     },
 
     //设置进度数据
@@ -56,7 +49,7 @@ cc.Class({
             const item = this.levelContent.children[i];
             item.getComponent("levelItem").onSetProgressData(this.chapterId, this.progressData);
         }
-        const bossData = this.progressData.find(a => a.chapterId == this.chapterId && a.sectionId == 3);
+        const bossData = this.progressData.find(a => a.chapterId == this.chapterId && a.sectionId == this.bossIndex);
         if (bossData) {
             this.onBossUnLock();
             this.onLightenDiadema(bossData.score);
@@ -79,15 +72,20 @@ cc.Class({
         }
     },
     onPlay() {
-        this.onPlayGame(3);
+        this.onPlayGame(this.bossIndex, false, true);
     },
-    onPlayGame(sectionId) {
+    onPlayGame(sectionId, isVideo, isBoss = false) {
         window.GameAudioJS().onPlayBtn();
         gameLocalData.GameData = this.gameData;
         gameLocalData.GotoGameData = {
             chapterId: this.chapterId,
-            sectionId: sectionId
+            sectionId: sectionId,
+            isBossLevel: isBoss
         }
-        cc.director.loadScene("gameScene");
+        if (!isVideo) {
+            cc.director.loadScene("gameScene");
+        } else {
+            cc.director.loadScene("videoScene");
+        }
     }
 })
