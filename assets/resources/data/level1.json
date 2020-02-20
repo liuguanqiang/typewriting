@@ -2,7 +2,6 @@
     "level": {
         "id": "L1",
         "name": "迈出你的第一步",
-        "speed": 100,
         "exercise": {
             "twoStars": 0.8,
             "threeStars": {
@@ -62,6 +61,8 @@
                 "time": 30
             },
             "blood": 100,
+            "practiceSpeed": 150,
+            "attackSpeed": 100,
             "practiceState": [
                 {
                     "normal": ["a"],

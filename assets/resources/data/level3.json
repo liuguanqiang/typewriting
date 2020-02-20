@@ -71,6 +71,8 @@
                 "time": 30
             },
             "blood": 100,
+            "practiceSpeed": 150,
+            "attackSpeed": 80,
             "practiceState": [
                 {
                     "normal": ["d","g"," "],

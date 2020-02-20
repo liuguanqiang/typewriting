@@ -36,6 +36,7 @@ cc.Class({
 
         //进入时游戏进度
         this.gotoGameData = gameLocalData.GotoGameData;
+        console.log("this.gotoGameData", this.gotoGameData)
         this.setAnchorCurStateIndex(this.gotoGameData.isBossLevel);
         //用户连续正确的次数  一旦错误归零重新累计
         this.correctCount = 0;
@@ -181,6 +182,7 @@ cc.Class({
 
     //一个字母块打击完成
     onFinishOnce() {
+        window.GameAudioJS().onPlayBullet();
         this.curAnchorLetter.isFinish = true;
         this.curStateJS.finishOnce();
         ++this.hitOKCount;
@@ -253,7 +255,7 @@ cc.Class({
         } else {
             progress = 0.5 + (this.getStateJS().onGetBloodRatio() / 2);
         }
-        this.failurePop.getComponent("failurePop").onInit(progress, (id) => {
+        this.failurePop.getComponent("failurePop").onInit(progress, this.gotoGameData.chapterId, (id) => {
             window.GameAudioJS().onPlayBtn();
             if (id == 1) {
                 this.onGotoMainScene();
@@ -289,7 +291,6 @@ cc.Class({
 
     //解锁下一个关卡
     onUnlockNextLevel(sectionId) {
-        console.log("sectionId", sectionId)
         this.onRequestSetUserPorgress(this.gotoGameData.chapterId, sectionId + 1, 0);
     },
 
@@ -306,6 +307,11 @@ cc.Class({
             "score": score
         }
         window.GameUserJS().requestSetUserPorgress(() => { }, param);
+    },
+
+    onGotoVideo(sectionId) {
+        gameLocalData.GotoGameData.sectionId = sectionId;
+        cc.director.loadScene("videoScene");
     },
 
     //返回主页
@@ -326,7 +332,6 @@ cc.Class({
         newNode.getComponent("bullet").onInit(target, keyboardPoint, this.onGetStall(), (node) => {
             this.bulletNodePool.put(node);
         });
-        window.GameAudioJS().onPlayBullet();
         return newNode;
     },
 

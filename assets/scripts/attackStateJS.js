@@ -25,7 +25,7 @@ cc.Class({
             this.bossJS.onInit(this);
             this.bossData = gameJS.getCurLevelData().boss;
             this.data = this.bossData.attackState;
-            this.speed = gameJS.getCurLevelData().speed;
+            this.speed = this.bossData.attackSpeed;
         }
         //播放背景音乐
         window.GameAudioJS().onPlayBossBG();

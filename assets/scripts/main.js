@@ -40,16 +40,12 @@ cc.Class({
                     "chapterId": 0,
                     "sectionId": 0,
                     "score": 0
-                }, {
-                    "userId": gameLocalData.UserID,
-                    "chapterId": 0,
-                    "sectionId": 1,
-                    "score": 0
                 }]
                 res.forEach(param => {
                     window.GameUserJS().requestSetUserPorgress(() => { }, param);
                 });
             }
+            gameLocalData.GameProgressData = res;
             for (let i = 0; i < this.ScrollContent.children.length; i++) {
                 const item = this.ScrollContent.children[i];
                 item.getComponent("gameItem").onSetProgressData(res);

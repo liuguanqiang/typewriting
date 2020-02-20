@@ -45,7 +45,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 50,
-      "height": 50
+      "height": 32
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -109,7 +109,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 50,
-      "height": 50
+      "height": 32
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -260,8 +260,8 @@
     "_useOriginalSize": false,
     "_string": "A",
     "_N$string": "A",
-    "_fontSize": 24,
-    "_lineHeight": 26,
+    "_fontSize": 22,
+    "_lineHeight": 24,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,

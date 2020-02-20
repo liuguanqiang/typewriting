@@ -153,6 +153,7 @@ cc.Class({
                 lastHighIndex = i + 1;
                 setTimeout(() => {
                     const keyboardPoint = item.convertToWorldSpaceAR(cc.v2(0, 0));
+                    window.GameAudioJS().onPlayBullet();
                     this.gameJS.createBulletItem(tragetJS, keyboardPoint);
                     this.onSetBlood(i + 1);
                     item.destroy();

@@ -143,8 +143,13 @@ cc.Class({
                 } else if (id == 3) {
                     this.levelIndex++;
                     if (this.levelIndex < this.levelCount) {
-                        this.curPoolIndex = 0;
-                        this.onUpdatePoolData();
+                        const nextData = this.data.exerciseState[this.levelIndex];
+                        if (nextData.isVideo) {
+                            this.gameJS.onGotoVideo(this.levelIndex);
+                        } else {
+                            this.curPoolIndex = 0;
+                            this.onUpdatePoolData();
+                        }
                     } else {
                         this.gameJS.onBack();
                     }

@@ -15,7 +15,7 @@ cc.Class({
         //播放背景音乐
         window.GameAudioJS().onPlayExerciseBG();
         this.data = gameJS.getCurLevelData().boss.practiceState;
-        this.speed = gameJS.getCurLevelData().speed;
+        this.speed = gameJS.getCurLevelData().boss.practiceSpeed;
         this.keyboardJS = gameJS.KeyboardJS;
         //当前刷新池索引
         this.curPoolIndex = 0;

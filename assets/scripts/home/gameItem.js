@@ -6,6 +6,7 @@ cc.Class({
         levelItem: cc.Prefab,
         title: cc.Node,
         levelContent: cc.Node,
+        bossItem: cc.Node,
         bossFrame: [cc.SpriteFrame],
         bossIcon: cc.Node,
         bossTitle: cc.Node,
@@ -38,7 +39,11 @@ cc.Class({
         this.bossIcon.setContentSize(bossSize[index].x, bossSize[index].y);
         this.bossTitle.getComponent(cc.Label).string = data.boss.name;
         this.bossInfo.getComponent(cc.Label).string = data.boss.describe;
-        this.node.height += (data.exercise.exerciseState.length - 3) * 62;
+        const h = (data.exercise.exerciseState.length - 3) * 62;
+        this.node.height += h;
+        this.bossItem.height += h;
+        this.bossShade.height += h;
+        this.bossItem.y -= h / 2;
         this.bossIndex = data.exercise.exerciseState.length;
     },
 

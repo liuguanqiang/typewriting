@@ -31,7 +31,7 @@ cc.Class({
         if (this.speed != -1) {
             this.isPlay = true;
         }
-        this.maxY = 180 - this.node.parent.height / 2 + this.node.height / 2;
+        this.maxY = 200 - this.node.parent.height / 2 + this.node.height / 2;
     },
 
     //设置当前为定位字母块
