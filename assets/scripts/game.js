@@ -18,6 +18,7 @@ cc.Class({
         winPop: cc.Node,
         pausePop: cc.Node,
         failurePop: cc.Node,
+        NoviceGuidePop: cc.Node,
     },
     //954
     start() {
@@ -27,6 +28,10 @@ cc.Class({
     onLoad() {
         this.initSetting();
         this.hitTimeCB = () => {
+            //引导窗口显示时  不计入时间
+            if (gameLocalData.IsPause) {
+                return;
+            }
             this.hitTimeOffset += 0.5;
         };
         this.KeyboardJS = this.Keyboard.getComponent("keyboard");
@@ -48,6 +53,13 @@ cc.Class({
         this.onBgAnim();
         this.onPlayGame();
         this.isGotoMainScene = false;
+
+        const progressData = gameLocalData.GameProgressData.find(a => a.chapterId == 0 && a.sectionId == 1);
+        if (!progressData || progressData.score == 0) {
+            setTimeout(() => {
+                this.onNoviceGuidePop(2);
+            }, 1000);
+        }
     },
 
     onDestroy() {
@@ -123,6 +135,9 @@ cc.Class({
     },
 
     onKeyDown(event) {
+        if (this.NoviceGuidePop.active) {
+            return;
+        }
         if (event.keyCode == cc.macro.KEY.escape) {
             this.onPausePop();
             return;
@@ -237,7 +252,30 @@ cc.Class({
                 this.winPop.active = false;
                 this.Keyboard.active = true;
             });
+            this.onWinShowNovicePop(isBoss);
         }, delayDate);
+    },
+
+    //胜利窗口判断是否需要显示引导
+    onWinShowNovicePop(isBoss) {
+        //第一次练习关卡胜利  sectionId=0  第一次boss关卡胜利sectionId=1
+        const sectionId = isBoss ? 1 : 0;
+        //第一次显示胜利窗口判断  后台数据中 chapterId=-1 
+        const progressData = gameLocalData.GameProgressData.find(a => a.chapterId == -1 && a.sectionId == sectionId);
+        if (!progressData) {
+            //第一次过后 往数据库插入一条数据作为标记 后续胜利不在显示引导窗口
+            this.onRequestSetUserPorgress(-1, sectionId, 1);
+            setTimeout(() => {
+                if (!isBoss) {
+                    const arrowDatas = [{ showArrowIndex: 2, x: 634 - this.node.width / 2, y: this.node.height / 2 - 580 }];
+                    this.onNoviceGuidePop(3, arrowDatas, true);
+                } else {
+                    const arrowDatas = [{ showArrowIndex: 1, x: 550 - this.node.width / 2, y: this.node.height / 2 - 580 },
+                    { showArrowIndex: 2, x: 386 - this.node.width / 2, y: this.node.height / 2 - 580 }];
+                    this.onNoviceGuidePop(8, arrowDatas, true);
+                }
+            }, 3000);
+        }
     },
 
     //显示失败窗口
@@ -265,6 +303,17 @@ cc.Class({
             this.failurePop.active = false;
             this.Keyboard.active = true;
         })
+        //第一次失败出现  sectionId=5
+        const sectionId = 5;
+        const progressData = gameLocalData.GameProgressData.find(a => a.chapterId == -1 && a.sectionId == sectionId);
+        if (!progressData) {
+            //第一次过后 往数据库插入一条数据作为标记 后续胜利不在显示引导窗口
+            this.onRequestSetUserPorgress(-1, sectionId, 1);
+            setTimeout(() => {
+                const arrowDatas = [{ showArrowIndex: 1, x: 580 - this.node.width / 2, y: this.node.height / 2 - 552 }];
+                this.onNoviceGuidePop(7, arrowDatas, true);
+            }, 1500);
+        }
     },
 
     //显示暂停窗口
@@ -282,6 +331,18 @@ cc.Class({
                 this.onGotoMainScene();
             }
         })
+    },
+
+    //显示新手引导窗口
+    onNoviceGuidePop(index, arrowDatas, isTop, cb) {
+        gameLocalData.IsPause = true;
+        this.NoviceGuidePop.active = true;
+        this.NoviceGuidePop.getComponent("noviceGuidePop").onInit(index, arrowDatas, isTop, () => {
+            gameLocalData.IsPause = false;
+            if (cb) {
+                cb();
+            }
+        });
     },
 
     //用户胜利更新关卡进度信息
@@ -306,6 +367,7 @@ cc.Class({
             "sectionId": sectionId,
             "score": score
         }
+        gameLocalData.GameProgressData.push(param);
         window.GameUserJS().requestSetUserPorgress(() => { }, param);
     },
 
@@ -317,6 +379,7 @@ cc.Class({
     //返回主页
     onGotoMainScene() {
         this.isGotoMainScene = true;
+        this.onRunTimer(false);
         cc.director.loadScene("mainScene");
     },
 
@@ -391,7 +454,7 @@ cc.Class({
         action1.easing(cc.easeIn(1));
         let action2 = cc.fadeTo(0.3, 0);
         action2.easing(cc.easeOut(1));
-        this.Lighting.runAction(cc.repeat(cc.sequence(action1, action2), 6));
+        this.Lighting.runAction(cc.repeat(cc.sequence(action1, action2), 3));
     },
     bgMove(bgList) {
         for (var index = 0; index < bgList.length; index++) {

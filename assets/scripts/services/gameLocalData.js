@@ -86,6 +86,13 @@ module.exports = {
         return getCacheData("gameProgressData");
     },
 
+    //暂停
+    set IsPause(value) {
+        return setCacheData(value, "isPause");
+    },
+    get IsPause() {
+        return getCacheData("isPause");
+    },
     // ---------------------------------- 本地数据 ----------------------------------
     //最新任务时间戳
     set TaskNewTime(value) {

@@ -1,5 +1,6 @@
 //boss练习关卡 操作类
 require('gameWindowFun');
+var gameLocalData = require('gameLocalData');
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -67,7 +68,7 @@ cc.Class({
         if (length == -1) {
             return null;
         }
-        curAnchorLetterJS.bulletSpeed = 50;
+        curAnchorLetterJS.bulletSpeed = 60;
         return curAnchorLetterJS;
     },
 

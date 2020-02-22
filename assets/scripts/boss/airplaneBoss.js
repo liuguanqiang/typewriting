@@ -25,12 +25,18 @@ cc.Class({
             //cc.log("完成");
         }
     },
+
+    //如果用户第一次进入boss  用于引导显示
+    playEnter() {
+        this._armatureDisPlay.playAnimation('喷火焰进入', 0);
+    },
+
     playAnimation(isFrist, bloodRatio) {
         this.stopAni = false;
         this.state = bloodRatio > 0.5 ? 1 : 2;
         this.initAniIndex = 0;
         if (isFrist) {
-            this._armatureDisPlay.playAnimation('喷火焰进入', 0);
+            this.playEnter();
             setTimeout(() => {
                 this.onAttackAnimation();
             }, 2200);

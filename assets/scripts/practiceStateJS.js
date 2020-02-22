@@ -1,4 +1,5 @@
 //boss练习关卡 操作类
+var gameLocalData = require('gameLocalData');
 require('gameWindowFun');
 cc.Class({
     extends: cc.Component,
@@ -29,6 +30,16 @@ cc.Class({
         this.gameJS.hitOKCount = 0;
         //当前打错误的个数
         this.gameJS.hitErrorCount = 0;
+
+        //第一次进入挑战关卡  sectionId=2
+        const progressData = gameLocalData.GameProgressData.find(a => a.chapterId == -1 && a.sectionId == 2);
+        if (!progressData) {
+            //第一次过后 往数据库插入一条数据作为标记 后续不在显示引导窗口
+            this.gameJS.onRequestSetUserPorgress(-1, 2, 1);
+            setTimeout(() => {
+                this.gameJS.onNoviceGuidePop(4);
+            }, 400);
+        }
     },
 
     //获取对应刷新池数据
@@ -65,7 +76,7 @@ cc.Class({
         if (length == -1) {
             return null;
         }
-        curAnchorLetterJS.bulletSpeed = 40;
+        curAnchorLetterJS.bulletSpeed = 60;
         return curAnchorLetterJS;
     },
 
@@ -77,6 +88,9 @@ cc.Class({
 
     //创建字母块
     createLetterItem() {
+        if (gameLocalData.IsPause) {
+            return;
+        }
         if (this.letterRectIndex < this.curUpdateCount) {
             const item = this.gameJS.createLetterItem();
             const letterText = this.curNormalLetterPool[this.gameJS.randomToFloor(0, this.curNormalLetterPool.length)];

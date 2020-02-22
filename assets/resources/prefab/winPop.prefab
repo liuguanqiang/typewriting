@@ -24,8 +24,8 @@
         "__id__": 5
       }
     ],
-    "_active": false,
-    "_level": 2,
+    "_active": true,
+    "_level": 1,
     "_components": [
       {
         "__id__": 113
@@ -4078,6 +4078,7 @@
       "__id__": 13
     },
     "smallStarContent": null,
+    "btns": null,
     "_id": ""
   },
   {

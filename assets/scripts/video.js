@@ -10,7 +10,7 @@ cc.Class({
     timeLabel: cc.Label,
     btnSF: [cc.SpriteFrame],
     nextBtn: cc.Node,
-    quitBtn: cc.Node,
+    quitBtn: cc.Node
   },
 
   start() {

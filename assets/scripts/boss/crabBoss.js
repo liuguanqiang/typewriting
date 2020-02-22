@@ -16,11 +16,18 @@ cc.Class({
         //获取 Armatrue
         this._armature = this._armatureDisPlay.armature();
     },
+
+
+    //如果用户第一次进入boss  用于引导显示
+    playEnter() {
+        this._armatureDisPlay.playAnimation('走', 0);
+    },
+
     playAnimation(isFrist, bloodRatio) {
         this.stopAni = false;
         this.initAniIndex = 0;
         if (isFrist) {
-            this._armatureDisPlay.playAnimation('走', 0);
+            this.playEnter();
             setTimeout(() => {
                 this.onAttackAnimation();
             }, 2200);

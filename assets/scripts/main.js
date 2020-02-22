@@ -7,7 +7,7 @@ cc.Class({
         GameItem: cc.Prefab,
         LevelJsons: [cc.JsonAsset],
         Audio: cc.Node,
-        AALab: cc.Node,
+        NoviceGuidePop: cc.Node,
     },
 
     start() {
@@ -44,6 +44,9 @@ cc.Class({
                 res.forEach(param => {
                     window.GameUserJS().requestSetUserPorgress(() => { }, param);
                 });
+                this.NoviceGuidePop.active = true;
+                const arrowDatas = [{ showArrowIndex: 1, x: 455 - this.node.width / 2, y: this.node.height / 2 - 222 }];
+                this.NoviceGuidePop.getComponent("noviceGuidePop").onInit(0, arrowDatas);
             }
             gameLocalData.GameProgressData = res;
             for (let i = 0; i < this.ScrollContent.children.length; i++) {

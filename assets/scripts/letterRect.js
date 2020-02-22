@@ -1,3 +1,4 @@
+var gameLocalData = require('gameLocalData');
 cc.Class({
     extends: cc.Component,
 
@@ -135,7 +136,7 @@ cc.Class({
     },
 
     update(dt) {
-        if (!this.isPlay) return;
+        if (!this.isPlay || gameLocalData.IsPause) return;
         if (this.accelerate > 1) {
             this.node.y -= this.speed * this.accelerate * dt;
             this.accelerate--;

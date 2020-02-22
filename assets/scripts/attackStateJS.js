@@ -1,5 +1,6 @@
 //boss练习关卡 操作类
 require('gameWindowFun');
+var gameLocalData = require('gameLocalData');
 cc.Class({
     extends: cc.Component,
 
@@ -28,9 +29,9 @@ cc.Class({
             this.speed = this.bossData.attackSpeed;
         }
         //播放背景音乐
+        this.bossNode.active = true;
         window.GameAudioJS().onPlayBossBG();
         this.playAnimation();
-        this.bossNode.active = true;
         this.gameJS.EnergyProgressBar.active = true;
         this.energyProgressBar = this.gameJS.EnergyProgressBar.getComponent(cc.ProgressBar);
         this.energyProgressBar.progress = 0;
@@ -53,7 +54,25 @@ cc.Class({
     },
 
     playAnimation() {
-        this.bossJS.playAnimation(this.isFristInit, 1 - this.onGetBloodRatio());
+        if (this.isFristInit) {
+            //第一次boss出现  sectionId=3
+            const progressData = gameLocalData.GameProgressData.find(a => a.chapterId == -1 && a.sectionId == 3);
+            if (!progressData) {
+                //第一次过后 往数据库插入一条数据作为标记 后续不在显示引导窗口
+                this.gameJS.onRequestSetUserPorgress(-1, 3, 1);
+                this.bossJS.playEnter();
+                setTimeout(() => {
+                    this.gameJS.onNoviceGuidePop(5, undefined, false, () => {
+                        this.bossJS.playAnimation(false, 1 - this.onGetBloodRatio());
+                        return;
+                    });
+                }, 2000);
+            } else {
+                this.bossJS.playAnimation(this.isFristInit, 1 - this.onGetBloodRatio());
+            }
+        } else {
+            this.bossJS.playAnimation(this.isFristInit, 1 - this.onGetBloodRatio());
+        }
         if (this.isFristInit) {
             this.isFristInit = false;
             const y = this.onGetBossDefaultY();

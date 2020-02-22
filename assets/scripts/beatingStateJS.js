@@ -1,5 +1,6 @@
 //boss练习关卡 操作类
 require('gameWindowFun');
+var gameLocalData = require('gameLocalData');
 cc.Class({
     extends: cc.Component,
 
@@ -55,6 +56,25 @@ cc.Class({
         //当前字母块个数
         this.updateCount = this.data.updateCount;
         this.isPlay = true;
+        const delayTime = 0.1 * this.updateCount + 0.7;
+        //第一次QTE出现  sectionId=4
+        const sectionId = 4;
+        const progressData = gameLocalData.GameProgressData.find(a => a.chapterId == -1 && a.sectionId == sectionId);
+        if (!progressData) {
+            setTimeout(() => {
+                //第一次过后 往数据库插入一条数据作为标记 后续不在显示引导窗口
+                this.gameJS.onRequestSetUserPorgress(-1, sectionId, 1);
+                this.gameJS.onNoviceGuidePop(6, undefined, false, () => {
+                    this.onStartTime(0.1);
+                });
+            }, delayTime * 1000);
+        } else {
+            this.onStartTime(delayTime);
+        }
+    },
+
+    //开始计时
+    onStartTime(delayTime) {
         let tCount = 20;
         let t = 0;
         this.schedule(function () {
@@ -63,7 +83,8 @@ cc.Class({
             if (t == tCount) {
                 this.onSendBullet();
             }
-        }, this.curBeatTime / tCount, tCount - 1, 0.1 * this.updateCount + 0.7);
+        }, this.curBeatTime / tCount, tCount - 1, delayTime);
+
     },
 
     onKeyDown(code, curAnchorLetter) {
