@@ -28,7 +28,7 @@
       }
     ],
     "_active": false,
-    "_level": 2,
+    "_level": 1,
     "_components": [
       {
         "__id__": 21
@@ -397,7 +397,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 180,
+      "width": 220,
       "height": 26
     },
     "_anchorPoint": {
@@ -442,8 +442,8 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": true,
-    "_string": "任意点击进入下一步",
-    "_N$string": "任意点击进入下一步",
+    "_string": "点击任意按键进入下一步",
+    "_N$string": "点击任意按键进入下一步",
     "_fontSize": 20,
     "_lineHeight": 26,
     "_enableWrapText": true,

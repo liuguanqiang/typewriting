@@ -17,7 +17,11 @@ cc.Class({
     start() {
 
     },
-    onInit(starNum, data, isBoss, cb) {
+    onInit(starNum, isThreeAccuracy, isThreeHitTimeOffset, data, isBoss, cb) {
+        console.log("data",data)
+        console.log("isThreeAccuracy",isThreeAccuracy)
+        console.log("isThreeHitTimeOffset",isThreeHitTimeOffset)
+        console.log("starNum",starNum)
         for (let i = 0; i < 3; i++) {
             const star0 = this.starEmpty.children[i];
             const star1 = this.starContent.children[i];
@@ -66,11 +70,28 @@ cc.Class({
             setTimeout(() => {
                 star.runAction(cc.fadeTo(0.25, 255));
             }, i * 250 + 500);
-            this.tickContent.children[i].getComponent(cc.Sprite).spriteFrame = this.tickrFrame;
         }
-        for (let i = 0; i < this.tickContent.children.length; i++) {
-            const tick = this.tickContent.children[i];
-            tick.getComponent(cc.Sprite).spriteFrame = i < starNum ? this.tickrFrames[1] : this.tickrFrames[0];
+        if (starNum <= 1) {
+            for (let i = 0; i < this.tickContent.children.length; i++) {
+                const tick = this.tickContent.children[i];
+                tick.getComponent(cc.Sprite).spriteFrame = i < starNum ? this.tickrFrames[1] : this.tickrFrames[0];
+            }
+        } else if (starNum == 2) {
+            for (let i = 0; i < this.tickContent.children.length; i++) {
+                const tick = this.tickContent.children[i];
+                if (i < 2) {
+                    tick.getComponent(cc.Sprite).spriteFrame = this.tickrFrames[1];
+                } else if (i == 2) {
+                    tick.getComponent(cc.Sprite).spriteFrame = isThreeAccuracy ? this.tickrFrames[1] : this.tickrFrames[0];
+                } else if (i == 3) {
+                    tick.getComponent(cc.Sprite).spriteFrame = isThreeHitTimeOffset ? this.tickrFrames[1] : this.tickrFrames[0];
+                }
+            }
+        } else {
+            for (let i = 0; i < this.tickContent.children.length; i++) {
+                const tick = this.tickContent.children[i];
+                tick.getComponent(cc.Sprite).spriteFrame = this.tickrFrames[1];
+            }
         }
         setTimeout(() => {
             this.anim.play('winEnd');

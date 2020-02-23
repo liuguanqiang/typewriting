@@ -239,7 +239,7 @@ cc.Class({
     },
 
     //显示胜利弹窗
-    onWinPop(num, data, cb) {
+    onWinPop(num, isThreeAccuracy, isThreeHitTimeOffset, data, cb) {
         const isBoss = this.curStateIndex != 0;
         let delayDate = 500;
         if (isBoss) {
@@ -250,7 +250,7 @@ cc.Class({
             this.winPop.active = true;
             this.Keyboard.active = false;
             window.GameAudioJS().onPlayWin();
-            this.winPop.getComponent("winPop").onInit(num, data, isBoss, (id) => {
+            this.winPop.getComponent("winPop").onInit(num, isThreeAccuracy, isThreeHitTimeOffset, data, isBoss, (id) => {
                 window.GameAudioJS().onPlayBtn();
                 if (id == 1) {
                     this.onGotoMainScene();
@@ -282,11 +282,11 @@ cc.Class({
             this.onRequestSetUserPorgress(-1, sectionId, 1);
             setTimeout(() => {
                 if (!isBoss) {
-                    const arrowDatas = [{ showArrowIndex: 2, x: 634 - this.node.width / 2, y: this.node.height / 2 - 580 }];
+                    const arrowDatas = [{ showArrowIndex: 2, x: 634 - this.node.width / 2, y: this.node.height / 2 - 598 }];
                     this.onNoviceGuidePop(3, arrowDatas, true);
                 } else {
-                    const arrowDatas = [{ showArrowIndex: 1, x: 550 - this.node.width / 2, y: this.node.height / 2 - 580 },
-                    { showArrowIndex: 2, x: 386 - this.node.width / 2, y: this.node.height / 2 - 580 }];
+                    const arrowDatas = [{ showArrowIndex: 1, x: 550 - this.node.width / 2, y: this.node.height / 2 - 598 },
+                    { showArrowIndex: 2, x: 386 - this.node.width / 2, y: this.node.height / 2 - 598 }];
                     this.onNoviceGuidePop(8, arrowDatas, true);
                 }
             }, 3000);

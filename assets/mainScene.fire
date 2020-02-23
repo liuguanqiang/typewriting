@@ -1012,7 +1012,7 @@
     "_prefab": {
       "__id__": 25
     },
-    "_opacity": 150,
+    "_opacity": 100,
     "_color": {
       "__type__": "cc.Color",
       "r": 0,
@@ -1307,7 +1307,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 180,
+      "width": 220,
       "height": 26
     },
     "_anchorPoint": {
@@ -1352,8 +1352,8 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": true,
-    "_string": "任意点击进入下一步",
-    "_N$string": "任意点击进入下一步",
+    "_string": "点击任意按键进入下一步",
+    "_N$string": "点击任意按键进入下一步",
     "_fontSize": 20,
     "_lineHeight": 26,
     "_enableWrapText": true,

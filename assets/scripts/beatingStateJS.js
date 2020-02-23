@@ -243,14 +243,16 @@ cc.Class({
             console.log("this.accuracy ", accuracy);
             let starNum = 1;
             //三星 两星判断
-            if (accuracy >= this.bossData.threeStars.accuracy && this.gameJS.hitTimeOffset <= this.bossData.threeStars.time) {
+            const isThreeAccuracy = accuracy >= this.bossData.threeStars.accuracy;
+            const isThreeHitTimeOffset = this.gameJS.hitTimeOffset <= this.bossData.threeStars.time;
+            if (isThreeAccuracy && isThreeHitTimeOffset) {
                 starNum = 3;
             } else if (accuracy >= this.bossData.twoStars) {
                 starNum = 2;
             }
             const bossIndex = this.gameJS.getCurLevelData().exercise.exerciseState.length;
             this.gameJS.onUpdateProgressData(starNum, bossIndex);
-            this.gameJS.onWinPop(starNum, this.bossData, (id) => {
+            this.gameJS.onWinPop(starNum, isThreeAccuracy, isThreeHitTimeOffset, this.bossData, (id) => {
                 if (id == 2) {
                     this.gameJS.checkGotoQTE(false);
                 }

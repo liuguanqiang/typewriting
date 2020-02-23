@@ -132,7 +132,7 @@ cc.Class({
 
     //加速一次
     onAccelerate() {
-        this.accelerate = 10;
+        this.accelerate = 5;
     },
 
     update(dt) {
