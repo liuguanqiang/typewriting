@@ -1,92 +1,145 @@
 {
     "level": {
         "id": "L2",
-        "name": "迈出你的第二步",
+        "name": "再战雷霆",
         "exercise": {
-            "twoStars": 0.8,
-            "threeStars": {
-                "accuracy": 0.9,
-                "time": 20
-            },
-            "exerciseState": [{
-                "name": "q,w",
+            "exerciseState": [
+                {
+                    "isVideo":true,
+                    "name": "提升打字速度的方法",
+                    "url":"https://client-hot-update.oss-cn-beijing.aliyuncs.com/mathapp/video/c1s1/c1_3.mp4"
+                },
+                {
+                "name": "练习d、e、i",
                 "isVideo":false,
+                "twoStars": 0.8,
+                "threeStars": {
+                    "accuracy": 0.9,
+                    "time": 20
+                },
                 "state": [
                     {
-                        "normal": ["q"],
+                        "normal": ["d","e","i"],
+                        "updateCount": 4
+                    },
+                    {
+                        "normal": ["dd","ee","ii","d","e","i"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["w"],
-                        "updateCount": 6
+                        "normal": ["iee","dde","dii","iid","idd","iie"],
+                        "updateCount": 8
                     },
                     {
-                        "normal": ["q","w"],
-                        "updateCount": 6
+                        "normal": ["eie","idi","iei","did","iii","ede","ddd"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["eie","idi","iei","did","iii","ede","eeie","dede","idid","eiii","iide","idei","d","e","i","d","e","i"],
+                        "updateCount": 14
                     }
                 ]
               },
+              
               {
-                "isVideo":true,
-                "name": "正确的打字姿势",
-                "url":"https://client-hot-update.oss-cn-beijing.aliyuncs.com/mathapp/video/c1s1/c1_3.mp4"
-              },
-              {
-                "name": "z,x",
+                "name": "练习c、g、n",
                 "isVideo":false,
+                "twoStars": 0.8,
+                "threeStars": {
+                    "accuracy": 0.9,
+                    "time": 20
+                },
                 "state":[
                     {
-                        "normal": ["z"],
+                        "normal": ["c","g","n"],
+                        "updateCount": 4
+                    },
+                    {
+                        "normal": ["cc","gg","nn","c","g","n"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["x"],
-                        "updateCount": 6
+                        "normal": ["ccg","ggn","ggc","gcc","cnn","gnn"],
+                        "updateCount": 8
                     },
                     {
-                        "normal": ["z","x"],
-                        "updateCount": 6
+                        "normal": ["cgc","cnc","ngn","gcg","ggg","nnn","ncn","ccc"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["cgc","cnc","ngn","gcg","ggg","nnn","ncn","ccc","ccgn","gncc","ncgg","ncnc","gngn","gcgc","ggcn","c","g","n","c","g","n"],
+                        "updateCount": 14
                     }
                 ]
               },
               {
-                "isVideo":true,
-                "name": "学习shift键",
-                "url":"https://client-hot-update.oss-cn-beijing.aliyuncs.com/mathapp/video/c1s1/c1_3.mp4"
+                "name": "综合练习",
+                "isVideo":false,
+                "twoStars": 0.8,
+                "threeStars": {
+                    "accuracy": 0.9,
+                    "time": 20
+                },
+                "state":[
+                    {
+                        "normal": ["c","g","n","d","e","i","f","j","u","r","k"],
+                        "updateCount": 4
+                    },
+                    {
+                        "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk"],
+                        "updateCount": 6
+                    },
+                    {
+                        "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["urr","rkk","kdd","djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["ujrr","rrkk","cgg","cjk","fku","ddrn","ccjd","krrn","nndn","rgnd","gkkd","kddg"],
+                        "updateCount": 14
+                    }
+                ]
               }
             ]
         },
         "boss": {
-            "name": "飞机怪",
-            "describe": "飞机中的战斗机",
+            "name": "雷霆",
+            "describe": "起飞，旋转，突突突！",
             "twoStars": 0.8,
             "threeStars": {
                 "accuracy": 0.9,
                 "time": 30
             },
             "blood": 100,
-            "practiceSpeed": 150,
-            "attackSpeed": 80,
+            "practiceSpeed": 70,
+            "attackSpeed": 40,
             "practiceState": [
                 {
-                    "normal": ["z","x"," "],
+                    "normal": ["c","g","n","d","e","i","f","j","u","r","k"],
                     "updateCount": 4
                 },
                 {
-                    "normal": ["q","w"],
-                    "updateCount": 4
+                    "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk"],
+                    "updateCount": 6
                 },
                 {
-                    "normal": ["q","w"," "],
-                    "updateCount": 10
+                    "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd","c","g","n","d","e","i","f","j","u","r","k"],
+                    "updateCount": 15
+                },
+                {
+                    "normal": ["urr","rkk","kdd","djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","c","g","n","d","e","i","f","j","u","r","k"],
+                    "updateCount": 15
                 }
             ],
             "attackState": {
-                "normal": ["z"],
+                "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","c","g","n","d","e","i","f","j","u","r","k","c","g","n","d","e","i","f","j","u","r","k"],
                 "updateCount": 12
             },
             "beatingState": {
-                "normal": ["z"],
+                "normal": ["c","g","n","d","e","i","f","j","u","r","k"],
                 "updateCount": 10,
                 "beatTime": 5
             }

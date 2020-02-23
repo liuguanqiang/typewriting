@@ -125,9 +125,10 @@ cc.Class({
             console.log("this.accuracy ", accuracy);
             let starNum = 1;
             //三星 两星判断
-            if (accuracy >= this.data.threeStars.accuracy && this.gameJS.hitTimeOffset <= this.data.threeStars.time) {
+            const curStateData = this.data.exerciseState[this.levelIndex];
+            if (accuracy >= curStateData.threeStars.accuracy && this.gameJS.hitTimeOffset <= curStateData.threeStars.time) {
                 starNum = 3;
-            } else if (accuracy >= this.data.twoStars) {
+            } else if (accuracy >= curStateData.twoStars) {
                 starNum = 2;
             }
             this.gameJS.onUpdateProgressData(starNum, this.levelIndex);
@@ -137,7 +138,7 @@ cc.Class({
             if (this.levelIndex == this.levelCount - 1) {
                 this.gameJS.onUnlockNextModule();
             }
-            this.gameJS.onWinPop(starNum, this.data, (id) => {
+            this.gameJS.onWinPop(starNum, curStateData, (id) => {
                 if (id == 2) {
                     this.curPoolIndex = 0;
                     this.onUpdatePoolData();

@@ -33,11 +33,11 @@ cc.Class({
             const itemComponent = item.getComponent("keyCube");
             if (itemComponent.keyCode == event.keyCode) {
                 if (itemComponent.canClick) {
-                    return i;
+                    return { index: i, keyValue: itemComponent.keyValue };
                 }
             }
         }
-        return -1;
+        return { index: -1 };
     },
 
     //获取字母对应键盘的X坐标点

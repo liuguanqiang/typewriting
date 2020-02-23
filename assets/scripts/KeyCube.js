@@ -13,6 +13,7 @@ cc.Class({
     setKey(keyData) {
         const label = this.KeyLabel.getComponent(cc.Label);
         label.string = keyData.key;
+        this.keyValue = keyData.key;
         if (!keyData.code) {
             this.keyCode = keyData.key.charCodeAt();
         } else {

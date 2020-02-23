@@ -1,70 +1,116 @@
 {
     "level": {
         "id": "L3",
-        "name": "迈出你的第三步",
+        "name": "喵星病毒",
         "speed": 100,
         "exercise": {
-            "twoStars": 0.8,
-            "threeStars": {
-                "accuracy": 0.9,
-                "time": 20
-            },
             "exerciseState": [{
-                "name": "d,f",
+                "isVideo":false,
+                "name": "练习t、s、l",
+                "twoStars": 0.8,
+                "threeStars": {
+                    "accuracy": 0.9,
+                    "time": 20
+                },
                 "state": [
                     {
-                        "normal": ["d"],
+                        "normal": ["t","s","l"],
+                        "updateCount": 4
+                    },
+                    {
+                        "normal": ["tt","ss","ll","t","s","l"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["f"],
-                        "updateCount": 6
+                        "normal": ["tss","sll","ttl","lss","ltt","tll","t","s","l","t","s","l"],
+                        "updateCount": 8
                     },
                     {
-                        "normal": ["d","f"],
-                        "updateCount": 6
+                        "normal": ["tlt","sts","lsl","sts","tss","sll","ttl","lss","ltt","tll","t","s","l","t","s","l"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["tsl","lst","tls","lts","lll","sss","ttt","lsls","stst","slll","tsss","ltts","tttl","tt","ss","ll","t","s","l","tt","ss","ll","t","s","l"],
+                        "updateCount": 14
                     }
                 ]
               },
               {
-                "name": "g,h",
+                "isVideo":true,
+                "name": "中英文输入法的切换",
+                "url":"https://client-hot-update.oss-cn-beijing.aliyuncs.com/mathapp/video/c1s1/c1_3.mp4"
+            },
+              {
+                "isVideo":false,
+                "name": "英文的逗号和句号",
+                "twoStars": 0.8,
+                "threeStars": {
+                    "accuracy": 0.9,
+                    "time": 20
+                },
                 "state":[
                     {
-                        "normal": ["g"],
+                        "normal": [",","."],
+                        "updateCount": 4
+                    },
+                    {
+                        "normal": [",,",".."],
+                        "updateCount": 4
+                    },
+                    {
+                        "normal": [",",".",",,",".."],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["h"],
-                        "updateCount": 6
+                        "normal": [",,.",".,,",",,,","...",",",".",",,",".."],
+                        "updateCount": 8
                     },
                     {
-                        "normal": ["g","h"],
-                        "updateCount": 6
+                        "normal": [",.,",".,.",",..",".,,",",",".",",,",".."],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": [",.,",".,.",",..",".,,",",,..",",..,",".,,.",".,.,",",.,.",",",".",",,","..",",",".",",,",".."],
+                        "updateCount": 10
                     }
                 ]
               },
               {
-                "name": "e,f",
+                "isVideo":false,
+                "name": "综合练习",
+                "twoStars": 0.8,
+                "threeStars": {
+                    "accuracy": 0.9,
+                    "time": 20
+                },
                 "state":[
                     {
-                        "normal": ["e"],
+                        "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["f"],
+                        "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,",".."],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["e","f"],
-                        "updateCount": 6
+                        "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd","tff","jss","t,,",".ll","f..","r,,","u..","n,,","sll"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["urr","rkk","kdd","djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is."],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["ujrr","rrkk","cgg","cjk","fku","ddrn","ccjd","krrn","nndn","rgnd","gkkd","kddg","ll.c","f,,n","ccs.","ftts","nn,n",",en.t","ettc","itis","ifis"],
+                        "updateCount": 14
                     }
                 ]
               }
             ]
         },
         "boss": {
-            "name": "猫猫",
-            "describe": "猫猫猫猫猫猫",
+            "name": "喵喵",
+            "describe": "再看我？还我喵喵拳！",
             "twoStars": 0.8,
             "threeStars": {
                 "accuracy": 0.9,
@@ -75,24 +121,32 @@
             "attackSpeed": 80,
             "practiceState": [
                 {
-                    "normal": ["d","g"," "],
-                    "updateCount": 4
+                    "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
+                    "updateCount": 6
                 },
                 {
-                    "normal": ["f","h"],
-                    "updateCount": 4
+                    "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,",".."],
+                    "updateCount": 6
                 },
                 {
-                    "normal": ["f","j"," "],
-                    "updateCount": 10
+                    "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd","tff","jss","t,,",".ll","f..","r,,","u..","n,,","sll"],
+                    "updateCount": 8
+                },
+                {
+                    "normal": ["urr","rkk","kdd","djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is."],
+                    "updateCount": 8
+                },
+                {
+                    "normal": ["ujrr","rrkk","cgg","cjk","fku","ddrn","ccjd","krrn","nndn","rgnd","gkkd","kddg","ll.c","f,,n","ccs.","ftts","nn,n",",en.t","ettc","itis","ifis"],
+                    "updateCount": 14
                 }
             ],
             "attackState": {
-                "normal": ["f"],
-                "updateCount": 12
+                "normal": ["de","is","it","in","di","ju","gg","un","u.","rk","kn",",t",",s","ll","c,","..","urr","rkk","..d","djf","fun","dun","cjd","krn","kdn","rnd","gkd","ndg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is."],
+                "updateCount": 10
             },
             "beatingState": {
-                "normal": ["g"],
+                "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
                 "updateCount": 10,
                 "beatTime": 5
             }

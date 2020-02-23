@@ -43,6 +43,7 @@ cc.Class({
         this.isWin = false;
         this.onUpdatePoolData();
         this.onPlayAnimation();
+        this.gameJS.checkGotoQTE(true);
     },
 
 
@@ -158,6 +159,7 @@ cc.Class({
                 this.Blood.active = false;
                 this.bloodJS.onReset();
                 this.gameJS.onBack(-1);
+                this.gameJS.checkGotoQTE(false);
             }
         }, this.interval * lastHighIndex + 1000);
     },
@@ -248,7 +250,9 @@ cc.Class({
             }
             this.gameJS.onUpdateProgressData(starNum, 3);
             this.gameJS.onWinPop(starNum, this.bossData, (id) => {
-
+                if (id == 2) {
+                    this.gameJS.checkGotoQTE(false);
+                }
             });
         }
     },

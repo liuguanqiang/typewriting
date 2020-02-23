@@ -26,7 +26,7 @@ cc.Class({
         let targetPoint = this.tragetJS.getBullseyePosition();
         let point = cc.v2(this.node.x, this.node.y);
         let distance = point.sub(targetPoint).mag();
-        if (distance <= 30) {
+        if (distance <= 40) {
             this.isUpdate = false;
             this.tragetJS.setHit(this.stallIndex);
             this.node.destroyAllChildren();

@@ -22,10 +22,11 @@ cc.Class({
     },
     //954
     start() {
-
     },
 
     onLoad() {
+        this.bgSpeed = 1;
+        gameLocalData.IsPause = false;
         this.initSetting();
         this.hitTimeCB = () => {
             //引导窗口显示时  不计入时间
@@ -52,8 +53,6 @@ cc.Class({
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         this.onBgAnim();
         this.onPlayGame();
-        this.isGotoMainScene = false;
-
         const progressData = gameLocalData.GameProgressData.find(a => a.chapterId == 0 && a.sectionId == 1);
         if (!progressData || progressData.score == 0) {
             setTimeout(() => {
@@ -82,18 +81,18 @@ cc.Class({
         }
     },
     //背景上动画
-    onBgAnim(isPlay = true) {
+    onBgAnim(isInit = true, isfast = true) {
         const leftAnimBox = this.BgAnimBox.getChildByName("leftSprite");
         const rightAnimBox = this.BgAnimBox.getChildByName("rightSprite");
         const nodeAction = (i, node) => {
-            if (isPlay) {
+            if (isInit) {
                 setTimeout(() => {
-                    if (this.isGotoMainScene == false) {
-                        node.runAction(cc.repeatForever(cc.sequence(cc.moveTo(this.random(3, 6), node.x, -node.y), cc.moveTo(0, node.x, node.y))));
+                    if (!gameLocalData.IsPause) {
+                        node.getComponent("smallRule").onPlay();
                     }
-                }, i * 800);
+                }, i * 500);
             } else {
-                node.stopAllActions();
+                node.getComponent("smallRule").onPlay(isfast);
             }
         }
         for (let i = 0; i < leftAnimBox.children.length; i++) {
@@ -122,6 +121,17 @@ cc.Class({
         this.onPlayGame();
     },
 
+    checkGotoQTE(isQTE) {
+        this.isQTE = isQTE;
+        if (isQTE) {
+            this.bgSpeed = 0.2;
+            this.onBgAnim(false, false);
+        } else {
+            this.bgSpeed = 1;
+            this.onBgAnim(false, true);
+        }
+    },
+
     getStateJS() {
         if (this.curStateIndex == 0) {
             return this.stateJSNode.getComponent("exerciseStateJS");
@@ -144,19 +154,23 @@ cc.Class({
         }
         if (this.isLose || !this.canKeyDown) return;
         if (this.curAnchorLetter && !this.curAnchorLetter.isFinish) {
-            const index = this.KeyboardJS.onCanKeyDown(event);
-            if (index == -1) {
+            const KeyData = this.KeyboardJS.onCanKeyDown(event);
+            if (KeyData.index == -1) {
                 return;
             }
-            const code = String.fromCharCode(event.keyCode).toLowerCase();
-            const curAnchorLetterJS = this.curStateJS.onKeyDown(code, this.curAnchorLetter);
+            const keyValues = KeyData.keyValue.split("\n");
+            if (!keyValues || keyValues.length == 0) {
+                return;
+            }
+            const keyValue = keyValues[keyValues.length - 1].toLowerCase();
+            const curAnchorLetterJS = this.curStateJS.onKeyDown(keyValue, this.curAnchorLetter);
             if (!curAnchorLetterJS) {
-                this.onKeyError(index);
+                this.onKeyError(KeyData.index);
                 console.log("打错了");
                 return;
             }
             ++this.correctCount;
-            const keyboardPoint = this.KeyboardJS.onKeyDown(index, true);
+            const keyboardPoint = this.KeyboardJS.onKeyDown(KeyData.index, true);
             if (curAnchorLetterJS.launchBullet !== false) {
                 this.createBulletItem(curAnchorLetterJS, keyboardPoint);
             }
@@ -243,6 +257,7 @@ cc.Class({
                 } else if (id == 2) {
                     if (isBoss) {
                         this.onBossOnceAgain();
+                        cb(id);
                     } else {
                         cb(id);
                     }
@@ -327,7 +342,6 @@ cc.Class({
             cc.director.resume();
             window.GameAudioJS().onPlayBtn();
             if (id == 1) {
-                this.onBgAnim(false);
                 this.onGotoMainScene();
             }
         })
@@ -378,7 +392,7 @@ cc.Class({
 
     //返回主页
     onGotoMainScene() {
-        this.isGotoMainScene = true;
+        gameLocalData.IsPause = true;
         this.onRunTimer(false);
         cc.director.loadScene("mainScene");
     },
@@ -459,7 +473,7 @@ cc.Class({
     bgMove(bgList) {
         for (var index = 0; index < bgList.length; index++) {
             var element = bgList[index];
-            element.y -= 1;
+            element.y -= this.bgSpeed;
         }
     },
     //检查是否要重置位置
