@@ -8,6 +8,8 @@ cc.Class({
         LevelJsons: [cc.JsonAsset],
         Audio: cc.Node,
         NoviceGuidePop: cc.Node,
+        videoLayout: cc.Node,
+        videoPlayer: cc.Node,
     },
 
     start() {
@@ -17,7 +19,7 @@ cc.Class({
         let userId = gameLocalData.UserID;
         if (!userId) {
             userId = this.randomToFloor(100000, 999999);
-            gameLocalData.UserID = 123124;
+            gameLocalData.UserID = 123559;
         }
         window.GamePersistRootJS().initPersistRootNode();
         window.GameAudioJS().onPlayHomeBG();
@@ -44,9 +46,7 @@ cc.Class({
                 res.forEach(param => {
                     window.GameUserJS().requestSetUserPorgress(() => { }, param);
                 });
-                this.NoviceGuidePop.active = true;
-                const arrowDatas = [{ showArrowIndex: 1, x: 455 - this.node.width / 2, y: this.node.height / 2 - 222 }];
-                this.NoviceGuidePop.getComponent("noviceGuidePop").onInit(0, arrowDatas);
+                this.onPlayVideo();
             }
             gameLocalData.GameProgressData = res;
             for (let i = 0; i < this.ScrollContent.children.length; i++) {
@@ -54,6 +54,22 @@ cc.Class({
                 item.getComponent("gameItem").onSetProgressData(res);
             }
         }, gameLocalData.UserID);
+    },
+
+    onPlayVideo() {
+        setTimeout(() => {
+            this.videoLayout.active = true;
+            this.videoPlayer.on("meta-loaded", () => {
+                this.videoPlayer.getComponent(cc.VideoPlayer).resume();
+            })
+            this.videoPlayer.on("completed", () => {
+                this.videoLayout.active = false;
+                this.NoviceGuidePop.active = true;
+                const arrowDatas = [{ showArrowIndex: 1, x: 455 - this.node.width / 2, y: this.node.height / 2 - 222 }];
+                this.NoviceGuidePop.getComponent("noviceGuidePop").onInit(0, arrowDatas);
+            })
+            this.videoPlayer.getComponent(cc.VideoPlayer).remoteURL = "https://client-hot-update.oss-cn-beijing.aliyuncs.com/typingResource/movie.mp4";
+        }, 1000);
     },
     //获取随机数 取整
     randomToFloor(lower, upper) {

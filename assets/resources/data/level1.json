@@ -25,26 +25,6 @@
                     {
                         "normal": ["f"],
                         "updateCount": 4
-                    },
-                    {
-                        "normal": ["jj","ff"],
-                        "updateCount": 4
-                    },
-                    {
-                        "normal": ["j","f","jj","ff"],
-                        "updateCount": 6
-                    },
-                    {
-                        "normal": ["jjj","fff","jff","ffj"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["jfj","fjf","jff","ffj"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["jfj","fjf","jff","ffj","jjfj","ffff","jjff","fjfj"],
-                        "updateCount": 10
                     }
                 ]
               },
@@ -69,26 +49,6 @@
                     {
                         "normal": ["r"],
                         "updateCount": 4
-                    },
-                    {
-                        "normal": ["k"],
-                        "updateCount": 4
-                    },
-                    {
-                        "normal": ["uu","rr","kk"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["u","r","k","uu","rr","kk"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["uuu","rrr","kkk","ur","uk","kr"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["uurk","urk","krk","uku","uukk","kurr","kkkr","rrru"],
-                        "updateCount": 10
                     }
                 ]
               }
@@ -111,24 +71,16 @@
                     "updateCount": 4
                 },
                 {
-                    "normal": ["j","f","u","r","k","jj","ff","uu","rr","kk"],
+                    "normal": ["j","f","u","r"],
                     "updateCount": 6
-                },
-                {
-                    "normal": ["ur","kr","uf","jr","fk","jj","ff","uu","rr","kk"],
-                    "updateCount": 6
-                },
-                {
-                    "normal": ["ur","kr","uf","jr","urk","uukk","rrru","jfj","jff","ffj","ffff","j","f","u","r","k","j","f","u","r","k"],
-                    "updateCount": 14
                 }
             ],
             "attackState": {
-                "normal": ["j","f","u","r","k","jj","ff","uu","rr","kk","ur","kr","uf","jr","fk"],
+                "normal": ["j","f","u","r"],
                 "updateCount": 10
             },
             "beatingState": {
-                "normal": ["j","f","u","r","k"],
+                "normal": ["j"],
                 "updateCount": 10,
                 "beatTime": 6
             }

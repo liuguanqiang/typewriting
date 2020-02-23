@@ -53,8 +53,8 @@ cc.Class({
     this.sliderProgressBg.width = 0;
     this.isLoaded = false;
     this.videoPlayer.getComponent(cc.VideoPlayer).remoteURL = this.data.url;//"https://scratch-videos.hetao101.com/469d3d02264cb5b955ee63472c33f2fe_vd12_uid2375193.mp4"
-    this.videoPlayer.getComponent(cc.VideoPlayer).play();
-    this.videoPlayer.getComponent(cc.VideoPlayer).stop();
+    // this.videoPlayer.getComponent(cc.VideoPlayer).play();
+    // this.videoPlayer.getComponent(cc.VideoPlayer).stop();
     const progressData = gameLocalData.GameProgressData.find(a => a.chapterId == this.gotoGameData.chapterId && a.sectionId == this.gotoGameData.sectionId);
     if (progressData) {
       this.nextBtn.active = progressData.score > 0;

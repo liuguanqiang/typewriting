@@ -54,24 +54,8 @@
                         "updateCount": 4
                     },
                     {
-                        "normal": [",,",".."],
+                        "normal": [",","."],
                         "updateCount": 4
-                    },
-                    {
-                        "normal": [",",".",",,",".."],
-                        "updateCount": 6
-                    },
-                    {
-                        "normal": [",,.",".,,",",,,","...",",",".",",,",".."],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": [",.,",".,.",",..",".,,",",",".",",,",".."],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": [",.,",".,.",",..",".,,",",,..",",..,",".,,.",".,.,",",.,.",",",".",",,","..",",",".",",,",".."],
-                        "updateCount": 10
                     }
                 ]
               },
@@ -85,24 +69,12 @@
                 },
                 "state":[
                     {
-                        "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
+                        "normal": ["c"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,",".."],
+                        "normal": ["d"],
                         "updateCount": 6
-                    },
-                    {
-                        "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd","tff","jss","t,,",".ll","f..","r,,","u..","n,,","sll"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["urr","rkk","kdd","djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is."],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["ujrr","rrkk","cgg","cjk","fku","ddrn","ccjd","krrn","nndn","rgnd","gkkd","kddg","ll.c","f,,n","ccs.","ftts","nn,n",",en.t","ettc","itis","ifis"],
-                        "updateCount": 14
                     }
                 ]
               }
@@ -121,32 +93,20 @@
             "attackSpeed": 80,
             "practiceState": [
                 {
-                    "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
+                    "normal": ["c"],
                     "updateCount": 6
                 },
                 {
-                    "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,",".."],
+                    "normal": ["d"],
                     "updateCount": 6
-                },
-                {
-                    "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd","tff","jss","t,,",".ll","f..","r,,","u..","n,,","sll"],
-                    "updateCount": 8
-                },
-                {
-                    "normal": ["urr","rkk","kdd","djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is."],
-                    "updateCount": 8
-                },
-                {
-                    "normal": ["ujrr","rrkk","cgg","cjk","fku","ddrn","ccjd","krrn","nndn","rgnd","gkkd","kddg","ll.c","f,,n","ccs.","ftts","nn,n",",en.t","ettc","itis","ifis"],
-                    "updateCount": 14
                 }
             ],
             "attackState": {
-                "normal": ["de","is","it","in","di","ju","gg","un","u.","rk","kn",",t",",s","ll","c,","..","urr","rkk","..d","djf","fun","dun","cjd","krn","kdn","rnd","gkd","ndg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is."],
+                "normal": ["d"],
                 "updateCount": 10
             },
             "beatingState": {
-                "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
+                "normal": ["c"],
                 "updateCount": 10,
                 "beatTime": 5
             }

@@ -248,7 +248,8 @@ cc.Class({
             } else if (accuracy >= this.bossData.twoStars) {
                 starNum = 2;
             }
-            this.gameJS.onUpdateProgressData(starNum, 3);
+            const bossIndex = this.gameJS.getCurLevelData().exercise.exerciseState.length;
+            this.gameJS.onUpdateProgressData(starNum, bossIndex);
             this.gameJS.onWinPop(starNum, this.bossData, (id) => {
                 if (id == 2) {
                     this.gameJS.checkGotoQTE(false);

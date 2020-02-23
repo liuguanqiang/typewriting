@@ -25,18 +25,6 @@
                     {
                         "normal": ["dd","ee","ii","d","e","i"],
                         "updateCount": 6
-                    },
-                    {
-                        "normal": ["iee","dde","dii","iid","idd","iie"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["eie","idi","iei","did","iii","ede","ddd"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["eie","idi","iei","did","iii","ede","eeie","dede","idid","eiii","iide","idei","d","e","i","d","e","i"],
-                        "updateCount": 14
                     }
                 ]
               },
@@ -55,20 +43,8 @@
                         "updateCount": 4
                     },
                     {
-                        "normal": ["cc","gg","nn","c","g","n"],
+                        "normal": ["c","g","n"],
                         "updateCount": 6
-                    },
-                    {
-                        "normal": ["ccg","ggn","ggc","gcc","cnn","gnn"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["cgc","cnc","ngn","gcg","ggg","nnn","ncn","ccc"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["cgc","cnc","ngn","gcg","ggg","nnn","ncn","ccc","ccgn","gncc","ncgg","ncnc","gngn","gcgc","ggcn","c","g","n","c","g","n"],
-                        "updateCount": 14
                     }
                 ]
               },
@@ -82,24 +58,12 @@
                 },
                 "state":[
                     {
-                        "normal": ["c","g","n","d","e","i","f","j","u","r","k"],
+                        "normal": ["c"],
                         "updateCount": 4
                     },
                     {
-                        "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk"],
+                        "normal": ["g"],
                         "updateCount": 6
-                    },
-                    {
-                        "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["urr","rkk","kdd","djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["ujrr","rrkk","cgg","cjk","fku","ddrn","ccjd","krrn","nndn","rgnd","gkkd","kddg"],
-                        "updateCount": 14
                     }
                 ]
               }
@@ -118,28 +82,20 @@
             "attackSpeed": 40,
             "practiceState": [
                 {
-                    "normal": ["c","g","n","d","e","i","f","j","u","r","k"],
+                    "normal": ["c"],
                     "updateCount": 4
                 },
                 {
-                    "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk"],
+                    "normal": ["d"],
                     "updateCount": 6
-                },
-                {
-                    "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd","c","g","n","d","e","i","f","j","u","r","k"],
-                    "updateCount": 15
-                },
-                {
-                    "normal": ["urr","rkk","kdd","djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","c","g","n","d","e","i","f","j","u","r","k"],
-                    "updateCount": 15
                 }
             ],
             "attackState": {
-                "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","c","g","n","d","e","i","f","j","u","r","k","c","g","n","d","e","i","f","j","u","r","k"],
-                "updateCount": 12
+                "normal": ["d"],
+                "updateCount": 6
             },
             "beatingState": {
-                "normal": ["c","g","n","d","e","i","f","j","u","r","k"],
+                "normal": ["c"],
                 "updateCount": 10,
                 "beatTime": 5
             }
