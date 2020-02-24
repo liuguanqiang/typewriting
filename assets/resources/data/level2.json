@@ -84,14 +84,10 @@
                 {
                     "normal": ["c"],
                     "updateCount": 4
-                },
-                {
-                    "normal": ["d"],
-                    "updateCount": 6
                 }
             ],
             "attackState": {
-                "normal": ["d"],
+                "normal": ["we","ab","bc","cg","dy"],
                 "updateCount": 6
             },
             "beatingState": {

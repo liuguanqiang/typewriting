@@ -27,7 +27,8 @@ cc.Class({
         this.node.setPosition(point);
         if (text.length > 1) {
             this.comLetterLabel._updateRenderData(true);
-            this.bg.width = this.letterLabel.width + 50;
+            const w = this.letterLabel.width > 20 ? this.letterLabel.width : 20;
+            this.bg.width = w + 40;
         }
         if (this.speed != -1) {
             this.isPlay = true;

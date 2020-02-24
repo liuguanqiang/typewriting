@@ -73,39 +73,40 @@ cc.Class({
                 this._armatureDisPlay.playAnimation('生气', 0);
                 setTimeout(() => {
                     this.onAttackAnimation();
-                }, 800);
+                }, 1500);
             }
         } else {
             let count = 0;
             if (aniIndex == 1) {
                 this._armatureDisPlay.playAnimation('状态2左攻击', 1);
                 this.schedule(function () {
-                    this.baseJS.createLetterItem(cc.v2(-88 - count * 60, 105));
+                    this.baseJS.createLetterItem(cc.v2(-108 - count * 90, 105));
                     count++;
                     if (count == 3) {
                         this._armatureDisPlay.playAnimation('状态2待机', 0);
                         setTimeout(() => {
                             this.onAttackAnimation();
-                        }, 800);
+                        }, 2000);
                     }
-                }, 0.2, 2, 0.2);
+                }, 0.3, 2, 0.3);
             } else if (aniIndex == 2) {
                 this._armatureDisPlay.playAnimation('状态2右攻击', 1);
                 this.schedule(function () {
-                    this.baseJS.createLetterItem(cc.v2(88 + count * 60, 105));
+                    this.baseJS.createLetterItem(cc.v2(108 + count * 90, 105));
                     count++;
                     if (count == 3) {
-                        this._armatureDisPlay.playAnimation('状态2待机', 0);
-                        setTimeout(() => {
-                            this.onAttackAnimation();
-                        }, 500);
+                        this.onAttackAnimation();
+                        // this._armatureDisPlay.playAnimation('状态2待机', 0);
+                        // setTimeout(() => {
+                        //     this.onAttackAnimation();
+                        // }, 500);
                     }
-                }, 0.2, 2, 0.2);
+                }, 0.3, 2, 0.3);
             } else if (aniIndex == 3) {
                 this._armatureDisPlay.playAnimation('状态2生气', 0);
                 setTimeout(() => {
                     this.onAttackAnimation();
-                }, 800);
+                }, 2500);
             }
         }
     },
