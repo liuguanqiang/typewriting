@@ -267,12 +267,12 @@ cc.Class({
                 this.winPop.active = false;
                 this.Keyboard.active = true;
             });
-            this.onWinShowNovicePop(isBoss);
+            this.onWinShowNovicePop(isBoss, num);
         }, delayDate);
     },
 
     //胜利窗口判断是否需要显示引导
-    onWinShowNovicePop(isBoss) {
+    onWinShowNovicePop(isBoss, num) {
         //第一次练习关卡胜利  sectionId=0  第一次boss关卡胜利sectionId=1
         const sectionId = isBoss ? 1 : 0;
         //第一次显示胜利窗口判断  后台数据中 chapterId=-1 
@@ -289,7 +289,7 @@ cc.Class({
                     { showArrowIndex: 2, x: -128, y: -211 }];
                     this.onNoviceGuidePop(8, arrowDatas, true);
                 }
-            }, 3000);
+            }, 2100 + num * 300);
         }
     },
 

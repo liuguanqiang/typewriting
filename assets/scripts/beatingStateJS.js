@@ -153,6 +153,7 @@ cc.Class({
     gameOver(lastHighIndex) {
         setTimeout(() => {
             if (this.isWin == true) {
+                this.onWin();
                 return;
             }
             if (this.Blood.active) {
@@ -186,6 +187,7 @@ cc.Class({
             }
         }
         if (lastHighIndex != 0) {
+            window.GameAudioJS().onPlayBossBG();
             this.createShockEff(lastHighIndex);
         }
         this.gameOver(lastHighIndex);
@@ -237,27 +239,30 @@ cc.Class({
         this.bossNode.residueBlood = residueBlood;
         if (residueBlood == 0) {
             this.isWin = true;
-            const accuracy = this.gameJS.hitOKCount / (this.gameJS.hitOKCount + this.gameJS.hitErrorCount);
-            this.gameJS.onRunTimer(false);
-            console.log("this.gameJS.hitTimeOffset ", this.gameJS.hitTimeOffset);
-            console.log("this.accuracy ", accuracy);
-            let starNum = 1;
-            //三星 两星判断
-            const isThreeAccuracy = accuracy >= this.bossData.threeStars.accuracy;
-            const isThreeHitTimeOffset = this.gameJS.hitTimeOffset <= this.bossData.threeStars.time;
-            if (isThreeAccuracy && isThreeHitTimeOffset) {
-                starNum = 3;
-            } else if (accuracy >= this.bossData.twoStars) {
-                starNum = 2;
-            }
-            const bossIndex = this.gameJS.getCurLevelData().exercise.exerciseState.length;
-            this.gameJS.onUpdateProgressData(starNum, bossIndex);
-            this.gameJS.onWinPop(starNum, isThreeAccuracy, isThreeHitTimeOffset, this.bossData, (id) => {
-                if (id == 2) {
-                    this.gameJS.checkGotoQTE(false);
-                }
-            });
         }
+    },
+
+    onWin() {
+        const accuracy = this.gameJS.hitOKCount / (this.gameJS.hitOKCount + this.gameJS.hitErrorCount);
+        this.gameJS.onRunTimer(false);
+        console.log("this.gameJS.hitTimeOffset ", this.gameJS.hitTimeOffset);
+        console.log("this.accuracy ", accuracy);
+        let starNum = 1;
+        //三星 两星判断
+        const isThreeAccuracy = accuracy >= this.bossData.threeStars.accuracy;
+        const isThreeHitTimeOffset = this.gameJS.hitTimeOffset <= this.bossData.threeStars.time;
+        if (isThreeAccuracy && isThreeHitTimeOffset) {
+            starNum = 3;
+        } else if (accuracy >= this.bossData.twoStars) {
+            starNum = 2;
+        }
+        const bossIndex = this.gameJS.getCurLevelData().exercise.exerciseState.length;
+        this.gameJS.onUpdateProgressData(starNum, bossIndex);
+        this.gameJS.onWinPop(starNum, isThreeAccuracy, isThreeHitTimeOffset, this.bossData, (id) => {
+            if (id == 2) {
+                this.gameJS.checkGotoQTE(false);
+            }
+        });
     },
 
     //打完一个字母
