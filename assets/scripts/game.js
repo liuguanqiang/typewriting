@@ -282,11 +282,11 @@ cc.Class({
             this.onRequestSetUserPorgress(-1, sectionId, 1);
             setTimeout(() => {
                 if (!isBoss) {
-                    const arrowDatas = [{ showArrowIndex: 2, x: 634 - this.node.width / 2, y: this.node.height / 2 - 598 }];
+                    const arrowDatas = [{ showArrowIndex: 2, x: 130, y: -211 }];
                     this.onNoviceGuidePop(3, arrowDatas, true);
                 } else {
-                    const arrowDatas = [{ showArrowIndex: 1, x: 550 - this.node.width / 2, y: this.node.height / 2 - 598 },
-                    { showArrowIndex: 2, x: 386 - this.node.width / 2, y: this.node.height / 2 - 598 }];
+                    const arrowDatas = [{ showArrowIndex: 1, x: 42, y: -211 },
+                    { showArrowIndex: 2, x: -128, y: -211 }];
                     this.onNoviceGuidePop(8, arrowDatas, true);
                 }
             }, 3000);
@@ -325,7 +325,7 @@ cc.Class({
             //第一次过后 往数据库插入一条数据作为标记 后续胜利不在显示引导窗口
             this.onRequestSetUserPorgress(-1, sectionId, 1);
             setTimeout(() => {
-                const arrowDatas = [{ showArrowIndex: 1, x: 580 - this.node.width / 2, y: this.node.height / 2 - 552 }];
+                const arrowDatas = [{ showArrowIndex: 1, x: 72, y: -168 }];
                 this.onNoviceGuidePop(7, arrowDatas, true);
             }, 1500);
         }
