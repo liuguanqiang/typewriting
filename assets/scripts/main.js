@@ -19,7 +19,7 @@ cc.Class({
         let userId = gameLocalData.UserID;
         if (!userId) {
             userId = this.randomToFloor(100000, 999999);
-            gameLocalData.UserID = 123123;
+            gameLocalData.UserID = 123902;
         }
         window.GamePersistRootJS().initPersistRootNode();
         window.GameAudioJS().onPlayHomeBG();
