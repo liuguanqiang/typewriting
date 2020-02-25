@@ -111,14 +111,15 @@ cc.Class({
     },
 
     onWin() {
+        //this._armatureDisPlay.playAnimation('死亡', 1);
         return 0;
     },
     onStop() {
+        this.stopAni = true;
         if (this.state === 1) {
             this._armatureDisPlay.playAnimation('呼吸', 1);
         } else {
             this._armatureDisPlay.playAnimation('露弱点呼吸', 1);
         }
-        this.stopAni = true;
     }
 });

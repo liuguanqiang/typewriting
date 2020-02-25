@@ -463,12 +463,23 @@ cc.Class({
     },
 
     //闪烁光效
-    onPlayLighting() {
-        let action1 = cc.fadeTo(0.3, 255);
+    onPlayLighting(isRed, isPlay = true) {
+        if (!isPlay) {
+            this.Lighting.stopAllActions();
+            this.Lighting.opacity = 0;
+            return;
+        }
+        this.Lighting.color = isRed ? new cc.color(255, 46, 97, 255) : new cc.color(220, 220, 220, 255);
+        const time = isRed ? 0.3 : 0.5;
+        let action1 = cc.fadeTo(time, 255);
         action1.easing(cc.easeIn(1));
-        let action2 = cc.fadeTo(0.3, 0);
+        let action2 = cc.fadeTo(time, 0);
         action2.easing(cc.easeOut(1));
-        this.Lighting.runAction(cc.repeat(cc.sequence(action1, action2), 3));
+        if (isRed) {
+            this.Lighting.runAction(cc.repeat(cc.sequence(action1, action2), 3));
+        } else {
+            this.Lighting.runAction(cc.repeatForever(cc.sequence(action1, action2)));
+        }
     },
     bgMove(bgList) {
         for (var index = 0; index < bgList.length; index++) {

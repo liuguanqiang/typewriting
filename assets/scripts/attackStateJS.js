@@ -19,7 +19,7 @@ cc.Class({
             this.isFristInit = true;
             this.id = id;
             this.gameJS = gameJS;
-            this.gameJS.onPlayLighting();
+            this.gameJS.onPlayLighting(true);
             this.bossIndex = this.gameJS.gotoGameData.chapterId;
             this.createBoss();
             this.gameJS.Bosslayer.addChild(this.bossNode);

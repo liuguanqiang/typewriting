@@ -39,6 +39,7 @@ cc.Class({
         setTimeout(() => {
             //播放背景音乐
             window.GameAudioJS().onPlayQTEBG();
+            this.gameJS.onPlayLighting(false);
         }, 2000);
         this.isWin = false;
         this.onUpdatePoolData();
@@ -190,6 +191,7 @@ cc.Class({
             window.GameAudioJS().onPlayBossBG();
             this.createShockEff(lastHighIndex);
         }
+        this.gameJS.onPlayLighting(false, false);
         this.gameOver(lastHighIndex);
     },
 

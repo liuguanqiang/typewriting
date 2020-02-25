@@ -112,11 +112,11 @@ cc.Class({
         return 1500;
     },
     onStop() {
+        this.stopAni = true;
         if (this.state === 1) {
             this._armatureDisPlay.playAnimation('状态1待机', 1);
         } else {
             this._armatureDisPlay.playAnimation('状态2待机', 1);
         }
-        this.stopAni = true;
     }
 });

@@ -68,12 +68,12 @@
             "practiceState": [
                 {
                     "normal": ["j"],
-                    "updateCount": 4
+                    "updateCount": 2
                 }
             ],
             "attackState": {
                 "normal": ["j"],
-                "updateCount": 8
+                "updateCount": 4
             },
             "beatingState": {
                 "normal": ["j"],
