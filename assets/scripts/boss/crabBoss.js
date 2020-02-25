@@ -15,6 +15,7 @@ cc.Class({
         this._armatureDisPlay = this.getComponent(dragonBones.ArmatureDisplay)
         //获取 Armatrue
         this._armature = this._armatureDisPlay.armature();
+        this.isTwo = false;
     },
 
 
@@ -25,6 +26,7 @@ cc.Class({
 
     playAnimation(isFrist, bloodRatio) {
         this.stopAni = false;
+        this.state = bloodRatio > 0.5 ? 1 : 2;
         this.initAniIndex = 0;
         if (isFrist) {
             this.playEnter();
@@ -32,30 +34,71 @@ cc.Class({
                 this.onAttackAnimation();
             }, 2200);
         } else {
-            this.onAttackAnimation();
+            if (!this.isTwo && this.state == 2) {
+                this.isTwo = true;
+                this._armatureDisPlay.playAnimation('露弱点', 1);
+                setTimeout(() => {
+                    this.onAttackAnimation();
+                }, 1300);
+            } else {
+                this.onAttackAnimation();
+            }
         }
     },
     //开始发射字符
     onAttackAnimation() {
         if (this.stopAni) return;
         const aniIndex = this.onGetAniIndex();
-        if (aniIndex == 1) {
-            this._armatureDisPlay.playAnimation('左手扔', 1);
-            setTimeout(() => {
-                this.baseJS.createLetterItem(cc.v2(-155, 170));
-                this.onAttackAnimation();
-            }, 500);
-        } else if (aniIndex == 2) {
-            this._armatureDisPlay.playAnimation('右手扔', 1);
-            setTimeout(() => {
-                this.baseJS.createLetterItem(cc.v2(155, 170));
-                this.onAttackAnimation();
-            }, 500);
-        } else if (aniIndex == 3) {
-            this._armatureDisPlay.playAnimation('呼吸', 0);
-            setTimeout(() => {
-                this.onAttackAnimation();
-            }, 800);
+        if (this.state == 1) {
+            if (aniIndex == 1) {
+                this._armatureDisPlay.playAnimation('左手扔', 1);
+                setTimeout(() => {
+                    this.baseJS.createLetterItem(cc.v2(-115, 150));
+                    this.onAttackAnimation();
+                }, 500);
+            } else if (aniIndex == 2) {
+                this._armatureDisPlay.playAnimation('右手扔', 1);
+                setTimeout(() => {
+                    this.baseJS.createLetterItem(cc.v2(115, 150));
+                    this.onAttackAnimation();
+                }, 500);
+            } else if (aniIndex == 3) {
+                this._armatureDisPlay.playAnimation('发怒', 1);
+                setTimeout(() => {
+                    this.onAttackAnimation();
+                }, 1400);
+            }
+        } else {
+            let count = 0;
+            if (aniIndex == 1) {
+                this._armatureDisPlay.playAnimation('露弱点左手扔', 1);
+                this.schedule(function () {
+                    // this.baseJS.createLetterItem(cc.v2(-155, 170));
+                    this.baseJS.createLetterItem(cc.v2(-60 - count * 90, 150));
+                    count++;
+                    if (count == 2) {
+                        this._armatureDisPlay.playAnimation('露弱点呼吸', 1);
+                        setTimeout(() => {
+                            this.onAttackAnimation();
+                        }, 1400);
+                    }
+                }, 0.3, 1, 0.3);
+            } else if (aniIndex == 2) {
+                this._armatureDisPlay.playAnimation('露弱点右手扔', 1);
+                this.schedule(function () {
+                    // this.baseJS.createLetterItem(cc.v2(-155, 170));
+                    this.baseJS.createLetterItem(cc.v2(60 + count * 90, 150));
+                    count++;
+                    if (count == 2) {
+                        this.onAttackAnimation();
+                    }
+                }, 0.3, 1, 0.3);
+            } else if (aniIndex == 3) {
+                this._armatureDisPlay.playAnimation('发怒', 1);
+                setTimeout(() => {
+                    this.onAttackAnimation();
+                }, 1400);
+            }
         }
     },
 
@@ -71,7 +114,11 @@ cc.Class({
         return 0;
     },
     onStop() {
-        this._armatureDisPlay.playAnimation('呼吸', 1);
+        if (this.state === 1) {
+            this._armatureDisPlay.playAnimation('呼吸', 1);
+        } else {
+            this._armatureDisPlay.playAnimation('露弱点呼吸', 1);
+        }
         this.stopAni = true;
     }
 });
