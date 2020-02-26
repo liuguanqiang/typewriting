@@ -1,33 +1,23 @@
+require('gameWindowFun');
 var gameLocalData = {};
-var getLocalData = function (key, callback, cancelBtnCallback) {
+var getLocalData = function (key) {
     gameLocalData = gameLocalData || {};
     // 返回缓存数据
     if (gameLocalData[key] !== undefined) {
-        if (callback) callback(gameLocalData[key]);
         return gameLocalData[key];
     }
-    // 进一步，查找本地数据
-    let str = window.ShellJS().getLocalStorageItem(key);
-    if (str == null || str === '') {
-        gameLocalData[key] = null;
-    } else {
-        gameLocalData[key] = JSON.parse(str);
+    if (window.isShell) {
+        // 进一步，查找本地数据
+        let str = window.parent.ShellJS().getLocalStorageItem(key);
+        if (str == null || str === '') {
+            gameLocalData[key] = null;
+        } else {
+            gameLocalData[key] = JSON.parse(str);
+        }
     }
-    if (callback) callback(gameLocalData[key]);
     return gameLocalData[key];
 };
-var setLocalData = function (value, key) {
-    gameLocalData = gameLocalData || {};
-    gameLocalData[key] = value;
-    var valueStr = JSON.stringify(value);
 
-    // 写入本地数据
-    if (valueStr !== window.ShellJS().getLocalStorageItem(key)) {
-        window.ShellJS().setLocalStorageItem(key, valueStr);
-        return true;
-    }
-    return false;
-};
 var setCacheData = function (value, key, additional) {
     for (var k in additional) {
         if (additional.hasOwnProperty(k)) {
@@ -47,30 +37,22 @@ var getCacheData = function (key, additional) {
         return gameLocalData[key];
     }
 };
-var removeCacheData = function (key, additional) {
-    for (var k in additional) {
-        if (additional.hasOwnProperty(k)) {
-            key += '__' + k + '_' + additional[k];
-        }
-    }
-    delete (gameLocalData[key]);
-};
-
 module.exports = {
-    // ---------------------------------- 缓存数据 ----------------------------------
+    set UserId(value) {
+        return setCacheData(value, "userId");
+    },
+    get UserId() {
+        return getLocalData("userId");
+    },
+
+    
     set GameData(value) {
         return setCacheData(value, "gameData");
     },
     get GameData() {
         return getCacheData("gameData");
     },
-    // ---------------------------------- 缓存数据 ----------------------------------
-    set UserID(value) {
-        return setCacheData(value, "userID");
-    },
-    get UserID() {
-        return getCacheData("userID");
-    },
+
     //用户选择进入游戏时缓存关卡数据
     set GotoGameData(value) {
         return setCacheData(value, "gotoGameData");
@@ -93,14 +75,5 @@ module.exports = {
     get IsPause() {
         return getCacheData("isPause");
     },
-    // ---------------------------------- 本地数据 ----------------------------------
-    //最新任务时间戳
-    set TaskNewTime(value) {
-        return setLocalData(value, 'taskNewTime_' + this.UserId);
-    },
-    get TaskNewTime() {
-        return getLocalData('taskNewTime_' + this.UserId);
-    },
-
 };
 

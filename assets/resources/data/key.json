@@ -8,51 +8,61 @@
         {
             "key": "!\n1",
             "fontSize": 16,
+            "handIndex": 4,
             "code": 49
         },
         {
             "key": "@\n2",
             "fontSize": 16,
+            "handIndex": 5,
             "code": 50
         },
         {
             "key": "#\n3",
             "fontSize": 16,
+            "handIndex": 6,
             "code": 51
         },
         {
             "key": "$\n4",
             "fontSize": 16,
+            "handIndex": 7,
             "code": 52
         },
         {
             "key": "%\n5",
             "fontSize": 16,
+            "handIndex": 8,
             "code": 53
         },
         {
             "key": "^\n6",
             "fontSize": 16,
+            "handIndex": 9,
             "code": 54
         },
         {
             "key": "&\n7",
             "fontSize": 16,
+            "handIndex": 10,
             "code": 55
         },
         {
             "key": "*\n8",
             "fontSize": 16,
+            "handIndex": 11,
             "code": 56
         },
         {
             "key": "(\n9",
             "fontSize": 16,
+            "handIndex": 12,
             "code": 57
         },
         {
             "key": ")\n0",
             "fontSize": 16,
+            "handIndex": 3,
             "code": 48
         },
         {
@@ -82,34 +92,44 @@
             "active": false
         },
         {
-            "key": "Q"
+            "key": "Q",
+            "handIndex": 35
         },
         {
-            "key": "W"
+            "key": "W",
+            "handIndex": 41
         },
         {
-            "key": "E"
+            "key": "E",
+            "handIndex": 23
         },
         {
-            "key": "R"
+            "key": "R",
+            "handIndex": 36
         },
         {
-            "key": "T"
+            "key": "T",
+            "handIndex": 38
         },
         {
-            "key": "Y"
+            "key": "Y",
+            "handIndex": 43
         },
         {
-            "key": "U"
+            "key": "U",
+            "handIndex": 39
         },
         {
-            "key": "I"
+            "key": "I",
+            "handIndex": 27
         },
         {
-            "key": "O"
+            "key": "O",
+            "handIndex": 33
         },
         {
-            "key": "P"
+            "key": "P",
+            "handIndex": 34
         },
         {
             "key": "{\n[",
@@ -135,40 +155,51 @@
             "active": false
         },
         {
-            "key": "A"
+            "key": "A",
+            "handIndex": 19
         },
         {
-            "key": "S"
+            "key": "S",
+            "handIndex": 37
         },
         {
-            "key": "D"
+            "key": "D",
+            "handIndex": 22
         },
         {
-            "key": "F"
+            "key": "F",
+            "handIndex": 24
         },
         {
-            "key": "G"
+            "key": "G",
+            "handIndex": 25
         },
         {
-            "key": "H"
+            "key": "H",
+            "handIndex": 26
         },
         {
-            "key": "J"
+            "key": "J",
+            "handIndex": 28
         },
         {
-            "key": "K"
+            "key": "K",
+            "handIndex": 29
         },
         {
-            "key": "L"
+            "key": "L",
+            "handIndex": 30
         },
         {
             "key": ":\n;",
             "fontSize": 16,
+            "handIndex": 0,
             "code": 186
         },
         {
             "key": "\"\n'",
             "fontSize": 16,
+            "handIndex": 1,
             "code": 222
         },
         {
@@ -176,6 +207,7 @@
             "width": 1.85,
             "horizontal": 3,
             "fontSize": 16,
+            "handIndex": 14,
             "code": 13,
             "active": false
         },
@@ -188,39 +220,49 @@
             "active": false
         },
         {
-            "key": "Z"
+            "key": "Z",
+            "handIndex": 44
         },
         {
-            "key": "X"
+            "key": "X",
+            "handIndex": 42
         },
         {
-            "key": "C"
+            "key": "C",
+            "handIndex": 21
         },
         {
-            "key": "V"
+            "key": "V",
+            "handIndex": 40
         },
         {
-            "key": "B"
+            "key": "B",
+            "handIndex": 20
         },
         {
-            "key": "N"
+            "key": "N",
+            "handIndex": 32
         },
         {
-            "key": "M"
+            "key": "M",
+            "handIndex": 31
         },
         {
             "key": "<\n,",
             "fontSize": 16,
+            "handIndex": 13,
             "code": 188
         },
         {
             "key": ">\n.",
             "fontSize": 16,
+            "handIndex": 15,
             "code": 190
         },
         {
             "key": "?\n/",
             "fontSize": 16,
+            "handIndex": 2,
             "code": 191
         },
         {
@@ -256,6 +298,7 @@
         {
             "key": "",
             "width": 7.6,
+            "handIndex": 16,
             "code": 32
         },
         {

@@ -74,7 +74,7 @@ cc.Class({
                 this._armatureDisPlay.playAnimation('露弱点左手扔', 1);
                 this.schedule(function () {
                     // this.baseJS.createLetterItem(cc.v2(-155, 170));
-                    this.baseJS.createLetterItem(cc.v2(-60 - count * 90, 150));
+                    this.baseJS.createLetterItem(cc.v2(-60 - count * 86, 150));
                     count++;
                     if (count == 2) {
                         this._armatureDisPlay.playAnimation('露弱点呼吸', 1);
@@ -87,7 +87,7 @@ cc.Class({
                 this._armatureDisPlay.playAnimation('露弱点右手扔', 1);
                 this.schedule(function () {
                     // this.baseJS.createLetterItem(cc.v2(-155, 170));
-                    this.baseJS.createLetterItem(cc.v2(60 + count * 90, 150));
+                    this.baseJS.createLetterItem(cc.v2(60 + count * 86, 150));
                     count++;
                     if (count == 2) {
                         this.onAttackAnimation();

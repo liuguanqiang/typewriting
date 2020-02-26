@@ -14,6 +14,7 @@ cc.Class({
         const label = this.KeyLabel.getComponent(cc.Label);
         label.string = keyData.key;
         this.keyValue = keyData.key;
+        this.handIndex = keyData.handIndex;
         if (!keyData.code) {
             this.keyCode = keyData.key.charCodeAt();
         } else {
@@ -37,6 +38,11 @@ cc.Class({
             label.verticalAlign = cc.Label.VerticalAlign.BOTTOM;
         }
         this.canClick = keyData.active !== false;
+    },
+    onSetActive(isActive) {
+        const index = isActive ? 0 : 2;
+        this.bg.getComponent(cc.Sprite).spriteFrame = this.keySpriteFrame[index];
+        this.bg.width = this.node.width;
     },
     onClick(isCorrect) {
         const index = isCorrect ? 0 : 1;

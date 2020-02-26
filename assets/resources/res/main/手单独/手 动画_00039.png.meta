@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "fa95bc8e-f781-454a-a895-b9f7c8205ad1",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "手 动画_00039": {
+      "ver": "1.0.3",
+      "uuid": "48714f28-c650-41e2-87ce-5e2d5736e74b",
+      "rawTextureUuid": "fa95bc8e-f781-454a-a895-b9f7c8205ad1",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -30.5,
+      "offsetY": -3.5,
+      "trimX": 120,
+      "trimY": 66,
+      "width": 519,
+      "height": 345,
+      "rawWidth": 820,
+      "rawHeight": 470,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

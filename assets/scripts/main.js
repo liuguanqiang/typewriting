@@ -10,17 +10,18 @@ cc.Class({
         NoviceGuidePop: cc.Node,
         videoLayout: cc.Node,
         videoPlayer: cc.Node,
+        userIDLab: cc.Node,
     },
 
     start() {
         cc.director.preloadScene('gameScene');
     },
     onLoad() {
-        let userId = gameLocalData.UserID;
+        let userId = gameLocalData.UserId;
         if (!userId) {
-            userId = this.randomToFloor(100000, 999999);
-            gameLocalData.UserID = 123123;
+            gameLocalData.UserId = 100000;
         }
+        this.userIDLab.getComponent(cc.Label).string = gameLocalData.UserId;
         window.GamePersistRootJS().initPersistRootNode();
         window.GameAudioJS().onPlayHomeBG();
         for (let i = 0; i < this.LevelJsons.length; i++) {
@@ -30,15 +31,15 @@ cc.Class({
             gameItem.getComponent("gameItem").onInit(i, data);
         }
         // window.GameUserJS().requestSetUserPorgress(() => { }, {
-        //     "userId": gameLocalData.UserID,
+        //     "userId": gameLocalData.UserId,
         //     "chapterId": 2,
         //     "sectionId": 0,
         //     "score": 0
         // });
-        window.GameUserJS().requestGetUserList((res) => {
-            if (res.length == 0) {
+        window.GameUserJS().requestGetUserList(gameLocalData.UserId, (res) => {
+            if (!res || res.length == 0) {
                 res = [{
-                    "userId": gameLocalData.UserID,
+                    "userId": gameLocalData.UserId,
                     "chapterId": 0,
                     "sectionId": 0,
                     "score": 0
@@ -53,7 +54,7 @@ cc.Class({
                 const item = this.ScrollContent.children[i];
                 item.getComponent("gameItem").onSetProgressData(res);
             }
-        }, gameLocalData.UserID);
+        });
     },
 
     onPlayVideo() {
@@ -68,7 +69,7 @@ cc.Class({
                 const arrowDatas = [{ showArrowIndex: 1, x: 455 - this.node.width / 2, y: this.node.height / 2 - 222 }];
                 this.NoviceGuidePop.getComponent("noviceGuidePop").onInit(0, arrowDatas);
             })
-            this.videoPlayer.getComponent(cc.VideoPlayer).remoteURL = "https://client-hot-update.oss-cn-beijing.aliyuncs.com/typingResource/movie.mp4";
+            this.videoPlayer.getComponent(cc.VideoPlayer).remoteURL = window.VideoUrl("movie.mp4");
         }, 1000);
     },
     //获取随机数 取整

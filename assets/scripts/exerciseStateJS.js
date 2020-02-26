@@ -155,6 +155,7 @@ cc.Class({
                             this.onUpdatePoolData();
                         }
                     } else {
+                        this.gameJS.KeyboardJS.onHandOver();
                         this.gameJS.onBack();
                     }
                 }

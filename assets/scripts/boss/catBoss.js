@@ -72,7 +72,7 @@ cc.Class({
             if (aniIndex == 1) {
                 this._armatureDisPlay.playAnimation('状态2攻击1', 1);
                 this.schedule(function () {
-                    this.baseJS.createLetterItem(cc.v2(-108 - count * 90, 105));
+                    this.baseJS.createLetterItem(cc.v2(-108 - count * 86, 105));
                     count++;
                     if (count == 3) {
                         this._armatureDisPlay.playAnimation('状态2待机', 0);
@@ -84,7 +84,7 @@ cc.Class({
             } else if (aniIndex == 2) {
                 this._armatureDisPlay.playAnimation('状态2攻击2', 1);
                 this.schedule(function () {
-                    this.baseJS.createLetterItem(cc.v2(108 + count * 90, 105));
+                    this.baseJS.createLetterItem(cc.v2(108 + count * 86, 105));
                     count++;
                     if (count == 3) {
                         this._armatureDisPlay.playAnimation('状态2待机', 0);

@@ -170,7 +170,9 @@ cc.Class({
                 return;
             }
             ++this.correctCount;
-            const keyboardPoint = this.KeyboardJS.onKeyDown(KeyData.index, true);
+            const isKeyBgChange = this.curStateIndex != 0;
+            const keyboardPoint = this.KeyboardJS.onKeyDown(KeyData.index, true, isKeyBgChange);
+            this.setHandImg();
             if (curAnchorLetterJS.launchBullet !== false) {
                 this.createBulletItem(curAnchorLetterJS, keyboardPoint);
             }
@@ -199,7 +201,21 @@ cc.Class({
             if (!item.isFinish) {
                 this.curAnchorLetter = item;
                 this.curAnchorLetter.getComponent("letterRect").setAnchor(() => this.onFinishOnce(), () => this.onLose());
+                this.setHandImg();
                 return;
+            }
+        }
+    },
+
+    //手势图判断
+    setHandImg() {
+        if (this.curStateIndex != 0) {
+            return;
+        }
+        if (this.curAnchorLetter) {
+            const zm = this.curAnchorLetter.getComponent("letterRect").getFristLetter();
+            if (zm) {
+                this.KeyboardJS.setHandImg(zm);
             }
         }
     },
@@ -376,7 +392,7 @@ cc.Class({
 
     onRequestSetUserPorgress(chapterId, sectionId, score) {
         const param = {
-            "userId": gameLocalData.UserID,
+            "userId": gameLocalData.UserId,
             "chapterId": chapterId,
             "sectionId": sectionId,
             "score": score

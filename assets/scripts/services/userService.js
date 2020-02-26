@@ -17,7 +17,7 @@ cc.Class({
         }, param);
     },
 
-    requestGetUserList(callback, userId) {
+    requestGetUserList(userId, callback) {
         window.GameHttpJS().sendGet(`/einstein-logic/v1/typingGame/progressByFilter?current=1&pageSize=1000&order=id&sortMode=ascend&filter={"userId": ${userId}}`, (response, xhr) => {
             if (response) {
                 if (callback) callback(response.data);

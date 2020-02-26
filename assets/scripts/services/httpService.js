@@ -16,7 +16,7 @@ cc.Class({
         if (window.isIOS) {
             this.urlStr = base.url;
         } else {
-            this.urlStr = "https://api.testing8.hetao101.com";
+            this.urlStr = "https://api.hetao101.com";
         }
     },
 
