@@ -259,7 +259,6 @@ cc.Class({
         const isBoss = this.curStateIndex != 0;
         let delayDate = 500;
         if (isBoss) {
-            delayDate = 1000;
             delayDate += this.stateJSNode.getComponent("attackStateJS").onWin();
         }
         setTimeout(() => {

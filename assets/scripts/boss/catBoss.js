@@ -108,7 +108,7 @@ cc.Class({
         return this.initAniIndex;
     },
     onWin() {
-        this._armatureDisPlay.playAnimation('失败待机', 1);
+        this._armatureDisPlay.playAnimation('死亡', 1);
         return 1500;
     },
     onStop() {

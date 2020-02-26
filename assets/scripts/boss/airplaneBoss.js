@@ -119,8 +119,8 @@ cc.Class({
         return this.initAniIndex;
     },
     onWin() {
-        // this._armatureDisPlay.playAnimation('战损', 1);
-        return 0;
+        this._armatureDisPlay.playAnimation('死亡', 1);
+        return 1500;
     },
     onStop() {
         this.stopAni = true;

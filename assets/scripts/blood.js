@@ -26,9 +26,12 @@ cc.Class({
         this.curBlood = (this.curBlood - increment) > 0 ? (this.curBlood - increment) : 0;
         const xBlood = Math.ceil(this.curBlood / 10);
         const yBlood = this.curBlood % 10 == 0 ? 10 : this.curBlood % 10;
-        this.node.getComponent(cc.ProgressBar).progress = yBlood / 10;
+        if(this.curBlood==0){
+            this.node.getComponent(cc.ProgressBar).progress =0;
+        }else{
+            this.node.getComponent(cc.ProgressBar).progress = yBlood / 10;
+        }
         this.HaemalCountLabel.getComponent(cc.Label).string = "x" + xBlood;
-
         const offset = oldBlood - this.curBlood;
         this.schedule(function () {
             this.NumLabel.getComponent(cc.Label).string = "-" + ++this.num;

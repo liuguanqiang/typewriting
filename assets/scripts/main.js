@@ -19,7 +19,7 @@ cc.Class({
     onLoad() {
         let userId = gameLocalData.UserId;
         if (!userId) {
-            gameLocalData.UserId = 100000;
+            gameLocalData.UserId = 123123;
         }
         this.userIDLab.getComponent(cc.Label).string = gameLocalData.UserId;
         window.GamePersistRootJS().initPersistRootNode();

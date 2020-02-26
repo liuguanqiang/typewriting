@@ -82,7 +82,7 @@ cc.Class({
 
     //胜利
     onWin() {
-        this.bossJS.onWin();
+        return this.bossJS.onWin();
     },
 
     //获取对应刷新池数据

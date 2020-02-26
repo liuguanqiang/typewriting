@@ -18,7 +18,6 @@ cc.Class({
         this.isTwo = false;
     },
 
-
     //如果用户第一次进入boss  用于引导显示
     playEnter() {
         this._armatureDisPlay.playAnimation('走', 0);
@@ -111,8 +110,8 @@ cc.Class({
     },
 
     onWin() {
-        //this._armatureDisPlay.playAnimation('死亡', 1);
-        return 0;
+        this._armatureDisPlay.playAnimation('死亡', 1);
+        return 1500;
     },
     onStop() {
         this.stopAni = true;
