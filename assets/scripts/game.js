@@ -352,8 +352,10 @@ cc.Class({
             return;
         cc.director.pause();//暂停
         this.pausePop.active = true;
+        gameLocalData.IsPause = true;
         this.pausePop.getComponent("pausePop").onInit((id) => {
             this.pausePop.active = false;
+            gameLocalData.IsPause = false;
             cc.director.resume();
             window.GameAudioJS().onPlayBtn();
             if (id == 1) {

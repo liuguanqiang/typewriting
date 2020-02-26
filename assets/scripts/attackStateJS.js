@@ -149,7 +149,7 @@ cc.Class({
     },
     //创建字母块
     createLetterItem(point) {
-        if (this.isStop) return;
+        if (this.isStop || gameLocalData.IsPause) return;
         if (this.letterRectIndex < this.curUpdateCount) {
             const item = this.gameJS.createLetterItem();
             const letterText = this.curNormalLetterPool[this.gameJS.randomToFloor(0, this.curNormalLetterPool.length)];
@@ -164,8 +164,7 @@ cc.Class({
 
     //惩罚一次，当前刷新项+1
     onKeyError() {
-        // ++this.curUpdateCount;
-        // this.isCreateOver = false;
+       
     },
 
     onStop() {

@@ -47,6 +47,10 @@ cc.Class({
     //开始发射字符
     onAttackAnimation() {
         if (this.stopAni) return;
+        if (this.baseJS.isCreateOver) {
+            this.onBreathing(0);
+            return;
+        }
         const aniIndex = this.onGetAniIndex();
         if (this.state == 1) {
             if (aniIndex == 1) {
@@ -109,16 +113,20 @@ cc.Class({
         return this.initAniIndex;
     },
 
+    onBreathing(num) {
+        if (this.state === 1) {
+            this._armatureDisPlay.playAnimation('呼吸', num);
+        } else {
+            this._armatureDisPlay.playAnimation('露弱点呼吸', num);
+        }
+    },
+
     onWin() {
         this._armatureDisPlay.playAnimation('死亡', 1);
         return 1500;
     },
     onStop() {
         this.stopAni = true;
-        if (this.state === 1) {
-            this._armatureDisPlay.playAnimation('呼吸', 1);
-        } else {
-            this._armatureDisPlay.playAnimation('露弱点呼吸', 1);
-        }
+        this.onBreathing(1);
     }
 });

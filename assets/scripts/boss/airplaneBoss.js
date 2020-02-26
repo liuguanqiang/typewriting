@@ -55,6 +55,10 @@ cc.Class({
     //开始发射字符
     onAttackAnimation() {
         if (this.stopAni) return;
+        if (this.baseJS.isCreateOver) {
+            this.onBreathing(0);
+            return;
+        }
         const aniIndex = this.onGetAniIndex();
         if (this.state === 1) {
             if (aniIndex == 1) {
@@ -122,12 +126,15 @@ cc.Class({
         this._armatureDisPlay.playAnimation('死亡', 1);
         return 1500;
     },
+    onBreathing(num) {
+        if (this.state === 1) {
+            this._armatureDisPlay.playAnimation('状态1待机', num);
+        } else {
+            this._armatureDisPlay.playAnimation('状态2待机', num);
+        }
+    },
     onStop() {
         this.stopAni = true;
-        if (this.state === 1) {
-            this._armatureDisPlay.playAnimation('状态1待机', 1);
-        } else {
-            this._armatureDisPlay.playAnimation('状态2待机', 1);
-        }
+        this.onBreathing(1);
     }
 });
