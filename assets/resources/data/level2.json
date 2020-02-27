@@ -5,11 +5,13 @@
         "exercise": {
             "exerciseState": [
                 {
+                    "id":"0201",
                     "isVideo":true,
                     "name": "提升打字速度的方法",
                     "url":"06提升打字速度的方法.mp4"
                 },
                 {
+                "id":"0202",
                 "name": "练习d、e、i",
                 "isVideo":false,
                 "twoStars": 0.8,
@@ -28,8 +30,8 @@
                     }
                 ]
               },
-              
               {
+                "id":"0203",
                 "name": "练习c、g、n",
                 "isVideo":false,
                 "twoStars": 0.8,
@@ -49,6 +51,7 @@
                 ]
               },
               {
+                "id":"0204",
                 "name": "综合练习",
                 "isVideo":false,
                 "twoStars": 0.8,
@@ -70,6 +73,7 @@
             ]
         },
         "boss": {
+            "id":"0205",
             "name": "雷霆",
             "describe": "起飞，旋转，突突突！",
             "twoStars": 0.8,

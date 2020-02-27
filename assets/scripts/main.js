@@ -14,12 +14,18 @@ cc.Class({
     },
 
     start() {
+        cc.director.preloadScene('videoScene');
         cc.director.preloadScene('gameScene');
     },
     onLoad() {
         let userId = gameLocalData.UserId;
         if (!userId) {
             gameLocalData.UserId = 123123;
+        }
+
+        if (!gameLocalData.StratTime) {
+            gameLocalData.StratTime = new Date().getTime();
+            console.log(gameLocalData.StratTime);
         }
         this.userIDLab.getComponent(cc.Label).string = gameLocalData.UserId;
         window.GamePersistRootJS().initPersistRootNode();
@@ -79,9 +85,9 @@ cc.Class({
     },
     onGoHome() {
         if (window.isShell) {
+            const offTime = window.GetSecond(new Date().getTime() - gameLocalData.StratTime);
+            window.requestContentTrack("learning_typing_pageExit", { duration: offTime });
             window.parent.PublicJS().runScene("MainScene");
-            // window.parent.ShellJS().requestTrack("learning_punch_view_reward", courseData.id);
         }
-
-    }
+    },
 });

@@ -5,11 +5,13 @@
         "exercise": {
             "exerciseState": [
                 {
+                    "id":"0101",
                     "isVideo":true,
                     "name": "知道正确的指法",
                     "url":"01正确的指法.mp4"
                 },
                 {
+                "id":"0102",
                 "isVideo":false,
                 "name": "练习j、f键",
                 "twoStars": 0.8,
@@ -29,11 +31,13 @@
                 ]
               },
               {
+                "id":"0103",
                 "isVideo":true,
                 "name": "正确的打字姿势",
                 "url":"03正确的打字姿势.mp4"
               },
               {
+                "id":"0104",
                 "isVideo":false,
                 "name": "练习u、r、k",
                 "twoStars": 0.8,
@@ -55,6 +59,7 @@
             ]
         },
         "boss": {
+            "id":"0105",
             "name": "巨蟹",
             "describe": "我要横着走，谁能挡我？",
             "twoStars": 0.7,

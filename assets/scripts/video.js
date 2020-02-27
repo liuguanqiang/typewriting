@@ -112,9 +112,11 @@ cc.Class({
     if (isPlay) {
       this.videoPlayer.getComponent(cc.VideoPlayer).resume();
       this.btn.spriteFrame = this.btnSF[1];
+      this.onRequestContentTrack("learning_typing_video_play");
     } else {
       this.videoPlayer.getComponent(cc.VideoPlayer).pause();
       this.btn.spriteFrame = this.btnSF[0];
+      this.onRequestContentTrack("learning_typing_video_pause");
     }
   },
   videoPlayCallback() {
@@ -122,11 +124,6 @@ cc.Class({
     if (isPlaying) {
       this.playVideo(false);
     } else {
-      let eventStr = this.isCreate ? "learning_create_video_play_click" : "learning_work_video_play_click";
-      let putData = {
-        //id: this.workData.id
-      }
-      //window.ShellJS().requestTrack(eventStr, null, null, this.isCreate ? null : putData, null, null, null, this.isCreate ? putData : null);
       this.playVideo(true);
     }
   },
@@ -160,8 +157,18 @@ cc.Class({
   },
 
   onQuit() {
+    this.onRequestContentTrack("learning_typing_video_end");
     this.videoPlayer.getComponent(cc.VideoPlayer).stop();
     cc.director.loadScene("mainScene");
+  },
+
+  onRequestContentTrack(eventName) {
+    const data = {
+      chapterId: this.data.id,
+      chapterName: this.data.name,
+      chapterType: "视频"
+    }
+    window.requestContentTrack(eventName, data);
   },
 
   update() {

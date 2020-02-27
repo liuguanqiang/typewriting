@@ -67,7 +67,8 @@ cc.Class({
             const item = this.data[i];
             count += item.updateCount;
         }
-        return count;
+        const curStateData1 = this.gameJS.getCurLevelData().boss;
+        return { sumCount: count, curStateData: curStateData1 };
     },
 
     onKeyDown(code, curAnchorLetter) {

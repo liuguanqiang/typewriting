@@ -104,6 +104,17 @@ cc.Class({
 
     },
 
+    //获取练习关卡总刷新数
+    onGetSumUpdateCount() {
+        let sum = 0;
+        const curStateData1 = this.data.exerciseState[this.levelIndex];
+        for (let j = 0; j < curStateData1.state.length; j++) {
+            const stateItem = curStateData1.state[j];
+            sum += stateItem.updateCount;
+        }
+        return { sumCount: sum, curStateData: curStateData1 };
+    },
+
     //打完一个字母
     finishOnce() {
         for (let i = 0; i < this.gameJS.LetterBoxs.children.length; i++) {

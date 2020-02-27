@@ -30,3 +30,32 @@ window.VideoUrl = function (name) {
     return "https://client-hot-update.oss-cn-beijing.aliyuncs.com/typingResource/" + name;
 };
 
+window.requestContentTrack = function (eventName, data) {
+    console.log("埋点： " + eventName, data);
+    if (window.isShell) {
+        window.parent.ShellJS().requestContentTrack(eventName, data);
+    }
+};
+
+//将毫秒秒转化成“00:00:00”格式
+window.GetSecond = (ms) => {
+    let second = parseInt(ms / 1000);
+    return second;
+
+    // let h = 0, m = 0, s = 0;
+    // if (second >= 60 * 60) {
+    //     h = parseInt(second / (60 * 60));
+    //     second -= h * 60 * 60;
+    // }
+    // if (second >= 60) {
+    //     m = parseInt(second / (60));
+    //     second = second - m * 60;
+    // }
+    // s = second;
+    // h = h < 10 ? "0" + h : h;
+    // m = m < 10 ? "0" + m : m;
+    // s = s < 10 ? "0" + s : s;
+    // return `${h}:${m}:${s}`;
+}
+
+

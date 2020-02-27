@@ -1,5 +1,6 @@
 require('gameWindowFun');
 var gameLocalData = {};
+
 var getLocalData = function (key) {
     gameLocalData = gameLocalData || {};
     // 返回缓存数据
@@ -45,7 +46,7 @@ module.exports = {
         return getLocalData("userId");
     },
 
-    
+
     set GameData(value) {
         return setCacheData(value, "gameData");
     },
@@ -74,6 +75,13 @@ module.exports = {
     },
     get IsPause() {
         return getCacheData("isPause");
+    },
+    //进入游戏时间
+    set StratTime(value) {
+        return setCacheData(value, "stratTime");
+    },
+    get StratTime() {
+        return getCacheData("stratTime");
     },
 };
 

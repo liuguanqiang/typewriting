@@ -1,4 +1,5 @@
 var gameLocalData = require('gameLocalData');
+require('gameWindowFun');
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -31,6 +32,7 @@ cc.Class({
     //设置进度数据
     onSetProgressData(chapterId, progressData) {
         const data = progressData.find(a => a.chapterId == chapterId && a.sectionId == this.sectionId);
+        this.scoreData = data;
         if (data) {
             this.onUnLock();
             this.onLightenStar(data.score);
@@ -54,6 +56,16 @@ cc.Class({
         }
     },
     onPlay() {
+        const score = this.scoreData ? this.scoreData.score : 0;
+        const isPass = score > 0;
+        const data = {
+            pass: isPass,
+            scoreLevel: score,
+            chapterId: this.data.id,
+            chapterName: this.data.name,
+            chapterType: this.isVideo ? "视频" : "练习"
+        }
+        window.requestContentTrack("learning_typing_chapterSelect", data);
         this.cb(this.isVideo);
     }
 })

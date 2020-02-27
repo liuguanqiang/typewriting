@@ -67,9 +67,12 @@ cc.Class({
 
     //关卡切换重置数据
     initSetting() {
+        //记录每个按键正确的个数
         this.hitOKCount = 0;
         this.hitErrorCount = 0;
         this.hitTimeOffset = 0;
+        //记录爆炸了字符块个数
+        this.hitOKRectCount = 0;
     },
 
     //判断进入练习关卡还是boss关卡
@@ -170,6 +173,7 @@ cc.Class({
                 return;
             }
             ++this.correctCount;
+            ++this.hitOKCount;
             const isKeyBgChange = this.curStateIndex != 0;
             const keyboardPoint = this.KeyboardJS.onKeyDown(KeyData.index, true, isKeyBgChange);
             this.setHandImg();
@@ -227,16 +231,17 @@ cc.Class({
 
     //一个字母块打击完成
     onFinishOnce() {
+        ++this.hitOKRectCount;
         window.GameAudioJS().onPlayBullet();
         this.curAnchorLetter.isFinish = true;
         this.curStateJS.finishOnce();
-        ++this.hitOKCount;
         this.onAutoLocation();
     },
 
     //触碰到键盘 失败了
     onLose() {
         this.isLose = true;
+        this.onRunTimer(false);
         this.onFailurePop();
         this.curStateJS.onLose();
         window.GameAudioJS().onPlayLose();
@@ -268,8 +273,10 @@ cc.Class({
             this.winPop.getComponent("winPop").onInit(num, isThreeAccuracy, isThreeHitTimeOffset, data, isBoss, (id) => {
                 window.GameAudioJS().onPlayBtn();
                 if (id == 1) {
+                    this.onBtnRequestTrack("learning_typing_ex_backToMenu", true, isBoss, num, data);
                     this.onGotoMainScene();
                 } else if (id == 2) {
+                    this.onBtnRequestTrack("learning_typing_ex_redo", true, isBoss, num, data);
                     if (isBoss) {
                         this.onBossOnceAgain();
                         cb(id);
@@ -277,17 +284,18 @@ cc.Class({
                         cb(id);
                     }
                 } else {
+                    this.onBtnRequestTrack("learning_typing_ex_nextPass", true, isBoss, num, data);
                     cb(id);
                 }
                 this.winPop.active = false;
                 this.Keyboard.active = true;
             });
-            this.onWinShowNovicePop(isBoss, num);
+            this.onWinShowNovicePop(isBoss, num, data);
         }, delayDate);
     },
 
     //胜利窗口判断是否需要显示引导
-    onWinShowNovicePop(isBoss, num) {
+    onWinShowNovicePop(isBoss, num, curStateData) {
         //第一次练习关卡胜利  sectionId=0  第一次boss关卡胜利sectionId=1
         const sectionId = isBoss ? 1 : 0;
         //第一次显示胜利窗口判断  后台数据中 chapterId=-1 
@@ -306,6 +314,7 @@ cc.Class({
                 }
             }, 2100 + num * 300);
         }
+        this.onRequestContentTrack(true, progressData == undefined, isBoss, num, curStateData);
     },
 
     //显示失败窗口
@@ -315,10 +324,10 @@ cc.Class({
         this.Keyboard.active = false;
         let progress = 0;
         if (this.curStateIndex == 1) {
-            const sumCount = this.getStateJS().onGetSumUpdateCount();
-            progress = (this.hitOKCount / sumCount / 2);
+            const sumCount = this.getStateJS().onGetSumUpdateCount().sumCount;
+            progress = (this.hitOKRectCount / sumCount / 2);
             console.log("sumCount", sumCount);
-            console.log("this.hitOKCount", sumCount);
+            console.log("this.hitOKRectCount", sumCount);
             console.log("progress", progress);
         } else {
             progress = 0.5 + (this.getStateJS().onGetBloodRatio() / 2);
@@ -326,8 +335,10 @@ cc.Class({
         this.failurePop.getComponent("failurePop").onInit(progress, this.gotoGameData.chapterId, (id) => {
             window.GameAudioJS().onPlayBtn();
             if (id == 1) {
+                this.onBtnRequestTrack("learning_typing_ex_backToMenu", false, true, 0, this.getCurLevelData().boss);
                 this.onGotoMainScene();
             } else if (id == 2) {
+                this.onBtnRequestTrack("learning_typing_ex_redo", false, true, 0, this.getCurLevelData().boss);
                 this.onBossOnceAgain();
             }
             this.failurePop.active = false;
@@ -344,6 +355,35 @@ cc.Class({
                 this.onNoviceGuidePop(7, arrowDatas, true);
             }, 1500);
         }
+        this.onRequestContentTrack(false, progressData == undefined, true, 0, this.getCurLevelData().boss);
+    },
+
+    onRequestContentTrack(ispass, isfirstPass, isBoss, num, curStateData) {
+        const chapterTime = parseInt(this.hitTimeOffset);
+        const trackData = {
+            pass: ispass,
+            firstPass: isfirstPass,
+            chapterDuration: chapterTime,
+            scoreLevel: num,
+            accuracy: this.hitOKCount / (this.hitOKCount + this.hitErrorCount),
+            speed: this.hitOKCount / chapterTime,
+            characters: this.hitOKCount,
+            chapterId: curStateData.id,
+            chapterName: curStateData.name,
+            chapterType: isBoss ? "挑战" : "练习"
+        }
+        window.requestContentTrack("learning_typing_ex_chapterAcct", trackData);
+    },
+
+    onBtnRequestTrack(eventName, ispass, isBoss, starNum, curStateData) {
+        const trackData = {
+            pass: ispass,
+            scoreLevel: starNum,
+            chapterId: curStateData.id,
+            chapterName: curStateData.name,
+            chapterType: isBoss ? "挑战" : "练习"
+        }
+        window.requestContentTrack(eventName, trackData);
     },
 
     //显示暂停窗口
@@ -358,6 +398,34 @@ cc.Class({
             gameLocalData.IsPause = false;
             cc.director.resume();
             window.GameAudioJS().onPlayBtn();
+            let progress1 = 0;
+            let curStateData = null;
+            if (this.curStateIndex == 0) {
+                const stateData = this.getStateJS().onGetSumUpdateCount();
+                curStateData = stateData.curStateData;
+                progress1 = this.hitOKRectCount / stateData.sumCount;
+                console.log("sumCount", stateData.sumCount);
+                console.log("this.hitOKRectCount", this.hitOKRectCount);
+                console.log("progress1", progress1);
+            } else if (this.curStateIndex == 1) {
+                const stateData = this.getStateJS().onGetSumUpdateCount();
+                curStateData = stateData.curStateData;
+                progress1 = (this.hitOKRectCount / stateData.sumCount / 2);
+                console.log("sumCount", stateData.sumCount);
+                console.log("this.hitOKRectCount", this.hitOKRectCount);
+                console.log("progress1", progress1);
+            } else {
+                curStateData = this.getCurLevelData().boss;
+                progress1 = 0.5 + (this.getStateJS().onGetBloodRatio() / 2);
+            }
+            const trackData = {
+                pauseChoice: id == 1 ? "退出" : "继续",
+                progress: progress1 * 100 + "%",
+                chapterId: curStateData.id,
+                chapterName: curStateData.name,
+                chapterType: this.curStateIndex == 0 ? "练习" : "挑战"
+            }
+            window.requestContentTrack("learning_typing_ex_pause", trackData);
             if (id == 1) {
                 this.onGotoMainScene();
             }

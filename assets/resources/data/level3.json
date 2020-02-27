@@ -5,6 +5,7 @@
         "speed": 100,
         "exercise": {
             "exerciseState": [{
+                "id":"0301",
                 "isVideo":false,
                 "name": "练习t、s、l",
                 "twoStars": 0.8,
@@ -36,11 +37,13 @@
                 ]
               },
               {
+                "id":"0302",
                 "isVideo":true,
                 "name": "中英文输入法的切换",
                 "url":"02输入法切换.mp4"
             },
               {
+                "id":"0303",
                 "isVideo":false,
                 "name": "英文的逗号和句号",
                 "twoStars": 0.8,
@@ -60,6 +63,7 @@
                 ]
               },
               {
+                "id":"0304",
                 "isVideo":false,
                 "name": "综合练习",
                 "twoStars": 0.8,
@@ -81,6 +85,7 @@
             ]
         },
         "boss": {
+            "id":"0305",
             "name": "喵喵",
             "describe": "再看我？还我喵喵拳！",
             "twoStars": 0.8,

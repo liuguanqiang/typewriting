@@ -55,6 +55,7 @@ cc.Class({
             item.getComponent("levelItem").onSetProgressData(this.chapterId, this.progressData);
         }
         const bossData = this.progressData.find(a => a.chapterId == this.chapterId && a.sectionId == this.bossIndex);
+        this.scoreData = bossData;
         if (bossData) {
             this.onBossUnLock();
             this.onLightenDiadema(bossData.score);
@@ -78,6 +79,16 @@ cc.Class({
     },
     onPlay() {
         this.onPlayGame(this.bossIndex, false, true);
+        const score = this.scoreData ? this.scoreData.score : 0;
+        const isPass = score > 0;
+        const data = {
+            pass: isPass,
+            scoreLevel: score,
+            chapterId: this.gameData.boss.id,
+            chapterName: this.gameData.boss.name,
+            chapterType: "挑战"
+        }
+        window.requestContentTrack("learning_typing_chapterSelect", data);
     },
     onPlayGame(sectionId, isVideo, isBoss = false) {
         window.GameAudioJS().onPlayBtn();

@@ -79,7 +79,11 @@ cc.Class({
     onStartTime(delayTime) {
         let tCount = 20;
         let t = 0;
+        this.startTime = 0;
         this.schedule(function () {
+            if (t == 0) {
+                this.startTime = new Date().getTime();
+            }
             ++t;
             this.energyProgressBar.progress -= 1 / tCount;
             if (t == tCount) {
@@ -151,7 +155,21 @@ cc.Class({
     },
 
     //挨打模式时间到了  或者打错了  直接返回攻击模式
-    gameOver(lastHighIndex) {
+    gameOver(highRectCount) {
+        if (this.startTime != 0) {
+            const duration = window.GetSecond(new Date().getTime() - this.startTime);
+            const speed1 = highRectCount / duration;
+            const data = {
+                QTEDuration: duration,
+                sumCount: this.updateCount,
+                accuracy: highRectCount,
+                speed: speed1,
+                chapterId: this.bossData.id,
+                chapterName: this.bossData.name,
+                chapterType: "挑战"
+            }
+            window.requestContentTrack("learning_typing_ex_QTEAcct", data);
+        }
         setTimeout(() => {
             if (this.isWin == true) {
                 this.onWin();
@@ -163,7 +181,7 @@ cc.Class({
                 this.gameJS.onBack(-1);
                 this.gameJS.checkGotoQTE(false);
             }
-        }, this.interval * lastHighIndex + 1000);
+        }, this.interval * highRectCount + 1000);
     },
 
     //打击完成 字符变成子弹发射
@@ -171,11 +189,11 @@ cc.Class({
         this.gameJS.canKeyDown = false;
         this.unscheduleAllCallbacks(this);
         const tragetJS = this.onTragetJS();
-        let lastHighIndex = 0;
+        let highRectCount = 0;
         for (let i = 0; i < this.gameJS.LetterBoxs.children.length; i++) {
             const item = this.gameJS.LetterBoxs.children[i];
             if (item.isHigh) {
-                lastHighIndex = i + 1;
+                highRectCount = i + 1;
                 setTimeout(() => {
                     const keyboardPoint = item.convertToWorldSpaceAR(cc.v2(0, 0));
                     window.GameAudioJS().onPlayBullet();
@@ -187,12 +205,12 @@ cc.Class({
                 item.destroy();
             }
         }
-        if (lastHighIndex != 0) {
+        if (highRectCount != 0) {
             window.GameAudioJS().onPlayBossBG();
-            this.createShockEff(lastHighIndex);
+            this.createShockEff(highRectCount);
         }
         this.gameJS.onPlayLighting(false, false);
-        this.gameOver(lastHighIndex);
+        this.gameOver(highRectCount);
     },
 
     onTragetJS() {
