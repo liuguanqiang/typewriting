@@ -11,22 +11,38 @@
                     "url":"01正确的指法.mp4"
                 },
                 {
-                "id":"0102",
-                "isVideo":false,
-                "name": "练习j、f键",
-                "twoStars": 0.8,
-                "threeStars": {
-                    "accuracy": 0.9,
-                    "time": 20
+                    "id":"0102",
+                    "isVideo":false,
+                    "name": "练习j、f键",
+                    "twoStars": 0.75,
+                    "threeStars": {
+                      "accuracy": 0.9,
+                      "time": 60
                 },
                 "state": [
                     {
-                        "normal": ["j"],
+                        "normal": ["j","f"],
                         "updateCount": 4
                     },
                     {
-                        "normal": ["f"],
+                        "normal": ["jj","ff"],
                         "updateCount": 4
+                    },
+                    {
+                        "normal": ["j","f","jj","ff"],
+                        "updateCount": 6
+                    },
+                    {
+                        "normal": ["jjj","fff","jff","ffj"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["jfj","fjf","jff","ffj"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["jfj","fjf","jff","ffj","jjfj","ffff","jjff","fjfj"],
+                        "updateCount": 10
                     }
                 ]
               },
@@ -40,19 +56,31 @@
                 "id":"0104",
                 "isVideo":false,
                 "name": "练习u、r、k",
-                "twoStars": 0.8,
+                "twoStars": 0.75,
                 "threeStars": {
                     "accuracy": 0.9,
-                    "time": 20
+                    "time": 60
                 },
                 "state":[
                     {
-                        "normal": ["u"],
-                        "updateCount": 4
+                        "normal": ["u","r","k"],
+                        "updateCount": 6
                     },
                     {
-                        "normal": ["r"],
-                        "updateCount": 4
+                        "normal": ["uu","rr","kk"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["u","r","k","uu","rr","kk"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["uuu","rrr","kkk","ur","uk","kr"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["uurk","urk","krk","uku","uukk","kurr","kkkr","rrru"],
+                        "updateCount": 10
                     }
                 ]
               }
@@ -61,11 +89,11 @@
         "boss": {
             "id":"0105",
             "name": "巨蟹",
-            "describe": "我要横着走，谁能挡我？",
-            "twoStars": 0.7,
+            "describe": "我能横着走，你能吗？",
+            "twoStars": 0.75,
             "threeStars": {
                 "accuracy": 0.9,
-                "time": 30
+                "time": 100
             },
             "blood": 100,
             "practiceSpeed": 70,
@@ -74,14 +102,26 @@
                 {
                     "normal": ["j","f","u","r","k"],
                     "updateCount": 4
+                },
+                {
+                    "normal": ["j","f","u","r","k","jj","ff","uu","rr","kk"],
+                    "updateCount": 6
+                },
+                {
+                    "normal": ["ur","kr","uf","jr","fk","jj","ff","uu","rr","kk"],
+                    "updateCount": 6
+                },
+                {
+                    "normal": ["ur","kr","uf","jr","urk","uukk","rrru","jfj","jff","ffj","ffff","j","f","u","r","k","j","f","u","r","k"],
+                    "updateCount": 14
                 }
             ],
             "attackState": {
-                "normal": ["j","f","u","r"],
-                "updateCount": 6
+                "normal": ["j","f","u","r","k","jj","ff","uu","rr","kk","ur","kr","uf","jr","fk"],
+                "updateCount": 10
             },
             "beatingState": {
-                "normal": ["j"],
+                "normal": ["j","f","u","r","k"],
                 "updateCount": 10,
                 "beatTime": 6
             }

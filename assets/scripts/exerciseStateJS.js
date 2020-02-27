@@ -28,7 +28,8 @@ cc.Class({
 
     //获取对应刷新池数据
     onUpdatePoolData(isFristUpdate = true) {
-        this.curLevelData = this.data.exerciseState[this.levelIndex].state;
+        this.curStateData = this.data.exerciseState[this.levelIndex];
+        this.curLevelData = this.curStateData.state;
         if (this.curPoolIndex < this.curLevelData.length) {
             //当前已创建字母块索引
             this.letterRectIndex = 0;
@@ -64,7 +65,9 @@ cc.Class({
 
     onKeyDown(code, curAnchorLetter) {
         const curAnchorLetterJS = curAnchorLetter.getComponent("letterRect");
+        const target = curAnchorLetterJS.getFristLetter();
         const length = curAnchorLetterJS.removeCode(code);
+        this.gameJS.onKeyDownRequestTrack(target, code, this.curStateData);
         if (length == -1) {
             return null;
         }
@@ -107,12 +110,11 @@ cc.Class({
     //获取练习关卡总刷新数
     onGetSumUpdateCount() {
         let sum = 0;
-        const curStateData1 = this.data.exerciseState[this.levelIndex];
-        for (let j = 0; j < curStateData1.state.length; j++) {
-            const stateItem = curStateData1.state[j];
+        for (let j = 0; j < this.curStateData.state.length; j++) {
+            const stateItem = this.curStateData.state[j];
             sum += stateItem.updateCount;
         }
-        return { sumCount: sum, curStateData: curStateData1 };
+        return { sumCount: sum, curStateData: this.curStateData };
     },
 
     //打完一个字母
@@ -136,7 +138,7 @@ cc.Class({
             console.log("this.accuracy ", accuracy);
             let starNum = 1;
             //三星 两星判断
-            const curStateData = this.data.exerciseState[this.levelIndex];
+            const curStateData = this.curStateData;
             const isThreeAccuracy = accuracy >= curStateData.threeStars.accuracy;
             const isThreeHitTimeOffset = this.gameJS.hitTimeOffset <= curStateData.threeStars.time;
             if (isThreeAccuracy && isThreeHitTimeOffset) {

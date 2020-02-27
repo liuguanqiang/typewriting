@@ -15,8 +15,9 @@ cc.Class({
         this.gameJS = gameJS;
         //播放背景音乐
         window.GameAudioJS().onPlayExerciseBG();
-        this.data = gameJS.getCurLevelData().boss.practiceState;
-        this.speed = gameJS.getCurLevelData().boss.practiceSpeed;
+        this.bossData = gameJS.getCurLevelData().boss;
+        this.data = this.bossData.practiceState;
+        this.speed = this.bossData.practiceSpeed;
         this.keyboardJS = gameJS.KeyboardJS;
         //当前刷新池索引
         this.curPoolIndex = 0;
@@ -67,13 +68,14 @@ cc.Class({
             const item = this.data[i];
             count += item.updateCount;
         }
-        const curStateData1 = this.gameJS.getCurLevelData().boss;
-        return { sumCount: count, curStateData: curStateData1 };
+        return { sumCount: count, curStateData: this.bossData };
     },
 
     onKeyDown(code, curAnchorLetter) {
         const curAnchorLetterJS = curAnchorLetter.getComponent("letterRect");
+        const target = curAnchorLetterJS.getFristLetter();
         const length = curAnchorLetterJS.removeCode(code);
+        this.gameJS.onKeyDownRequestTrack(target, code, this.bossData);
         if (length == -1) {
             return null;
         }

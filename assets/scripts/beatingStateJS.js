@@ -95,7 +95,9 @@ cc.Class({
 
     onKeyDown(code, curAnchorLetter) {
         const curAnchorLetterJS = curAnchorLetter.getComponent("weaknessLetterRect");
+        const target = curAnchorLetterJS.getFristLetter();
         const length = curAnchorLetterJS.removeCode(code);
+        this.gameJS.onKeyDownRequestTrack(target, code, this.bossData);
         if (length == -1) {
             return null;
         }

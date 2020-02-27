@@ -386,6 +386,18 @@ cc.Class({
         window.requestContentTrack(eventName, trackData);
     },
 
+    onKeyDownRequestTrack(target1, keyin1, curStateData) {
+        const trackData = {
+            target: target1,
+            keyin: keyin1,
+            correct: target1 == keyin1,
+            chapterId: curStateData.id,
+            chapterName: curStateData.name,
+            chapterType: this.curStateIndex == 0 ? "练习" : "挑战"
+        }
+        window.requestContentTrack("learning_typing_ex_keyDown", trackData);
+    },
+
     //显示暂停窗口
     onPausePop() {
         if (!this.Keyboard.active)

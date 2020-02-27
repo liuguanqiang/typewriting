@@ -122,7 +122,9 @@ cc.Class({
 
     onKeyDown(code, curAnchorLetter) {
         const curAnchorLetterJS = curAnchorLetter.getComponent("letterRect");
+        const target = curAnchorLetterJS.getFristLetter();
         const length = curAnchorLetterJS.removeCode(code);
+        this.gameJS.onKeyDownRequestTrack(target, code, this.bossData);
         if (length == -1) {
             return null;
         }
@@ -164,7 +166,7 @@ cc.Class({
 
     //惩罚一次，当前刷新项+1
     onKeyError() {
-       
+
     },
 
     onStop() {
