@@ -5,13 +5,13 @@
         "speed": 100,
         "exercise": {
             "exerciseState": [{
-                "id":"0301",
+			"id":"0301",
                 "isVideo":false,
                 "name": "练习t、s、l",
-                "twoStars": 0.75,
+                "twoStars": 0.8,
                 "threeStars": {
                     "accuracy": 0.9,
-                    "time": 50
+                    "time": 20
                 },
                 "state": [
                     {
@@ -37,19 +37,19 @@
                 ]
               },
               {
-                "id":"0302",
+			  "id":"0302",
                 "isVideo":true,
                 "name": "中英文输入法的切换",
                 "url":"02输入法切换.mp4"
             },
               {
-                "id":"0303",
+			  "id":"0303",
                 "isVideo":false,
                 "name": "英文的逗号和句号",
-                "twoStars": 0.75,
+                "twoStars": 0.8,
                 "threeStars": {
                     "accuracy": 0.9,
-                    "time": 40
+                    "time": 20
                 },
                 "state":[
                     {
@@ -57,93 +57,61 @@
                         "updateCount": 4
                     },
                     {
-                        "normal": [",,",".."],
+                        "normal": [",","."],
                         "updateCount": 4
-                    },
-                    {
-                        "normal": [",",".",",,",".."],
-                        "updateCount": 6
-                    },
-                    {
-                        "normal": [",,.",".,,",",,,","...",",",".",",,",".."],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": [",.,",".,.",",..",".,,",",",".",",,",".."],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": [",.,",".,.",",..",".,,",",,..",",..,",".,,.",".,.,",",.,.",",",".",",,","..",",",".",",,",".."],
-                        "updateCount": 10
                     }
                 ]
               },
               {
-                "id":"0304",
+			  "id":"0304",
                 "isVideo":false,
                 "name": "综合练习",
-                "twoStars": 0.75,
+                "twoStars": 0.8,
                 "threeStars": {
                     "accuracy": 0.9,
-                    "time": 40
+                    "time": 20
                 },
                 "state":[
                     {
-                        "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
+                        "normal": ["c"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,",".."],
-                        "updateCount": 4
-                    },
-                    {
-                        "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd","tff","jss","t,,",".ll","f..","r,,","u..","n,,","sll","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
-                        "updateCount": 15
-                    },
-                    {
-                        "normal": ["urr","rkk","kdd","djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is.","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
-                        "updateCount": 15
+                        "normal": ["d"],
+                        "updateCount": 6
                     }
                 ]
               }
             ]
         },
         "boss": {
-            "id":"0305",
+		"id":"0305",
             "name": "喵喵",
-            "describe": "喵？吃我一记还我喵喵拳！",
-            "twoStars": 0.75,
+            "describe": "再看我？还我喵喵拳！",
+            "twoStars": 0.8,
             "threeStars": {
                 "accuracy": 0.9,
-                "time": 150
+                "time": 30
             },
             "blood": 100,
-            "practiceSpeed": 70,
-            "attackSpeed": 40,
+            "practiceSpeed": 150,
+            "attackSpeed": 80,
             "practiceState": [
                 {
-                    "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
+                    "normal": ["c"],
                     "updateCount": 6
                 },
                 {
-                    "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,",".."],
-                    "updateCount": 4
-                },
-                {
-                    "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd","tff","jss","t,,",".ll","f..","r,,","u..","n,,","sll","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
-                    "updateCount": 15
-                },
-                {
-                    "normal": ["urr","rkk","kdd","djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is.","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
-                    "updateCount": 15
+                    "normal": ["d"],
+                    "updateCount": 6
                 }
             ],
             "attackState": {
-                "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,",".."],
-                "updateCount": 12
+                "normal": ["d"],
+                "updateCount": 10
             },
             "beatingState": {
-                "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
+                "normal": ["c"],
                 "updateCount": 10,
                 "beatTime": 5
             }

@@ -11,6 +11,7 @@ cc.Class({
     btnSF: [cc.SpriteFrame],
     nextBtn: cc.Node,
     quitBtn: cc.Node,
+    titleLab: cc.Node,
     loadingNode: cc.Node,
   },
 
@@ -53,6 +54,7 @@ cc.Class({
     this.slider.getComponent(cc.Slider).progress = 0;
     this.sliderProgressBg.width = 0;
     this.isLoaded = false;
+    this.titleLab.getComponent(cc.Label).string = this.data.name;
     this.videoPlayer.getComponent(cc.VideoPlayer).remoteURL = window.VideoUrl(this.data.url);//"https://scratch-videos.hetao101.com/469d3d02264cb5b955ee63472c33f2fe_vd12_uid2375193.mp4"
     // this.videoPlayer.getComponent(cc.VideoPlayer).play();
     // this.videoPlayer.getComponent(cc.VideoPlayer).stop();

@@ -5,95 +5,67 @@
         "exercise": {
             "exerciseState": [
                 {
-                    "id":"0101",
+				    "id":"0101",
                     "isVideo":true,
                     "name": "知道正确的指法",
                     "url":"01正确的指法.mp4"
                 },
                 {
-                    "id":"0102",
-                    "isVideo":false,
-                    "name": "练习j、f键",
-                    "twoStars": 0.75,
-                    "threeStars": {
-                      "accuracy": 0.9,
-                      "time": 60
+				"id":"0102",
+                "isVideo":false,
+                "name": "练习j、f键",
+                "twoStars": 0.8,
+                "threeStars": {
+                    "accuracy": 0.9,
+                    "time": 20
                 },
                 "state": [
                     {
-                        "normal": ["j","f"],
+                        "normal": ["j"],
                         "updateCount": 4
                     },
                     {
-                        "normal": ["jj","ff"],
+                        "normal": ["f"],
                         "updateCount": 4
-                    },
-                    {
-                        "normal": ["j","f","jj","ff"],
-                        "updateCount": 6
-                    },
-                    {
-                        "normal": ["jjj","fff","jff","ffj"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["jfj","fjf","jff","ffj"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["jfj","fjf","jff","ffj","jjfj","ffff","jjff","fjfj"],
-                        "updateCount": 10
                     }
                 ]
               },
               {
-                "id":"0103",
+			  "id":"0103",
                 "isVideo":true,
                 "name": "正确的打字姿势",
                 "url":"03正确的打字姿势.mp4"
               },
               {
-                "id":"0104",
+			  "id":"0104",
                 "isVideo":false,
                 "name": "练习u、r、k",
-                "twoStars": 0.75,
+                "twoStars": 0.8,
                 "threeStars": {
                     "accuracy": 0.9,
-                    "time": 60
+                    "time": 20
                 },
                 "state":[
                     {
-                        "normal": ["u","r","k"],
-                        "updateCount": 6
+                        "normal": ["u"],
+                        "updateCount": 4
                     },
                     {
-                        "normal": ["uu","rr","kk"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["u","r","k","uu","rr","kk"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["uuu","rrr","kkk","ur","uk","kr"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["uurk","urk","krk","uku","uukk","kurr","kkkr","rrru"],
-                        "updateCount": 10
+                        "normal": ["r"],
+                        "updateCount": 4
                     }
                 ]
               }
             ]
         },
         "boss": {
-            "id":"0105",
+		   "id":"0105",
             "name": "巨蟹",
-            "describe": "我能横着走，你能吗？",
-            "twoStars": 0.75,
+            "describe": "我要横着走，谁能挡我？",
+            "twoStars": 0.7,
             "threeStars": {
                 "accuracy": 0.9,
-                "time": 100
+                "time": 30
             },
             "blood": 100,
             "practiceSpeed": 70,
@@ -102,26 +74,14 @@
                 {
                     "normal": ["j","f","u","r","k"],
                     "updateCount": 4
-                },
-                {
-                    "normal": ["j","f","u","r","k","jj","ff","uu","rr","kk"],
-                    "updateCount": 6
-                },
-                {
-                    "normal": ["ur","kr","uf","jr","fk","jj","ff","uu","rr","kk"],
-                    "updateCount": 6
-                },
-                {
-                    "normal": ["ur","kr","uf","jr","urk","uukk","rrru","jfj","jff","ffj","ffff","j","f","u","r","k","j","f","u","r","k"],
-                    "updateCount": 14
                 }
             ],
             "attackState": {
-                "normal": ["j","f","u","r","k","jj","ff","uu","rr","kk","ur","kr","uf","jr","fk"],
-                "updateCount": 10
+                "normal": ["j","f","u","r"],
+                "updateCount":12
             },
             "beatingState": {
-                "normal": ["j","f","u","r","k"],
+                "normal": ["j"],
                 "updateCount": 10,
                 "beatTime": 6
             }

@@ -20,7 +20,7 @@ cc.Class({
 
     //如果用户第一次进入boss  用于引导显示
     playEnter() {
-        this._armatureDisPlay.playAnimation('走', 0);
+        this._armatureDisPlay.playAnimation('进入', 0);
     },
 
     playAnimation(isFrist, bloodRatio) {
@@ -35,7 +35,7 @@ cc.Class({
         } else {
             if (!this.isTwo && this.state == 2) {
                 this.isTwo = true;
-                this._armatureDisPlay.playAnimation('露弱点', 1);
+                this._armatureDisPlay.playAnimation('状态2呼吸', 1);
                 setTimeout(() => {
                     this.onAttackAnimation();
                 }, 1300);
@@ -54,42 +54,40 @@ cc.Class({
         const aniIndex = this.onGetAniIndex();
         if (this.state == 1) {
             if (aniIndex == 1) {
-                this._armatureDisPlay.playAnimation('左手扔', 1);
+                this._armatureDisPlay.playAnimation('状态1攻击1', 1);
                 setTimeout(() => {
                     this.baseJS.createLetterItem(cc.v2(-115, 150));
                     this.onAttackAnimation();
                 }, 500);
             } else if (aniIndex == 2) {
-                this._armatureDisPlay.playAnimation('右手扔', 1);
+                this._armatureDisPlay.playAnimation('状态1攻击2', 1);
                 setTimeout(() => {
                     this.baseJS.createLetterItem(cc.v2(115, 150));
                     this.onAttackAnimation();
                 }, 500);
             } else if (aniIndex == 3) {
-                this._armatureDisPlay.playAnimation('发怒', 1);
+                this._armatureDisPlay.playAnimation('boss状态1生气', 1);
                 setTimeout(() => {
                     this.onAttackAnimation();
-                }, 1400);
+                }, 1600);
             }
         } else {
             let count = 0;
             if (aniIndex == 1) {
-                this._armatureDisPlay.playAnimation('露弱点左手扔', 1);
+                this._armatureDisPlay.playAnimation('状态2攻击1', 1);
                 this.schedule(function () {
-                    // this.baseJS.createLetterItem(cc.v2(-155, 170));
                     this.baseJS.createLetterItem(cc.v2(-60 - count * 86, 150));
                     count++;
                     if (count == 2) {
-                        this._armatureDisPlay.playAnimation('露弱点呼吸', 1);
+                        this._armatureDisPlay.playAnimation('状态2呼吸', 1);
                         setTimeout(() => {
                             this.onAttackAnimation();
                         }, 1400);
                     }
                 }, 0.3, 1, 0.3);
             } else if (aniIndex == 2) {
-                this._armatureDisPlay.playAnimation('露弱点右手扔', 1);
+                this._armatureDisPlay.playAnimation('状态2攻击2', 1);
                 this.schedule(function () {
-                    // this.baseJS.createLetterItem(cc.v2(-155, 170));
                     this.baseJS.createLetterItem(cc.v2(60 + count * 86, 150));
                     count++;
                     if (count == 2) {
@@ -97,10 +95,10 @@ cc.Class({
                     }
                 }, 0.3, 1, 0.3);
             } else if (aniIndex == 3) {
-                this._armatureDisPlay.playAnimation('发怒', 1);
+                this._armatureDisPlay.playAnimation('boss状态2生气', 1);
                 setTimeout(() => {
                     this.onAttackAnimation();
-                }, 1400);
+                }, 1800);
             }
         }
     },
@@ -115,14 +113,14 @@ cc.Class({
 
     onBreathing(num) {
         if (this.state === 1) {
-            this._armatureDisPlay.playAnimation('呼吸', num);
+            this._armatureDisPlay.playAnimation('状态1休闲', num);
         } else {
-            this._armatureDisPlay.playAnimation('露弱点呼吸', num);
+            this._armatureDisPlay.playAnimation('状态2呼吸', num);
         }
     },
 
     onWin() {
-        this._armatureDisPlay.playAnimation('死亡', 1);
+        this._armatureDisPlay.playAnimation('boss死亡', 1);
         return 1500;
     },
     onStop() {
