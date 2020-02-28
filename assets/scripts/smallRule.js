@@ -8,7 +8,7 @@ cc.Class({
     },
     onLoad() {
         this.fastSpeed = this.random(2, 4);
-        this.slowSpeed = this.random(0.3, 0.8);
+        this.slowSpeed = this.random(0.2, 0.6);
         this.init_y = this.node.y;
     },
     onPlay(isfast = true) {

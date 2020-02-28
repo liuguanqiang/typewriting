@@ -29,7 +29,6 @@ cc.Class({
         }
         this.userIDLab.getComponent(cc.Label).string = gameLocalData.UserId;
         window.GamePersistRootJS().initPersistRootNode();
-        window.GameAudioJS().onPlayHomeBG();
         for (let i = 0; i < this.LevelJsons.length; i++) {
             const data = this.LevelJsons[i].json.level;
             const gameItem = cc.instantiate(this.GameItem);
@@ -53,7 +52,11 @@ cc.Class({
                 res.forEach(param => {
                     window.GameUserJS().requestSetUserPorgress(() => { }, param);
                 });
+                this.isOnPlayVideo = true;
                 this.onPlayVideo();
+            }
+            if (!this.isOnPlayVideo) {
+                window.GameAudioJS().onPlayHomeBG();
             }
             gameLocalData.GameProgressData = res;
             for (let i = 0; i < this.ScrollContent.children.length; i++) {
@@ -74,6 +77,7 @@ cc.Class({
                 this.NoviceGuidePop.active = true;
                 const arrowDatas = [{ showArrowIndex: 1, x: 455 - this.node.width / 2, y: this.node.height / 2 - 222 }];
                 this.NoviceGuidePop.getComponent("noviceGuidePop").onInit(0, arrowDatas);
+                window.GameAudioJS().onPlayHomeBG();
             })
             this.videoPlayer.getComponent(cc.VideoPlayer).remoteURL = window.VideoUrl("movie.mp4");
         }, 1000);

@@ -42,12 +42,11 @@ cc.Class({
 
         //进入时游戏进度
         this.gotoGameData = gameLocalData.GotoGameData;
-        console.log("this.gotoGameData", this.gotoGameData)
         this.setAnchorCurStateIndex(this.gotoGameData.isBossLevel);
         //用户连续正确的次数  一旦错误归零重新累计
         this.correctCount = 0;
         this.bulletNodePool = new cc.NodePool();
-        for (let i = 0; i < 10; ++i) {
+        for (let i = 0; i < 5; ++i) {
             this.bulletNodePool.put(cc.instantiate(this.BulletItem));
         }
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -269,6 +268,7 @@ cc.Class({
         setTimeout(() => {
             this.winPop.active = true;
             this.Keyboard.active = false;
+            this.canKeyDown = false;
             window.GameAudioJS().onPlayWin();
             this.winPop.getComponent("winPop").onInit(num, isThreeAccuracy, isThreeHitTimeOffset, data, isBoss, (id) => {
                 window.GameAudioJS().onPlayBtn();
@@ -289,6 +289,7 @@ cc.Class({
                 }
                 this.winPop.active = false;
                 this.Keyboard.active = true;
+                this.canKeyDown = true;
             });
             this.onWinShowNovicePop(isBoss, num, data);
         }, delayDate);
@@ -322,6 +323,7 @@ cc.Class({
         this.failurePop.getComponent("failurePop").onDefault();
         this.failurePop.active = true;
         this.Keyboard.active = false;
+        this.canKeyDown = false;
         let progress = 0;
         if (this.curStateIndex == 1) {
             const sumCount = this.getStateJS().onGetSumUpdateCount().sumCount;
@@ -343,6 +345,7 @@ cc.Class({
             }
             this.failurePop.active = false;
             this.Keyboard.active = true;
+            this.canKeyDown = true;
         })
         //第一次失败出现  sectionId=5
         const sectionId = 5;
@@ -405,9 +408,11 @@ cc.Class({
         cc.director.pause();//暂停
         this.pausePop.active = true;
         gameLocalData.IsPause = true;
+        this.canKeyDown = false;
         this.pausePop.getComponent("pausePop").onInit((id) => {
             this.pausePop.active = false;
             gameLocalData.IsPause = false;
+            this.canKeyDown = true;
             cc.director.resume();
             window.GameAudioJS().onPlayBtn();
             let progress1 = 0;
@@ -416,16 +421,10 @@ cc.Class({
                 const stateData = this.getStateJS().onGetSumUpdateCount();
                 curStateData = stateData.curStateData;
                 progress1 = this.hitOKRectCount / stateData.sumCount;
-                console.log("sumCount", stateData.sumCount);
-                console.log("this.hitOKRectCount", this.hitOKRectCount);
-                console.log("progress1", progress1);
             } else if (this.curStateIndex == 1) {
                 const stateData = this.getStateJS().onGetSumUpdateCount();
                 curStateData = stateData.curStateData;
                 progress1 = (this.hitOKRectCount / stateData.sumCount / 2);
-                console.log("sumCount", stateData.sumCount);
-                console.log("this.hitOKRectCount", this.hitOKRectCount);
-                console.log("progress1", progress1);
             } else {
                 curStateData = this.getCurLevelData().boss;
                 progress1 = 0.5 + (this.getStateJS().onGetBloodRatio() / 2);

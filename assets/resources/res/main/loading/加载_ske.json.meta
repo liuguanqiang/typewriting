@@ -1,0 +1,6 @@
+{
+  "ver": "1.0.0",
+  "uuid": "3bde50e4-51e9-4694-b735-27fc2680d4e3",
+  "dragonBonesJson": "{\"frameRate\":12,\"name\":\"加载\",\"version\":\"5.5\",\"compatibleVersion\":\"5.5\",\"armature\":[{\"type\":\"Armature\",\"frameRate\":12,\"name\":\"Armature\",\"aabb\":{\"x\":-100.5,\"y\":-100.5,\"width\":201,\"height\":201},\"bone\":[{\"name\":\"root\"},{\"name\":\"bone\",\"parent\":\"root\"}],\"slot\":[{\"name\":\"组 14\",\"parent\":\"bone\"}],\"skin\":[{\"slot\":[{\"name\":\"组 14\",\"display\":[{\"name\":\"组 14\"}]}]}],\"animation\":[{\"duration\":11,\"playTimes\":0,\"name\":\"newAnimation\",\"bone\":[{\"name\":\"bone\",\"rotateFrame\":[{\"duration\":3,\"tweenEasing\":0},{\"duration\":4,\"tweenEasing\":0,\"rotate\":90},{\"duration\":4,\"tweenEasing\":0,\"rotate\":-90},{\"duration\":0}],\"scaleFrame\":[{\"duration\":11,\"x\":-1}]}]}],\"defaultActions\":[{\"gotoAndPlay\":\"newAnimation\"}]}]}",
+  "subMetas": {}
+}

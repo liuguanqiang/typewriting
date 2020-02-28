@@ -28,8 +28,9 @@ cc.Class({
             this.data = this.bossData.attackState;
             this.speed = this.bossData.attackSpeed;
         }
-        //播放背景音乐
+        this.isCreateOver = false;
         this.bossNode.active = true;
+        //播放背景音乐
         window.GameAudioJS().onPlayBossBG();
         this.playAnimation();
         this.gameJS.EnergyProgressBar.active = true;
@@ -87,7 +88,6 @@ cc.Class({
 
     //获取对应刷新池数据
     onUpdatePoolData() {
-        this.isCreateOver = false;
         this.unscheduleAllCallbacks(this);
         //当前已创建字母块索引
         this.letterRectIndex = 0;

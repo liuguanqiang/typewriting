@@ -10,19 +10,22 @@ cc.Class({
     timeLabel: cc.Label,
     btnSF: [cc.SpriteFrame],
     nextBtn: cc.Node,
-    quitBtn: cc.Node
+    quitBtn: cc.Node,
+    loadingNode: cc.Node,
   },
 
   start() {
 
   },
   onLoad() {
+    this.loadingNode.active = true;
     window.GameAudioJS().onStopMusic();
     this.gotoGameData = gameLocalData.GotoGameData;
     this.exerciseState = gameLocalData.GameData.exercise.exerciseState;
     this.init();
     this.videoPlayer.on("meta-loaded", () => {
       this.isLoaded = true;
+      this.loadingNode.active = false;
       this.duration = this.videoPlayer.getComponent(cc.VideoPlayer).getDuration();
       cc.log("this.duration======" + this.duration + " url=" + this.data.url)
       this.refreshVideoTime();
