@@ -15,17 +15,15 @@ cc.Class({
   },
 
   start() {
-
   },
   onLoad() {
-    this.loadingNode.active = true;
+    console.log("this.loadingNode ", this.loadingNode)
     window.GameAudioJS().onStopMusic();
     this.gotoGameData = gameLocalData.GotoGameData;
     this.exerciseState = gameLocalData.GameData.exercise.exerciseState;
     this.init();
     this.videoPlayer.on("meta-loaded", () => {
       this.isLoaded = true;
-      this.loadingNode.active = false;
       this.duration = this.videoPlayer.getComponent(cc.VideoPlayer).getDuration();
       cc.log("this.duration======" + this.duration + " url=" + this.data.url)
       this.refreshVideoTime();
@@ -55,7 +53,7 @@ cc.Class({
     this.slider.getComponent(cc.Slider).progress = 0;
     this.sliderProgressBg.width = 0;
     this.isLoaded = false;
-    this.videoPlayer.getComponent(cc.VideoPlayer).remoteURL = window.VideoUrl(this.data.url);;//"https://scratch-videos.hetao101.com/469d3d02264cb5b955ee63472c33f2fe_vd12_uid2375193.mp4"
+    this.videoPlayer.getComponent(cc.VideoPlayer).remoteURL = window.VideoUrl(this.data.url);//"https://scratch-videos.hetao101.com/469d3d02264cb5b955ee63472c33f2fe_vd12_uid2375193.mp4"
     // this.videoPlayer.getComponent(cc.VideoPlayer).play();
     // this.videoPlayer.getComponent(cc.VideoPlayer).stop();
     const progressData = gameLocalData.GameProgressData.find(a => a.chapterId == this.gotoGameData.chapterId && a.sectionId == this.gotoGameData.sectionId);
