@@ -35,10 +35,10 @@ cc.Class({
         } else {
             if (!this.isTwo && this.state == 2) {
                 this.isTwo = true;
-                this._armatureDisPlay.playAnimation('状态2呼吸', 1);
+                this._armatureDisPlay.playAnimation('boss状态1变状态2', 1);
                 setTimeout(() => {
                     this.onAttackAnimation();
-                }, 1300);
+                }, 1500);
             } else {
                 this.onAttackAnimation();
             }
