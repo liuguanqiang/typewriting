@@ -19,28 +19,30 @@ cc.Class({
         this.data = this.bossData.practiceState;
         this.speed = this.bossData.practiceSpeed;
         this.keyboardJS = gameJS.KeyboardJS;
-        //当前刷新池索引
-        this.curPoolIndex = 0;
-        this.onUpdatePoolData();
-        this.isCreateOver = false;
-        this.unscheduleAllCallbacks(this);
-        this.schedule(this.createLetterItem, 1.2, cc.macro.REPEAT_FOREVER, 0.1);
+        this.gameJS.onPlayLevelStartDragon(this.bossData.id, () => {
+            //当前刷新池索引
+            this.curPoolIndex = 0;
+            this.onUpdatePoolData();
+            this.isCreateOver = false;
+            this.unscheduleAllCallbacks(this);
+            this.schedule(this.createLetterItem, 1.2, cc.macro.REPEAT_FOREVER, 0.1);
 
-        this.gameJS.onRunTimer(true);
-        //当前打正确的个数
-        this.gameJS.hitOKCount = 0;
-        //当前打错误的个数
-        this.gameJS.hitErrorCount = 0;
+            this.gameJS.onRunTimer(true);
+            //当前打正确的个数
+            this.gameJS.hitOKCount = 0;
+            //当前打错误的个数
+            this.gameJS.hitErrorCount = 0;
 
-        //第一次进入挑战关卡  sectionId=2
-        const progressData = gameLocalData.GameProgressData.find(a => a.chapterId == -1 && a.sectionId == 2);
-        if (!progressData) {
-            //第一次过后 往数据库插入一条数据作为标记 后续不在显示引导窗口
-            this.gameJS.onRequestSetUserPorgress(-1, 2, 1);
-            setTimeout(() => {
-                this.gameJS.onNoviceGuidePop(4);
-            }, 400);
-        }
+            //第一次进入挑战关卡  sectionId=2
+            const progressData = gameLocalData.GameProgressData.find(a => a.chapterId == -1 && a.sectionId == 2);
+            if (!progressData) {
+                //第一次过后 往数据库插入一条数据作为标记 后续不在显示引导窗口
+                this.gameJS.onRequestSetUserPorgress(-1, 2, 1);
+                setTimeout(() => {
+                    this.gameJS.onNoviceGuidePop(4);
+                }, 400);
+            }
+        })
     },
 
     //获取对应刷新池数据

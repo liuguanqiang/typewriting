@@ -19,6 +19,7 @@ cc.Class({
         pausePop: cc.Node,
         failurePop: cc.Node,
         NoviceGuidePop: cc.Node,
+        levelStartDragon: cc.Node,
     },
     //954
     start() {
@@ -551,6 +552,19 @@ cc.Class({
             }
         }
         return true;
+    },
+
+    //关卡先导动画
+    onPlayLevelStartDragon(name, cb) {
+        console.log("name", name);
+        this.levelStartDragon.active = true;
+        this.levelStartDragon.getComponent("levelStartDragon").playAnimation(name);
+        setTimeout(() => {
+            this.levelStartDragon.active = false;
+            if (cb) {
+                cb();
+            }
+        }, 3000);
     },
 
     ///获取当前关卡的数据对象

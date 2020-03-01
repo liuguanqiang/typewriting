@@ -38,25 +38,27 @@ cc.Class({
             //当前正常池刷新次数，也就是用户不增加惩罚的默认刷新次数
             this.curUpdateCount = this.curLevelData[this.curPoolIndex].updateCount;
             if (isFristUpdate) {
-                this.gameJS.onRunTimer(true);
-                //当前打正确的个数
-                this.gameJS.hitOKCount = 0;
-                //当前打错误的个数
-                this.gameJS.hitErrorCount = 0;
-                //当前关卡是否创建完成
-                this.isCurCreateOver = false;
-                let index = 3;
-                const h = 80;
-                let canvasHeight = this.gameJS.BgAnimBox.height;
-                this.schedule(function () {
-                    let isAutoLocation = index == 3 ? true : false;
-                    let item = this.createLetterItem((canvasHeight + h) / 2, isAutoLocation);
-                    if (item) {
-                        const y = this.topY - h * index;
-                        item.runAction(cc.moveTo(0.2, item.x, y).easing(cc.easeIn(2)));
-                    }
-                    --index;
-                }, 0.1, 3, 0);
+                this.gameJS.onPlayLevelStartDragon(this.curStateData.id, () => {
+                    this.gameJS.onRunTimer(true);
+                    //当前打正确的个数
+                    this.gameJS.hitOKCount = 0;
+                    //当前打错误的个数
+                    this.gameJS.hitErrorCount = 0;
+                    //当前关卡是否创建完成
+                    this.isCurCreateOver = false;
+                    let index = 3;
+                    const h = 80;
+                    let canvasHeight = this.gameJS.BgAnimBox.height;
+                    this.schedule(function () {
+                        let isAutoLocation = index == 3 ? true : false;
+                        let item = this.createLetterItem((canvasHeight + h) / 2, isAutoLocation);
+                        if (item) {
+                            const y = this.topY - h * index;
+                            item.runAction(cc.moveTo(0.2, item.x, y).easing(cc.easeIn(2)));
+                        }
+                        --index;
+                    }, 0.1, 3, 0);
+                });
             } else {
                 this.createLetterItem(this.topY);
             }
