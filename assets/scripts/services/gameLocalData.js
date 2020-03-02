@@ -46,6 +46,22 @@ module.exports = {
         return getLocalData("userId");
     },
 
+    //音乐音量
+    set MusicVolum(value) {
+        return setCacheData(value, 'musicVolum');
+    },
+    get MusicVolum() {
+        getLocalData('musicVolum');
+    },
+
+    //音效音量
+    set SoundVolum(value) {
+        return setCacheData(value, 'soundVolum');
+    },
+    get SoundVolum() {
+        getLocalData('soundVolum');
+    },
+
 
     set GameData(value) {
         return setCacheData(value, "gameData");

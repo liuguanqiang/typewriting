@@ -12,18 +12,21 @@ cc.Class({
     nextBtn: cc.Node,
     quitBtn: cc.Node,
     titleLab: cc.Node,
-    loadingNode: cc.Node,
+    loadingAnimation: cc.Node,
   },
 
   start() {
   },
   onLoad() {
-    console.log("this.loadingNode ", this.loadingNode)
+    console.log("this.loadingAnimation ", this.loadingAnimation)
     window.GameAudioJS().onStopMusic();
     this.gotoGameData = gameLocalData.GotoGameData;
     this.exerciseState = gameLocalData.GameData.exercise.exerciseState;
     this.init();
     this.videoPlayer.on("meta-loaded", () => {
+      if (this.loadingAnimation) {
+        this.loadingAnimation.active = false;
+      }
       this.isLoaded = true;
       this.duration = this.videoPlayer.getComponent(cc.VideoPlayer).getDuration();
       cc.log("this.duration======" + this.duration + " url=" + this.data.url)

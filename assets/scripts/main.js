@@ -23,10 +23,16 @@ cc.Class({
             gameLocalData.UserId = 123123;
         }
 
+        let musicVolum = gameLocalData.MusicVolum || 1;
+        cc.audioEngine.setMusicVolume(musicVolum);
+
+        let soundVolum = gameLocalData.SoundVolum || 1;
+        cc.audioEngine.setEffectsVolume(soundVolum);
+
         if (!gameLocalData.StratTime) {
             gameLocalData.StratTime = new Date().getTime();
-            console.log(gameLocalData.StratTime);
         }
+
         this.userIDLab.getComponent(cc.Label).string = gameLocalData.UserId;
         window.GamePersistRootJS().initPersistRootNode();
         for (let i = 0; i < this.LevelJsons.length; i++) {

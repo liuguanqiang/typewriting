@@ -78,7 +78,7 @@
             ],
             "attackState": {
                 "normal": ["j","f","u","r"],
-                "updateCount":12
+                "updateCount": 4
             },
             "beatingState": {
                 "normal": ["j"],

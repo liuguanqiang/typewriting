@@ -23,25 +23,21 @@ cc.Class({
     //播放boss阶段背景音乐
     onPlayBossBG() {
         cc.audioEngine.playMusic(this.bossBG, true);
-        cc.audioEngine.setMusicVolume(0.5);
     },
 
     //播放QTE背景音乐
     onPlayQTEBG() {
         cc.audioEngine.playMusic(this.QTEBG, true);
-        cc.audioEngine.setMusicVolume(1);
     },
 
     //播放练习关卡背景音乐
     onPlayExerciseBG() {
         cc.audioEngine.playMusic(this.exerciseBG, true);
-        cc.audioEngine.setMusicVolume(0.5);
     },
 
     //播放主页背景音
     onPlayHomeBG() {
         cc.audioEngine.playMusic(this.homeBG, true);
-        cc.audioEngine.setMusicVolume(0.5);
     },
 
     //播放子弹音效

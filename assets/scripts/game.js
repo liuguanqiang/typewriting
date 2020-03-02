@@ -19,6 +19,7 @@ cc.Class({
         pausePop: cc.Node,
         failurePop: cc.Node,
         NoviceGuidePop: cc.Node,
+        levelStartDragonBg: cc.Node,
         levelStartDragon: cc.Node,
     },
     //954
@@ -556,11 +557,10 @@ cc.Class({
 
     //关卡先导动画
     onPlayLevelStartDragon(name, cb) {
-        console.log("name", name);
-        this.levelStartDragon.active = true;
+        this.levelStartDragonBg.active = true;
         this.levelStartDragon.getComponent("levelStartDragon").playAnimation(name);
         setTimeout(() => {
-            this.levelStartDragon.active = false;
+            this.levelStartDragonBg.active = false;
             if (cb) {
                 cb();
             }

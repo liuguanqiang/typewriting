@@ -255,8 +255,10 @@ cc.Class({
     },
 
     onSetBlood(increment) {
-        if (this.bossNode.residueBlood == 0)
+        if (this.bossNode.residueBlood == 0) {
+            this.bloodJS.onSetBloodNum(increment);
             return;
+        }
         const residueBlood = this.bloodJS.onSetBlood(increment);
         this.bossNode.residueBlood = residueBlood;
         if (residueBlood == 0) {

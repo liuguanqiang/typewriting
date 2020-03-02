@@ -83,6 +83,7 @@ cc.Class({
 
     //胜利
     onWin() {
+        window.GameAudioJS().onPlayBossExplode();
         return this.bossJS.onWin();
     },
 
