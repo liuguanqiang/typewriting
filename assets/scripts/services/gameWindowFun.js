@@ -31,7 +31,7 @@ window.VideoUrl = function (name) {
 };
 
 window.requestContentTrack = function (eventName, data) {
-    console.log("埋点： " + eventName, data);
+    //console.log("埋点： " + eventName, data);
     if (window.isShell) {
         window.parent.ShellJS().requestContentTrack(eventName, data);
     }

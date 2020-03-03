@@ -51,7 +51,7 @@ module.exports = {
         return setCacheData(value, 'musicVolum');
     },
     get MusicVolum() {
-        getLocalData('musicVolum');
+        return getLocalData('musicVolum');
     },
 
     //音效音量
@@ -59,9 +59,8 @@ module.exports = {
         return setCacheData(value, 'soundVolum');
     },
     get SoundVolum() {
-        getLocalData('soundVolum');
+        return getLocalData('soundVolum');
     },
-
 
     set GameData(value) {
         return setCacheData(value, "gameData");

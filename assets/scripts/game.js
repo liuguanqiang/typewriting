@@ -371,7 +371,7 @@ cc.Class({
             chapterDuration: chapterTime,
             scoreLevel: num,
             accuracy: this.hitOKCount / (this.hitOKCount + this.hitErrorCount),
-            speed: this.hitOKCount / chapterTime,
+            speed: this.hitOKCount / chapterTime * 60,
             characters: this.hitOKCount,
             chapterId: curStateData.id,
             chapterName: curStateData.name,

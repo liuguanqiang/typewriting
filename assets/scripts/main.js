@@ -23,17 +23,18 @@ cc.Class({
             gameLocalData.UserId = 123123;
         }
 
-        let musicVolum = gameLocalData.MusicVolum || 1;
+        let musicVolum = gameLocalData.MusicVolum != undefined ? gameLocalData.MusicVolum : 1;
         cc.audioEngine.setMusicVolume(musicVolum);
 
-        let soundVolum = gameLocalData.SoundVolum || 1;
+        let soundVolum = gameLocalData.SoundVolum != undefined ? gameLocalData.SoundVolum : 1;
         cc.audioEngine.setEffectsVolume(soundVolum);
 
         if (!gameLocalData.StratTime) {
             gameLocalData.StratTime = new Date().getTime();
         }
-
-        this.userIDLab.getComponent(cc.Label).string = gameLocalData.UserId;
+        // if (gameLocalData.MusicVolum) {
+        //     this.userIDLab.getComponent(cc.Label).string = gameLocalData.MusicVolum;
+        // }
         window.GamePersistRootJS().initPersistRootNode();
         for (let i = 0; i < this.LevelJsons.length; i++) {
             const data = this.LevelJsons[i].json.level;
