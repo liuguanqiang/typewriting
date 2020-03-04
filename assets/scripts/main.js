@@ -11,6 +11,7 @@ cc.Class({
         videoLayout: cc.Node,
         videoPlayer: cc.Node,
         userIDLab: cc.Node,
+        shade: cc.Node,
     },
 
     start() {
@@ -18,6 +19,7 @@ cc.Class({
         cc.director.preloadScene('gameScene');
     },
     onLoad() {
+        cc.renderer.canvas.focus()
         let userId = gameLocalData.UserId;
         if (!userId) {
             gameLocalData.UserId = 123123;
@@ -31,6 +33,7 @@ cc.Class({
 
         if (!gameLocalData.StratTime) {
             gameLocalData.StratTime = new Date().getTime();
+            this.shade.active = true;
         }
         // if (gameLocalData.MusicVolum) {
         //     this.userIDLab.getComponent(cc.Label).string = gameLocalData.MusicVolum;
@@ -64,6 +67,7 @@ cc.Class({
             }
             if (!this.isOnPlayVideo) {
                 window.GameAudioJS().onPlayHomeBG();
+                this.shade.active = false;
             }
             gameLocalData.GameProgressData = res;
             for (let i = 0; i < this.ScrollContent.children.length; i++) {
@@ -74,20 +78,19 @@ cc.Class({
     },
 
     onPlayVideo() {
-        setTimeout(() => {
-            this.videoLayout.active = true;
-            this.videoPlayer.on("meta-loaded", () => {
-                this.videoPlayer.getComponent(cc.VideoPlayer).resume();
-            })
-            this.videoPlayer.on("completed", () => {
-                this.videoLayout.active = false;
-                this.NoviceGuidePop.active = true;
-                const arrowDatas = [{ showArrowIndex: 1, x: 455 - this.node.width / 2, y: this.node.height / 2 - 222 }];
-                this.NoviceGuidePop.getComponent("noviceGuidePop").onInit(0, arrowDatas);
-                window.GameAudioJS().onPlayHomeBG();
-            })
-            this.videoPlayer.getComponent(cc.VideoPlayer).remoteURL = window.VideoUrl("movie.mp4");
-        }, 1000);
+        this.videoLayout.active = true;
+        this.videoPlayer.on("meta-loaded", () => {
+            this.videoPlayer.getComponent(cc.VideoPlayer).resume();
+        })
+        this.videoPlayer.on("completed", () => {
+            this.videoLayout.active = false;
+            this.shade.active = false;
+            this.NoviceGuidePop.active = true;
+            const arrowDatas = [{ showArrowIndex: 1, x: -57, y: 192 }];
+            this.NoviceGuidePop.getComponent("noviceGuidePop").onInit(0, arrowDatas);
+            window.GameAudioJS().onPlayHomeBG();
+        })
+        this.videoPlayer.getComponent(cc.VideoPlayer).remoteURL = window.VideoUrl("movie.mp4");
     },
     //获取随机数 取整
     randomToFloor(lower, upper) {
