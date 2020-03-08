@@ -18,6 +18,7 @@ cc.Class({
   start() {
   },
   onLoad() {
+    this.isNext = false;
     console.log("this.loadingAnimation ", this.loadingAnimation)
     window.GameAudioJS().onStopMusic();
     this.gotoGameData = gameLocalData.GotoGameData;
@@ -114,15 +115,19 @@ cc.Class({
     return m + ":" + s;
   },
 
-  playVideo(isPlay) {
+  playVideo(isPlay, isRequest = true) {
     if (isPlay) {
       this.videoPlayer.getComponent(cc.VideoPlayer).resume();
       this.btn.spriteFrame = this.btnSF[1];
-      this.onRequestContentTrack("learning_typing_video_play");
+      if (isRequest) {
+        this.onRequestContentTrack("learning_typing_video_play");
+      }
     } else {
       this.videoPlayer.getComponent(cc.VideoPlayer).pause();
       this.btn.spriteFrame = this.btnSF[0];
-      this.onRequestContentTrack("learning_typing_video_pause");
+      if (isRequest) {
+        this.onRequestContentTrack("learning_typing_video_pause");
+      }
     }
   },
   videoPlayCallback() {
@@ -145,6 +150,11 @@ cc.Class({
   },
 
   onNext() {
+    if (this.isNext) {
+      return;
+    }
+    this.isNext = true;
+    this.playVideo(false, false);
     gameLocalData.GotoGameData.sectionId += 1;
     console.log(gameLocalData.GotoGameData.sectionId);
     console.log(this.gotoGameData.sectionId);
