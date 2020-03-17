@@ -9,12 +9,14 @@ cc.Class({
 
     },
 
-    requestSetUserPorgress(callback, param) {
+    requestSetUserPorgress(param, callback) {
         window.GameHttpJS().sendPost("/einstein-logic/v1/typingGame/progress", (response, xhr) => {
             if (response && response.data) {
                 if (callback) callback();
             }
-        }, param);
+        }, param, () => {
+            window.requestContentTrack("typingSetUserPorgress_error");
+        });
     },
 
     requestGetUserList(userId, callback) {
@@ -24,6 +26,8 @@ cc.Class({
             } else {
                 if (callback) callback(null);
             }
+        }, () => {
+            window.requestContentTrack("typingGetUserList_error");
         });
     },
 });

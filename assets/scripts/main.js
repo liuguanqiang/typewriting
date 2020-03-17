@@ -45,12 +45,12 @@ cc.Class({
             this.ScrollContent.addChild(gameItem);
             gameItem.getComponent("gameItem").onInit(i, data);
         }
-        // window.GameUserJS().requestSetUserPorgress(() => { }, {
+        // window.GameUserJS().requestSetUserPorgress( {
         //     "userId": gameLocalData.UserId,
         //     "chapterId": 2,
         //     "sectionId": 0,
         //     "score": 0
-        // });
+        // },() => { });
         window.GameUserJS().requestGetUserList(gameLocalData.UserId, (res) => {
             if (!res || res.length == 0) {
                 res = [{
@@ -60,7 +60,7 @@ cc.Class({
                     "score": 0
                 }]
                 res.forEach(param => {
-                    window.GameUserJS().requestSetUserPorgress(() => { }, param);
+                    window.GameUserJS().requestSetUserPorgress(param, () => { });
                 });
                 this.isOnPlayVideo = true;
                 this.onPlayVideo();

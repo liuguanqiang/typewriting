@@ -480,7 +480,7 @@ cc.Class({
             "score": score
         }
         gameLocalData.GameProgressData.push(param);
-        window.GameUserJS().requestSetUserPorgress(() => { }, param);
+        window.GameUserJS().requestSetUserPorgress(param, () => { });
     },
 
     onGotoVideo(sectionId) {

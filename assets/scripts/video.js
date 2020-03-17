@@ -83,7 +83,7 @@ cc.Class({
       "sectionId": sectionId,
       "score": score
     }
-    window.GameUserJS().requestSetUserPorgress(() => { }, param);
+    window.GameUserJS().requestSetUserPorgress(param, () => { });
   },
   refreshVideoTime() {
     if (!this.duration) return;
