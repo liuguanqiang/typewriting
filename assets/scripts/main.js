@@ -15,66 +15,74 @@ cc.Class({
     },
 
     start() {
-        cc.director.preloadScene('videoScene');
-        cc.director.preloadScene('gameScene');
+        try {
+            cc.director.preloadScene('videoScene');
+            cc.director.preloadScene('gameScene');
+        } catch (error) {
+            window.requestContentTrack("learning_typing_error", { errorInfo: error });
+        }
     },
     onLoad() {
-        cc.renderer.canvas.focus()
-        let userId = gameLocalData.UserId;
-        if (!userId) {
-            gameLocalData.UserId = 123123;
-        }
-
-        let musicVolum = gameLocalData.MusicVolum != undefined ? gameLocalData.MusicVolum : 1;
-        cc.audioEngine.setMusicVolume(musicVolum);
-
-        let soundVolum = gameLocalData.SoundVolum != undefined ? gameLocalData.SoundVolum : 1;
-        cc.audioEngine.setEffectsVolume(soundVolum);
-
-        if (!gameLocalData.StratTime) {
-            gameLocalData.StratTime = new Date().getTime();
-            this.shade.active = true;
-        }
-        // if (gameLocalData.MusicVolum) {
-        //     this.userIDLab.getComponent(cc.Label).string = gameLocalData.MusicVolum;
-        // }
-        window.GamePersistRootJS().initPersistRootNode();
-        for (let i = 0; i < this.LevelJsons.length; i++) {
-            const data = this.LevelJsons[i].json.level;
-            const gameItem = cc.instantiate(this.GameItem);
-            this.ScrollContent.addChild(gameItem);
-            gameItem.getComponent("gameItem").onInit(i, data);
-        }
-        // window.GameUserJS().requestSetUserPorgress( {
-        //     "userId": gameLocalData.UserId,
-        //     "chapterId": 2,
-        //     "sectionId": 0,
-        //     "score": 0
-        // },() => { });
-        window.GameUserJS().requestGetUserList(gameLocalData.UserId, (res) => {
-            if (!res || res.length == 0) {
-                res = [{
-                    "userId": gameLocalData.UserId,
-                    "chapterId": 0,
-                    "sectionId": 0,
-                    "score": 0
-                }]
-                res.forEach(param => {
-                    window.GameUserJS().requestSetUserPorgress(param, () => { });
-                });
-                this.isOnPlayVideo = true;
-                this.onPlayVideo();
+        try {
+            cc.renderer.canvas.focus()
+            let userId = gameLocalData.UserId;
+            if (!userId) {
+                gameLocalData.UserId = 123123;
             }
-            if (!this.isOnPlayVideo) {
-                window.GameAudioJS().onPlayHomeBG();
-                this.shade.active = false;
+
+            let musicVolum = gameLocalData.MusicVolum != undefined ? gameLocalData.MusicVolum : 1;
+            cc.audioEngine.setMusicVolume(musicVolum);
+
+            let soundVolum = gameLocalData.SoundVolum != undefined ? gameLocalData.SoundVolum : 1;
+            cc.audioEngine.setEffectsVolume(soundVolum);
+
+            if (!gameLocalData.StratTime) {
+                gameLocalData.StratTime = new Date().getTime();
+                this.shade.active = true;
             }
-            gameLocalData.GameProgressData = res;
-            for (let i = 0; i < this.ScrollContent.children.length; i++) {
-                const item = this.ScrollContent.children[i];
-                item.getComponent("gameItem").onSetProgressData(res);
+            // if (gameLocalData.MusicVolum) {
+            //     this.userIDLab.getComponent(cc.Label).string = gameLocalData.MusicVolum;
+            // }
+            window.GamePersistRootJS().initPersistRootNode();
+            for (let i = 0; i < this.LevelJsons.length; i++) {
+                const data = this.LevelJsons[i].json.level;
+                const gameItem = cc.instantiate(this.GameItem);
+                this.ScrollContent.addChild(gameItem);
+                gameItem.getComponent("gameItem").onInit(i, data);
             }
-        });
+            // window.GameUserJS().requestSetUserPorgress( {
+            //     "userId": gameLocalData.UserId,
+            //     "chapterId": 2,
+            //     "sectionId": 0,
+            //     "score": 0
+            // },() => { });
+            window.GameUserJS().requestGetUserList(gameLocalData.UserId, (res) => {
+                if (!res || res.length == 0) {
+                    res = [{
+                        "userId": gameLocalData.UserId,
+                        "chapterId": 0,
+                        "sectionId": 0,
+                        "score": 0
+                    }]
+                    res.forEach(param => {
+                        window.GameUserJS().requestSetUserPorgress(param, () => { });
+                    });
+                    this.isOnPlayVideo = true;
+                    this.onPlayVideo();
+                }
+                if (!this.isOnPlayVideo) {
+                    window.GameAudioJS().onPlayHomeBG();
+                    this.shade.active = false;
+                }
+                gameLocalData.GameProgressData = res;
+                for (let i = 0; i < this.ScrollContent.children.length; i++) {
+                    const item = this.ScrollContent.children[i];
+                    item.getComponent("gameItem").onSetProgressData(res);
+                }
+            });
+        } catch (error) {
+            window.requestContentTrack("learning_typing_error", { errorInfo: error });
+        }
     },
 
     onPlayVideo() {

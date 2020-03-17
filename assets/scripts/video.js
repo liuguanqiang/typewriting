@@ -18,36 +18,40 @@ cc.Class({
   start() {
   },
   onLoad() {
-    this.isNext = false;
-    console.log("this.loadingAnimation ", this.loadingAnimation)
-    window.GameAudioJS().onStopMusic();
-    this.gotoGameData = gameLocalData.GotoGameData;
-    this.exerciseState = gameLocalData.GameData.exercise.exerciseState;
-    this.init();
-    this.videoPlayer.on("meta-loaded", () => {
-      if (this.loadingAnimation) {
-        this.loadingAnimation.active = false;
-      }
-      this.isLoaded = true;
-      this.duration = this.videoPlayer.getComponent(cc.VideoPlayer).getDuration();
-      cc.log("this.duration======" + this.duration + " url=" + this.data.url)
-      this.refreshVideoTime();
-      this.playVideo(true);
-    })
-    this.videoPlayer.on("paused", () => {
-      this.btn.spriteFrame = this.btnSF[0];
-    })
-    this.videoPlayer.on("stopped", () => {
-      this.btn.spriteFrame = this.btnSF[0];
-    })
-    this.videoPlayer.on("playing", () => {
-      this.btn.spriteFrame = this.btnSF[1];
-    })
-    this.videoPlayer.on("completed", () => {
-      cc.log("completed");
-      this.onCompleted();
-      this.nextBtn.active = true;
-    })
+    try {
+      this.isNext = false;
+      console.log("this.loadingAnimation ", this.loadingAnimation)
+      window.GameAudioJS().onStopMusic();
+      this.gotoGameData = gameLocalData.GotoGameData;
+      this.exerciseState = gameLocalData.GameData.exercise.exerciseState;
+      this.init();
+      this.videoPlayer.on("meta-loaded", () => {
+        if (this.loadingAnimation) {
+          this.loadingAnimation.active = false;
+        }
+        this.isLoaded = true;
+        this.duration = this.videoPlayer.getComponent(cc.VideoPlayer).getDuration();
+        cc.log("this.duration======" + this.duration + " url=" + this.data.url)
+        this.refreshVideoTime();
+        this.playVideo(true);
+      })
+      this.videoPlayer.on("paused", () => {
+        this.btn.spriteFrame = this.btnSF[0];
+      })
+      this.videoPlayer.on("stopped", () => {
+        this.btn.spriteFrame = this.btnSF[0];
+      })
+      this.videoPlayer.on("playing", () => {
+        this.btn.spriteFrame = this.btnSF[1];
+      })
+      this.videoPlayer.on("completed", () => {
+        cc.log("completed");
+        this.onCompleted();
+        this.nextBtn.active = true;
+      })
+    } catch (error) {
+      window.requestContentTrack("learning_typing_error", { errorInfo: error });
+    }
   },
 
 

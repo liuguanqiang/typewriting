@@ -27,38 +27,42 @@ cc.Class({
     },
 
     onLoad() {
-        this.bgSpeed = 1;
-        gameLocalData.IsPause = false;
-        this.initSetting();
-        this.hitTimeCB = () => {
-            //引导窗口显示时  不计入时间
-            if (gameLocalData.IsPause) {
-                return;
+        try {
+            this.bgSpeed = 1;
+            gameLocalData.IsPause = false;
+            this.initSetting();
+            this.hitTimeCB = () => {
+                //引导窗口显示时  不计入时间
+                if (gameLocalData.IsPause) {
+                    return;
+                }
+                this.hitTimeOffset += 0.5;
+            };
+            this.KeyboardJS = this.Keyboard.getComponent("keyboard");
+
+            //当前游戏总配置数据
+            this.gameData = gameLocalData.GameData;
+
+            //进入时游戏进度
+            this.gotoGameData = gameLocalData.GotoGameData;
+            this.setAnchorCurStateIndex(this.gotoGameData.isBossLevel);
+            //用户连续正确的次数  一旦错误归零重新累计
+            this.correctCount = 0;
+            this.bulletNodePool = new cc.NodePool();
+            for (let i = 0; i < 5; ++i) {
+                this.bulletNodePool.put(cc.instantiate(this.BulletItem));
             }
-            this.hitTimeOffset += 0.5;
-        };
-        this.KeyboardJS = this.Keyboard.getComponent("keyboard");
-
-        //当前游戏总配置数据
-        this.gameData = gameLocalData.GameData;
-
-        //进入时游戏进度
-        this.gotoGameData = gameLocalData.GotoGameData;
-        this.setAnchorCurStateIndex(this.gotoGameData.isBossLevel);
-        //用户连续正确的次数  一旦错误归零重新累计
-        this.correctCount = 0;
-        this.bulletNodePool = new cc.NodePool();
-        for (let i = 0; i < 5; ++i) {
-            this.bulletNodePool.put(cc.instantiate(this.BulletItem));
-        }
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-        this.onBgAnim();
-        this.onPlayGame();
-        const progressData = gameLocalData.GameProgressData.find(a => a.chapterId == 0 && a.sectionId == 1);
-        if (!progressData || progressData.score == 0) {
-            setTimeout(() => {
-                this.onNoviceGuidePop(2);
-            }, 1000);
+            cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+            this.onBgAnim();
+            this.onPlayGame();
+            const progressData = gameLocalData.GameProgressData.find(a => a.chapterId == 0 && a.sectionId == 1);
+            if (!progressData || progressData.score == 0) {
+                setTimeout(() => {
+                    this.onNoviceGuidePop(2);
+                }, 1000);
+            }
+        } catch (error) {
+            window.requestContentTrack("learning_typing_error", { errorInfo: error });
         }
     },
 
