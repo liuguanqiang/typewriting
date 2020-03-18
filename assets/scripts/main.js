@@ -40,9 +40,6 @@ cc.Class({
                 gameLocalData.StratTime = new Date().getTime();
                 this.shade.active = true;
             }
-            // if (gameLocalData.MusicVolum) {
-            //     this.userIDLab.getComponent(cc.Label).string = gameLocalData.MusicVolum;
-            // }
             window.GamePersistRootJS().initPersistRootNode();
             for (let i = 0; i < this.LevelJsons.length; i++) {
                 const data = this.LevelJsons[i].json.level;
@@ -109,6 +106,7 @@ cc.Class({
         if (window.isShell) {
             const offTime = window.GetSecond(new Date().getTime() - gameLocalData.StratTime);
             window.requestContentTrack("learning_typing_pageExit", { duration: offTime });
+            gameLocalData.StratTime=null;
             window.parent.PublicJS().runScene("MainScene");
         }
     },

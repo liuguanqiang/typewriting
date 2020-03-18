@@ -19,24 +19,11 @@ var getLocalData = function (key) {
     return gameLocalData[key];
 };
 
-var setCacheData = function (value, key, additional) {
-    for (var k in additional) {
-        if (additional.hasOwnProperty(k)) {
-            key += '__' + k + '_' + additional[k];
-        }
-    }
+var setCacheData = function (value, key) {
     gameLocalData[key] = value;
 };
-var getCacheData = function (key, additional) {
-    for (var k in additional) {
-        if (additional.hasOwnProperty(k)) {
-            key += '__' + k + '_' + additional[k];
-        }
-    }
-    // 返回缓存数据
-    if (gameLocalData[key] !== undefined) {
-        return gameLocalData[key];
-    }
+var getCacheData = function (key) {
+    return gameLocalData[key];
 };
 module.exports = {
     set UserId(value) {
