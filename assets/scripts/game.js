@@ -28,6 +28,7 @@ cc.Class({
 
     onLoad() {
         try {
+            if (window.isShell) window.parent.ShellJS().eyeGuardPause();
             this.bgSpeed = 1;
             gameLocalData.IsPause = false;
             this.initSetting();

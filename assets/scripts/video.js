@@ -20,7 +20,7 @@ cc.Class({
   onLoad() {
     try {
       this.isNext = false;
-      console.log("this.loadingAnimation ", this.loadingAnimation)
+      if (window.isShell) window.parent.ShellJS().eyeGuardPause();
       window.GameAudioJS().onStopMusic();
       this.gotoGameData = gameLocalData.GotoGameData;
       this.exerciseState = gameLocalData.GameData.exercise.exerciseState;

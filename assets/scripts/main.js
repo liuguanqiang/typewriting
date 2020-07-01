@@ -24,6 +24,7 @@ cc.Class({
     },
     onLoad() {
         try {
+            if (window.isShell) window.parent.ShellJS().eyeGuardStart();
             cc.renderer.canvas.focus()
             let userId = gameLocalData.UserId;
             if (!userId) {
@@ -106,7 +107,7 @@ cc.Class({
         if (window.isShell) {
             const offTime = window.GetSecond(new Date().getTime() - gameLocalData.StratTime);
             window.requestContentTrack("learning_typing_pageExit", { duration: offTime });
-            gameLocalData.StratTime=null;
+            gameLocalData.StratTime = null;
             window.parent.PublicJS().runScene("MainScene");
         }
     },
