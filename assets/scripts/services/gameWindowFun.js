@@ -27,7 +27,7 @@ window.GameUserJS = function () {
 
 //视频链接
 window.VideoUrl = function (name) {
-    return "https://client-hot-update.oss-cn-beijing.aliyuncs.com/typingResource/" + name;
+    return "https://hotupdate.pipacoding.com/typingResource/" + name;
 };
 
 window.requestContentTrack = function (eventName, data) {
