@@ -35,7 +35,7 @@ cc.Class({
             }
         }
         this.bossIcon.getComponent(cc.Sprite).spriteFrame = this.bossFrame[index];
-        const bossSize = [{ x: 132, y: 118 }, { x: 145, y: 115 }, { x: 145, y: 81 }];
+        const bossSize = [{ x: 132, y: 118 }, { x: 145, y: 115 }, { x: 145, y: 81 }, { x: 145, y: 132 }, { x: 145, y: 145 }];
         this.bossIcon.setContentSize(bossSize[index].x, bossSize[index].y);
         this.bossTitle.getComponent(cc.Label).string = data.boss.name;
         this.bossInfo.getComponent(cc.Label).string = data.boss.describe;
@@ -45,7 +45,7 @@ cc.Class({
         this.bossShade.height += h;
         this.bossItem.y -= h / 2;
         this.bossIndex = data.exercise.exerciseState.length;
-    },
+    },                                                                                                                                                                                                                                                                     
 
     //设置进度数据
     onSetProgressData(progressData) {

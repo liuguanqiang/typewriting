@@ -1,0 +1,155 @@
+{
+    "level": {
+        "id": "L4",
+        "name": "火龙降临",
+        "speed": 100,
+        "exercise": {
+            "exerciseState": [
+                {
+                    "id":"0401",
+                    "isVideo":true,
+                    "name": "肌肉记忆",
+                    "url":"08肌肉记忆.mp4"
+                },
+               {
+                "id":"0402",
+                "isVideo":false,
+                "name": "练习w、x、分号键",
+                "twoStars": 0.75,
+                "threeStars": {
+                    "accuracy": 0.9,
+                    "time": 60
+                },
+                "state": [
+                    {
+                        "normal": ["w","x",";"],
+                        "updateCount": 4
+                    },
+                    {
+                        "normal": ["ww","xx",";;","w","x",";"],
+                        "updateCount": 6
+                    },
+                    {
+                        "normal": ["wxx","x;;","ww;",";xx",";ww","w;;","w","x",";","w","x",";"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["w;w","xwx",";x;","wxw","wxx","x;;","ww;",";xx",";ww","w;;","w","x",";","w","x",";"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["wx;",";xw","w;x",";wx",";;;","xxx","www",";x;x;","xwxw","x;;;","wxxx",";wwx","www;","ww","xx",";;","w","x",";","ww","xx",";;","w","x",";"],
+                        "updateCount": 14
+                    }
+                ]
+              },
+              {
+                "id":"0403",
+                "isVideo":true,
+                "name": "shift键的作用",
+                "url":"05shift键的作用.mp4"
+            },
+              {
+                "id":"0404",
+                "isVideo":false,
+                "name": "练习q、y、p",
+                "twoStars": 0.75,
+                "threeStars": {
+                    "accuracy": 0.9,
+                    "time": 55
+                },
+                "state":[
+                    {
+                        "normal": ["q","y","p"],
+                        "updateCount": 4
+                    },
+                    {
+                        "normal": ["qq","yy","pp","q","y","p"],
+                        "updateCount": 6
+                    },
+                    {
+                        "normal": ["qyy","ypp","qqp","pyy","ltt","qpp","q","y","p","q","y","p"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["qpq","yqy","pyp","yqy","qyy","ypp","qqp","ppy","pqq","qpp","q","y","p","q","y","p"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["qyp","pyq","qpy","pqy","qqq","yyy","ppp","pypy","yqyq","yppp","qyyy","pqqy","qqqp","qq","yy","pp","q","y","p","qq","yy","pp","q","y","p"],
+                        "updateCount": 14
+                    }
+                ]
+              },
+              {
+                "id":"0405",
+                "isVideo":false,
+                "name": "综合练习",
+                "twoStars": 0.75,
+                "threeStars": {
+                    "accuracy": 0.9,
+                    "time": 70
+                },
+                "state":[
+                    {
+                        "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","w","x",";","q","y","p"],
+                        "updateCount": 6
+                    },
+                    {
+                        "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,","..","ww","xx",";;","qq","yy","pp"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd","tff","jss","t,,",".ll","f..","r,,","u..","n,,","sll","wwn","dxx","e;;","qqi","fyy","ppk","xxp","pdd","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","w","x",";","q","y","p"],
+                        "updateCount": 14
+                    },
+                    {
+                        "normal": ["djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is.","wg,","lab","txm","jql","xyk","ucp","bwp","abo","x;y","wnp","xlq","s;y","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","w","x",";","q","y","p"],
+                        "updateCount": 18
+                    }
+                ]
+              }
+            ]
+        },
+        "boss": {
+            "id":"0406",
+            "name": "火龙",
+            "describe": "让我掠过的土地尽情燃烧吧！",
+            "twoStars": 0.75,
+            "threeStars": {
+                "accuracy": 0.9,
+                "time": 150
+            },
+            "blood": 100,
+            "practiceSpeed": 70,
+            "attackSpeed": 40,
+            "practiceState": [
+                {
+                    "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","w","x",";","q","y","p"],
+                    "updateCount": 6
+                },
+                {
+                    "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,","..","qq","yy","pp","ww","xx",";;"],
+                    "updateCount": 6
+                },
+                {
+                    "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd","tff","jss","t,,",".ll","f..","r,,","u..","n,,","sll","wwn","dxx","e;;","qqi","fyy","ppk","xxp","pdd","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","w","x",";","q","y","p"],
+                    "updateCount": 14
+                },
+                {
+                    "normal": ["djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is.","wg,","lab","txm","jql","xyk","ucp","bwp","abo","x;y","wnp","xlq","s;y","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","w","x",";","q","y","p"],
+                    "updateCount": 18
+                }
+            ],
+            "attackState": {
+                "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","w","x",";","q","y","p","dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,","..","qq","yy","pp","ww","xx",";;"],
+                "updateCount": 12
+            },
+            "beatingState": {
+                "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","w","x",";","q","y","p"],
+                "updateCount": 10,
+                "beatTime": 6
+            }
+        }
+    }
+}

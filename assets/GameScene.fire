@@ -41,9 +41,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.7125651041666666,
-      "y": 0.7125651041666666,
-      "z": 0.7125651041666666
+      "x": 0.6032577992413527,
+      "y": 0.6032577992413527,
+      "z": 0.6032577992413527
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -11195,6 +11195,12 @@
       },
       {
         "__uuid__": "41d84a3a-5aff-4e77-867a-33ee81b1d74d"
+      },
+      {
+        "__uuid__": "b4c8d507-4d4c-4d92-a5a6-2664ac09d431"
+      },
+      {
+        "__uuid__": "40492097-0c8f-4cc4-8b61-cf6b07db3cc0"
       }
     ],
     "_id": "f93mf9xgpKC6orVox6xlBh"
@@ -12090,7 +12096,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_armatureName": "关卡发布",
-    "_animationName": "0102",
+    "_animationName": "",
     "playTimes": -1,
     "_N$dragonAsset": {
       "__uuid__": "89622f61-18d9-4921-a86d-256428634cbd"
@@ -12099,7 +12105,7 @@
       "__uuid__": "c8f9484a-b87d-46ad-8358-06dbfe14dffd"
     },
     "_N$_defaultArmatureIndex": 0,
-    "_N$_animationIndex": 1,
+    "_N$_animationIndex": 0,
     "_N$timeScale": 1,
     "_N$debugBones": false,
     "_id": "dd/BfdZxlEkbZMOPcnWzOi"

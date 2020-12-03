@@ -20,7 +20,7 @@ cc.Class({
     },
     onInit(progress, chapterId, cb) {
         this.bossIcon.getComponent(cc.Sprite).spriteFrame = this.bossFrames[chapterId];
-        const bossSize = [{ x: 184, y: 165 }, { x: 203, y: 161 }, { x: 203, y: 113 }];
+        const bossSize = [{ x: 184, y: 165 }, { x: 203, y: 161 }, { x: 203, y: 113 }, { x: 203, y: 185 }, { x: 203, y: 203 }];
         this.bossIcon.setContentSize(bossSize[chapterId].x, bossSize[chapterId].y);
         this.bossImg.runAction(cc.scaleTo(0.5, 1, 1).easing(cc.easeIn(3)));
         setTimeout(() => {

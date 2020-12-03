@@ -119,7 +119,7 @@
                 "time": 150
             },
             "blood": 100,
-            "practiceSpeed": 70,
+            "practiceSpeed": 60,
             "attackSpeed": 40,
             "practiceState": [
                 {
@@ -146,7 +146,7 @@
             "beatingState": {
                 "normal": ["c","g","n","d","e","i","f","j","u","r","k"],
                 "updateCount": 10,
-                "beatTime": 5
+                "beatTime": 8
             }
         }
     }

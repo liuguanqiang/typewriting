@@ -19,7 +19,7 @@ cc.Class({
             cc.director.preloadScene('videoScene');
             cc.director.preloadScene('gameScene');
         } catch (error) {
-            window.requestContentTrack("learning_typing_error", { errorInfo: error });
+            window.requestContentTrack("learning_typing_error", { errorInfo: error.message });
         }
     },
     onLoad() {
@@ -79,7 +79,7 @@ cc.Class({
                 }
             });
         } catch (error) {
-            window.requestContentTrack("learning_typing_error", { errorInfo: error });
+            window.requestContentTrack("learning_typing_error", { errorInfo: error.message });
         }
     },
 

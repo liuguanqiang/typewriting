@@ -1,0 +1,155 @@
+{
+    "level": {
+        "id": "L5",
+        "name": "激战金刚",
+        "speed": 100,
+        "exercise": {
+            "exerciseState": [
+                {
+                    "id":"0501",
+                    "isVideo":true,
+                    "name": "知道空格键的作用",
+                    "url":"04空格键的作用.mp4"
+                },
+               {
+                "id":"0502",
+                "isVideo":false,
+                "name": "练习z、h、m",
+                "twoStars": 0.75,
+                "threeStars": {
+                    "accuracy": 0.9,
+                    "time": 50
+                },
+                "state": [
+                    {
+                        "normal": ["z","h","m"], 
+                        "updateCount": 4
+                    },
+                    {
+                        "normal": ["zz","hh","mm","z","h","m"],
+                        "updateCount": 6
+                    },
+                    {
+                        "normal": ["zhh","hmm","zzm","mhh","mzz","zmm","z","h","m","z","h","m"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["zmz","hzh","mhm","zhz","zhh","zhh","hmm","zzm","mhh","mzz","zmm","z","h","m"],
+                        "updateCount": 10
+                    },
+                    {
+                        "normal": ["zhm","mhz","zmh","mzh","mmm","hhh","zzz",";hmhm","zhzh","hmmm","zhhh","mzzh","zzzm","zz","hh","mm","z","h","m"],
+                        "updateCount": 12
+                    }
+                ]
+              },
+              {
+                "id":"0503",
+                "isVideo":true,
+                "name": "知道常用的快捷键",
+                "url":"07常用的快捷键.mp4"
+            },
+              {
+                "id":"0504",
+                "isVideo":false,
+                "name": "练习a、b、o、v",
+                "twoStars": 0.75,
+                "threeStars": {
+                    "accuracy": 0.9,
+                    "time": 60
+                },
+                "state":[
+                    {  
+                        "normal": ["a","b","o","v"],
+                        "updateCount": 4
+                    },
+                    {
+                        "normal": ["aa","bb","oo","vv","a","b","o","v"],
+                        "updateCount": 6
+                    },
+                    {
+                        "normal": ["abb","boo","aao","oob","vaa","bvv","ovv","vbb","a","b","o","v"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["aoa","bab","obo","bab","vov","ava","ovo","abb","boo","aao","oob","vaa","bvv","ovv","vbb","a","b","o","v"],
+                        "updateCount": 12
+                    },
+                    {
+                        "normal": ["abo","abv","vob","vba","oab","boa","ovb","bav","aaa","bbb","ooo","vvv","obva","voab","abov","abvv","bvvo","bvoa","oavb","vabo","aa","bb","oo","vv","a","b","o","v"],
+                        "updateCount": 16
+                    }
+                ]
+              },
+              {
+                "id":"0505",
+                "isVideo":false,
+                "name": "综合练习",
+                "twoStars": 0.75,
+                "threeStars": {
+                    "accuracy": 0.9,
+                    "time": 60
+                },
+                "state":[
+                    {
+                        "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","w","x",";","q","y","p","z","h","m","a","b","o","v"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,","..","qq","yy","pp","ww","xx",";;","zz","hh","mm","aa","bb","oo","vv"],
+                        "updateCount": 8
+                    },
+                    {
+                        "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd","tff","jss","t,,",".ll","f..","r,,","u..","n,,","sll","wwn","dxx","e;;","qqi","fyy","ppk","xxp","pdd","zzk","ehh","mmx","uaa","bbr","zoo","vvp","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","w","x",";","q","y","p","z","h","m","a","b","o","v"],
+                        "updateCount": 16
+                    },
+                    {
+                        "normal": ["djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is.","wg,","lab","txm","jql","xyk","ucp","bwp","abo","x;y","wnp","xlq","s;y","kzg","hw.","emg","fox","abp","vus",",f;","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","w","x",";","q","y","p","z","h","m","a","b","o","v"],
+                        "updateCount": 18
+                    }
+                ]
+              }
+            ]
+        },
+        "boss": {
+            "id":"0506",
+            "name": "金刚",
+            "describe": "我一咆哮，就是世纪之战！",
+            "twoStars": 0.75,
+            "threeStars": {
+                "accuracy": 0.9,
+                "time": 150
+            },
+            "blood": 100,
+            "practiceSpeed": 70,
+            "attackSpeed": 40,
+            "practiceState": [
+                {
+                    "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","w","x",";","q","y","p","z","h","m","a","b","o","v"],
+                    "updateCount": 8
+                },
+                {
+                    "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,","..","qq","yy","pp","ww","xx",";;","zz","hh","mm","aa","bb","oo","vv"],
+                    "updateCount": 8
+                },
+                {
+                    "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd","tff","jss","t,,",".ll","f..","r,,","u..","n,,","sll","wwn","dxx","e;;","qqi","fyy","ppk","xxp","pdd","zzk","ehh","mmx","uaa","bbr","zoo","vvp","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","w","x",";","q","y","p","z","h","m","a","b","o","v"],
+                    "updateCount": 14
+                },
+                {
+                    "normal": ["djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is.","wg,","lab","txm","jql","xyk","ucp","bwp","abo","x;y","wnp","xlq","s;y","kzg","hw.","emg","fox","abp","vus",",f;","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","w","x",";","q","y","p","z","h","m","a","b","o","v"],
+                    "updateCount": 18
+                }
+            ],
+            "attackState": {
+                "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","ww","xx",";;","zz","hh","mm","aa","bb","oo","vv"],
+                "updateCount": 12
+            },
+            "beatingState": {
+                "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","w","x",";","q","y","p","z","h","m","a","b","o","v"],
+                "updateCount": 10,
+                "beatTime": 6
+            }
+        }
+    }
+}
