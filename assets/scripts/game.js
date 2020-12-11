@@ -408,7 +408,7 @@ cc.Class({
         window.requestContentTrack("learning_typing_ex_keyDown", trackData);
     },
 
-    //显示暂停窗口
+    //显示暂停窗口 
     onPausePop() {
         if (!this.Keyboard.active)
             return;

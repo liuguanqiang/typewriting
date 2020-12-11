@@ -51,6 +51,12 @@ cc.Class({
         } else if (this.bossIndex == 2) {
             this.bossNode = cc.instantiate(this.Bosses[2]);
             this.bossJS = this.bossNode.getComponent("catBoss");
+        } else if (this.bossIndex == 3) {
+            this.bossNode = cc.instantiate(this.Bosses[3]);
+            this.bossJS = this.bossNode.getComponent("fieryDragonBoss");
+        } else if (this.bossIndex == 4) {
+            this.bossNode = cc.instantiate(this.Bosses[4]);
+            this.bossJS = this.bossNode.getComponent("gorillaBoss");
         }
     },
 
@@ -104,23 +110,24 @@ cc.Class({
             this.isFristInit = true;
             this.bossNode.active = false;
             this.gameJS.EnergyProgressBar.active = false;
-            this.bossNode.y = 490;
+            this.bossNode.y = 520;
         }
     },
 
     onGetBossDefaultY() {
         if (this.bossIndex == 0) {
             return 170;
-        }
-        else if (this.bossIndex == 1) {
+        } else if (this.bossIndex == 1) {
             return 200;
-        }
-        else if (this.bossIndex == 2) {
+        } else if (this.bossIndex == 2) {
             return 230;
+        } else if (this.bossIndex == 3) {
+            return 230;
+        } else if (this.bossIndex == 4) {
+            return 280;
         }
         return 200;
     },
-
     onKeyDown(code, curAnchorLetter) {
         const curAnchorLetterJS = curAnchorLetter.getComponent("letterRect");
         const target = curAnchorLetterJS.getFristLetter();
