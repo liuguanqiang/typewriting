@@ -122,7 +122,7 @@ cc.Class({
         } else if (this.bossIndex == 2) {
             return 230;
         } else if (this.bossIndex == 3) {
-            return 230;
+            return 250;
         } else if (this.bossIndex == 4) {
             return 280;
         }

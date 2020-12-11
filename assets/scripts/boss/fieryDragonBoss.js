@@ -56,13 +56,13 @@ cc.Class({
             if (aniIndex == 1) {
                 this._armatureDisPlay.playAnimation('状态1左攻击', 1);
                 setTimeout(() => {
-                    this.baseJS.createLetterItem(cc.v2(-115, 170));
+                    this.baseJS.createLetterItem(cc.v2(-115, 190));
                     this.onAttackAnimation();
                 }, 500);
             } else if (aniIndex == 2) {
                 this._armatureDisPlay.playAnimation('状态1右攻击', 1);
                 setTimeout(() => {
-                    this.baseJS.createLetterItem(cc.v2(115, 170));
+                    this.baseJS.createLetterItem(cc.v2(115, 190));
                     this.onAttackAnimation();
                 }, 500);
             } else if (aniIndex == 3) {
@@ -75,9 +75,9 @@ cc.Class({
             if (aniIndex == 1) {
                 this._armatureDisPlay.playAnimation('状态2左攻击', 1);
                 setTimeout(() => {
-                    this.baseJS.createLetterItem(cc.v2(-90, 160));
-                    this.baseJS.createLetterItem(cc.v2(-180, 180));
-                    this.baseJS.createLetterItem(cc.v2(-270, 200));
+                    this.baseJS.createLetterItem(cc.v2(-90, 190));
+                    this.baseJS.createLetterItem(cc.v2(-180, 210));
+                    this.baseJS.createLetterItem(cc.v2(-270, 230));
                     this._armatureDisPlay.playAnimation('状态2生气', 1);
                     setTimeout(() => {
                         this.onAttackAnimation();
@@ -86,9 +86,9 @@ cc.Class({
             } else if (aniIndex == 2) {
                 this._armatureDisPlay.playAnimation('状态2右攻击', 1);
                 setTimeout(() => {
-                    this.baseJS.createLetterItem(cc.v2(90, 160));
-                    this.baseJS.createLetterItem(cc.v2(180, 180));
-                    this.baseJS.createLetterItem(cc.v2(270, 200));
+                    this.baseJS.createLetterItem(cc.v2(90, 190));
+                    this.baseJS.createLetterItem(cc.v2(180, 210));
+                    this.baseJS.createLetterItem(cc.v2(270, 230));
                     this.onAttackAnimation();
                 }, 500);
             } else if (aniIndex == 3) {
