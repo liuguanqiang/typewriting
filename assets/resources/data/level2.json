@@ -17,7 +17,7 @@
                   "twoStars": 0.75,
                   "threeStars": {
                     "accuracy": 0.9,
-                    "time": 50
+                    "time": 90
                 },
                 "state": [
                     {
@@ -25,19 +25,19 @@
                         "updateCount": 4
                     },
                     {
-                        "normal": ["dd","ee","ii","d","e","i"],
+                        "normal": ["dd","ee","ii","de","di","ie","d","e","i"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["iee","dde","dii","iid","idd","iie"],
+                        "normal": ["iee","dde","dii","iid","idd","iie","de","di","ie"],
                         "updateCount": 8
                     },
                     {
-                        "normal": ["eie","idi","iei","did","iii","ede","ddd"],
+                        "normal": ["iee","dde","dii","iid","idd","eie","idi","iei","did","iii","ede","ddd","eee"],
                         "updateCount": 8
                     },
                     {
-                        "normal": ["eie","idi","iei","did","iii","ede","eeie","dede","idid","eiii","iide","idei","d","e","i","d","e","i"],
+                        "normal": ["eid","ide","ied","die","edi","dei","eeie","dede","idid","eiid","iide","idei","de","di","ie","d","e","i"],
                         "updateCount": 14
                     }
                 ]
@@ -50,7 +50,7 @@
                 "twoStars": 0.75,
                 "threeStars": {
                     "accuracy": 0.9,
-                    "time": 50
+                    "time": 80
                 },
                 "state":[
                     {
@@ -58,19 +58,19 @@
                         "updateCount": 4
                     },
                     {
-                        "normal": ["cc","gg","nn","c","g","n"],
+                        "normal": ["cc","gg","nn","gc","cn","ng","c","g","n"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["ccg","ggn","ggc","gcc","cnn","gnn"],
+                        "normal": ["ccg","ggn","ggc","gcc","cnn","gnn","gc","cn","ng"],
                         "updateCount": 8
                     },
                     {
-                        "normal": ["cgc","cnc","ngn","gcg","ggg","nnn","ncn","ccc"],
+                        "normal": ["ccg","ggn","nnc","cgc","cnc","ngn","gcg","ggg","nnn","ncn","ccc","gng"],
                         "updateCount": 8
                     },
                     {
-                        "normal": ["cgc","cnc","ngn","gcg","ggg","nnn","ncn","ccc","ccgn","gncc","ncgg","ncnc","gngn","gcgc","ggcn","c","g","n","c","g","n"],
+                        "normal": ["cgc","ngn","gcg","cgn","gnc","ncg","ccgn","gncc","ncgg","ncnc","gngn","gcgc","gc","cn","ng","c","g","n"],
                         "updateCount": 14
                     }
                 ]
@@ -82,28 +82,28 @@
                 "twoStars": 0.75,
                 "threeStars": {
                     "accuracy": 0.9,
-                    "time": 70
+                    "time": 120
                 },
                 "state":[
                     {
                         "normal": ["c","g","n","d","e","i","f","j","u","r","k"],
-                        "updateCount": 4
+                        "updateCount": 5
                     },
                     {
                         "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk"],
-                        "updateCount": 6
+                        "updateCount": 5
                     },
                     {
-                        "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd"],
-                        "updateCount": 8
+                        "normal": ["ccj","jje","nnf","krr","uuc","ncc","gkk","ggu","ggc","jdd","di","ne","jr","kc","fu"],
+                        "updateCount": 10
                     },
                     {
-                        "normal": ["urr","rkk","kdd","djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg"],
-                        "updateCount": 8
+                        "normal": ["urr","rkk","kdd","djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","dd","ee","ii","cc","gg","nn"],
+                        "updateCount": 10
                     },
                     {
-                        "normal": ["ujrr","rrkk","cgg","cjk","fku","ddrn","ccjd","krrn","nndn","rgnd","gkkd","kddg"],
-                        "updateCount": 14
+                        "normal": ["ujrr","rrnk","ddnr","ccjd","krrn","cnig","rgnd","gkkd","cgg","cjk","fku","kdn","rnd","gkd","djf","fun","drn"],
+                        "updateCount": 10
                     }
                 ]
               }
@@ -116,31 +116,31 @@
             "twoStars": 0.75,
             "threeStars": {
                 "accuracy": 0.9,
-                "time": 150
+                "time": 140
             },
             "blood": 100,
             "practiceSpeed": 60,
-            "attackSpeed": 40,
+            "attackSpeed": 50,
             "practiceState": [
                 {
                     "normal": ["c","g","n","d","e","i","f","j","u","r","k"],
-                    "updateCount": 4
+                    "updateCount": 6
                 },
                 {
                     "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk"],
                     "updateCount": 6
                 },
                 {
-                    "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd","c","g","n","d","e","i","f","j","u","r","k"],
-                    "updateCount": 15
+                    "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd","cc","gg","nn","dd","ee","i","f","j","u","r","k"],
+                    "updateCount": 12
                 },
                 {
-                    "normal": ["urr","rkk","kdd","djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","c","g","n","d","e","i","f","j","u","r","k"],
-                    "updateCount": 15
+                    "normal": ["djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","cci","ggu","nnf","ddk","eej","id","en","rj","ck","uf","ng"],
+                    "updateCount": 18
                 }
             ],
             "attackState": {
-                "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","c","g","n","d","e","i","f","j","u","r","k","c","g","n","d","e","i","f","j","u","r","k"],
+                "normal": ["jj","ff","uu","rr","kk","c","g","n","d","e","i","jc","fi","ud","ri","ke"],
                 "updateCount": 12
             },
             "beatingState": {

@@ -11,7 +11,7 @@
                 "twoStars": 0.75,
                 "threeStars": {
                     "accuracy": 0.9,
-                    "time": 50
+                    "time": 75
                 },
                 "state": [
                     {
@@ -27,11 +27,11 @@
                         "updateCount": 8
                     },
                     {
-                        "normal": ["tlt","sts","lsl","tst","tss","sll","ttl","lss","ltt","tll","t","s","l","t","s","l"],
+                        "normal": ["tlt","sts","lsl","tst","tss","sll","ttl","lss","ltt","tll","tt","ss","ll","t","s","l"],
                         "updateCount": 8
                     },
                     {
-                        "normal": ["tsl","lst","tls","lts","lll","sss","ttt","lsls","stst","slll","tsss","ltts","tttl","tt","ss","ll","t","s","l","tt","ss","ll","t","s","l"],
+                        "normal": ["tsl","lst","tls","lts","llt","sls","tst","lsls","stst","sllt","tssl","ltts","tltl","tt","ss","ll","t","s","l"],
                         "updateCount": 14
                     }
                 ]
@@ -49,7 +49,7 @@
                 "twoStars": 0.75,
                 "threeStars": {
                     "accuracy": 0.9,
-                    "time": 40
+                    "time": 50
                 },
                 "state":[
                     {
@@ -85,7 +85,7 @@
                 "twoStars": 0.75,
                 "threeStars": {
                     "accuracy": 0.9,
-                    "time": 50
+                    "time": 90
                 },
                 "state":[
                     {
@@ -93,16 +93,16 @@
                         "updateCount": 6
                     },
                     {
-                        "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,",".."],
-                        "updateCount": 4
+                        "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll"],
+                        "updateCount": 6
                     },
                     {
-                        "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd","tff","jss","t,,",".ll","f..","r,,","u..","n,,","sll","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
-                        "updateCount": 15
+                        "normal": ["ccl","jje","nnf","krr","sll","uuc","ntt","gkk","ggu","jdd","tff","jss","f..","s,,","u..","c,,","sll","dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll"],
+                        "updateCount": 14
                     },
                     {
-                        "normal": ["urr","rkk","kdd","djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is.","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
-                        "updateCount": 15
+                        "normal": ["urr","rkk","kdd","djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is.","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
+                        "updateCount": 14
                     }
                 ]
               }
@@ -122,30 +122,30 @@
             "attackSpeed": 40,
             "practiceState": [
                 {
-                    "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
+                    "normal": ["c","g","n","d","e","i","f","j","u","r","k","t","s","l"],
                     "updateCount": 6
                 },
                 {
                     "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,",".."],
-                    "updateCount": 4
+                    "updateCount": 6
                 },
                 {
-                    "normal": ["ccj","jje","nnf","krr","kuu","uuc","ncc","gkk","ggu","ggc","jdd","tff","jss","t,,",".ll","f..","r,,","u..","n,,","sll","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
-                    "updateCount": 15
+                    "normal": ["ccl","jje","nnf","krr","sll","uuc","ntt","gkk","ggu","jdd","tff","jss","f..","s,,","u..","c,,","sll"],
+                    "updateCount": 12
                 },
                 {
-                    "normal": ["urr","rkk","kdd","djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is.","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
-                    "updateCount": 15
+                    "normal": ["djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is.","dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll"],
+                    "updateCount": 18
                 }
             ],
             "attackState": {
-                "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l","dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,",".."],
-                "updateCount": 15
+                "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,",".."],
+                "updateCount": 12
             },
             "beatingState": {
                 "normal": ["c","g","n","d","e","i","f","j","u","r","k",",",".","t","s","l"],
                 "updateCount": 10,
-                "beatTime": 8
+                "beatTime": 7
             }
         }
     }

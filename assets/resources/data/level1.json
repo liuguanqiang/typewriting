@@ -33,7 +33,7 @@
                         "updateCount": 6
                     },
                     {
-                        "normal": ["jjj","fff","jff","ffj"],
+                        "normal": ["jjj","fff","jff","fjj"],
                         "updateCount": 8
                     },
                     {
@@ -41,7 +41,7 @@
                         "updateCount": 8
                     },
                     {
-                        "normal": ["jfj","fjf","jff","ffj","jjfj","ffff","jjff","fjfj"],
+                        "normal": ["jfj","fjf","jff","ffj","jjfj","ffjf","jjff","fjfj"],
                         "updateCount": 10
                     }
                 ]
@@ -59,28 +59,28 @@
                 "twoStars": 0.75,
                 "threeStars": {
                     "accuracy": 0.9,
-                    "time": 60
+                    "time": 90
                 },
                 "state":[
                     {
                         "normal": ["u","r","k"],
+                        "updateCount": 4
+                    },
+                    {
+                        "normal": ["uu","rr","kk","u","r","k"],
                         "updateCount": 6
                     },
                     {
-                        "normal": ["uu","rr","kk"],
+                        "normal": ["uur","rrk","kuu","ukk","krr","rkk","uu","rr","kk"],
                         "updateCount": 8
                     },
                     {
-                        "normal": ["u","r","k","uu","rr","kk"],
+                        "normal": ["uuu","rrr","kkk","urk","rku","kur","ukr","ur","uk","kr","ku"],
                         "updateCount": 8
                     },
                     {
-                        "normal": ["uuu","rrr","kkk","ur","uk","kr"],
-                        "updateCount": 8
-                    },
-                    {
-                        "normal": ["uurk","urk","krk","uku","uukk","kurr","kkkr","rrru"],
-                        "updateCount": 10
+                        "normal": ["uur","rrk","ukk","urk","rku","kur","ukr","ur","uk","kr","ku","uurk","uukk","kurr","kurk","rrku"],
+                        "updateCount": 14
                     }
                 ]
               }
@@ -93,32 +93,32 @@
             "twoStars": 0.75,
             "threeStars": {
                 "accuracy": 0.9,
-                "time": 100
+                "time": 140
             },
             "blood": 100,
-            "practiceSpeed": 70,
+            "practiceSpeed": 60,
             "attackSpeed": 50,
             "practiceState": [
-                {
-                    "normal": ["j","f","u","r","k"],
-                    "updateCount": 4
-                },
                 {
                     "normal": ["j","f","u","r","k","jj","ff","uu","rr","kk"],
                     "updateCount": 6
                 },
                 {
-                    "normal": ["ur","kr","uf","jr","fk","jj","ff","uu","rr","kk"],
+                    "normal": ["ur","kr","uf","jr","fk","rf","fj","ku","jk","jj","ff","uu","rr","kk"],
                     "updateCount": 6
                 },
                 {
-                    "normal": ["ur","kr","uf","jr","urk","uukk","rrru","jfj","jff","ffj","ffff","j","f","u","r","k","j","f","u","r","k"],
-                    "updateCount": 14
+                    "normal": ["ur","kr","uf","jr","fk","rf","fj","ku","jk","jj","ff","uu","rr","kk","j","f","u","r","k"],
+                    "updateCount": 12
+                },
+                {
+                    "normal": ["ur","kr","uf","jr","fk","rf","fj","ku","jk","urk","fkr","kuj","jfu","ruf","ffuu","kkrr","jjff","j","f","u","r","k"],
+                    "updateCount": 18
                 }
             ],
             "attackState": {
-                "normal": ["j","f","u","r","k","jj","ff","uu","rr","kk","ur","kr","uf","jr","fk"],
-                "updateCount": 10
+                "normal": ["j","f","u","r","k","jj","ff","uu","rr","kk","ur","kr","uf","jr","fk","rf","fj","ku","jk"],
+                "updateCount": 12
             },
             "beatingState": {
                 "normal": ["j","f","u","r","k"],
