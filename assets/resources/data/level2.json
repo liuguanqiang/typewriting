@@ -17,7 +17,7 @@
                   "twoStars": 0.75,
                   "threeStars": {
                     "accuracy": 0.9,
-                    "time": 90
+                    "time": 80
                 },
                 "state": [
                     {
@@ -82,7 +82,7 @@
                 "twoStars": 0.75,
                 "threeStars": {
                     "accuracy": 0.9,
-                    "time": 120
+                    "time": 100
                 },
                 "state":[
                     {
@@ -102,7 +102,7 @@
                         "updateCount": 10
                     },
                     {
-                        "normal": ["ujrr","rrnk","ddnr","ccjd","krrn","cnig","rgnd","gkkd","cgg","cjk","fku","kdn","rnd","gkd","djf","fun","drn"],
+                        "normal": ["cgg","cjk","fku","kdn","rnd","gkd","djf","fun","drn","ujrr","rrnk","ddnr","ccjd","krrn","cnig","rgnd","gkkd","di","ne","jr","kc","fu"],
                         "updateCount": 10
                     }
                 ]
@@ -135,7 +135,7 @@
                     "updateCount": 12
                 },
                 {
-                    "normal": ["djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","cci","ggu","nnf","ddk","eej","id","en","rj","ck","uf","ng"],
+                    "normal": ["djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","cci","ugg","nff","ddk","eej","id","en","rj","ck","uf","ng","cc","gg","nn","dd","ee"],
                     "updateCount": 18
                 }
             ],

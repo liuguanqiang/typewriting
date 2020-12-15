@@ -59,7 +59,7 @@
                 "twoStars": 0.75,
                 "threeStars": {
                     "accuracy": 0.9,
-                    "time": 90
+                    "time": 80
                 },
                 "state":[
                     {
@@ -113,7 +113,7 @@
                 },
                 {
                     "normal": ["ur","kr","uf","jr","fk","rf","fj","ku","jk","urk","fkr","kuj","jfu","ruf","ffuu","kkrr","jjff","j","f","u","r","k"],
-                    "updateCount": 18
+                    "updateCount": 12
                 }
             ],
             "attackState": {

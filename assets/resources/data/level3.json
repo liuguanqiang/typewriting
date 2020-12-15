@@ -11,7 +11,7 @@
                 "twoStars": 0.75,
                 "threeStars": {
                     "accuracy": 0.9,
-                    "time": 75
+                    "time": 70
                 },
                 "state": [
                     {
@@ -85,7 +85,7 @@
                 "twoStars": 0.75,
                 "threeStars": {
                     "accuracy": 0.9,
-                    "time": 90
+                    "time": 80
                 },
                 "state":[
                     {
@@ -115,26 +115,26 @@
             "twoStars": 0.75,
             "threeStars": {
                 "accuracy": 0.9,
-                "time": 150
+                "time": 140
             },
             "blood": 100,
-            "practiceSpeed": 70,
-            "attackSpeed": 40,
+            "practiceSpeed": 60,
+            "attackSpeed": 50,
             "practiceState": [
                 {
                     "normal": ["c","g","n","d","e","i","f","j","u","r","k","t","s","l"],
                     "updateCount": 6
                 },
                 {
-                    "normal": ["dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll",",,",".."],
+                    "normal": ["dl",",e","si","jr","ff","cu","gg","nn","uu","r.","kk","tt","ss","ll",",,",".."],
                     "updateCount": 6
                 },
                 {
-                    "normal": ["ccl","jje","nnf","krr","sll","uuc","ntt","gkk","ggu","jdd","tff","jss","f..","s,,","u..","c,,","sll"],
+                    "normal": ["cll","ejj","fnn","rrk","lls","uuc","ntt","ggk","guu","ddj","fft","ssj","..l","tt,","i..","c,,","lss"],
                     "updateCount": 12
                 },
                 {
-                    "normal": ["djf","fun","drn","cjd","krn","kdn","rnd","gkd","kdg","l.c","f,n","tcs","kts","ntk",",n.t","i,s","is.","dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll"],
+                    "normal": ["jdf","unf","rnd","jdc","rkn","dkn","rdn","gkd","cl.",",fn","cts","tks","knt",",nt.",",si","ls.","dd","ee","ii","jj","ff","cc","gg","nn","uu","rr","kk","tt","ss","ll"],
                     "updateCount": 18
                 }
             ],
