@@ -83,7 +83,10 @@ cc.Class({
 
     //获取字母对应键盘的X坐标点
     getPointX(letter) {
-        let code = letter.substr(0, 1) == ";" ? 186 : letter.toUpperCase().charCodeAt(0);
+        let code = letter.toUpperCase().charCodeAt(0);
+        if (letter.substr(0, 1) == ";") code = 186;
+        else if (letter.substr(0, 1) == ",") code = 188;
+        else if (letter.substr(0, 1) == ".") code = 190;
         for (let i = 0; i < this.KeyBox.children.length; i++) {
             const item = this.KeyBox.children[i];
             if (item.getComponent("keyCube").keyCode == code) {
